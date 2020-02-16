@@ -1,0 +1,52 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: ['App', '*', '*\UI\*Presenter']
+		Front: ['App\Front', '*', '*\UI\*Presenter']
+		Error: ['App\Error', '*', '*\UI\*Presenter']
+		Admin: ['App\Admin', '*', '*\UI\*Presenter']
+
+extensions:
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+	dbal: Nettrine\DBAL\DI\DbalExtension
+	dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension
+	orm: Nettrine\ORM\DI\OrmExtension
+	orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
+	nettrine.annotations: Nettrine\Annotations\DI\AnnotationsExtension
+	orm.console: Nettrine\ORM\DI\OrmConsoleExtension
+	migrations: Nettrine\Migrations\DI\MigrationsExtension
+	orm.cache: Nettrine\Cache\DI\CacheExtension
+
+
+session:
+	expiration: 14 days
+
+dbal:
+	debug:
+		panel: %debugMode%
+	connection:
+		host: %database.host%
+		user: %database.user%
+		password: %database.password%
+		dbname: %database.dbname%
+		driver: 'pdo_mysql'
+
+orm.annotations:
+	paths:
+		- %appDir%
+
+migrations:
+    table: doctrine_migrations
+    column: version
+    directory: %appDir%/../migrations
+    namespace: Migrations
+
+console:
+    url: http://localhost/public-transport-app/www
+    catchExceptions: false
+
+services:
+	router: App\Router\RouterFactory::createRouter
