@@ -32,7 +32,8 @@
 		"nettrine/migrations": "^0.6",
 		"nettrine/cache": "^0.1",
 		"nettrine/annotations": "^0.6",
-		"mistrfilda/pid-api": "dev-master"
+		"mistrfilda/pid-api": "^0.1",
+		"ramsey/uuid-doctrine": "^1.6"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0",
