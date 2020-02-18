@@ -1,5 +1,6 @@
 parameters:
-
+	pid:
+		accessToken: ""
 
 application:
 	errorPresenter: Error
@@ -19,6 +20,7 @@ extensions:
 	orm.console: Nettrine\ORM\DI\OrmConsoleExtension
 	migrations: Nettrine\Migrations\DI\MigrationsExtension
 	orm.cache: Nettrine\Cache\DI\CacheExtension
+	monolog: Contributte\Monolog\DI\MonologExtension
 
 
 session:
@@ -47,6 +49,26 @@ migrations:
 console:
     url: http://localhost/public-transport-app/www
     catchExceptions: false
+    lazy: false
+
+monolog:
+	channel:
+		default:
+			handlers:
+				- Monolog\Handler\RotatingFileHandler(%appDir%/../log/app-log.log, 30)
+				- Monolog\Handler\StreamHandler("php://stdout")
+			processors:
+				- Monolog\Processor\MemoryPeakUsageProcessor()
+				- Monolog\Processor\WebProcessor()
 
 services:
 	router: App\Router\RouterFactory::createRouter
+
+	- App\Utils\DatetimeFactory
+	- Ofce\Pid\Api\PidService(%pid.accessToken%)
+
+	#PRAGUE
+	- App\Transport\Prague\Stop\Import\StopImportCommand
+	- App\Transport\Prague\Stop\Import\StopImportFacade
+	- App\Transport\Prague\Stop\StopRepository(App\Transport\Prague\Stop\Stop)
+	- App\Transport\Prague\Stop\StopFactory
