@@ -1,6 +1,6 @@
-dibi:
-    host: 127.0.0.1
-    username: root
-    password: ""
-    database: 'transport-app-test'
-    lazy: true
+parameters:
+	database:
+		host: 127.0.0.1
+		user: root
+		password: ""
+		dbname: 'transport-app-test'
