@@ -81,3 +81,9 @@ services:
 	- App\Transport\Prague\StopLine\Trip\TripRepository(App\Transport\Prague\StopLine\Trip\Trip)
 	- App\Transport\Prague\StopLine\Trip\TripFactory
 
+	#STOP TIME
+	- App\Transport\Prague\StopLine\StopTime\Import\StopTimeImportCommand
+	- App\Transport\Prague\StopLine\StopTime\Import\StopTimeImportFacade
+	- App\Transport\Prague\StopLine\StopTime\StopTimeFactory
+	- App\Transport\Prague\StopLine\StopTime\StopTimeRepository(App\Transport\Prague\StopLine\StopTime\StopTime)
+	- App\Transport\Prague\StopLine\StopTime\StopTimeTimeFactory
