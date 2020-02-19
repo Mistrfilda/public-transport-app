@@ -69,6 +69,7 @@
 		"test": "vendor/bin/tester tests/ -C",
 		"test-coverage-html": "vendor/bin/tester tests/ -C --coverage coverage.html --coverage-src src/ ",
 		"orm-validate": "bin/console orm:validate-schema --ansi",
+		"migration-migrate": "bin/console migrations:migrate --no-interaction",
 		"build-all": [
 			"@lint",
 			"@stan",

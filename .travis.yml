@@ -1,0 +1,25 @@
+language: php
+
+php:
+  - 7.3
+
+services:
+  - mysql
+
+matrix:
+  fast_finish: true
+
+sudo: false
+
+install:
+  - cp tests/travis/test.local.neon config/config.local.neon
+  - composer install --no-interaction -o
+  - mysql -u root -e 'CREATE DATABASE `transport-app-test`;'
+
+script:
+  - composer migration-migrate
+  - composer build-all
+
+cache:
+  directories:
+    - $HOME/.composer/cache
