@@ -67,8 +67,17 @@ services:
 	- App\Utils\DatetimeFactory
 	- Ofce\Pid\Api\PidService(%pid.accessToken%)
 
-	#PRAGUE
+	#### PRAGUE ####
+
+	#STOP
 	- App\Transport\Prague\Stop\Import\StopImportCommand
 	- App\Transport\Prague\Stop\Import\StopImportFacade
 	- App\Transport\Prague\Stop\StopRepository(App\Transport\Prague\Stop\Stop)
 	- App\Transport\Prague\Stop\StopFactory
+
+	#TRIP
+	- App\Transport\Prague\StopLine\Trip\Import\TripImportCommand
+	- App\Transport\Prague\StopLine\Trip\Import\TripImportFacade
+	- App\Transport\Prague\StopLine\Trip\TripRepository(App\Transport\Prague\StopLine\Trip\Trip)
+	- App\Transport\Prague\StopLine\Trip\TripFactory
+

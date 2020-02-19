@@ -68,10 +68,12 @@
 		"cs-fix": "vendor/bin/ecs -c ecs.yaml check src tests --fix --ansi",
 		"test": "vendor/bin/tester tests/ -C",
 		"test-coverage-html": "vendor/bin/tester tests/ -C --coverage coverage.html --coverage-src src/ ",
+		"orm-validate": "bin/console orm:validate-schema --ansi",
 		"build-all": [
 			"@lint",
 			"@stan",
-			"@cs"
+			"@cs",
+			"@orm-validate"
 		]
 	},
 	"minimum-stability": "stable"

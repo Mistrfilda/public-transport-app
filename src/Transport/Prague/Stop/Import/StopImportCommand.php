@@ -25,7 +25,7 @@ class StopImportCommand extends Command
         $this->setName('prague:import:stop');
     }
 
-    public function execute(InputInterface $input, OutputInterface $output): int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->stopImportFacade->import();
         return 0;

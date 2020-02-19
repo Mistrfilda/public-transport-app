@@ -8,6 +8,8 @@ use DateTimeImmutable;
 
 class DatetimeFactory
 {
+    public const DEFAULT_DATETIME_FORMAT = 'Y-m-d H:i:s';
+
     public function createNow(): DateTimeImmutable
     {
         return new DateTimeImmutable();
