@@ -80,8 +80,8 @@ class Vehicle implements IEntity, IVehicle
     private $registrationNumber;
 
     /**
-     * @var bool
-     * @ORM\Column(type="boolean")
+     * @var int
+     * @ORM\Column(type="integer")
      */
     private $vehicleType;
 
