@@ -16,8 +16,10 @@ class VehicleFactory
         string $finalStation,
         int $delayInSeconds,
         bool $wheelchairAccessible,
+        int $vehicleType,
         ?string $lastStopId,
-        ?string $nextStopId
+        ?string $nextStopId,
+        ?string $registrationNumber
     ): Vehicle {
         return new Vehicle(
             $vehiclePosition,
@@ -27,8 +29,10 @@ class VehicleFactory
             $finalStation,
             $delayInSeconds,
             $wheelchairAccessible,
+            $vehicleType,
             $lastStopId,
-            $nextStopId
+            $nextStopId,
+            $registrationNumber
         );
     }
 
@@ -44,8 +48,10 @@ class VehicleFactory
             $pidVehiclePosition->getTripHeadsign(),
             $pidVehiclePosition->getDelay(),
             $pidVehiclePosition->getWheelchairAccessible(),
+            $pidVehiclePosition->getVehicleType(),
             $pidVehiclePosition->getLastStopId(),
-            $pidVehiclePosition->getNextStopId()
+            $pidVehiclePosition->getNextStopId(),
+            (string) $pidVehiclePosition->getVehicleRegistrationNumber()
         );
     }
 }

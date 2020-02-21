@@ -23,4 +23,8 @@ interface IVehicle
     public function getLastStopId(): ?string;
 
     public function getNextStopId(): ?string;
+
+    public function getRegistrationNumber(): ?string;
+
+    public function getVehicleType(): int;
 }

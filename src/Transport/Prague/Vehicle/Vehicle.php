@@ -73,6 +73,18 @@ class Vehicle implements IEntity, IVehicle
      */
     private $nextStopId;
 
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $registrationNumber;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $vehicleType;
+
     public function __construct(
         VehiclePosition $vehiclePosition,
         string $routeId,
@@ -81,8 +93,10 @@ class Vehicle implements IEntity, IVehicle
         string $finalStation,
         int $delayInSeconds,
         bool $wheelchairAccessible,
+        int $vehicleType,
         ?string $lastStopId,
-        ?string $nextStopId
+        ?string $nextStopId,
+        ?string $registrationNumber
     ) {
         $this->vehiclePosition = $vehiclePosition;
         $this->routeId = $routeId;
@@ -93,6 +107,8 @@ class Vehicle implements IEntity, IVehicle
         $this->wheelchairAccessible = $wheelchairAccessible;
         $this->lastStopId = $lastStopId;
         $this->nextStopId = $nextStopId;
+        $this->vehicleType = $vehicleType;
+        $this->registrationNumber = $registrationNumber;
     }
 
     public function getVehiclePosition(): IVehiclePosition
@@ -133,5 +149,15 @@ class Vehicle implements IEntity, IVehicle
     public function getNextStopId(): ?string
     {
         return $this->nextStopId;
+    }
+
+    public function getRegistrationNumber(): ?string
+    {
+        return $this->registrationNumber;
+    }
+
+    public function getVehicleType(): int
+    {
+        return $this->vehicleType;
     }
 }
