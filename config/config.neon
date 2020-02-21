@@ -36,6 +36,11 @@ dbal:
 		dbname: %database.dbname%
 		driver: 'pdo_mysql'
 
+		types:
+			uuid:
+				class: Ramsey\Uuid\Doctrine\UuidType
+				commented: false
+
 orm.annotations:
 	paths:
 		- %appDir%
@@ -87,3 +92,10 @@ services:
 	- App\Transport\Prague\StopLine\StopTime\StopTimeFactory
 	- App\Transport\Prague\StopLine\StopTime\StopTimeRepository(App\Transport\Prague\StopLine\StopTime\StopTime)
 	- App\Transport\Prague\StopLine\StopTime\StopTimeTimeFactory
+
+	#VEHICLE
+	- App\Transport\Prague\Vehicle\Import\VehicleImportCommand
+	- App\Transport\Prague\Vehicle\Import\VehicleImportFacade
+	- App\Transport\Prague\Vehicle\VehicleFactory
+	- App\Transport\Prague\Vehicle\VehiclePositionRepository(App\Transport\Prague\Vehicle\VehiclePosition)
+	- App\Transport\Prague\Vehicle\VehicleRepository(App\Transport\Prague\Vehicle\Vehicle)

@@ -16,7 +16,11 @@ interface IStopLine
 
     public function getDepartureTime(): DateTimeImmutable;
 
-    public function getRouteId(): string;
+    public function getTripId(): string;
+
+    public function getLineNumber(): string;
+
+    public function getFinalDestination(): string;
 
     /** Nullable, vehicle can be at depot! */
     public function getVehicle(): ?IVehicle;

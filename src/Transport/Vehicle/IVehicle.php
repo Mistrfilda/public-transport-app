@@ -8,6 +8,8 @@ use App\Utils\Coordinates;
 
 interface IVehicle
 {
+    public function getVehiclePosition(): IVehiclePosition;
+
     public function getRouteId(): string;
 
     public function getCoordinates(): Coordinates;
