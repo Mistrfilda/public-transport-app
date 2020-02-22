@@ -10,6 +10,10 @@ application:
 		Error: ['App\Error', '*', '*\UI\*Presenter']
 		Admin: ['App\Admin', '*', '*\UI\*Presenter']
 
+tracy:
+	maxDepth: 6
+	showLocation: true
+
 extensions:
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
 	dbal: Nettrine\DBAL\DI\DbalExtension
@@ -92,6 +96,7 @@ services:
 	- App\Transport\Prague\StopLine\StopTime\StopTimeFactory
 	- App\Transport\Prague\StopLine\StopTime\StopTimeRepository(App\Transport\Prague\StopLine\StopTime\StopTime)
 	- App\Transport\Prague\StopLine\StopTime\StopTimeTimeFactory
+	- App\Transport\Prague\StopLine\StopLineFactory
 
 	#VEHICLE
 	- App\Transport\Prague\Vehicle\Import\VehicleImportCommand
@@ -99,3 +104,8 @@ services:
 	- App\Transport\Prague\Vehicle\VehicleFactory
 	- App\Transport\Prague\Vehicle\VehiclePositionRepository(App\Transport\Prague\Vehicle\VehiclePosition)
 	- App\Transport\Prague\Vehicle\VehicleRepository(App\Transport\Prague\Vehicle\Vehicle)
+
+	#DEPARTURE TABLE
+	- App\Transport\Prague\DepartureTable\DepartureTableFacade
+	- App\Transport\Prague\DepartureTable\DepartureTableRepository(App\Transport\Prague\DepartureTable\DepartureTable)
+	- App\Transport\Prague\DepartureTable\DepartureTableStopLinesFactory

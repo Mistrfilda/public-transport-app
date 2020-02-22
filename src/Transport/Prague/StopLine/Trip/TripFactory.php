@@ -16,7 +16,8 @@ class TripFactory
         string $tripId,
         string $tripHeadsign,
         bool $wheelchairAccessible,
-        DateTimeImmutable $date
+        DateTimeImmutable $date,
+        string $lineNumber
     ): Trip {
         return new Trip(
             $stop,
@@ -24,7 +25,8 @@ class TripFactory
             $tripId,
             $tripHeadsign,
             $wheelchairAccessible,
-            $date
+            $date,
+            $lineNumber
         );
     }
 
@@ -39,7 +41,8 @@ class TripFactory
             $trip->getTripId(),
             $trip->getTripHeadsign(),
             $trip->isWheelchairAccessible(),
-            $date
+            $date,
+            $trip->getRouteId()
         );
     }
 }

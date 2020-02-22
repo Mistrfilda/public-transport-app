@@ -7,6 +7,7 @@ namespace App\Transport\Prague\StopLine\Trip;
 use App\Doctrine\BaseRepository;
 use App\Doctrine\NoEntityFoundException;
 use DateTimeImmutable;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
@@ -50,6 +51,22 @@ class TripRepository extends BaseRepository
 
         $qb->andWhere($qb->expr()->eq('trip.date', ':date'));
         $qb->setParameter('date', $date);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return Trip[]
+     */
+    public function findForDepartureTable(int $stopId, DateTimeImmutable $today): array
+    {
+        $qb = $this->doctrineRepository->createQueryBuilder('trip', 'trip.dateTripId');
+
+        $qb->andWhere($qb->expr()->eq('trip.stop', ':stopId'));
+        $qb->setParameter('stopId', $stopId);
+
+        $qb->andWhere($qb->expr()->gte('trip.date', ':today'));
+        $qb->setParameter('today', $today, Types::DATE_IMMUTABLE);
 
         return $qb->getQuery()->getResult();
     }

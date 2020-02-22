@@ -30,7 +30,7 @@ class VehiclePosition implements IEntity, IVehiclePosition
 
     /**
      * @var Collection<int,Vehicle>
-     * @ORM\OneToMany(targetEntity="App\Transport\Prague\Vehicle\Vehicle", mappedBy="vehiclePosition")
+     * @ORM\OneToMany(targetEntity="App\Transport\Prague\Vehicle\Vehicle", mappedBy="vehiclePosition", indexBy="tripId")
      */
     private $vehicles;
 

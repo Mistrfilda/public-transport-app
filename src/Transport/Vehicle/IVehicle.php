@@ -27,4 +27,6 @@ interface IVehicle
     public function getRegistrationNumber(): ?string;
 
     public function getVehicleType(): int;
+
+    public function getTripId(): string;
 }

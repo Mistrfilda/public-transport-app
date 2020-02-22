@@ -40,6 +40,12 @@ class Trip implements IEntity
      * @var string
      * @ORM\Column(type="string")
      */
+    private $dateTripId;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
     private $tripHeadsign;
 
     /**
@@ -54,13 +60,20 @@ class Trip implements IEntity
      */
     private $date;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $lineNumber;
+
     public function __construct(
         Stop $stop,
         string $serviceId,
         string $tripId,
         string $tripHeadsign,
         bool $wheelchairAccessible,
-        DateTimeImmutable $date
+        DateTimeImmutable $date,
+        string $lineNumber
     ) {
         $this->stop = $stop;
         $this->serviceId = $serviceId;
@@ -68,6 +81,9 @@ class Trip implements IEntity
         $this->tripHeadsign = $tripHeadsign;
         $this->wheelchairAccessible = $wheelchairAccessible;
         $this->date = $date;
+        $this->lineNumber = $lineNumber;
+
+        $this->dateTripId = $date->getTimestamp() . '_' . $tripId;
     }
 
     public function updateTrip(
@@ -106,5 +122,15 @@ class Trip implements IEntity
     public function getDate(): DateTimeImmutable
     {
         return $this->date;
+    }
+
+    public function getDateTripId(): string
+    {
+        return $this->dateTripId;
+    }
+
+    public function getLineNumber(): string
+    {
+        return $this->lineNumber;
     }
 }

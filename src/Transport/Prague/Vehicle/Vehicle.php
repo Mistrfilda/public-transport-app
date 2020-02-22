@@ -32,6 +32,18 @@ class Vehicle implements IEntity, IVehicle
     private $routeId;
 
     /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $tripId;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $dateTripId;
+
+    /**
      * @var float
      * @ORM\Column(type="float")
      */
@@ -88,6 +100,7 @@ class Vehicle implements IEntity, IVehicle
     public function __construct(
         VehiclePosition $vehiclePosition,
         string $routeId,
+        string $tripId,
         float $latitude,
         float $longitude,
         string $finalStation,
@@ -100,6 +113,7 @@ class Vehicle implements IEntity, IVehicle
     ) {
         $this->vehiclePosition = $vehiclePosition;
         $this->routeId = $routeId;
+        $this->tripId = $tripId;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
         $this->finalStation = $finalStation;
@@ -109,6 +123,9 @@ class Vehicle implements IEntity, IVehicle
         $this->nextStopId = $nextStopId;
         $this->vehicleType = $vehicleType;
         $this->registrationNumber = $registrationNumber;
+
+        $createdAt = $vehiclePosition->getCreatedAt()->setTime(0, 0, 0);
+        $this->dateTripId = $createdAt->getTimestamp() . '_' . $this->tripId;
     }
 
     public function getVehiclePosition(): IVehiclePosition
@@ -159,5 +176,15 @@ class Vehicle implements IEntity, IVehicle
     public function getVehicleType(): int
     {
         return $this->vehicleType;
+    }
+
+    public function getTripId(): string
+    {
+        return $this->tripId;
+    }
+
+    public function getDateTripId(): string
+    {
+        return $this->dateTripId;
     }
 }
