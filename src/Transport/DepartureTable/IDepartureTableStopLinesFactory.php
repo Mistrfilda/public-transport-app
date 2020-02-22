@@ -6,8 +6,8 @@ namespace App\Transport\DepartureTable;
 
 use App\Transport\StopLine\IStopLine;
 
-interface IDepartureTableStopLines
+interface IDepartureTableStopLinesFactory
 {
     /** @return IStopLine[] */
-    public function getLines(): array;
+    public function getStopLines(string $departureTableId): array;
 }

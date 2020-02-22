@@ -11,6 +11,7 @@ class VehicleFactory
     public function create(
         VehiclePosition $vehiclePosition,
         string $routeId,
+        string $tripId,
         float $latitude,
         float $longitude,
         string $finalStation,
@@ -24,6 +25,7 @@ class VehicleFactory
         return new Vehicle(
             $vehiclePosition,
             $routeId,
+            $tripId,
             $latitude,
             $longitude,
             $finalStation,
@@ -43,6 +45,7 @@ class VehicleFactory
         return $this->create(
             $vehiclePosition,
             $pidVehiclePosition->getRouteId(),
+            $pidVehiclePosition->getTripId(),
             $pidVehiclePosition->getLatitude(),
             $pidVehiclePosition->getLongitude(),
             $pidVehiclePosition->getTripHeadsign(),

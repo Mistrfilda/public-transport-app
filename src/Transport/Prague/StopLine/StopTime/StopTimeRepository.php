@@ -6,6 +6,7 @@ namespace App\Transport\Prague\StopLine\StopTime;
 
 use App\Doctrine\BaseRepository;
 use App\Doctrine\NoEntityFoundException;
+use App\Doctrine\OrderBy;
 use DateTimeImmutable;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -50,6 +51,24 @@ class StopTimeRepository extends BaseRepository
 
         $qb->andWhere($qb->expr()->eq('stopTime.date', ':date'));
         $qb->setParameter('date', $date);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return StopTime[]
+     */
+    public function findForDepartureTable(int $stopId, DateTimeImmutable $now): array
+    {
+        $qb = $this->doctrineRepository->createQueryBuilder('stopTime', 'stopTime.dateTripId');
+
+        $qb->andWhere($qb->expr()->eq('stopTime.stop', ':stopId'));
+        $qb->setParameter('stopId', $stopId);
+
+        $qb->andWhere($qb->expr()->gte('stopTime.departureTime', ':now'));
+        $qb->setParameter('now', $now);
+
+        $qb->orderBy('stopTime.departureTime', OrderBy::ASC);
 
         return $qb->getQuery()->getResult();
     }

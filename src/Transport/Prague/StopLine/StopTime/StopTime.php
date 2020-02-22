@@ -49,6 +49,12 @@ class StopTime implements IEntity
     private $tripId;
 
     /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $dateTripId;
+
+    /**
      * @var int
      * @ORM\Column(type="integer")
      */
@@ -68,6 +74,8 @@ class StopTime implements IEntity
         $this->date = $date;
         $this->tripId = $tripId;
         $this->stopSequence = $stopSequence;
+
+        $this->dateTripId = $date->getTimestamp() . '_' . $tripId;
     }
 
     public function updateStopTime(
@@ -108,5 +116,10 @@ class StopTime implements IEntity
     public function getDate(): DateTimeImmutable
     {
         return $this->date;
+    }
+
+    public function getDateTripId(): string
+    {
+        return $this->dateTripId;
     }
 }
