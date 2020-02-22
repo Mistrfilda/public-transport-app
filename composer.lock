@@ -1444,16 +1444,16 @@
         },
         {
             "name": "mistrfilda/pid-api",
-            "version": "v0.1.2",
+            "version": "v0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mistrfilda/ofce-pid-api.git",
-                "reference": "998aa33eb802dd57f446a2d80a55883f462b17a1"
+                "reference": "28494248ba8ead24a5bf59bcc8bbc04f071d26f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mistrfilda/ofce-pid-api/zipball/998aa33eb802dd57f446a2d80a55883f462b17a1",
-                "reference": "998aa33eb802dd57f446a2d80a55883f462b17a1",
+                "url": "https://api.github.com/repos/Mistrfilda/ofce-pid-api/zipball/28494248ba8ead24a5bf59bcc8bbc04f071d26f5",
+                "reference": "28494248ba8ead24a5bf59bcc8bbc04f071d26f5",
                 "shasum": ""
             },
             "require": {
@@ -1486,8 +1486,8 @@
             "license": [
                 "MIT"
             ],
-            "description": "Prague public transport api integration using guzzle/http client",
-            "time": "2020-02-18T01:12:39+00:00"
+            "description": "PID api integration using guzzle/http client",
+            "time": "2020-02-21T15:37:45+00:00"
         },
         {
             "name": "monolog/monolog",
