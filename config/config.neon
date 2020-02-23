@@ -6,13 +6,17 @@ application:
 	errorPresenter: Error
 	mapping:
 		*: ['App', '*', '*\UI\*Presenter']
-		Front: ['App\Front', '*', '*\UI\*Presenter']
-		Error: ['App\Error', '*', '*\UI\*Presenter']
-		Admin: ['App\Admin', '*', '*\UI\*Presenter']
+		Front: ['App\UI\Front', '*', '*\*Presenter']
+		Error: ['App\UI\Error', '*', '*\*Presenter']
+		Admin: ['App\UI\Admin', '*', '*\*Presenter']
 
 tracy:
 	maxDepth: 6
 	showLocation: true
+
+session:
+	expiration: 14 days
+
 
 extensions:
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
@@ -25,10 +29,11 @@ extensions:
 	migrations: Nettrine\Migrations\DI\MigrationsExtension
 	orm.cache: Nettrine\Cache\DI\CacheExtension
 	monolog: Contributte\Monolog\DI\MonologExtension
+	webpackassets: App\UI\Webpack\DI\WebpackAssetExtension
 
+webpackassets:
+	buildedAssetsDir: %wwwDir%/build
 
-session:
-	expiration: 14 days
 
 dbal:
 	debug:
