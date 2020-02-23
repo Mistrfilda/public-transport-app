@@ -1,3 +1,6 @@
 vendor/*
 config/config.local.neon
 .idea/
+
+www/build/*
+yarn-error.log

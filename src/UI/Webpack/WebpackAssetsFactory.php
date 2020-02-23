@@ -42,7 +42,7 @@ class WebpackAssetsFactory
             $cssAssets[] = $link->render();
         }
 
-        return implode('\n', $cssAssets);
+        return implode('', $cssAssets);
     }
 
     public function getJsAssets(string $entryName): string
@@ -64,7 +64,7 @@ class WebpackAssetsFactory
             $jsAssets[] = $script->render();
         }
 
-        return implode('\n', $jsAssets);
+        return implode('', $jsAssets);
     }
 
     /**

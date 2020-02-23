@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18c2c101e171bb20969009fced5007ae",
+    "content-hash": "b8e6387d9499e04868b40e439a39430b",
     "packages": [
         {
             "name": "contributte/console",
@@ -1370,16 +1370,16 @@
         },
         {
             "name": "latte/latte",
-            "version": "v2.6.1",
+            "version": "v2.7.0-RC",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/latte.git",
-                "reference": "82321e0d039d7b7e3324b5a7cb8f046a69458da9"
+                "reference": "95098bbf4027ecfc381562293c14efe83d8684aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/82321e0d039d7b7e3324b5a7cb8f046a69458da9",
-                "reference": "82321e0d039d7b7e3324b5a7cb8f046a69458da9",
+                "url": "https://api.github.com/repos/nette/latte/zipball/95098bbf4027ecfc381562293c14efe83d8684aa",
+                "reference": "95098bbf4027ecfc381562293c14efe83d8684aa",
                 "shasum": ""
             },
             "require": {
@@ -1391,6 +1391,7 @@
                 "nette/application": "<2.4.1"
             },
             "require-dev": {
+                "nette/php-generator": "^3.3.4",
                 "nette/tester": "~2.0",
                 "nette/utils": "^3.0",
                 "phpstan/phpstan": "^0.12",
@@ -1399,12 +1400,13 @@
             "suggest": {
                 "ext-fileinfo": "to use filter |datastream",
                 "ext-mbstring": "to use filters like lower, upper, capitalize, ...",
+                "nette/php-generator": "to use tag {templatePrint}",
                 "nette/utils": "to use filter |webalize"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
@@ -1440,7 +1442,7 @@
                 "template",
                 "twig"
             ],
-            "time": "2020-01-14T18:32:37+00:00"
+            "time": "2020-02-23T15:18:46+00:00"
         },
         {
             "name": "mistrfilda/pid-api",
@@ -4795,6 +4797,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "latte/latte": 5,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
