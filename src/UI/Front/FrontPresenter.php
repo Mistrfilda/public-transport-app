@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Front;
+namespace App\UI\Front;
 
 use Nette\Application\UI\Presenter;
 
