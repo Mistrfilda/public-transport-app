@@ -81,6 +81,19 @@ services:
 	- App\Utils\DatetimeFactory
 	- Ofce\Pid\Api\PidService(%pid.accessToken%)
 
+	#Forms
+	- App\UI\Admin\Base\AdminFormFactory
+
+	#AppAdmin
+	- App\Admin\AppAdminRepository(App\Admin\AppAdmin)
+	- App\Admin\AppAdminAuthenticator
+	- App\Admin\AppAdminFacade
+	- App\Admin\CurrentAppAdminGetter
+	- App\Admin\Command\CreateAppAdminCommand
+
+	#Login
+	- App\UI\Admin\Login\Form\LoginFormFactory
+
 	#### PRAGUE ####
 
 	#STOP
