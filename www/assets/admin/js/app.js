@@ -18,3 +18,18 @@ import 'ublaboo-datagrid'
 import 'ublaboo-datagrid/assets/datagrid-instant-url-refresh';
 import 'bootstrap-datepicker';
 import 'bootstrap-select';
+
+$(document).ready(function () {
+    initCustomJs();
+});
+
+naja.snippetHandler.addEventListener('afterUpdate', (event) => {
+    initCustomJs();
+});
+
+function initCustomJs() {
+    $('.bootstrap-selectpicker').selectpicker({
+        'liveSearch': true,
+        'style': 'btn-primary'
+    });
+}
