@@ -1,0 +1,56 @@
+{templateType App\UI\Admin\templates\LayoutTemplate}
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" n:href="Dashboard:default">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-bus"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Public transport</div>
+    </a>
+
+    <hr class="sidebar-divider my-0">
+
+    {varType App\UI\Admin\Menu\MenuGroup $menuGroup}
+    {varType App\UI\Admin\Menu\MenuItem $menuItem}
+    {varType App\UI\Admin\Menu\MenuItem $menuItemChildren}
+    {foreach $menuItems as $menuGroup}
+        {if $menuGroup->shouldShowLabel()}
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {$menuGroup->getLabel()}
+            </div>
+        {/if}
+
+        {foreach $menuGroup->getMenuItems() as $menuItem}
+            {if $menuItem->isNested()}
+                {var $isMenuLinkActive = $presenter->isMenuLinkActive($menuItem->getActiveLinks())}
+                <li n:class="nav-item, $isMenuLinkActive ? active">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-collapse-{$iterator->getCounter()}" aria-expanded="true" aria-controls="collapseTwo-{$iterator->getCounter()}">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Stops</span>
+                    </a>
+                    <div id="menu-collapse-{$iterator->getCounter()}" n:class="collapse, $isMenuLinkActive ? show" aria-labelledby="headingTwo-{$iterator->getCounter()}" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            {foreach $menuItem->getChildrens() as $menuItemChildren}
+                                <a n:class="collapse-item, $presenter->isLinkCurrent($menuItemChildren->getLink()) ? active" n:href="$menuItemChildren->getLink()">{$menuItemChildren->getLabel()}</a>
+                            {/foreach}
+                        </div>
+                    </div>
+                </li>
+            {else}
+                <!-- Nav Item - Dashboard -->
+                <li n:class="nav-item, $presenter->isLinkCurrent($menuItem->getLink()) ? active">
+                    <a class="nav-link" n:href="{$menuItem->getLink()}">
+                        <i class="{$menuItem->getIcon()}"></i>
+                        <span>{$menuItem->getLabel()}</span></a>
+                </li>
+            {/if}
+        {/foreach}
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+    {/foreach}
+    <!-- Nav Item - Utilities Collapse Menu -->
+</ul>

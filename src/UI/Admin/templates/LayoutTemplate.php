@@ -6,6 +6,7 @@ namespace App\UI\Admin\templates;
 
 use App\Admin\AppAdmin;
 use App\UI\Admin\Dashboard\DashboardPresenter;
+use App\UI\Admin\Menu\MenuGroup;
 use Nette\Security\User;
 
 class LayoutTemplate
@@ -30,4 +31,7 @@ class LayoutTemplate
 
     /** @var AppAdmin */
     public $appAdmin;
+
+    /** @var MenuGroup[] */
+    public $menuItems;
 }

@@ -10,8 +10,8 @@ class AdminFormFactory
     {
         $form = new AdminForm();
         if ($mappedClass !== null) {
-        	$form->setMappedType($mappedClass);
-		}
+            $form->setMappedType($mappedClass);
+        }
         return $form;
     }
 }
