@@ -72,6 +72,7 @@
 		"orm-validate": "bin/console orm:validate-schema --ansi",
 		"clear": "rm -rf temp/cache/*",
 		"migration-migrate": "bin/console migrations:migrate --no-interaction",
+		"js-lint": "yarn eslint www/assets/**",
 		"build-all": [
 			"@lint",
 			"@stan",

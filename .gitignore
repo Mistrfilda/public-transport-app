@@ -4,3 +4,5 @@ config/config.local.neon
 
 www/build/*
 yarn-error.log
+
+node_modules/*

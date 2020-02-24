@@ -11,7 +11,7 @@ window.Nette = netteForms;
 
 document.addEventListener('DOMContentLoaded', naja.initialize.bind(naja));
 
-import sbAdmin from '../sbadmin/js/sb-admin-2';
+import '../sbadmin/js/sb-admin-2';
 
 //Datagrid
 import 'ublaboo-datagrid'
@@ -23,7 +23,7 @@ $(document).ready(function () {
     initCustomJs();
 });
 
-naja.snippetHandler.addEventListener('afterUpdate', (event) => {
+naja.snippetHandler.addEventListener('afterUpdate', () => {
     initCustomJs();
 });
 
