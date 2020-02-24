@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Transport\Prague\DepartureTable;
 
+use App\Doctrine\CreatedAt;
 use App\Doctrine\IEntity;
+use App\Doctrine\UpdatedAt;
 use App\Doctrine\Uuid;
 use App\Transport\DepartureTable\IDepartureTable;
 use App\Transport\Prague\Stop\Stop;
 use App\Transport\Stop\IStop;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,6 +21,8 @@ use Doctrine\ORM\Mapping as ORM;
 class DepartureTable implements IDepartureTable, IEntity
 {
     use Uuid;
+    use CreatedAt;
+    use UpdatedAt;
 
     /**
      * @var Stop
@@ -31,15 +36,23 @@ class DepartureTable implements IDepartureTable, IEntity
      */
     private $numberOfFutureDays;
 
-    public function __construct(Stop $stop, int $numberOfFutureDays)
-    {
+    public function __construct(
+        Stop $stop,
+        int $numberOfFutureDays,
+        DateTimeImmutable $now
+    ) {
         $this->stop = $stop;
         $this->numberOfFutureDays = $numberOfFutureDays;
+        $this->createdAt = $now;
+        $this->updatedAt = $now;
     }
 
-    public function update(int $numberOfFutureDays): void
-    {
+    public function update(
+        int $numberOfFutureDays,
+        DateTimeImmutable $now
+    ): void {
         $this->numberOfFutureDays = $numberOfFutureDays;
+        $this->updatedAt = $now;
     }
 
     public function getStop(): IStop
@@ -48,6 +61,11 @@ class DepartureTable implements IDepartureTable, IEntity
     }
 
     public function getDownloadNumberOfDays(): int
+    {
+        return $this->numberOfFutureDays;
+    }
+
+    public function getNumberOfFutureDays(): int
     {
         return $this->numberOfFutureDays;
     }

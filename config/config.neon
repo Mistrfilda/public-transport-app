@@ -133,3 +133,5 @@ services:
 	- App\Transport\Prague\DepartureTable\DepartureTableFacade
 	- App\Transport\Prague\DepartureTable\DepartureTableRepository(App\Transport\Prague\DepartureTable\DepartureTable)
 	- App\Transport\Prague\DepartureTable\DepartureTableStopLinesFactory
+
+	- App\UI\Admin\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory

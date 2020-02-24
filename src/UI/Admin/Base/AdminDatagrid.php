@@ -18,6 +18,7 @@ class AdminDatagrid extends DataGrid
     {
         $filter = $column->setFilterSelect($options);
         $filter->addAttribute('class', SelectPicker::BOOTSTRAP_SELECTPICKER);
+        $filter->setPrompt('--Select--');
         return $filter;
     }
 }

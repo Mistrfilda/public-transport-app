@@ -45,6 +45,34 @@ class StopRepository extends BaseRepository
         return $this->doctrineRepository->findAll();
     }
 
+    /**
+     * @return array<int, string>
+     */
+    public function findPairs(): array
+    {
+        $results = $this->findAll();
+        $pairs = [];
+        foreach ($results as $result) {
+            $pairs[$result->getId()] = sprintf('%s (%s)', $result->getName(), $result->getStopId());
+        }
+
+        return $pairs;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function findStopIdPairs(): array
+    {
+        $results = $this->findAll();
+        $pairs = [];
+        foreach ($results as $result) {
+            $pairs[$result->getStopId()] = sprintf('%s (%s)', $result->getName(), $result->getStopId());
+        }
+
+        return $pairs;
+    }
+
     public function createQueryBuilder(): QueryBuilder
     {
         return $this->doctrineRepository->createQueryBuilder('stop');

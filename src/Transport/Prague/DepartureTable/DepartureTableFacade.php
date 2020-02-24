@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Transport\Prague\DepartureTable;
 
 use App\Transport\Prague\Stop\StopRepository;
+use App\Utils\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
@@ -23,16 +24,21 @@ class DepartureTableFacade
     /** @var StopRepository */
     private $stopRepository;
 
+    /** @var DatetimeFactory */
+    private $datetimeFactory;
+
     public function __construct(
         EntityManagerInterface $entityManager,
         LoggerInterface $logger,
         DepartureTableRepository $departureTableRepository,
-        StopRepository $stopRepository
+        StopRepository $stopRepository,
+        DatetimeFactory $datetimeFactory
     ) {
         $this->entityManager = $entityManager;
         $this->logger = $logger;
         $this->departureTableRepository = $departureTableRepository;
         $this->stopRepository = $stopRepository;
+        $this->datetimeFactory = $datetimeFactory;
     }
 
     public function createDepartureTable(int $stopId, int $numberOfFutureDays): DepartureTable
@@ -46,7 +52,11 @@ class DepartureTableFacade
         );
 
         $stop = $this->stopRepository->findById($stopId);
-        $departureTable = new DepartureTable($stop, $numberOfFutureDays);
+        $departureTable = new DepartureTable(
+            $stop,
+            $numberOfFutureDays,
+            $this->datetimeFactory->createNow()
+        );
 
         $this->entityManager->persist($departureTable);
         $this->entityManager->flush();
@@ -66,7 +76,7 @@ class DepartureTableFacade
         );
 
         $departureTable = $this->departureTableRepository->findByStopId(Uuid::fromString($departureTableId));
-        $departureTable->update($numberOfFutureDays);
+        $departureTable->update($numberOfFutureDays, $this->datetimeFactory->createNow());
 
         $this->entityManager->flush();
         $this->entityManager->refresh($departureTable);

@@ -28,16 +28,9 @@ class StopDatagridFactory
 
         $grid->setDataSource($this->stopRepository->createQueryBuilder());
 
-        $id = $grid->addColumnText('id', 'ID')->setSortable();
-        $grid->setFilterSelect($id, [1 => 'aa', 2 => 'bb', 3 => 'gg'])->setPrompt('select');
-
-        $grid->addColumnText('stopId', 'Stop ID')->setFilterDate();
+        $grid->addColumnText('id', 'ID')->setSortable()->setFilterText();
+        $grid->addColumnText('stopId', 'Stop ID')->setFilterText();
         $grid->addColumnText('name', 'Name')->setSortable()->setFilterText();
-
-        $grid->setAutoSubmit(false);
-        $grid->setOuterFilterRendering();
-
-        $grid->setRememberState(false);
 
         return $grid;
     }
