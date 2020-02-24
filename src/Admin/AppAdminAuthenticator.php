@@ -25,11 +25,10 @@ class AppAdminAuthenticator implements IAuthenticator
         $this->passwords = $passwords;
     }
 
-	/**
-	 * @param string[] $credentials
-	 * @return IIdentity
-	 * @throws AuthenticationException
-	 */
+    /**
+     * @param string[] $credentials
+     * @throws AuthenticationException
+     */
     public function authenticate(array $credentials): IIdentity
     {
         [$username, $password] = $credentials;
