@@ -84,12 +84,16 @@ services:
 	#Forms
 	- App\UI\Admin\Base\AdminFormFactory
 
+	#Grids
+	- App\UI\Admin\Base\AdminDatagridFactory
+
 	#AppAdmin
 	- App\Admin\AppAdminRepository(App\Admin\AppAdmin)
 	- App\Admin\AppAdminAuthenticator
 	- App\Admin\AppAdminFacade
 	- App\Admin\CurrentAppAdminGetter
 	- App\Admin\Command\CreateAppAdminCommand
+
 
 	#Login
 	- App\UI\Admin\Login\Form\LoginFormFactory
@@ -101,6 +105,8 @@ services:
 	- App\Transport\Prague\Stop\Import\StopImportFacade
 	- App\Transport\Prague\Stop\StopRepository(App\Transport\Prague\Stop\Stop)
 	- App\Transport\Prague\Stop\StopFactory
+
+	- App\UI\Admin\PragueStop\Datagrid\StopDatagridFactory
 
 	#TRIP
 	- App\Transport\Prague\StopLine\Trip\Import\TripImportCommand

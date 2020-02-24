@@ -1,8 +1,20 @@
 import '../scss/app.scss';
 
-import $ from "jquery";
+import $ from 'jquery';
 import 'bootstrap';
-import sbAdmin from "../sbadmin/js/sb-admin-2";'../sbadmin/js/sb-admin-2';
+
 import naja from 'naja';
+import netteForms from 'nette-forms';
+
+netteForms.initOnLoad();
+window.Nette = netteForms;
 
 document.addEventListener('DOMContentLoaded', naja.initialize.bind(naja));
+
+import sbAdmin from '../sbadmin/js/sb-admin-2';
+
+//Datagrid
+import 'ublaboo-datagrid'
+import 'ublaboo-datagrid/assets/datagrid-instant-url-refresh';
+import 'bootstrap-datepicker';
+import 'bootstrap-select';

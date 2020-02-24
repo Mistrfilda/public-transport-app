@@ -9,8 +9,12 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
     "bootstrap": "^4.4.1",
+    "bootstrap-datepicker": "^1.9.0",
+    "bootstrap-select": "^1.13.12",
     "jquery": "^3.4.1",
     "naja": "^1.7.0",
-    "popper.js": "^1.16.1"
+    "nette-forms": "^3.0.3",
+    "popper.js": "^1.16.1",
+    "ublaboo-datagrid": "^6.2.6"
   }
 }
