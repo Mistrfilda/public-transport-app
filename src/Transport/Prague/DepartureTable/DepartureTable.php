@@ -69,4 +69,9 @@ class DepartureTable implements IDepartureTable, IEntity
     {
         return $this->numberOfFutureDays;
     }
+
+    public function getPragueStop(): Stop
+    {
+        return $this->stop;
+    }
 }

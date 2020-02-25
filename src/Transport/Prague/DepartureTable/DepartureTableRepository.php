@@ -12,7 +12,7 @@ use Ramsey\Uuid\UuidInterface;
 
 class DepartureTableRepository extends BaseRepository
 {
-    public function findByStopId(UuidInterface $departureTableId): DepartureTable
+    public function findById(UuidInterface $departureTableId): DepartureTable
     {
         $qb = $this->createQueryBuilder();
 

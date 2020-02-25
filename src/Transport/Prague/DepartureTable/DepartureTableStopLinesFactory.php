@@ -27,7 +27,7 @@ class DepartureTableStopLinesFactory implements IDepartureTableStopLinesFactory
 
     public function getStopLines(string $departureTableId): array
     {
-        $departureTable = $this->departureTableRepository->findByStopId(Uuid::fromString($departureTableId));
+        $departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));
 
         /** @var Stop $stop */
         $stop = $departureTable->getStop();

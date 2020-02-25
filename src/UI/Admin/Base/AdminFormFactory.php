@@ -12,6 +12,8 @@ class AdminFormFactory
         if ($mappedClass !== null) {
             $form->setMappedType($mappedClass);
         }
+        $form->setRenderer(new BootstrapFormRenderer());
+
         return $form;
     }
 }

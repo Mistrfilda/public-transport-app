@@ -10,6 +10,8 @@ class AdminDatagridFactory
     {
         $grid = new AdminDatagrid();
 
+        $grid::$iconPrefix = '';
+
         //GLOBAL PRESETS
         $grid->setRememberState(false);
         $grid->setOuterFilterRendering(true);

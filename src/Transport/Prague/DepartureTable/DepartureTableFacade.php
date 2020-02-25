@@ -75,7 +75,7 @@ class DepartureTableFacade
             ]
         );
 
-        $departureTable = $this->departureTableRepository->findByStopId(Uuid::fromString($departureTableId));
+        $departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));
         $departureTable->update($numberOfFutureDays, $this->datetimeFactory->createNow());
 
         $this->entityManager->flush();

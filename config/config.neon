@@ -135,3 +135,4 @@ services:
 	- App\Transport\Prague\DepartureTable\DepartureTableStopLinesFactory
 
 	- App\UI\Admin\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory
+	- App\UI\Admin\PragueDepartureTable\Form\DepartureTableFormFactory

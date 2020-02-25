@@ -7,4 +7,6 @@ namespace App\Utils;
 class SelectPicker
 {
     public const BOOTSTRAP_SELECTPICKER = 'bootstrap-selectpicker';
+
+    public const PROMPT = '--Select--';
 }
