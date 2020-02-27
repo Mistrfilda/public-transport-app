@@ -3,7 +3,14 @@
         <div class="col-md-12">
             <div class="card shadow mb-12">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-lg text-primary">Departure tables</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="m-0 font-weight-bold text-lg text-primary pt-1">Departure tables</h6>
+                        </div>
+                        <div class="col-md-6">
+                            <a n:href="PragueDepartureTable:edit" class="btn btn-success float-right">Add</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     {control departureTableGrid}

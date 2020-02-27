@@ -4,7 +4,7 @@ import $ from 'jquery';
 import 'bootstrap';
 
 import naja from 'naja';
-import netteForms from 'nette-forms';
+import netteForms from '../nette/live-form-validation';
 
 netteForms.initOnLoad();
 window.Nette = netteForms;

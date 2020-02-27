@@ -134,6 +134,10 @@ class BootstrapFormRenderer extends DefaultFormRenderer
             $this->form->getElementPrototype()->addClass('form-inline');
         }
 
+        if ($this->form instanceof AdminForm && $this->form->isAjax()) {
+            $this->form->getElementPrototype()->addClass('ajax');
+        }
+
         foreach ($this->form->getControls() as $control) {
             if ($this->layout === self::INLINE && ! $control instanceof Controls\Checkbox) {
                 $control->getLabelPrototype()->addClass('my-1')->addClass('mr-2');
