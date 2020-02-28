@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Request;
 
-class RequestConditions
+use JsonSerializable;
+
+class RequestConditions implements JsonSerializable
 {
     /** @var array<string, bool> */
     private $conditions;
@@ -48,5 +50,16 @@ class RequestConditions
         }
 
         throw new RequestException('Unknown parameter');
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'conditions' => $this->conditions,
+            'parameters' => $this->parameters,
+        ];
     }
 }
