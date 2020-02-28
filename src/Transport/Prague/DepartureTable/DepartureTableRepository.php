@@ -26,6 +26,14 @@ class DepartureTableRepository extends BaseRepository
         }
     }
 
+    /**
+     * @return DepartureTable[]
+     */
+    public function findAll(): array
+    {
+        return $this->doctrineRepository->findAll();
+    }
+
     public function createQueryBuilder(): QueryBuilder
     {
         return $this->doctrineRepository->createQueryBuilder('departureTable');

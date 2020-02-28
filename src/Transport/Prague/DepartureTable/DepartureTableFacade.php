@@ -83,4 +83,19 @@ class DepartureTableFacade
 
         return $departureTable;
     }
+
+    public function deleteDepartureTable(string $departureTableId): void
+    {
+        $this->logger->info(
+            'Deleting departure table',
+            [
+                'id' => $departureTableId,
+            ]
+        );
+
+        $departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));
+
+        $this->entityManager->remove($departureTable);
+        $this->entityManager->flush();
+    }
 }
