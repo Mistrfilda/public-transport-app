@@ -1,0 +1,46 @@
+rabbitmq:
+	connections:
+		default:
+			user: ""
+			password: ""
+			host: ""
+			port: ""
+
+	queues:
+		pragueDepartureTableQueue:
+			connection: default
+		pragueVehiclePositionQueue:
+			connection: default
+
+	producers:
+		pragueDepartureTableProducer:
+			queue: pragueDepartureTableQueue
+			contentType: application/json
+			deliveryMode: 2 # Producer::DELIVERY_MODE_PERSISTENT
+		pragueVehiclePositionProducer:
+			queue: pragueVehiclePositionQueue
+			contentType: application/json
+			deliveryMode: 2 # Producer::DELIVERY_MODE_PERSISTENT
+
+	consumers:
+		pragueDepartureTableConsumer:
+			queue: pragueDepartureTableQueue
+			callback: [@pragueDepartureTableConsumer, consume]
+			qos:
+				prefetchSize: 0
+				prefetchCount: 5
+		pragueVehiclePositionConsumer:
+			queue: pragueVehiclePositionQueue
+			callback: [@pragueVehiclePositionConsumer, consume]
+			qos:
+				prefetchSize: 0
+				prefetchCount: 5
+
+services:
+	pragueDepartureTableConsumer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableConsumer
+	pragueDepartureTableProducer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableProducer(@Gamee\RabbitMQ\Client::getProducer(pragueDepartureTableProducer))
+
+	pragueVehiclePositionConsumer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionConsumer
+	pragueVehiclePositionProducer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer(@Gamee\RabbitMQ\Client::getProducer(pragueVehiclePositionProducer))
+
+	- App\Transport\Prague\Request\RequestFacade
