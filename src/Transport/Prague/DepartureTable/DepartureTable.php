@@ -13,12 +13,13 @@ use App\Transport\Prague\Stop\Stop;
 use App\Transport\Stop\IStop;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="prague_departure_table")
  */
-class DepartureTable implements IDepartureTable, IEntity
+class DepartureTable implements IDepartureTable, IEntity, JsonSerializable
 {
     use Uuid;
     use CreatedAt;
@@ -73,5 +74,15 @@ class DepartureTable implements IDepartureTable, IEntity
     public function getPragueStop(): Stop
     {
         return $this->stop;
+    }
+
+    /**
+     * @return array<string, string|int>
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->getId()->toString(),
+        ];
     }
 }

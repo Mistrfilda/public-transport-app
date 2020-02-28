@@ -35,7 +35,8 @@
 		"mistrfilda/pid-api": "^0.1",
 		"ramsey/uuid-doctrine": "^1.6",
 		"contributte/monolog": "^0.4.1",
-		"ublaboo/datagrid": "^6.2"
+		"ublaboo/datagrid": "^6.2",
+		"gamee/nette-rabbitmq": "^4.1"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0",

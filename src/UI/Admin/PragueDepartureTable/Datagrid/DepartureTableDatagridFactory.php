@@ -8,6 +8,7 @@ use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\Stop\StopRepository;
 use App\UI\Admin\Base\AdminDatagrid;
 use App\UI\Admin\Base\AdminDatagridFactory;
+use Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation;
 
 class DepartureTableDatagridFactory
 {
@@ -47,6 +48,11 @@ class DepartureTableDatagridFactory
         $grid->addAction('edit', 'Edit', 'edit')
             ->setIcon('fas fa-fw fa-cog')
             ->setClass('btn btn-primary');
+
+        $grid->addAction('delete', 'Delete', 'deleteDepartureTable!')
+            ->setIcon('fas fa-fw fa-trash')
+            ->setClass('btn btn-danger')
+            ->setConfirmation(new StringConfirmation('Do you realy want to delete departure table %s', 'id'));
 
         return $grid;
     }

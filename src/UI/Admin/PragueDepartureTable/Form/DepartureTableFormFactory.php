@@ -42,7 +42,6 @@ class DepartureTableFormFactory
     public function create(callable $onSuccess, ?UuidInterface $id = null): AdminForm
     {
         $form = $this->adminFormFactory->create(DepartureTableFormDTO::class);
-        $form->ajax();
 
         $form->addSelect('stopId', 'Stop', $this->stopRepository->findPairs())
             ->setRequired()
