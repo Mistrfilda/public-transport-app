@@ -3,6 +3,9 @@ language: php
 php:
   - 7.3
 
+env:
+  - TRAVIS_RABBIT_MQ_QUEUE=TRUE
+
 services:
   - mysql
 
