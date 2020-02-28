@@ -60,6 +60,13 @@ class RequestFacade implements IRequestFacade
 
     private function generateDepartureTableRequests(RequestConditions $conditions): void
     {
+        if (
+            $conditions->hasCondition('generateDepartureTables')
+            && $conditions->getCondition('generateDepartureTables') === false
+        ) {
+            return;
+        }
+
         foreach ($this->departureTableRepository->findAll() as $departureTable) {
             $this->logger->info('Generating departure table request', $departureTable->jsonSerialize());
 
@@ -79,6 +86,14 @@ class RequestFacade implements IRequestFacade
 
     private function generateVehiclePositionsRequest(RequestConditions $conditions): void
     {
+        if (
+            $conditions->hasCondition('generateVehiclePositions')
+            && $conditions->getCondition('generateVehiclePositions') === false
+        ) {
+            return;
+        }
+
+        $this->logger->info('Generating vehicle position request');
         $request = new Request(
             RequestType::PRAGUE_VEHICLE_POSITION,
             $this->datetimeFactory->createNow()

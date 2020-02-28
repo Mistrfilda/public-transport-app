@@ -183,6 +183,7 @@ services:
 	#RABITMQ
 	- App\Request\RabbitMQ\MessageFactory
 	- App\Request\RequestRepository(App\Request\Request)
+	- App\Request\GenerateRequestsCommand
 
 	pragueDepartureTableConsumer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableConsumer
 	pragueDepartureTableProducer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableProducer(@Gamee\RabbitMQ\Client::getProducer(pragueDepartureTableProducer))
