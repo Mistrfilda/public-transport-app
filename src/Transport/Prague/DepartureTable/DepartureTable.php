@@ -76,6 +76,11 @@ class DepartureTable implements IDepartureTable, IEntity, JsonSerializable
         return $this->stop;
     }
 
+    public function getAdminFormatedName(): string
+    {
+        return sprintf('%s (%s)', $this->getPragueStop()->getName(), $this->getId()->toString());
+    }
+
     /**
      * @return array<string, string|int>
      */

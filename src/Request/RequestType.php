@@ -27,4 +27,15 @@ class RequestType
             self::PRAGUE_VEHICLE_POSITION,
         ];
     }
+
+    /**
+     * @return string[]
+     */
+    public static function getLabels(): array
+    {
+        return [
+            self::PRAGUE_VEHICLE_POSITION => 'Prague vehicle position',
+            self::PRAGUE_DEPARTURE_TABLE => 'Prague departure table',
+        ];
+    }
 }

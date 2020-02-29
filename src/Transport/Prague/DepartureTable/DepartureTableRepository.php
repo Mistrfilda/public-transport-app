@@ -34,6 +34,25 @@ class DepartureTableRepository extends BaseRepository
         return $this->doctrineRepository->findAll();
     }
 
+    /**
+     * @return string[]
+     */
+    public function findPairs(): array
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->innerJoin('departureTable.stop', 'stop');
+
+        /** @var DepartureTable[] $results */
+        $results = $qb->getQuery()->getResult();
+
+        $pairs = [];
+        foreach ($results as $departureTable) {
+            $pairs[$departureTable->getId()->toString()] = $departureTable->getAdminFormatedName();
+        }
+
+        return $pairs;
+    }
+
     public function createQueryBuilder(): QueryBuilder
     {
         return $this->doctrineRepository->createQueryBuilder('departureTable');

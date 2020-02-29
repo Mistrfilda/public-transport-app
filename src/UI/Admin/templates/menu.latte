@@ -28,8 +28,8 @@
                 {var $isMenuLinkActive = $presenter->isMenuLinkActive($menuItem->getActiveLinks())}
                 <li n:class="nav-item, $isMenuLinkActive ? active">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu-collapse-{$iterator->getCounter()}" aria-expanded="true" aria-controls="collapseTwo-{$iterator->getCounter()}">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Stops</span>
+                        <i class="{$menuItem->getIcon()}"></i>
+                        <span>{$menuItem->getLabel()}</span>
                     </a>
                     <div id="menu-collapse-{$iterator->getCounter()}" n:class="collapse, $isMenuLinkActive ? show" aria-labelledby="headingTwo-{$iterator->getCounter()}" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">

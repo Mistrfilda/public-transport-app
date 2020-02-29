@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace App\UI\Admin\Base;
 
+use App\Utils\DatetimeFactory;
 use App\Utils\SelectPicker;
+use DateTimeImmutable;
+use Ublaboo\DataGrid\Column\ColumnDateTime;
 use Ublaboo\DataGrid\Column\FilterableColumn;
 use Ublaboo\DataGrid\DataGrid;
 use Ublaboo\DataGrid\Filter\FilterSelect;
 
 class AdminDatagrid extends DataGrid
 {
+    public const NULLABLE_PLACEHOLDER = '----';
+
     /**
      * @param array<int|string, string> $options
      */
@@ -20,5 +25,21 @@ class AdminDatagrid extends DataGrid
         $filter->addAttribute('class', SelectPicker::BOOTSTRAP_SELECTPICKER);
         $filter->setPrompt(SelectPicker::PROMPT);
         return $filter;
+    }
+
+    public function addColumnDateTime(string $key, string $name, ?string $column = null): ColumnDateTime
+    {
+        $column = parent::addColumnDateTime($key, $name, $column);
+        $column->setFormat(DatetimeFactory::DEFAULT_DATETIME_FORMAT);
+        return $column;
+    }
+
+    public static function formatNullableDatetimeColumn(?DateTimeImmutable $time): string
+    {
+        if ($time === null) {
+            return self::NULLABLE_PLACEHOLDER;
+        }
+
+        return $time->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT);
     }
 }

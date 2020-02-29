@@ -78,4 +78,9 @@ class Stop implements IStop, IEntity
     {
         return new Coordinates($this->latitude, $this->longitude);
     }
+
+    public function getFormattedName(): string
+    {
+        return sprintf('%s (%s)', $this->getName(), $this->getStopId());
+    }
 }

@@ -16,11 +16,14 @@ class MenuBuilder
                 new MenuItem('Dashboard', 'default', 'fas fa-fw fa-tachometer-alt', 'Dashboard'),
             ]),
             new MenuGroup('Prague', true, [
-                new MenuItem('', '', 'fas fa-fw fa-cog', 'Stops', [
+                new MenuItem('', '', 'fas fa-bus-alt', 'Stops', [
                     new MenuItem('PragueStop', 'default', '', 'List'),
                     new MenuItem('PragueStop', 'map', '', 'Map'),
                 ]),
-                new MenuItem('PragueDepartureTable', 'default', 'fas fa-fw fa-cog', 'Departure tables'),
+                new MenuItem('PragueDepartureTable', 'default', 'fas fa-table', 'Departure tables'),
+            ]),
+            new MenuGroup('Requests', true, [
+                new MenuItem('Request', 'default', 'fas fa-clipboard-list', 'Requests'),
             ]),
         ];
     }

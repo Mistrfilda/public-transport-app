@@ -46,11 +46,11 @@ class DepartureTableDatagridFactory
         $grid->addColumnText('numberOfFutureDays', 'Number of future days');
 
         $grid->addAction('edit', 'Edit', 'edit')
-            ->setIcon('fas fa-fw fa-cog')
+            ->setIcon('cog')
             ->setClass('btn btn-primary');
 
         $grid->addAction('delete', 'Delete', 'deleteDepartureTable!')
-            ->setIcon('fas fa-fw fa-trash')
+            ->setIcon('trash')
             ->setClass('btn btn-danger')
             ->setConfirmation(new StringConfirmation('Do you realy want to delete departure table %s', 'id'));
 
