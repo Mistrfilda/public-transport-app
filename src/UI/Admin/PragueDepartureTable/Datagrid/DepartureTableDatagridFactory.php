@@ -47,16 +47,16 @@ class DepartureTableDatagridFactory
 
         $grid->addAction('edit', 'Edit', 'edit')
             ->setIcon('cog')
-            ->setClass('btn btn-primary');
+            ->setClass('btn btn-sm btn-primary');
 
         $grid->addAction('delete', 'Delete', 'deleteDepartureTable!')
             ->setIcon('trash')
-            ->setClass('btn btn-danger')
+            ->setClass('btn btn-sm btn-danger')
             ->setConfirmation(new StringConfirmation('Do you realy want to delete departure table %s', 'id'));
 
         $grid->addAction('detail', 'Show table', 'table')
             ->setIcon('eye')
-            ->setClass('btn btn-info');
+            ->setClass('btn btn-sm btn-info');
 
         return $grid;
     }

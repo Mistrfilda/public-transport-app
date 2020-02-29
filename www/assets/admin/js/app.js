@@ -19,8 +19,12 @@ import 'ublaboo-datagrid/assets/datagrid-instant-url-refresh';
 import 'bootstrap-datepicker';
 import 'bootstrap-select';
 
+//Custom js
+import clock from "./clock";
+
 $(document).ready(function () {
     initCustomJs();
+    clock();
 });
 
 naja.snippetHandler.addEventListener('afterUpdate', () => {

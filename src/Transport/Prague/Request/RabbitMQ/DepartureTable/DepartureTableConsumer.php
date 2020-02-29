@@ -19,11 +19,15 @@ use Nette\Utils\Json;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
 use Throwable;
+use Tracy\ILogger;
 
 class DepartureTableConsumer implements IConsumer
 {
     /** @var LoggerInterface */
     private $logger;
+
+    /** @var ILogger */
+    private $tracyLogger;
 
     /** @var StopTimeImportFacade */
     private $stopTimeImportFacade;
@@ -45,6 +49,7 @@ class DepartureTableConsumer implements IConsumer
 
     public function __construct(
         LoggerInterface $logger,
+        ILogger $tracyLogger,
         StopTimeImportFacade $stopTimeImportFacade,
         TripImportFacade $tripImportFacade,
         DepartureTableRepository $departureTableRepository,
@@ -59,6 +64,7 @@ class DepartureTableConsumer implements IConsumer
         $this->requestRepository = $requestRepository;
         $this->entityManager = $entityManager;
         $this->datetimeFactory = $datetimeFactory;
+        $this->tracyLogger = $tracyLogger;
     }
 
     public function consume(Message $message): int
@@ -93,6 +99,8 @@ class DepartureTableConsumer implements IConsumer
                 $request->failed($this->datetimeFactory->createNow());
                 $this->entityManager->flush();
             }
+
+            $this->tracyLogger->log($e);
         }
 
         return IConsumer::MESSAGE_ACK;

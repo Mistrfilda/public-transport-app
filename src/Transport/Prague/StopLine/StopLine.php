@@ -86,4 +86,9 @@ class StopLine implements IStopLine
     {
         return $this->vehicle;
     }
+
+    public function hasVehicle(): bool
+    {
+        return $this->vehicle !== null;
+    }
 }

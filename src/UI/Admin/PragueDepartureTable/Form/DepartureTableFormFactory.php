@@ -43,7 +43,7 @@ class DepartureTableFormFactory
     {
         $form = $this->adminFormFactory->create(DepartureTableFormDTO::class);
 
-        $form->addSelect('stopId', 'Stop', $this->stopRepository->findPairs())
+        $stopSelect = $form->addSelect('stopId', 'Stop', $this->stopRepository->findPairs())
             ->setRequired()
             ->setPrompt(SelectPicker::PROMPT);
 
@@ -60,6 +60,7 @@ class DepartureTableFormFactory
         };
 
         if ($id !== null) {
+            $stopSelect->setDisabled();
             $this->setDefaults($id, $form);
         }
 

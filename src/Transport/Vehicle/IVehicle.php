@@ -29,4 +29,6 @@ interface IVehicle
     public function getVehicleType(): int;
 
     public function getTripId(): string;
+
+    public function getCompany(): ?string;
 }

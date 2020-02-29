@@ -16,11 +16,15 @@ use Nette\Schema\Processor;
 use Nette\Utils\Json;
 use Psr\Log\LoggerInterface;
 use Throwable;
+use Tracy\ILogger;
 
 class VehiclePositionConsumer implements IConsumer
 {
     /** @var LoggerInterface */
     private $logger;
+
+    /** @var ILogger */
+    private $tracyLogger;
 
     /** @var DatetimeFactory */
     private $datetimeFactory;
@@ -36,12 +40,14 @@ class VehiclePositionConsumer implements IConsumer
 
     public function __construct(
         LoggerInterface $logger,
+        ILogger $tracyLogger,
         DatetimeFactory $datetimeFactory,
         VehicleImportFacade $vehicleImportFacade,
         EntityManagerInterface $entityManager,
         RequestRepository $requestRepository
     ) {
         $this->logger = $logger;
+        $this->tracyLogger = $tracyLogger;
         $this->datetimeFactory = $datetimeFactory;
         $this->vehicleImportFacade = $vehicleImportFacade;
         $this->entityManager = $entityManager;
@@ -70,6 +76,8 @@ class VehiclePositionConsumer implements IConsumer
                 $request->failed($this->datetimeFactory->createNow());
                 $this->entityManager->flush();
             }
+
+            $this->tracyLogger->log($e);
         }
 
         return IConsumer::MESSAGE_ACK;

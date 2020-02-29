@@ -97,6 +97,12 @@ class Vehicle implements IEntity, IVehicle
      */
     private $vehicleType;
 
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $company;
+
     public function __construct(
         VehiclePosition $vehiclePosition,
         string $routeId,
@@ -109,7 +115,8 @@ class Vehicle implements IEntity, IVehicle
         int $vehicleType,
         ?string $lastStopId,
         ?string $nextStopId,
-        ?string $registrationNumber
+        ?string $registrationNumber,
+        ?string $company
     ) {
         $this->vehiclePosition = $vehiclePosition;
         $this->routeId = $routeId;
@@ -123,6 +130,7 @@ class Vehicle implements IEntity, IVehicle
         $this->nextStopId = $nextStopId;
         $this->vehicleType = $vehicleType;
         $this->registrationNumber = $registrationNumber;
+        $this->company = $company;
 
         $createdAt = $vehiclePosition->getCreatedAt()->setTime(0, 0, 0);
         $this->dateTripId = $createdAt->getTimestamp() . '_' . $this->tripId;
@@ -186,5 +194,10 @@ class Vehicle implements IEntity, IVehicle
     public function getDateTripId(): string
     {
         return $this->dateTripId;
+    }
+
+    public function getCompany(): ?string
+    {
+        return $this->company;
     }
 }
