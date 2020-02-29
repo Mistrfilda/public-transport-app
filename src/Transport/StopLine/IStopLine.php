@@ -24,4 +24,6 @@ interface IStopLine
 
     /** Nullable, vehicle can be at depot! */
     public function getVehicle(): ?IVehicle;
+
+    public function hasVehicle(): bool;
 }

@@ -14,6 +14,7 @@ tracy:
 	maxDepth: 6
 	showLocation: true
 
+
 session:
 	expiration: 14 days
 
@@ -82,6 +83,15 @@ monolog:
 
 services:
 	router: App\Router\RouterFactory::createRouter
+
+	latte.latteFactory:
+		setup:
+			- addFilter(datetimeFormat, [@datetimeformatfilter, format])
+			- addFilter(secondsFormat, [@secondsformatFilter, format])
+
+	#CUSTOM LATTE FILTERS
+	datetimeformatfilter: App\UI\Filter\DatetimeFormatFilter
+	secondsformatFilter: App\UI\Filter\SecondsFormatFilter
 
 	- App\Utils\DatetimeFactory
 	- Ofce\Pid\Api\PidService(%pid.accessToken%)

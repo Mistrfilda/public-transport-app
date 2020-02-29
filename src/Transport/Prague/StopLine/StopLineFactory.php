@@ -45,7 +45,7 @@ class StopLineFactory
         $trips = $this->tripRepository->findForDepartureTable($stop->getId(), $this->datetimeFactory->createToday());
 
         $lastVehiclePosition = $this->vehiclePositionRepository->findLast();
-        dump($lastVehiclePosition);
+        $vehicles = $lastVehiclePosition->getVehicles();
 
         $stopLines = [];
         foreach ($stopTimes as $stopTime) {
@@ -55,6 +55,11 @@ class StopLineFactory
                 continue;
             }
 
+            $vehicle = null;
+            if (array_key_exists($stopTime->getDateTripId(), $vehicles)) {
+                $vehicle = $vehicles[$stopTime->getDateTripId()];
+            }
+
             $stopLines[] = new StopLine(
                 $stop,
                 $stopTime->getArrivalTime(),
@@ -62,7 +67,7 @@ class StopLineFactory
                 $stopTime->getTripId(),
                 $trip->getLineNumber(),
                 $trip->getTripHeadsign(),
-                null
+                $vehicle
             );
         }
 

@@ -17,6 +17,8 @@ class AdminDatagridFactory
         $grid->setOuterFilterRendering(true);
         $grid->setAutoSubmit(false);
 
+        $grid->setTemplateFile(__DIR__ . '/templates/adminDatagrid.latte');
+
         return $grid;
     }
 }
