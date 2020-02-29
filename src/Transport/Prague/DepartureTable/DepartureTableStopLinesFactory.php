@@ -6,6 +6,7 @@ namespace App\Transport\Prague\DepartureTable;
 
 use App\Transport\DepartureTable\IDepartureTableStopLinesFactory;
 use App\Transport\Prague\Stop\Stop;
+use App\Transport\Prague\StopLine\StopLine;
 use App\Transport\Prague\StopLine\StopLineFactory;
 use Ramsey\Uuid\Uuid;
 
@@ -25,6 +26,9 @@ class DepartureTableStopLinesFactory implements IDepartureTableStopLinesFactory
         $this->departureTableRepository = $departureTableRepository;
     }
 
+    /**
+     * @return StopLine[]
+     */
     public function getStopLines(string $departureTableId): array
     {
         $departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));

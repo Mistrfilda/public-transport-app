@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace App\UI\Admin\Base;
 
+use Nette\Forms\Container;
+use Nette\Forms\ControlGroup;
 use Nette\Forms\Controls;
 use Nette\Forms\Form;
 use Nette\Forms\IControl;
@@ -92,6 +94,9 @@ class BootstrapFormRenderer extends DefaultFormRenderer
         return parent::renderBody();
     }
 
+    /**
+     * @param Container|ControlGroup $parent
+     */
     public function renderControls($parent): string
     {
         $this->controlsInit();
@@ -104,6 +109,9 @@ class BootstrapFormRenderer extends DefaultFormRenderer
         return parent::renderPair($control);
     }
 
+    /**
+     * @param IControl[] $controls
+     */
     public function renderPairMulti(array $controls): string
     {
         $this->controlsInit();

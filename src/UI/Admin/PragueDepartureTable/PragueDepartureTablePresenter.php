@@ -8,7 +8,10 @@ use App\Transport\Prague\DepartureTable\DepartureTableFacade;
 use App\UI\Admin\AdminPresenter;
 use App\UI\Admin\Base\AdminDatagrid;
 use App\UI\Admin\Base\AdminForm;
+use App\UI\Admin\PragueDepartureTable\Control\DepartureTableControl;
+use App\UI\Admin\PragueDepartureTable\Control\DepartureTableControlFactory;
 use App\UI\Admin\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory;
+use App\UI\Admin\PragueDepartureTable\Exception\InvalidArgumentException;
 use App\UI\Admin\PragueDepartureTable\Form\DepartureTableFormFactory;
 use Ramsey\Uuid\Uuid;
 
@@ -23,18 +26,27 @@ class PragueDepartureTablePresenter extends AdminPresenter
     /** @var DepartureTableFacade */
     private $departureTableFacade;
 
+    /** @var DepartureTableControlFactory */
+    private $departureTableControlFactory;
+
     public function __construct(
         DepartureTableDatagridFactory $departureTableDatagridFactory,
         DepartureTableFormFactory $departureTableFormFactory,
-        DepartureTableFacade $departureTableFacade
+        DepartureTableFacade $departureTableFacade,
+        DepartureTableControlFactory $departureTableControlFactory
     ) {
         parent::__construct();
         $this->departureTableDatagridFactory = $departureTableDatagridFactory;
         $this->departureTableFormFactory = $departureTableFormFactory;
         $this->departureTableFacade = $departureTableFacade;
+        $this->departureTableControlFactory = $departureTableControlFactory;
     }
 
     public function renderEdit(?string $id): void
+    {
+    }
+
+    public function renderTable(string $id): void
     {
     }
 
@@ -62,5 +74,15 @@ class PragueDepartureTablePresenter extends AdminPresenter
         };
 
         return $this->departureTableFormFactory->create($onSuccess, $id);
+    }
+
+    protected function createComponentDepartureTableControl(): DepartureTableControl
+    {
+        $id = $this->getParameter('id');
+        if ($id === null) {
+            throw new InvalidArgumentException('Missing parameter ID');
+        }
+
+        return $this->departureTableControlFactory->create($id);
     }
 }
