@@ -141,6 +141,7 @@ services:
 
 	- App\UI\Admin\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory
 	- App\UI\Admin\PragueDepartureTable\Form\DepartureTableFormFactory
+	- App\UI\Admin\PragueDepartureTable\Control\DepartureTableControlFactory
 
 	#REQUEST
 	- App\Request\RequestRepository(App\Request\Request)

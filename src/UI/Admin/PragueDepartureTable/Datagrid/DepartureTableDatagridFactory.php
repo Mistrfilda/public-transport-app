@@ -54,6 +54,10 @@ class DepartureTableDatagridFactory
             ->setClass('btn btn-danger')
             ->setConfirmation(new StringConfirmation('Do you realy want to delete departure table %s', 'id'));
 
+        $grid->addAction('detail', 'Show table', 'table')
+            ->setIcon('eye')
+            ->setClass('btn btn-info');
+
         return $grid;
     }
 }
