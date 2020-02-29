@@ -104,4 +104,14 @@ class Request implements IEntity
     {
         return $this->pragueDepartureTable !== null;
     }
+
+    public function hasFailed(): bool
+    {
+        return $this->failedAt !== null;
+    }
+
+    public function hasFinished(): bool
+    {
+        return $this->finishedAt !== null;
+    }
 }

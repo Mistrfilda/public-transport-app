@@ -10,7 +10,7 @@ class AdminDatagridFactory
     {
         $grid = new AdminDatagrid();
 
-        $grid::$iconPrefix = '';
+        $grid::$iconPrefix = 'fa fa-';
 
         //GLOBAL PRESETS
         $grid->setRememberState(false);
