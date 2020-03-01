@@ -10,6 +10,12 @@ use Nette\Application\UI\Presenter;
 
 class LoginPresenter extends Presenter
 {
+    /**
+     * @persistent
+     * @var string
+     */
+    public $backlink = '';
+
     /** @var LoginFormFactory */
     private $loginFormFactory;
 
@@ -22,7 +28,7 @@ class LoginPresenter extends Presenter
     protected function createComponentLoginForm(): AdminForm
     {
         $onSuccess = function (): void {
-            $this->restoreRequest('backlink');
+            $this->restoreRequest($this->backlink);
             $this->redirect('Dashboard:default');
         };
 
