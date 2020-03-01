@@ -47,6 +47,7 @@ class Request implements IEntity
     /**
      * @var DepartureTable|null
      * @ORM\ManyToOne(targetEntity="App\Transport\Prague\DepartureTable\DepartureTable")
+     * @ORM\JoinColumn(onDelete="set null")
      */
     private $pragueDepartureTable;
 

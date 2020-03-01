@@ -7,6 +7,7 @@ namespace App\UI\Admin\Login\Form;
 use App\Admin\CurrentAppAdminGetter;
 use App\UI\Admin\Base\AdminForm;
 use App\UI\Admin\Base\AdminFormFactory;
+use Nette\Security\AuthenticationException;
 
 class LoginFormFactory
 {
@@ -37,7 +38,12 @@ class LoginFormFactory
         $form->addSubmit('submit', 'Submit');
 
         $form->onSuccess[] = function (AdminForm $form, LoginFormDTO $values) use ($onSuccess): void {
-            $this->currentAppAdminGetter->login($values->username, $values->password);
+            try {
+                $this->currentAppAdminGetter->login($values->username, $values->password);
+            } catch (AuthenticationException $e) {
+                $form->addError('Invalid username/password combination');
+                return;
+            }
             $onSuccess();
         };
 

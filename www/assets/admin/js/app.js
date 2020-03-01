@@ -21,10 +21,14 @@ import 'bootstrap-select';
 
 //Custom js
 import clock from "./clock";
+import departureTableRefresh from './departureTableRefresh';
+
+let najaDepartureTableHandler = new departureTableRefresh(naja, $);
 
 $(document).ready(function () {
     initCustomJs();
     clock();
+    najaDepartureTableHandler.bind();
 });
 
 naja.snippetHandler.addEventListener('afterUpdate', () => {

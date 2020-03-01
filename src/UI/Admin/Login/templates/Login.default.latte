@@ -33,6 +33,13 @@
                                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                 </div>
                                 <form class="user" n:name="loginForm">
+                                    {if $form->hasErrors()}
+                                        {foreach $form->getErrors() as $error}
+                                            <div class="alert alert-danger" role="alert">
+                                                {$error}
+                                            </div>
+                                        {/foreach}
+                                    {/if}
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" n:name="username" placeholder="Enter username">
                                     </div>

@@ -55,6 +55,7 @@ class PragueDepartureTablePresenter extends AdminPresenter
     public function handleDeleteDepartureTable(string $id): void
     {
         $this->departureTableFacade->deleteDepartureTable($id);
+        $this->flashMessage('Departure table successfully deleted');
     }
 
     protected function createComponentDepartureTableGrid(): AdminDatagrid
