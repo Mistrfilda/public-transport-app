@@ -66,7 +66,7 @@ class StopTimeRepository extends BaseRepository
         $qb->setParameter('stopId', $stopId);
 
         $qb->andWhere($qb->expr()->gte('stopTime.departureTime', ':now'));
-        $qb->setParameter('now', $now);
+        $qb->setParameter('now', $now->modify('- 2 hours'));
 
         $qb->orderBy('stopTime.departureTime', OrderBy::ASC);
 

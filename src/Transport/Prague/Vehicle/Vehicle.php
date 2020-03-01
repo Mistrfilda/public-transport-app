@@ -200,4 +200,9 @@ class Vehicle implements IEntity, IVehicle
     {
         return $this->company;
     }
+
+    public function hasDelay(): bool
+    {
+        return $this->getDelayInSeconds() > 0;
+    }
 }

@@ -67,7 +67,8 @@ class StopLineFactory
                 $stopTime->getTripId(),
                 $trip->getLineNumber(),
                 $trip->getTripHeadsign(),
-                $vehicle
+                $vehicle,
+                $this->datetimeFactory->createNow()
             );
         }
 

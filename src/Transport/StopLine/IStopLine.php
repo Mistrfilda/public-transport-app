@@ -26,4 +26,12 @@ interface IStopLine
     public function getVehicle(): ?IVehicle;
 
     public function hasVehicle(): bool;
+
+    public function hasVehicleLeft(): bool;
+
+    public function getRealDepartureTime(): DateTimeImmutable;
+
+    public function isNearDeparture(): bool;
+
+    public function hasBigDelay(): bool;
 }
