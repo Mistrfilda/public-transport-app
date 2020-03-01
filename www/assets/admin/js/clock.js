@@ -1,12 +1,16 @@
 export default function() {
-    myTimer();
+    let clockElement = document.getElementById("departure-table-clock");
 
-    setInterval(function() {
+    if (clockElement !== null) {
         myTimer();
-    }, 1000);
 
-    function myTimer() {
-        var d = new Date();
-        document.getElementById("departure-table-clock").innerHTML = d.toLocaleTimeString();
+        setInterval(function () {
+            myTimer();
+        }, 1000);
+
+        function myTimer() {
+            var d = new Date();
+            document.getElementById("departure-table-clock").innerHTML = d.toLocaleTimeString();
+        }
     }
 }

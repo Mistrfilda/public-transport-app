@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Admin\PragueDepartureTable;
 
+use App\Transport\Prague\DepartureTable\DepartureTable;
 use App\Transport\Prague\DepartureTable\DepartureTableFacade;
 use App\UI\Admin\AdminPresenter;
 use App\UI\Admin\Base\AdminDatagrid;
@@ -13,6 +14,7 @@ use App\UI\Admin\PragueDepartureTable\Control\DepartureTableControlFactory;
 use App\UI\Admin\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory;
 use App\UI\Admin\PragueDepartureTable\Exception\InvalidArgumentException;
 use App\UI\Admin\PragueDepartureTable\Form\DepartureTableFormFactory;
+use App\Utils\FlashMessageType;
 use Ramsey\Uuid\Uuid;
 
 class PragueDepartureTablePresenter extends AdminPresenter
@@ -68,8 +70,11 @@ class PragueDepartureTablePresenter extends AdminPresenter
             $id = Uuid::fromString($id);
         }
 
-        $onSuccess = function (): void {
-            $this->flashMessage('Successfully saved');
+        $onSuccess = function (DepartureTable $departureTable): void {
+            $this->flashMessage(
+                sprintf('Departure table %s successfuly saved', $departureTable->getId()->toString()),
+                FlashMessageType::INFO
+            );
             $this->redirect('default');
         };
 

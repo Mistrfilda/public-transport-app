@@ -36,4 +36,6 @@ function initCustomJs() {
         'liveSearch': true,
         'style': 'btn-primary'
     });
+
+    $('.toast').toast('show');
 }
