@@ -41,7 +41,8 @@
 
                             {varType App\Transport\Prague\StopLine\StopLine $stopLine}
                             {foreach $stopLines as $stopLine}
-                                <tr>
+                                {continueIf $stopLine->hasVehicleLeft()}
+                                <tr n:class="$stopLine->isNearDeparture() ? departure-table-animation, $stopLine->hasBigDelay() ? 'table-danger text-black'">
                                     <th scope="row">{$stopLine->getLineNumber()}</th>
                                     <td>{$stopLine->getTripId()}</td>
                                     <td>{$stopLine->getFinalDestination()}</td>

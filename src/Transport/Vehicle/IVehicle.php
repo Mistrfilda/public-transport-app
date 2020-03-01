@@ -18,6 +18,8 @@ interface IVehicle
 
     public function getDelayInSeconds(): int;
 
+    public function hasDelay(): bool;
+
     public function isWheelchairAccessible(): bool;
 
     public function getLastStopId(): ?string;

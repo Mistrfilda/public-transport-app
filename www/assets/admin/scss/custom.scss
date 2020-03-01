@@ -1,3 +1,21 @@
 .invalid-feedback {
   display: block !important;
 }
+
+.departure-table-animation {
+  animation-name: leaving-departure-table;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes leaving-departure-table {
+  0%   {background-color: #343a40;}
+  25%  {background-color: #ffeeba; color: #000000}
+  50%  {background-color: #ffeeba; color: #000000}
+  75%  {background-color: #343a40;}
+  100% {background-color: #343a40;}
+}
+
+.text-black {
+  color: #000000;
+}

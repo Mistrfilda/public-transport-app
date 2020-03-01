@@ -34,6 +34,9 @@ class StopLine implements IStopLine
     /** @var Vehicle|null */
     private $vehicle;
 
+    /** @var DateTimeImmutable */
+    private $now;
+
     public function __construct(
         Stop $stop,
         DateTimeImmutable $arrivalTime,
@@ -41,7 +44,8 @@ class StopLine implements IStopLine
         string $tripId,
         string $lineNumber,
         string $finalDestination,
-        ?Vehicle $vehicle
+        ?Vehicle $vehicle,
+        DateTimeImmutable $now
     ) {
         $this->stop = $stop;
         $this->arrivalTime = $arrivalTime;
@@ -50,6 +54,7 @@ class StopLine implements IStopLine
         $this->lineNumber = $lineNumber;
         $this->finalDestination = $finalDestination;
         $this->vehicle = $vehicle;
+        $this->now = $now;
     }
 
     public function getStop(): IStop
@@ -90,5 +95,47 @@ class StopLine implements IStopLine
     public function hasVehicle(): bool
     {
         return $this->vehicle !== null;
+    }
+
+    public function hasVehicleLeft(): bool
+    {
+        if ($this->getRealDepartureTime()->getTimestamp() > $this->now->getTimestamp()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getRealDepartureTime(): DateTimeImmutable
+    {
+        $departureTime = $this->getDepartureTime();
+        $vehicle = $this->getVehicle();
+
+        if ($vehicle !== null && $vehicle->getDelayInSeconds() > 0) {
+            return $departureTime->modify('+ ' . $vehicle->getDelayInSeconds() . ' seconds');
+        }
+
+        return $departureTime;
+    }
+
+    public function isNearDeparture(): bool
+    {
+        $realDepartureTime = $this->getRealDepartureTime();
+
+        if ($this->now->modify('+ 2 minutes')->getTimestamp() > $realDepartureTime->getTimestamp()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function hasBigDelay(): bool
+    {
+        $vehicle = $this->getVehicle();
+        if ($vehicle !== null && $vehicle->getDelayInSeconds() > 240 && $this->isNearDeparture() === false) {
+            return true;
+        }
+
+        return false;
     }
 }
