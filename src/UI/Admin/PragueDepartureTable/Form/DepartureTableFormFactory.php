@@ -85,11 +85,11 @@ class DepartureTableFormFactory
         DepartureTableFormDTO $values,
         callable $onSuccess
     ): void {
-        $this->departureTableFacade->createDepartureTable(
+        $departureTable = $this->departureTableFacade->createDepartureTable(
             $values->getStopId(),
             $values->getNumberOfFutureDays()
         );
-        $onSuccess();
+        $onSuccess($departureTable);
     }
 
     private function updateDepartureTable(
@@ -98,7 +98,7 @@ class DepartureTableFormFactory
         DepartureTableFormDTO $values,
         callable $onSucces
     ): void {
-        $this->departureTableFacade->updateDepartureTable($id->toString(), $values->getNumberOfFutureDays());
-        $onSucces();
+        $departureTable = $this->departureTableFacade->updateDepartureTable($id->toString(), $values->getNumberOfFutureDays());
+        $onSucces($departureTable);
     }
 }
