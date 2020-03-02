@@ -5,14 +5,26 @@ declare(strict_types=1);
 namespace App\Transport\Prague\Vehicle;
 
 use App\Doctrine\BaseRepository;
+use App\Doctrine\NoEntityFoundException;
 use App\Doctrine\OrderBy;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
+use Ramsey\Uuid\UuidInterface;
 
 class VehiclePositionRepository extends BaseRepository
 {
-    public function createQueryBuilder(): QueryBuilder
+    public function findById(UuidInterface $id): VehiclePosition
     {
-        return $this->doctrineRepository->createQueryBuilder('vehiclePosition');
+        $qb = $this->createQueryBuilder();
+
+        $qb->where($qb->expr()->eq('vehiclePosition.id', ':id'));
+        $qb->setParameter('id', $id);
+
+        try {
+            return $qb->getQuery()->getSingleResult();
+        } catch (NoResultException $e) {
+            throw new NoEntityFoundException();
+        }
     }
 
     public function findLast(): VehiclePosition
@@ -21,5 +33,10 @@ class VehiclePositionRepository extends BaseRepository
         $qb->orderBy('vehiclePosition.createdAt', OrderBy::DESC);
         $qb->setMaxResults(1);
         return $qb->getQuery()->getSingleResult();
+    }
+
+    public function createQueryBuilder(): QueryBuilder
+    {
+        return $this->doctrineRepository->createQueryBuilder('vehiclePosition');
     }
 }

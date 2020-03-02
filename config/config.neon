@@ -146,6 +146,9 @@ services:
 	- App\Transport\Prague\Vehicle\VehiclePositionRepository(App\Transport\Prague\Vehicle\VehiclePosition)
 	- App\Transport\Prague\Vehicle\VehicleRepository(App\Transport\Prague\Vehicle\Vehicle)
 
+	- App\UI\Admin\PragueVehiclePosition\Datagrid\VehicleDatagridFactory
+	- App\UI\Admin\PragueVehiclePosition\Datagrid\VehiclePositionDatagridFactory
+
 	#DEPARTURE TABLE
 	- App\Transport\Prague\DepartureTable\DepartureTableFacade
 	- App\Transport\Prague\DepartureTable\DepartureTableRepository(App\Transport\Prague\DepartureTable\DepartureTable)
