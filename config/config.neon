@@ -33,8 +33,10 @@ extensions:
 	migrations: Nettrine\Migrations\DI\MigrationsExtension
 	orm.cache: Nettrine\Cache\DI\CacheExtension
 	monolog: Contributte\Monolog\DI\MonologExtension
-	webpackassets: App\UI\Webpack\DI\WebpackAssetExtension
 	rabbitmq: Gamee\RabbitMQ\DI\RabbitMQExtension
+
+	webpackassets: App\UI\Webpack\DI\WebpackAssetExtension
+	custompresenterfactory: App\UI\PresenterFactory\DI\CustomPresenterFactoryExtension
 
 webpackassets:
 	buildedAssetsDir: %wwwDir%/build

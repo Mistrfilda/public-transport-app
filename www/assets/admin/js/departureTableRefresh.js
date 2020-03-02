@@ -20,6 +20,6 @@ export default class departureTableRefresh {
                 null,
                 {}
             );
-        }, 20000);
+        }, 10000);
     }
 }
