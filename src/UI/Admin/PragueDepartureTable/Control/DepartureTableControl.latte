@@ -39,6 +39,7 @@
                                 <th scope="col">Zpoždění</th>
                                 <th scope="col">Společnost</th>
                                 <th scope="col">Vozidlo</th>
+                                <th scope="col">Poslední známá poloha</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,7 +56,9 @@
                                         <td>{$stopLine->getVehicle()->getDelayInSeconds()|secondsFormat}</td>
                                         <td>{$stopLine->getVehicle()->getCompany()}</td>
                                         <td>{$stopLine->getVehicle()->getRegistrationNumber()}</td>
+                                        <td>{$stopLine->getVehicle()->getLastStopId()|pragueStopId}</td>
                                     {else}
+                                        <td>----</td>
                                         <td>----</td>
                                         <td>----</td>
                                         <td>----</td>

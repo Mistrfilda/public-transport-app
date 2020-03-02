@@ -46,14 +46,14 @@ class VehicleDatagridFactory
         $grid->addColumnText('routeId', 'Route ID')->setFilterText();
         $grid->addColumnText('tripId', 'Trip ID')->setFilterText();
         $grid->addColumnText('finalStation', 'Final station')->setFilterText();
-        $grid->addColumnText('delayInSeconds', 'Delay in seconds')->setFilterText();
+        $grid->addColumnText('delayInSeconds', 'Delay in seconds')->setSortable()->setFilterText();
         $grid->addColumnText('vehicleType', 'Vehicle type')->setFilterText();
 
         $grid->addColumnText('lastStopId', 'Last stop ID')->setFilterText();
         $grid->addColumnText('nextStopId', 'Next stop ID')->setFilterText();
 
         $grid->addColumnText('registrationNumber', 'Registration number')->setFilterText();
-        $grid->addColumnText('company', 'Company')->setFilterText();
+        $grid->addColumnText('company', 'Company')->setSortable()->setFilterText();
 
         return $grid;
     }

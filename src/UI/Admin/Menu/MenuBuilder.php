@@ -16,7 +16,7 @@ class MenuBuilder
                 new MenuItem('Dashboard', 'default', 'fas fa-fw fa-tachometer-alt', 'Dashboard'),
             ]),
             new MenuGroup('Prague', true, [
-                new MenuItem('', '', 'fas fa-bus-alt', 'Stops', [
+                new MenuItem('', '', 'fas fa-ruler-vertical', 'Stops', [
                     new MenuItem('PragueStop', 'default', '', 'List'),
                     new MenuItem('PragueStop', 'map', '', 'Map'),
                 ]),

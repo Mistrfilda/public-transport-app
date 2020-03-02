@@ -90,6 +90,7 @@ services:
 		setup:
 			- addFilter(datetimeFormat, [@datetimeformatfilter, format])
 			- addFilter(secondsFormat, [@secondsformatFilter, format])
+			- addFilter(pragueStopId, [@praguestopidfilter, format])
 
 	#CUSTOM LATTE FILTERS
 	datetimeformatfilter: App\UI\Filter\DatetimeFormatFilter
@@ -122,8 +123,10 @@ services:
 	- App\Transport\Prague\Stop\Import\StopImportFacade
 	- App\Transport\Prague\Stop\StopRepository(App\Transport\Prague\Stop\Stop)
 	- App\Transport\Prague\Stop\StopFactory
+	- App\Transport\Prague\Stop\StopCacheService
 
 	- App\UI\Admin\PragueStop\Datagrid\StopDatagridFactory
+	praguestopidfilter: App\Transport\Prague\Stop\Filter\StopIdFilter
 
 	#TRIP
 	- App\Transport\Prague\StopLine\Trip\Import\TripImportCommand
