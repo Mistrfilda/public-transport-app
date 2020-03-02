@@ -8,15 +8,15 @@
                         <div class="card border-left-primary border-right-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-8 col-sm-12 d-flex align-items-md-center justify-content-md-start align-items-center justify-content-center">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{$departureTable->getStop()->getName()}</div>
+                                    <div class="col-md-6 col-sm-12 d-flex align-items-md-center justify-content-md-start align-items-center justify-content-center">
+                                        <div class="h5 mb-md-0 font-weight-bold text-gray-800">{$departureTable->getStop()->getName()}</div>
                                     </div>
-                                    <div class="col-md-4 col-sm-12 text-md-right d-flex align-items-md-center justify-content-md-end align-items-center justify-content-center">
+                                    <div class="col-md-6 col-sm-12 text-md-right d-flex align-items-md-center justify-content-md-end align-items-center justify-content-between pl-0 pr-0">
                                         <span class="h5 mb-0 font-weight-bold text-gray-800"
                                               id="departure-table-clock"></span>
                                         {snippet headerButtons}
-                                            <a n:href="refresh!" data-naja-history="off" class="ml-2 btn btn-primary btn-sm ajax">Refresh</a>
-                                            <a n:if="$currentStep !== 1" data-naja-history="off" n:href="resetPagination!" class="ml-2 btn btn-primary btn-sm ajax">Reset pagination</a>
+                                            <a n:if="$currentStep !== 1" data-naja-history="off" n:href="resetPagination!" class="ml-2 btn btn-danger btn-sm ajax">Reset pagination</a>
+                                            <a n:href="refresh!" data-naja-history="off" class="ml-2 btn btn-info btn-sm ajax">Refresh</a>
                                         {/snippet}
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                     <div class="card border-left-primary border-right-primary shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12 col-sm-12 text-md-right d-flex align-items-md-center justify-content-md-end align-items-center justify-content-center">
+                                <div class="col-md-12 col-sm-12 text-right d-flex align-items-center justify-content-end pl-0 pr-0">
                                         <span class="h5 mb-0 font-weight-bold text-gray-800"
                                               id="departure-table-clock"></span>
                                     {snippet footerButtons}
