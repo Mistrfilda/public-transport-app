@@ -14,7 +14,10 @@
                                     <div class="col-md-4 col-sm-12 text-md-right d-flex align-items-md-center justify-content-md-end align-items-center justify-content-center">
                                         <span class="h5 mb-0 font-weight-bold text-gray-800"
                                               id="departure-table-clock"></span>
-                                        <a n:href="refresh!" class="ml-2 btn btn-primary btn-sm ajax">Refresh</a>
+                                        {snippet headerButtons}
+                                            <a n:href="refresh!" data-naja-history="off" class="ml-2 btn btn-primary btn-sm ajax">Refresh</a>
+                                            <a n:if="$currentStep !== 1" data-naja-history="off" n:href="resetPagination!" class="ml-2 btn btn-primary btn-sm ajax">Reset pagination</a>
+                                        {/snippet}
                                     </div>
                                 </div>
                             </div>
@@ -22,10 +25,11 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body p-0" naja-departure-table-id="{$departureTable->getId()->toString()}" naja-departure-table-url="{link refresh!}">
+            <div class="card-body p-0" naja-departure-table-id="{$departureTable->getId()->toString()}"
+                 naja-departure-table-url="{link refresh!}">
                 {snippet table}
                     <div class="table-responsive">
-                        <table class="table table-striped table-dark table-hover">
+                        <table class="table table-striped table-dark table-hover mb-0">
                             <thead>
                             <tr>
                                 <th scope="col">Linka</th>
@@ -61,6 +65,25 @@
                         </table>
                     </div>
                 {/snippet}
+            </div>
+
+            <div class="row">
+                <div class="col-xl-12 col-md-12 mb-0">
+                    <div class="card border-left-primary border-right-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 text-md-right d-flex align-items-md-center justify-content-md-end align-items-center justify-content-center">
+                                        <span class="h5 mb-0 font-weight-bold text-gray-800"
+                                              id="departure-table-clock"></span>
+                                    {snippet footerButtons}
+                                        <a n:if="$currentStep !== 1" data-naja-history="off" data-naja-history-nocache n:href="resetPagination!" class="ml-2 btn btn-danger btn-sm ajax">Reset pagination</a>
+                                        <a n:if="$showLoadMoreButton" data-naja-history="off" n:href="loadMore!" data-naja-history-nocache class="ml-2 btn btn-primary btn-sm ajax">Load more</a>
+                                    {/snippet}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
