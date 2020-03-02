@@ -40,17 +40,17 @@ class DepartureTableControl extends BaseControl
     public function render(): void
     {
         $departureTable = $this->departureTableRepository->findById($this->id);
-        $stoplines = $this->stopLineFactory->getStopLinesForStop(
+        $stopLines = $this->stopLineFactory->getStopLinesForStop(
             $departureTable->getPragueStop(),
             $this->paginatorService->getLoadedCount()
         );
 
         $showLoadMoreButton = true;
-        if ($this->paginatorService->getLoadedCount() > count($stoplines)) {
+        if ($this->paginatorService->getLoadedCount() > count($stopLines)) {
             $showLoadMoreButton = false;
         }
 
-        $this->getTemplate()->stopLines = $stoplines;
+        $this->getTemplate()->stopLines = $stopLines;
         $this->getTemplate()->departureTable = $departureTable;
         $this->getTemplate()->currentStep = $this->paginatorService->getCurrentStep();
         $this->getTemplate()->showLoadMoreButton = $showLoadMoreButton;
