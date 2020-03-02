@@ -61,7 +61,7 @@ class StopLineFactory
                 $vehicle = $vehicles[$stopTime->getDateTripId()];
             }
 
-            $stopLines[] = new StopLine(
+            $stopLine = new StopLine(
                 $stop,
                 $stopTime->getArrivalTime(),
                 $stopTime->getDepartureTime(),
@@ -71,6 +71,12 @@ class StopLineFactory
                 $vehicle,
                 $this->datetimeFactory->createNow()
             );
+
+            if ($stopLine->hasVehicleLeft()) {
+                continue;
+            }
+
+            $stopLines[] = $stopLine;
 
             $index++;
             if ($index > $limit) {
