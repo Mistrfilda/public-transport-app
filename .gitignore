@@ -6,3 +6,5 @@ www/build/*
 yarn-error.log
 
 node_modules/*
+
+tests/Integration/config/tests.local.neon
