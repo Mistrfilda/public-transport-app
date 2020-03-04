@@ -4,7 +4,7 @@ use App\Utils\DatetimeFactory;
 use Tester\Assert;
 
 
-require __DIR__ . '/Bootstrap.php';
+require __DIR__ . '/../Bootstrap.php';
 
 $datetimeFactory = new DatetimeFactory();
 

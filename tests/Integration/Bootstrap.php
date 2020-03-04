@@ -1,32 +1,42 @@
 <?php
 
-use Nette\Configurator;
-use Tester\Environment;
+declare(strict_types=1);
 
+namespace Test\Integration;
+
+use Nette\Configurator;
+use Nette\DI\Container;
 
 require __DIR__ . '/../../vendor/autoload.php';
 
-Environment::setup();
-Environment::setupColors();
+class Bootstrap
+{
+    public static function boot(): Container
+    {
+        $configurator = new Configurator();
+        $configurator->setDebugMode(true);
+        //$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
+        $configurator->enableTracy(__DIR__ . '/../../log');
 
-$configurator = new Configurator();
-$configurator->setDebugMode(TRUE);
-//$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
-$configurator->enableTracy(__DIR__ . '/../log');
+        $configurator->setTimeZone('Europe/Prague');
+        $configurator->setTempDirectory(__DIR__ . '/../../temp');
 
-$configurator->setTimeZone('Europe/Prague');
-$configurator->setTempDirectory(__DIR__ . '/../temp');
+        $configurator->createRobotLoader()
+            ->addDirectory(__DIR__)
+            ->register();
 
-$configurator->createRobotLoader()
-	->addDirectory(__DIR__)
-	->register();
+        $configurator->addConfig(__DIR__ . '/../../config/config.neon');
+        $configurator->addConfig(__DIR__ . '/config/tests.neon');
 
+        if (is_file(__DIR__ . '/config/tests.local.neon')) {
+            $configurator->addConfig(__DIR__ . '/config/tests.local.neon');
+        }
 
-$configurator->addConfig(__DIR__ . '/../../config/config.neon');
-$configurator->addConfig(__DIR__ . '/config/tests.neon');
+		$travisEnv = getenv('TRAVIS_TESTS_ENV');
+		if ($travisEnv === 'TRUE') {
+			$configurator->addConfig(__DIR__ . '/../travis/test.local.neon');
+		}
 
-if (is_file(__DIR__ . '/config/tests.local.neon')) {
-	$configurator->addConfig(__DIR__ . '/config/tests.local.neon');
+        return $configurator->createContainer();
+    }
 }
-
-return $configurator;

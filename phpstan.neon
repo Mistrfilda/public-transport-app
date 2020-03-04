@@ -1,12 +1,7 @@
-includes:
-	- vendor/phpstan/phpstan-strict-rules/rules.neon
-	- vendor/phpstan/phpstan-nette/extension.neon
-	- vendor/phpstan/phpstan-nette/rules.neon
-	- vendor/phpstan/phpstan-doctrine/extension.neon
-
 parameters:
 	excludes_analyse:
 		- src/Doctrine/BaseRepository.php
+		- tests/Integration/BaseTest.php
 
 	ignoreErrors:
 		-
