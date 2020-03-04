@@ -17,7 +17,7 @@ sudo: false
 install:
   - cp tests/travis/test.local.neon config/config.local.neon
   - composer install --no-interaction -o
-  - mysql -u root -e 'CREATE DATABASE `transport-app-test`;'
+  - mysql -u root -e 'CREATE DATABASE `public-transport-app-test`;'
 
 script:
   - composer migration-migrate
