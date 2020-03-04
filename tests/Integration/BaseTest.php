@@ -10,6 +10,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Nette\DI\Container;
+use Tester\Environment;
 use Tester\TestCase;
 
 require __DIR__ . '/TestsBootstrap.php';
@@ -45,6 +46,7 @@ abstract class BaseTest extends TestCase
         $this->connection->beginTransaction();
 
         $this->entityManager = $container->getByType(EntityManagerInterface::class);
+        Environment::lock('db', __DIR__ . '/../../temp');
     }
 
     protected function tearDown(): void

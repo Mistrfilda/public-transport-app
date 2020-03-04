@@ -45,7 +45,10 @@ class StopLineFactory
         $trips = $this->tripRepository->findForDepartureTable($stop->getId(), $this->datetimeFactory->createToday());
 
         $lastVehiclePosition = $this->vehiclePositionRepository->findLast();
-        $vehicles = $lastVehiclePosition->getVehicles();
+        $vehicles = [];
+        if ($lastVehiclePosition !== null) {
+            $vehicles = $lastVehiclePosition->getVehicles();
+        }
 
         $index = 0;
         $stopLines = [];

@@ -27,12 +27,17 @@ class VehiclePositionRepository extends BaseRepository
         }
     }
 
-    public function findLast(): VehiclePosition
+    public function findLast(): ?VehiclePosition
     {
         $qb = $this->createQueryBuilder();
         $qb->orderBy('vehiclePosition.createdAt', OrderBy::DESC);
         $qb->setMaxResults(1);
-        return $qb->getQuery()->getSingleResult();
+
+        try {
+            return $qb->getQuery()->getSingleResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
     }
 
     public function createQueryBuilder(): QueryBuilder
