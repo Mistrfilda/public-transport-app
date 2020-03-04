@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Test\Integration\Prague\Stop;
 
+use App\Transport\Prague\Stop\Filter\StopIdFilter;
 use App\Transport\Prague\Stop\Import\StopImportFacade;
 use App\Transport\Prague\Stop\Stop;
+use App\Transport\Prague\Stop\StopCacheService;
 use App\Transport\Prague\Stop\StopFactory;
 use App\Transport\Prague\Stop\StopRepository;
 use InvalidArgumentException;
@@ -29,11 +31,15 @@ class StopTest extends BaseTest
     /** @var StopImportFacade */
     private $stopImportFacade;
 
+    /** @var StopCacheService */
+    private $stopCacheService;
+
     protected function setUp(): void
     {
         $this->stopRepository = $this->container->getByType(StopRepository::class);
         $this->stopFactory = $this->container->getByType(StopFactory::class);
         $this->stopImportFacade = $this->container->getByType(StopImportFacade::class);
+        $this->stopCacheService = $this->container->getByType(StopCacheService::class);
     }
 
     public function testImport(): void
@@ -95,6 +101,21 @@ class StopTest extends BaseTest
         );
     }
 
+    public function testStopCacheService(): void
+    {
+        Assert::equal('Testovací zastávka 4 (U56789)', $this->stopCacheService->getStop('U56789'));
+        Assert::equal('Testovací zastávka 2 (U54321)', $this->stopCacheService->getStop('U54321'));
+        Assert::equal(StopCacheService::UNDEFINED_STOP_PLACEHOLDER, $this->stopCacheService->getStop('U123333'));
+    }
+
+    public function testStopIdFilter(): void
+    {
+        $filter = new StopIdFilter($this->stopCacheService);
+        Assert::equal('Testovací zastávka 4 (U56789)', $filter->format('U56789'));
+        Assert::equal('Testovací zastávka 2 (U54321)', $filter->format('U54321'));
+        Assert::equal(StopCacheService::UNDEFINED_STOP_PLACEHOLDER, $filter->format(null));
+    }
+
     protected function mockTestSpecificClasses(): void
     {
         $firstResponse = Mockery::mock(StopResponse::class)
@@ -134,8 +155,8 @@ class StopTest extends BaseTest
                 new InvalidArgumentException('Out of mocked responses'),
             ]);
 
-        $this->container->removeService('pidservie');
-        $this->container->addService('pidservie', $mockedPidService);
+        $this->container->removeService('pidservice');
+        $this->container->addService('pidservice', $mockedPidService);
     }
 
     private function assertStops(Stop $expected, Stop $actual): void
