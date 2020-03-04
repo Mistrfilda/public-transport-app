@@ -96,8 +96,8 @@ services:
 	datetimeformatfilter: App\UI\Filter\DatetimeFormatFilter
 	secondsformatFilter: App\UI\Filter\SecondsFormatFilter
 
-	- App\Utils\DatetimeFactory
-	- Ofce\Pid\Api\PidService(%pid.accessToken%)
+	datetimefactory: App\Utils\DatetimeFactory
+	pidservie: Ofce\Pid\Api\PidService(%pid.accessToken%)
 
 	#Forms
 	- App\UI\Admin\Base\AdminFormFactory

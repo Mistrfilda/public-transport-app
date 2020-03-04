@@ -8,3 +8,6 @@ parameters:
     - 'php-cs-fixer-psr2'
     - 'dead-code'
     - 'types'
+
+  exclude_files:
+    - tests/Integration/TestsBootstrap.php

@@ -39,16 +39,18 @@
 		"gamee/nette-rabbitmq": "^4.1"
 	},
 	"require-dev": {
+		"nette/tester": "^2.3",
 		"phpstan/phpstan": "^0.12",
+		"phpstan/extension-installer": "^1.0",
 		"phpstan/phpstan-strict-rules": "^0.12",
 		"phpstan/phpstan-nette": "^0.12",
 		"phpstan/phpstan-doctrine": "^0.12",
+		"phpstan/phpstan-mockery": "^0.12.3",
 		"jakub-onderka/php-parallel-lint": "^1.0",
 		"tracy/tracy": "^2.6",
 		"mockery/mockery": "^1.2",
 		"symplify/easy-coding-standard-prefixed": "^7.2",
-		"roave/security-advisories": "dev-master",
-		"nette/tester": "^2.3"
+		"roave/security-advisories": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -75,13 +77,22 @@
 		"orm-validate": "bin/console orm:validate-schema --ansi",
 		"clear": "rm -rf temp/cache/*",
 		"migration-migrate": "bin/console migrations:migrate --no-interaction",
-		"tests-db-init": "php tests/Integration/DatabaseCreator.php",
+		"test-db-init": "php tests/Integration/DatabaseCreator.php",
+		"test-local": [
+			"@test-db-init",
+			"@test"
+		],
 		"js-lint": "yarn eslint www/assets/**",
 		"build-all": [
 			"@lint",
 			"@stan",
 			"@cs",
-			"@orm-validate"
+			"@orm-validate",
+			"@test"
+		],
+		"build-all-local": [
+			"@test-db-init",
+			"@build-all"
 		]
 	},
 	"minimum-stability": "stable"

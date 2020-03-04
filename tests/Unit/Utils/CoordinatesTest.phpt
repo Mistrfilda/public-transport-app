@@ -4,7 +4,7 @@ use App\Utils\Coordinates;
 use Tester\Assert;
 
 
-require __DIR__ . '/Bootstrap.php';
+require __DIR__ . '/../Bootstrap.php';
 
 $coordinates = new Coordinates(50.1252, 19.421);
 

@@ -5,6 +5,7 @@ php:
 
 env:
   - TRAVIS_RABBIT_MQ_QUEUE=TRUE
+  - TRAVIS_TESTS_ENV=TRUE
 
 services:
   - mysql
