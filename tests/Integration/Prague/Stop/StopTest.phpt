@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types = 1);
-
+declare(strict_types=1);
 
 namespace Test\Integration\Prague\Stop;
-
 
 use App\Transport\Prague\Stop\Import\StopImportFacade;
 use App\Transport\Prague\Stop\Stop;
@@ -13,198 +11,141 @@ use App\Transport\Prague\Stop\StopRepository;
 use InvalidArgumentException;
 use Mockery;
 use Ofce\Pid\Api\PidService;
+use Ofce\Pid\Api\Stop\Stop as PIDStop;
 use Ofce\Pid\Api\Stop\StopResponse;
 use Test\Integration\BaseTest;
 use Tester\Assert;
-use Ofce\Pid\Api\Stop\Stop as PIDStop;
-
 
 $container = require __DIR__ . '/../../TestsBootstrap.php';
 
 class StopTest extends BaseTest
 {
-	/** @var StopRepository */
-	private $stopRepository;
+    /** @var StopRepository */
+    private $stopRepository;
 
-	/** @var StopFactory */
-	private $stopFactory;
+    /** @var StopFactory */
+    private $stopFactory;
 
-	/** @var StopImportFacade */
-	private $stopImportFacade;
+    /** @var StopImportFacade */
+    private $stopImportFacade;
 
-	public function testStopFactory(): void
-	{
-		$name = 'test-stop-1';
-		$stopId = 'U123467';
-		$latitude = 55.1234;
-		$longitude = 15.1234;
+    protected function setUp(): void
+    {
+        $this->stopRepository = $this->container->getByType(StopRepository::class);
+        $this->stopFactory = $this->container->getByType(StopFactory::class);
+        $this->stopImportFacade = $this->container->getByType(StopImportFacade::class);
+    }
 
-		$expectedStop = new Stop(
-			$name,
-			$stopId,
-			$latitude,
-			$longitude
-		);
+    public function testImport(): void
+    {
+        Assert::noError(function (): void {
+            $this->stopImportFacade->import();
+        });
 
-		Assert::equal($name, $expectedStop->getName());
-		Assert::equal($stopId, $expectedStop->getStopId());
-		Assert::equal($latitude, $expectedStop->getCoordinates()->getLatitude());
-		Assert::equal($longitude, $expectedStop->getCoordinates()->getLongitude());
+        $stops = $this->stopRepository->findAll();
+        Assert::count(2, $stops);
 
-		$stop = $this->stopFactory->create(
-			$name,
-			$stopId,
-			$latitude,
-			$longitude
-		);
+        $this->assertStops(
+            $this->stopFactory->createFromPidLibrary(
+                new PIDStop('U12345', 50.54321, 15.12345, 'Testovací zastávka 1'),
+            ),
+            $stops[0]
+        );
 
-		$this->assertStops($expectedStop, $stop);
-	}
+        $this->assertStops(
+            $this->stopFactory->createFromPidLibrary(
+                new PIDStop('U54321', 50.12345, 15.54321, 'Testovací zastávka 2'),
+            ),
+            $stops[1]
+        );
 
-	public function testStopFactoryFromPidLibrary(): void
-	{
-		$name = 'test-stop-1';
-		$stopId = 'U123467';
-		$latitude = 55.1234;
-		$longitude = 15.1234;
+        Assert::noError(function (): void {
+            $this->stopImportFacade->import();
+        });
 
-		$expectedStop = new Stop(
-			$name,
-			$stopId,
-			$latitude,
-			$longitude
-		);
+        $stops = $this->stopRepository->findAll();
+        Assert::count(4, $stops);
 
-		$pidLibraryStop = new PIDStop(
-			$stopId,
-			$latitude,
-			$longitude,
-			$name
-		);
+        $this->assertStops(
+            $this->stopFactory->createFromPidLibrary(
+                new PIDStop('U12345', 50.54321, 15.12345, 'Testovací zastávka 1'),
+            ),
+            $stops[0]
+        );
 
-		$stop = $this->stopFactory->createFromPidLibrary($pidLibraryStop);
+        $this->assertStops(
+            $this->stopFactory->createFromPidLibrary(
+                new PIDStop('U54321', 50.12345, 15.54321, 'Testovací zastávka 2'),
+            ),
+            $stops[1]
+        );
 
-		$this->assertStops($expectedStop, $stop);
-	}
+        $this->assertStops(
+            $this->stopFactory->createFromPidLibrary(
+                new PIDStop('U98765', 50.98765, 15.56789, 'Testovací zastávka 3'),
+            ),
+            $stops[2]
+        );
 
-	public function testImport(): void
-	{
-		Assert::noError(function () {
-			$this->stopImportFacade->import();
-		});
+        $this->assertStops(
+            $this->stopFactory->createFromPidLibrary(
+                new PIDStop('U56789', 50.56789, 15.98765, 'Testovací zastávka 4'),
+            ),
+            $stops[3]
+        );
+    }
 
-		$stops = $this->stopRepository->findAll();
-		Assert::count(2, $stops);
+    protected function mockTestSpecificClasses(): void
+    {
+        $firstResponse = Mockery::mock(StopResponse::class)
+            ->makePartial();
 
-		$this->assertStops(
-			$this->stopFactory->createFromPidLibrary(
-				new PIDStop('U12345', 50.54321, 15.12345, 'Testovací zastávka 1'),
-			),
-			$stops[0]
-		);
+        $firstResponse->shouldReceive('getCount')->andReturn(2);
+        $firstResponse->shouldReceive('getStops')->andReturn([
+            new PIDStop('U12345', 50.54321, 15.12345, 'Testovací zastávka 1'),
+            new PIDStop('U54321', 50.12345, 15.54321, 'Testovací zastávka 2'),
+        ]);
 
-		$this->assertStops(
-			$this->stopFactory->createFromPidLibrary(
-				new PIDStop('U54321', 50.12345, 15.54321, 'Testovací zastávka 2'),
-				),
-			$stops[1]
-		);
+        $secondResponse = Mockery::mock(StopResponse::class)
+            ->makePartial();
 
-		Assert::noError(function () {
-			$this->stopImportFacade->import();
-		});
+        $secondResponse->shouldReceive('getCount')->andReturn(4);
+        $secondResponse->shouldReceive('getStops')->andReturn([
+            new PIDStop('U12345', 50.54321, 15.12345, 'Testovací zastávka 1'),
+            new PIDStop('U54321', 50.12345, 15.54321, 'Testovací zastávka 2'),
+            new PIDStop('U98765', 50.98765, 15.56789, 'Testovací zastávka 3'),
+            new PIDStop('U56789', 50.56789, 15.98765, 'Testovací zastávka 4'),
 
-		$stops = $this->stopRepository->findAll();
-		Assert::count(4, $stops);
+        ]);
 
-		$this->assertStops(
-			$this->stopFactory->createFromPidLibrary(
-				new PIDStop('U12345', 50.54321, 15.12345, 'Testovací zastávka 1'),
-				),
-			$stops[0]
-		);
+        $emptyResponse = Mockery::mock(StopResponse::class)
+            ->makePartial();
 
-		$this->assertStops(
-			$this->stopFactory->createFromPidLibrary(
-				new PIDStop('U54321', 50.12345, 15.54321, 'Testovací zastávka 2'),
-				),
-			$stops[1]
-		);
+        $emptyResponse->shouldReceive('getCount')->andReturn(0);
+        $emptyResponse->shouldReceive('getStops')->andReturn([]);
 
-		$this->assertStops(
-			$this->stopFactory->createFromPidLibrary(
-				new PIDStop('U98765', 50.98765, 15.56789, 'Testovací zastávka 3'),
-				),
-			$stops[2]
-		);
+        $mockedPidService = Mockery::mock(PidService::class);
+        $mockedPidService->shouldReceive('sendGetStopsRequest')
+            ->andReturnValues([
+                $firstResponse,
+                $emptyResponse,
+                $secondResponse,
+                $emptyResponse,
+                new InvalidArgumentException('Out of mocked responses'),
+            ]);
 
-		$this->assertStops(
-			$this->stopFactory->createFromPidLibrary(
-				new PIDStop('U56789', 50.56789, 15.98765, 'Testovací zastávka 4'),
-				),
-			$stops[3]
-		);
+        $this->container->removeService('pidservie');
+        $this->container->addService('pidservie', $mockedPidService);
+    }
 
-	}
-
-	private function assertStops(Stop $expected, Stop $actual): void
-	{
-		Assert::equal($expected->getStopId(), $actual->getStopId());
-		Assert::equal($expected->getName(), $actual->getName());
-		Assert::equal($expected->getFormattedName(), $actual->getFormattedName());
-		Assert::equal($expected->getCoordinates()->getLatitude(), $actual->getCoordinates()->getLatitude());
-		Assert::equal($expected->getCoordinates()->getLongitude(), $expected->getCoordinates()->getLongitude());
-	}
-
-	protected function setUp(): void
-	{
-		$this->stopRepository = $this->container->getByType(StopRepository::class);
-		$this->stopFactory = $this->container->getByType(StopFactory::class);
-		$this->stopImportFacade = $this->container->getByType(StopImportFacade::class);
-	}
-
-	protected function mockTestSpecificClasses(): void
-	{
-		$firstResponse = Mockery::mock(StopResponse::class)
-			->makePartial();
-
-		$firstResponse->shouldReceive('getCount')->andReturn(2);
-		$firstResponse->shouldReceive('getStops')->andReturn([
-			new PIDStop('U12345', 50.54321, 15.12345, 'Testovací zastávka 1'),
-			new PIDStop('U54321', 50.12345, 15.54321, 'Testovací zastávka 2'),
-		]);
-
-		$secondResponse = Mockery::mock(StopResponse::class)
-			->makePartial();
-
-		$secondResponse->shouldReceive('getCount')->andReturn(4);
-		$secondResponse->shouldReceive('getStops')->andReturn([
-			new PIDStop('U12345', 50.54321, 15.12345, 'Testovací zastávka 1'),
-			new PIDStop('U54321', 50.12345, 15.54321, 'Testovací zastávka 2'),
-			new PIDStop('U98765', 50.98765, 15.56789, 'Testovací zastávka 3'),
-			new PIDStop('U56789', 50.56789, 15.98765, 'Testovací zastávka 4'),
-
-		]);
-
-		$emptyResponse =  Mockery::mock(StopResponse::class)
-			->makePartial();
-
-		$emptyResponse->shouldReceive('getCount')->andReturn(0);
-		$emptyResponse->shouldReceive('getStops')->andReturn([]);
-
-		$mockedPidService = Mockery::mock(PidService::class);
-		$mockedPidService->shouldReceive('sendGetStopsRequest')
-			->andReturnValues([
-				$firstResponse,
-				$emptyResponse,
-				$secondResponse,
-				$emptyResponse,
-				new InvalidArgumentException('Out of mocked responses')
-			]);
-
-		$this->container->removeService('pidservie');
-		$this->container->addService('pidservie', $mockedPidService);
-	}
+    private function assertStops(Stop $expected, Stop $actual): void
+    {
+        Assert::equal($expected->getStopId(), $actual->getStopId());
+        Assert::equal($expected->getName(), $actual->getName());
+        Assert::equal($expected->getFormattedName(), $actual->getFormattedName());
+        Assert::equal($expected->getCoordinates()->getLatitude(), $actual->getCoordinates()->getLatitude());
+        Assert::equal($expected->getCoordinates()->getLongitude(), $expected->getCoordinates()->getLongitude());
+    }
 }
 
 (new StopTest($container))->run();

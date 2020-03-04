@@ -9,5 +9,9 @@ parameters:
     - 'dead-code'
     - 'types'
 
+  file_extensions:
+    - 'php'
+    - 'phpt'
+
   exclude_files:
     - tests/Integration/TestsBootstrap.php

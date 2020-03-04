@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Utils\Coordinates;
 use Tester\Assert;
-
 
 require __DIR__ . '/../Bootstrap.php';
 
