@@ -32,10 +32,10 @@ class Bootstrap
             $configurator->addConfig(__DIR__ . '/config/tests.local.neon');
         }
 
-		$travisEnv = getenv('TRAVIS_TESTS_ENV');
-		if ($travisEnv === 'TRUE') {
-			$configurator->addConfig(__DIR__ . '/../travis/test.local.neon');
-		}
+        $travisEnv = getenv('TRAVIS_TESTS_ENV');
+        if ($travisEnv === 'TRUE') {
+            $configurator->addConfig(__DIR__ . '/../travis/test.local.neon');
+        }
 
         return $configurator->createContainer();
     }
