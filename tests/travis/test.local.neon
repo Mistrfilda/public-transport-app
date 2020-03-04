@@ -3,4 +3,4 @@ parameters:
 		host: 127.0.0.1
 		user: root
 		password: ""
-		dbname: 'transport-app-test'
+		dbname: 'public-transport-app-test'
