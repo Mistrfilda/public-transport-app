@@ -77,6 +77,10 @@
 		"orm-validate": "bin/console orm:validate-schema --ansi",
 		"clear": "rm -rf temp/cache/*",
 		"migration-migrate": "bin/console migrations:migrate --no-interaction",
+		"webpack": "yarn encore prod",
+		"webpack-dev": "yarn encore dev",
+		"webpack-prod": "PROD_HOST=1 yarn encore prod",
+		"webpack-dev-prod": "PROD_HOST=1 yarn encore dev",
 		"test-db-init": "php tests/Integration/DatabaseCreator.php",
 		"test-local": [
 			"@test-db-init",
@@ -93,6 +97,11 @@
 		"build-all-local": [
 			"@test-db-init",
 			"@build-all"
+		],
+		"deploy-prod": [
+			"@clear",
+			"@migration-migrate",
+			"@webpack-prod"
 		]
 	},
 	"minimum-stability": "stable"
