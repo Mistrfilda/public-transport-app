@@ -1,15 +1,22 @@
 var Encore = require('@symfony/webpack-encore');
 const path = require('path');
+require('dotenv').config();
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+}
+
+var publicPath = '/public-transport-app/www/build';
+var prodHost = process.env.PROD_HOST;
+if (prodHost !== undefined) {
+    publicPath = '/www/build';
 }
 
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('www/build/')
     // public path used by the web server to access the output path
-    .setPublicPath('/public-transport-app/www/build')
+    .setPublicPath(publicPath)
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
