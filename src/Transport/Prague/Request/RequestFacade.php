@@ -7,6 +7,7 @@ namespace App\Transport\Prague\Request;
 use App\Request\IRequestFacade;
 use App\Request\Request;
 use App\Request\RequestConditions;
+use App\Request\RequestRepository;
 use App\Request\RequestType;
 use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableProducer;
@@ -35,10 +36,14 @@ class RequestFacade implements IRequestFacade
     /** @var VehiclePositionProducer */
     private $vehiclePositionProducer;
 
+    /** @var RequestRepository */
+    private $requestRepository;
+
     public function __construct(
         LoggerInterface $logger,
         DatetimeFactory $datetimeFactory,
         DepartureTableRepository $departureTableRepository,
+        RequestRepository $requestRepository,
         EntityManagerInterface $entityManager,
         DepartureTableProducer $departureTableProducer,
         VehiclePositionProducer $vehiclePositionProducer
@@ -49,6 +54,7 @@ class RequestFacade implements IRequestFacade
         $this->entityManager = $entityManager;
         $this->departureTableProducer = $departureTableProducer;
         $this->vehiclePositionProducer = $vehiclePositionProducer;
+        $this->requestRepository = $requestRepository;
     }
 
     public function generateRequests(RequestConditions $conditions): void
@@ -69,6 +75,22 @@ class RequestFacade implements IRequestFacade
 
         foreach ($this->departureTableRepository->findAll() as $departureTable) {
             $this->logger->info('Generating departure table request', $departureTable->jsonSerialize());
+
+            if (
+                $this->requestRepository->findLastRequestByTypeAndDepartureTable(
+                    RequestType::PRAGUE_DEPARTURE_TABLE,
+                    $departureTable,
+                    $this->datetimeFactory->createNow()
+                ) !== null
+            ) {
+                $this->logger->debug(
+                    'Skipping creating of generate departure table request, request already pending',
+                    [
+                        'departureTable' => $departureTable->jsonSerialize(),
+                    ]
+                );
+                continue;
+            }
 
             $request = new Request(
                 RequestType::PRAGUE_DEPARTURE_TABLE,
@@ -94,6 +116,19 @@ class RequestFacade implements IRequestFacade
         }
 
         $this->logger->info('Generating vehicle position request');
+
+        if (
+            $this->requestRepository->findLastRequestByType(
+                RequestType::PRAGUE_VEHICLE_POSITION,
+                $this->datetimeFactory->createNow()
+            ) !== null
+        ) {
+            $this->logger->debug(
+                'Skipping creating of generate vehicle position request, request already pending'
+            );
+            return;
+        }
+
         $request = new Request(
             RequestType::PRAGUE_VEHICLE_POSITION,
             $this->datetimeFactory->createNow()
