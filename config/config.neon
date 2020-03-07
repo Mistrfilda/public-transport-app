@@ -168,3 +168,6 @@ services:
 
 	#RABITMQ
 	- App\Request\RabbitMQ\MessageFactory
+
+	#Statistic
+	- App\UI\Shared\Statistic\Control\StatisticControlFactory

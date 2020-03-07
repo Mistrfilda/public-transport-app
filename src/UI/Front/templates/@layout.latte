@@ -2,18 +2,21 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	{include '@favicon.latte'}
+    {include '@favicon.latte'}
 
-	<title>Public transport app</title>
-	{webpackCss 'admin'}
+    <title>Public transport app</title>
+    {webpackCss 'admin'}
 </head>
 
 <body>
-	{include content}
+<nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand" n:href="Homepage:default"><i class="fas fa-bus rotate-n-15"></i> Public transport</a>
+</nav>
+{include content}
 
-	{webpackJs 'admin'}
+{webpackJs 'admin'}
 </body>
 </html>

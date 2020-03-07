@@ -73,6 +73,13 @@ class StopRepository extends BaseRepository
         return $pairs;
     }
 
+    public function getStopsCount(): int
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->select('count(stop.id)');
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function createQueryBuilder(): QueryBuilder
     {
         return $this->doctrineRepository->createQueryBuilder('stop');

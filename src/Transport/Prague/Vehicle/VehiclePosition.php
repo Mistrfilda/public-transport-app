@@ -53,4 +53,9 @@ class VehiclePosition implements IEntity, IVehiclePosition
     {
         return $this->vehicles->toArray();
     }
+
+    public function getVehiclesCount(): int
+    {
+        return $this->vehicles->count();
+    }
 }
