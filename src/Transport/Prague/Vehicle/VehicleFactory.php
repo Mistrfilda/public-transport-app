@@ -44,6 +44,11 @@ class VehicleFactory
         PIDVehiclePosition $pidVehiclePosition,
         VehiclePosition $vehiclePosition
     ): Vehicle {
+        $vehicleType = $pidVehiclePosition->getVehicleType();
+        if ($vehicleType === null) {
+            $vehicleType = VehicleType::UNDEFINED;
+        }
+
         return $this->create(
             $vehiclePosition,
             $pidVehiclePosition->getRouteId(),
@@ -53,7 +58,7 @@ class VehicleFactory
             $pidVehiclePosition->getTripHeadsign(),
             $pidVehiclePosition->getDelay(),
             $pidVehiclePosition->getWheelchairAccessible(),
-            $pidVehiclePosition->getVehicleType(),
+            $vehicleType,
             $pidVehiclePosition->getLastStopId(),
             $pidVehiclePosition->getNextStopId(),
             (string) $pidVehiclePosition->getVehicleRegistrationNumber(),
