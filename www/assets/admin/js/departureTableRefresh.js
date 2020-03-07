@@ -18,7 +18,9 @@ export default class departureTableRefresh {
                 'GET',
                 refreshUrl,
                 null,
-                {}
+                {
+                    history: false
+                }
             );
         }, 10000);
     }
