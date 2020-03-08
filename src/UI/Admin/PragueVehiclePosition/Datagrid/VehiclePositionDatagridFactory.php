@@ -32,6 +32,8 @@ class VehiclePositionDatagridFactory
         $grid->addColumnText('id', 'ID');
         $grid->addColumnDateTime('createdAt', 'Created at')->setSortable()->setFilterDate();
 
+        $grid->addColumnText('vehiclesCount', 'Vehicles count')->setSortable();
+
         $grid->setDefaultSort(['createdAt' => 'desc']);
 
         $grid->addAction('vehicle', 'Vehicles', 'vehicle')
