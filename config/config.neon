@@ -91,6 +91,7 @@ services:
 			- addFilter(datetimeFormat, [@datetimeformatfilter, format])
 			- addFilter(secondsFormat, [@secondsformatFilter, format])
 			- addFilter(pragueStopId, [@praguestopidfilter, format])
+			- addFilter(vehicleType, [@vehicletypefilter, format])
 
 	#CUSTOM LATTE FILTERS
 	datetimeformatfilter: App\UI\Filter\DatetimeFormatFilter
@@ -151,6 +152,8 @@ services:
 
 	- App\UI\Admin\PragueVehiclePosition\Datagrid\VehicleDatagridFactory
 	- App\UI\Admin\PragueVehiclePosition\Datagrid\VehiclePositionDatagridFactory
+
+	vehicletypefilter: App\Transport\Prague\Vehicle\Filter\VehicleTypeFilter
 
 	#DEPARTURE TABLE
 	- App\Transport\Prague\DepartureTable\DepartureTableFacade

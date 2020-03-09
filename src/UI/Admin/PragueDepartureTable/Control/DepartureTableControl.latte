@@ -36,7 +36,7 @@
                                 <th scope="col">Trip id</th>
                                 <th scope="col">Cílová stanice</th>
                                 <th scope="col">Čas odjezdu</th>
-                                <th scope="col">Zpoždění</th>
+                                <th scope="col">Zpoždění (minut)</th>
                                 <th scope="col">Společnost</th>
                                 <th scope="col">Vozidlo</th>
                                 <th scope="col">Poslední známá poloha</th>
@@ -55,7 +55,7 @@
                                     {if $stopLine->hasVehicle()}
                                         <td>{$stopLine->getVehicle()->getDelayInSeconds()|secondsFormat}</td>
                                         <td>{$stopLine->getVehicle()->getCompany()}</td>
-                                        <td>{$stopLine->getVehicle()->getRegistrationNumber()}</td>
+                                        <td> <i class="{$stopLine->getVehicle()->getVehicleType()|vehicleType}"></i> {$stopLine->getVehicle()->getRegistrationNumber()}</td>
                                         <td>{$stopLine->getVehicle()->getLastStopId()|pragueStopId}</td>
                                     {else}
                                         <td>----</td>
