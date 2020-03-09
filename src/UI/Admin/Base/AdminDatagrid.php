@@ -34,6 +34,13 @@ class AdminDatagrid extends DataGrid
         return $column;
     }
 
+    public function addColumnDate(string $key, string $name, ?string $column = null): ColumnDateTime
+    {
+        $column = parent::addColumnDateTime($key, $name, $column);
+        $column->setFormat(DatetimeFactory::DEFAULT_DATE_FORMAT);
+        return $column;
+    }
+
     public static function formatNullableDatetimeColumn(?DateTimeImmutable $time): string
     {
         if ($time === null) {

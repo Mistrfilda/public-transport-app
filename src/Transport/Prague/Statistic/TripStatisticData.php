@@ -50,19 +50,19 @@ class TripStatisticData implements IEntity
 
     /**
      * @var DateTimeImmutable
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $date;
 
     /**
      * @var DateTimeImmutable
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $oldestKnownPosition;
 
     /**
      * @var DateTimeImmutable
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime_immutable")
      */
     private $newestKnownPosition;
 

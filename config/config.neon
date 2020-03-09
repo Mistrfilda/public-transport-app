@@ -176,3 +176,5 @@ services:
 	- App\UI\Shared\Statistic\Control\StatisticControlFactory
 	- App\Transport\Prague\Statistic\TripStatisticFacade
 	- App\Transport\Prague\Statistic\Command\GenerateTripStatisticCommand
+	- App\Transport\Prague\Statistic\TripStatisticDataRepository(App\Transport\Prague\Statistic\TripStatisticData)
+	- App\UI\Admin\PragueStatistic\Datagrid\StatisticDatagridFactory

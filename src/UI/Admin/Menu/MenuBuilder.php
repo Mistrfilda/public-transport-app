@@ -22,6 +22,7 @@ class MenuBuilder
                 ]),
                 new MenuItem('PragueDepartureTable', 'default', 'fas fa-table', 'Departure tables'),
                 new MenuItem('PragueVehiclePosition', 'default', 'fas fa-bus', 'Vehicles positions'),
+                new MenuItem('PragueStatistic', 'default', 'fas fa-list-ul', 'Trip statistics'),
             ]),
             new MenuGroup('Requests', true, [
                 new MenuItem('Request', 'default', 'fas fa-clipboard-list', 'Requests'),

@@ -12,6 +12,8 @@ class DatetimeFactory
 
     public const DEPARTURE_TABLE_DATETIME_FORMAT = 'd. m. Y H:i:s';
 
+    public const DEFAULT_DATE_FORMAT = 'Y-m-d';
+
     public const DEFAULT_NULL_DATETIME_PLACEHOLDER = '---';
 
     public function createNow(): DateTimeImmutable
