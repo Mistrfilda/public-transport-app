@@ -1,4 +1,4 @@
-/* global naja, $ */
+/* global naja, $, intervalFunction */
 export default class departureTableRefresh {
     constructor(naja, $) {
         this.naja = naja;
@@ -13,7 +13,7 @@ export default class departureTableRefresh {
             return;
         }
 
-        setInterval(function () {
+        this.intervalFunction = setInterval(function () {
             naja.makeRequest(
                 'GET',
                 refreshUrl,
@@ -23,5 +23,9 @@ export default class departureTableRefresh {
                 }
             );
         }, 10000);
+    }
+
+    stop() {
+        clearInterval(this.intervalFunction);
     }
 }
