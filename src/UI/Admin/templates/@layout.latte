@@ -193,7 +193,7 @@
                 {block flashes}
                     {foreach $flashes as $flash}
                         <div class="alert alert-{$flash->type}" role="alert">
-							<strong>{$flash->message}</strong>
+                            <strong>{$flash->message}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -224,4 +224,11 @@
 <!-- End of Page Wrapper -->
 
 {webpackJs 'admin'}
+
+{snippet modalComponentSnippet}
+    {if $presenter->getModalComponentName() !== null}
+        {control $presenter->getModalComponentName()}
+    {/if}
+{/snippet}
+
 </body>
