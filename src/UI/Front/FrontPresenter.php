@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\UI\Front;
 
-use Nette\Application\UI\Presenter;
+use App\UI\Shared\BasePresenter;
 
-abstract class FrontPresenter extends Presenter
+abstract class FrontPresenter extends BasePresenter
 {
     /**
      * @return string[]

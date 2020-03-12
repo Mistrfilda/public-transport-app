@@ -106,6 +106,9 @@ services:
 	#Grids
 	- App\UI\Admin\Base\AdminDatagridFactory
 
+	#Modal
+	- App\UI\Shared\Modal\ModalRendererControlFactory
+
 	#AppAdmin
 	- App\Admin\AppAdminRepository(App\Admin\AppAdmin)
 	- App\Admin\AppAdminAuthenticator

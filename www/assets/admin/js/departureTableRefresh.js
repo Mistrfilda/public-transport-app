@@ -1,11 +1,11 @@
-/* global naja, $, intervalFunction */
+/* global naja, $ */
 export default class departureTableRefresh {
     constructor(naja, $) {
         this.naja = naja;
         this.$ = $;
     }
 
-    bind() {
+    placeListener() {
         let departureTable = $('[naja-departure-table-id]');
         let refreshUrl = departureTable.attr('naja-departure-table-url');
 

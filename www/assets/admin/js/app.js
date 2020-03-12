@@ -6,11 +6,6 @@ import 'bootstrap';
 import naja from 'naja';
 import netteForms from '../nette/live-form-validation';
 
-netteForms.initOnLoad();
-window.Nette = netteForms;
-
-document.addEventListener('DOMContentLoaded', naja.initialize.bind(naja));
-
 import '../sbadmin/js/sb-admin-2';
 
 //Datagrid
@@ -22,16 +17,23 @@ import 'bootstrap-select';
 //Custom js
 import clock from "./clock";
 import departureTableRefresh from './departureTableRefresh';
+import modalExtension from "./modalExtension";
 
 let najaDepartureTableHandler = new departureTableRefresh(naja, $);
+
+netteForms.initOnLoad();
+window.Nette = netteForms;
+
+naja.registerExtension(modalExtension, $);
+document.addEventListener('DOMContentLoaded', naja.initialize.bind(naja));
 
 $(document).ready(function () {
     initCustomJs();
     clock();
-    najaDepartureTableHandler.bind();
+    najaDepartureTableHandler.placeListener();
 });
 
-naja.snippetHandler.addEventListener('afterUpdate', () => {
+naja.snippetHandler.addEventListener('afterUpdate', function () {
     initCustomJs();
 });
 
@@ -40,6 +42,4 @@ function initCustomJs() {
         'liveSearch': true,
         'style': 'btn-primary'
     });
-
-    $('.toast').toast('show');
 }

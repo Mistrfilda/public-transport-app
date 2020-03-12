@@ -5,33 +5,27 @@ declare(strict_types=1);
 namespace App\UI\Admin\templates;
 
 use App\Admin\AppAdmin;
+use App\UI\Admin\AdminPresenter;
 use App\UI\Admin\Dashboard\DashboardPresenter;
 use App\UI\Admin\Menu\MenuGroup;
 use Nette\Security\User;
 
+/**
+ * @property User $user
+ * @property string $baseUrl
+ * @property string $basePath
+ * @property mixed $flashes
+ * @property DashboardPresenter $control
+ * @property AdminPresenter $presenter
+ * @property AppAdmin $appAdmin
+ * @property MenuGroup[] $menuItems
+ * @property \stdClass $_l
+ * @property \stdClass $_g
+ * @property \stdClass $_b
+ * @method bool isLinkCurrent(string $destination = null, $args = [])
+ * @method bool isModuleCurrent(string $module)
+ * @method string|null getModalComponentName()
+ */
 class LayoutTemplate
 {
-    /** @var User */
-    public $user;
-
-    /** @var string */
-    public $baseUrl;
-
-    /** @var string */
-    public $basePath;
-
-    /** @var mixed[] */
-    public $flashes;
-
-    /** @var DashboardPresenter */
-    public $control;
-
-    /** @var DashboardPresenter */
-    public $presenter;
-
-    /** @var AppAdmin */
-    public $appAdmin;
-
-    /** @var MenuGroup[] */
-    public $menuItems;
 }

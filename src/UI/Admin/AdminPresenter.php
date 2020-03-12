@@ -6,10 +6,10 @@ namespace App\UI\Admin;
 
 use App\Admin\CurrentAppAdminGetter;
 use App\UI\Admin\Menu\MenuBuilder;
+use App\UI\Shared\BasePresenter;
 use Nette\Application\UI\InvalidLinkException;
-use Nette\Application\UI\Presenter;
 
-abstract class AdminPresenter extends Presenter
+abstract class AdminPresenter extends BasePresenter
 {
     /** @var CurrentAppAdminGetter */
     protected $currentAppAdminGetter;
