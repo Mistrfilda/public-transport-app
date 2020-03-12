@@ -12,9 +12,12 @@ class Bootstrap
     {
         $configurator = new Configurator();
 
-        $configurator->setDebugMode(true);
-        //$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
         $configurator->enableTracy(__DIR__ . '/../log');
+
+        //enable from local network IP
+        if (array_key_exists('pubtransport', $_COOKIE) && $_COOKIE['pubtransport'] === 'debug_on') {
+            $configurator->setDebugMode('192.168.1.13');
+        }
 
         $configurator->setTimeZone('Europe/Prague');
         $configurator->setTempDirectory(__DIR__ . '/../temp');
