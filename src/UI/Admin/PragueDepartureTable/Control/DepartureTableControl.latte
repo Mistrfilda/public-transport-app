@@ -40,6 +40,7 @@
                                 <th scope="col">Společnost</th>
                                 <th scope="col">Vozidlo</th>
                                 <th scope="col">Poslední známá poloha</th>
+                                <th scope="col">Statistiky</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -63,6 +64,7 @@
                                         <td>----</td>
                                         <td>----</td>
                                     {/if}
+                                    <td><a n:href="tripIdStatistics, tripId => $stopLine->getTripId()" class="btn btn-primary ajax" data-naja-history="off"><i class="fas fa-arrow-right"></i></a></td>
                                 </tr>
                             {/foreach}
                         </table>
@@ -90,4 +92,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div n:snippet="modalComponentSnippet" data-naja-history-nocache>
+    {if $renderModal}
+        {control tripStatisticModalControl}
+    {/if}
 </div>

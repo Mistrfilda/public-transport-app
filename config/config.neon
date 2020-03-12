@@ -181,3 +181,4 @@ services:
 	- App\Transport\Prague\Statistic\Command\GenerateTripStatisticCommand
 	- App\Transport\Prague\Statistic\TripStatisticDataRepository(App\Transport\Prague\Statistic\TripStatisticData)
 	- App\UI\Admin\PragueStatistic\Datagrid\StatisticDatagridFactory
+	- App\UI\Shared\Statistic\Modal\TripStatisticModalRendererControlFactory
