@@ -18,6 +18,7 @@ use Nette\Security\User;
  * @property PragueDepartureTablePresenter $presenter
  * @property StopLine[] $stopLines
  * @property DepartureTable $departureTable
+ * @property bool $renderModal
  * @property \stdClass $_l
  * @property \stdClass $_g
  * @property \stdClass $_b

@@ -7,6 +7,9 @@ namespace App\UI\Admin\PragueDepartureTable\Control;
 use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\StopLine\StopLineFactory;
 use App\UI\Admin\Base\BaseControl;
+use App\UI\Shared\LogicException;
+use App\UI\Shared\Statistic\Modal\TripStatisticModalRendererControl;
+use App\UI\Shared\Statistic\Modal\TripStatisticModalRendererControlFactory;
 use Nette\Http\Session;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -15,6 +18,12 @@ class DepartureTableControl extends BaseControl
 {
     /** @var UuidInterface */
     private $id;
+
+    /** @var string|null */
+    private $tripId = null;
+
+    /** @var bool */
+    private $renderModal = false;
 
     /** @var DepartureTableRepository */
     private $departureTableRepository;
@@ -25,16 +34,21 @@ class DepartureTableControl extends BaseControl
     /** @var DepartureTablePaginatorService */
     private $paginatorService;
 
+    /** @var TripStatisticModalRendererControlFactory */
+    private $tripStatisticModalRendererControlFactory;
+
     public function __construct(
         string $id,
         DepartureTableRepository $departureTableRepository,
         StopLineFactory $stopLineFactory,
-        Session $session
+        Session $session,
+        TripStatisticModalRendererControlFactory $tripStatisticModalRendererControlFactory
     ) {
         $this->id = Uuid::fromString($id);
         $this->departureTableRepository = $departureTableRepository;
         $this->stopLineFactory = $stopLineFactory;
         $this->paginatorService = new DepartureTablePaginatorService($this->id, $session);
+        $this->tripStatisticModalRendererControlFactory = $tripStatisticModalRendererControlFactory;
     }
 
     public function render(): void
@@ -50,6 +64,7 @@ class DepartureTableControl extends BaseControl
             $showLoadMoreButton = false;
         }
 
+        $this->getTemplate()->renderModal = $this->renderModal;
         $this->getTemplate()->stopLines = $stopLines;
         $this->getTemplate()->departureTable = $departureTable;
         $this->getTemplate()->currentStep = $this->paginatorService->getCurrentStep();
@@ -73,6 +88,25 @@ class DepartureTableControl extends BaseControl
     {
         $this->paginatorService->reset();
         $this->redrawTable();
+    }
+
+    public function handleTripIdStatistics(string $tripId): void
+    {
+        $this->tripId = $tripId;
+        $modalComponent = $this->getComponent('tripStatisticModalControl');
+        $this->renderModal = true;
+        $this->presenter->payload->showModal = true;
+        $this->presenter->payload->modalId = $modalComponent->getModalId();
+        $this->redrawControl('modalComponentSnippet');
+    }
+
+    protected function createComponentTripStatisticModalControl(): TripStatisticModalRendererControl
+    {
+        if ($this->tripId === null) {
+            throw new LogicException('Variable $tripId is null, please set that before creating component');
+        }
+
+        return $this->tripStatisticModalRendererControlFactory->create($this->tripId);
     }
 
     private function redrawTable(): void
