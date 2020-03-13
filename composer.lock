@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3c3b070dcf716b02db3122783033856",
+    "content-hash": "d7fed6539f66c8b265d1a19b899a1f68",
     "packages": [
         {
             "name": "bunny/bunny",
@@ -1541,16 +1541,16 @@
         },
         {
             "name": "latte/latte",
-            "version": "v2.7.0-RC",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/latte.git",
-                "reference": "95098bbf4027ecfc381562293c14efe83d8684aa"
+                "reference": "b91c508a3c5a990c84da8daaf41ad165601858e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/95098bbf4027ecfc381562293c14efe83d8684aa",
-                "reference": "95098bbf4027ecfc381562293c14efe83d8684aa",
+                "url": "https://api.github.com/repos/nette/latte/zipball/b91c508a3c5a990c84da8daaf41ad165601858e2",
+                "reference": "b91c508a3c5a990c84da8daaf41ad165601858e2",
                 "shasum": ""
             },
             "require": {
@@ -1570,6 +1570,7 @@
             },
             "suggest": {
                 "ext-fileinfo": "to use filter |datastream",
+                "ext-iconv": "to use filters |reverse, |substring",
                 "ext-mbstring": "to use filters like lower, upper, capitalize, ...",
                 "nette/php-generator": "to use tag {templatePrint}",
                 "nette/utils": "to use filter |webalize"
@@ -1613,7 +1614,7 @@
                 "template",
                 "twig"
             ],
-            "time": "2020-02-23T15:18:46+00:00"
+            "time": "2020-03-05T01:19:01+00:00"
         },
         {
             "name": "mistrfilda/pid-api",
@@ -2309,21 +2310,21 @@
         },
         {
             "name": "nette/mail",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/mail.git",
-                "reference": "82fb366ff218283bd19327ab0f897d2be20a4ce0"
+                "reference": "696dfbcaceb2be678595cf1fade31e8fe36e3232"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/mail/zipball/82fb366ff218283bd19327ab0f897d2be20a4ce0",
-                "reference": "82fb366ff218283bd19327ab0f897d2be20a4ce0",
+                "url": "https://api.github.com/repos/nette/mail/zipball/696dfbcaceb2be678595cf1fade31e8fe36e3232",
+                "reference": "696dfbcaceb2be678595cf1fade31e8fe36e3232",
                 "shasum": ""
             },
             "require": {
                 "ext-iconv": "*",
-                "nette/utils": "^2.4 || ^3.0",
+                "nette/utils": "^3.1",
                 "php": ">=7.1"
             },
             "conflict": {
@@ -2332,6 +2333,7 @@
             "require-dev": {
                 "nette/di": "^3.0.0",
                 "nette/tester": "^2.0",
+                "phpstan/phpstan-nette": "^0.12",
                 "tracy/tracy": "^2.4"
             },
             "suggest": {
@@ -2341,22 +2343,19 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
                 "classmap": [
                     "src/"
-                ],
-                "files": [
-                    "src/compatibility.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
+                "GPL-2.0-only",
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -2377,7 +2376,7 @@
                 "nette",
                 "smtp"
             ],
-            "time": "2019-07-01T12:17:45+00:00"
+            "time": "2020-02-23T18:12:31+00:00"
         },
         {
             "name": "nette/neon",
@@ -4073,24 +4072,24 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "v4.4.5",
+            "version": "v5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
-                "reference": "090b4bc92ded1ec512f7e2ed1691210769dffdb3"
+                "reference": "18617a8c26b97a262f816c78765eb3cd91630e19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/090b4bc92ded1ec512f7e2ed1691210769dffdb3",
-                "reference": "090b4bc92ded1ec512f7e2ed1691210769dffdb3",
+                "url": "https://api.github.com/repos/symfony/property-access/zipball/18617a8c26b97a262f816c78765eb3cd91630e19",
+                "reference": "18617a8c26b97a262f816c78765eb3cd91630e19",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3",
-                "symfony/inflector": "^3.4|^4.0|^5.0"
+                "php": "^7.2.5",
+                "symfony/inflector": "^4.4|^5.0"
             },
             "require-dev": {
-                "symfony/cache": "^3.4|^4.0|^5.0"
+                "symfony/cache": "^4.4|^5.0"
             },
             "suggest": {
                 "psr/cache-implementation": "To cache access methods."
@@ -4098,7 +4097,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.4-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -4136,7 +4135,7 @@
                 "property path",
                 "reflection"
             ],
-            "time": "2020-01-04T13:00:46+00:00"
+            "time": "2020-01-04T14:08:26+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -4321,16 +4320,16 @@
         },
         {
             "name": "ublaboo/datagrid",
-            "version": "v6.2.9",
+            "version": "v6.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/datagrid.git",
-                "reference": "a6a9c348e87598ea940ac64f6f47dc1fb9d7b91b"
+                "reference": "c6b1d66dcdcc5e1da48e728b2a0eb58deac9fee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/datagrid/zipball/a6a9c348e87598ea940ac64f6f47dc1fb9d7b91b",
-                "reference": "a6a9c348e87598ea940ac64f6f47dc1fb9d7b91b",
+                "url": "https://api.github.com/repos/contributte/datagrid/zipball/c6b1d66dcdcc5e1da48e728b2a0eb58deac9fee2",
+                "reference": "c6b1d66dcdcc5e1da48e728b2a0eb58deac9fee2",
                 "shasum": ""
             },
             "require": {
@@ -4340,7 +4339,7 @@
                 "nette/forms": "^3.0.1",
                 "nette/utils": "^3.0.1",
                 "php": "^7.2",
-                "symfony/property-access": "^3.0.0 || ^4.0.0"
+                "symfony/property-access": "^3.0.0 || ^4.0.0 || ^5.0.0"
             },
             "require-dev": {
                 "dibi/dibi": "^3.0.0 || ^4.0.0",
@@ -4387,7 +4386,7 @@
                 "grid",
                 "nette"
             ],
-            "time": "2020-01-22T09:15:50+00:00"
+            "time": "2020-02-21T12:25:09+00:00"
         },
         {
             "name": "zendframework/zend-code",
@@ -4817,16 +4816,16 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "0.12.9",
+            "version": "0.12.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "af14feb2ed259f9eb16d3107e63d85ed516e30af"
+                "reference": "601f343b05875074454ca72702204592f8844f7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/af14feb2ed259f9eb16d3107e63d85ed516e30af",
-                "reference": "af14feb2ed259f9eb16d3107e63d85ed516e30af",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/601f343b05875074454ca72702204592f8844f7d",
+                "reference": "601f343b05875074454ca72702204592f8844f7d",
                 "shasum": ""
             },
             "require": {
@@ -4877,7 +4876,7 @@
                 "MIT"
             ],
             "description": "Doctrine extensions for PHPStan",
-            "time": "2020-01-10T12:31:37+00:00"
+            "time": "2020-03-13T13:03:08+00:00"
         },
         {
             "name": "phpstan/phpstan-mockery",
@@ -5315,16 +5314,16 @@
         },
         {
             "name": "symplify/easy-coding-standard-prefixed",
-            "version": "v7.2.3",
+            "version": "v7.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/easy-coding-standard-prefixed.git",
-                "reference": "9386fd88c1934e6a9f345afd75e08b029e54f8b2"
+                "reference": "5c7bb164cafa67e6daa8588a9def5ef1aad2b965"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/easy-coding-standard-prefixed/zipball/9386fd88c1934e6a9f345afd75e08b029e54f8b2",
-                "reference": "9386fd88c1934e6a9f345afd75e08b029e54f8b2",
+                "url": "https://api.github.com/repos/symplify/easy-coding-standard-prefixed/zipball/5c7bb164cafa67e6daa8588a9def5ef1aad2b965",
+                "reference": "5c7bb164cafa67e6daa8588a9def5ef1aad2b965",
                 "shasum": ""
             },
             "require": {
@@ -5351,13 +5350,12 @@
                 "MIT"
             ],
             "description": "Prefixed version of ECS compiled in PHAR",
-            "time": "2020-02-27T16:48:21+00:00"
+            "time": "2020-03-12T09:46:15+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "latte/latte": 5,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,

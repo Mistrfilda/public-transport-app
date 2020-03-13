@@ -24,7 +24,7 @@
 		"nette/robot-loader": "^3.0",
 		"nette/security": "^3.0",
 		"nette/utils": "^3.0",
-		"latte/latte": "2.7.0-RC",
+		"latte/latte": "^2.7",
 		"tracy/tracy": "^2.6",
 		"contributte/console": "^0.8",
 		"nettrine/orm": "^0.5",
