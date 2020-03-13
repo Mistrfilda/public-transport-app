@@ -21,7 +21,7 @@ class DepartureTableFormFactory
     /** @var DepartureTableFacade */
     private $departureTableFacade;
 
-    /** @var StopRepository $stopRepository */
+    /** @var StopRepository */
     private $stopRepository;
 
     /** @var AdminFormFactory */
