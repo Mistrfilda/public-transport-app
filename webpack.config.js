@@ -74,7 +74,8 @@ Encore
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
     .autoProvideVariables({
-        'naja': 'naja'
+        'naja': 'naja',
+        'markerCluster': 'markerCluster'
     })
     .autoProvidejQuery();
 

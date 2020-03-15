@@ -1,6 +1,8 @@
 parameters:
 	pid:
 		accessToken: ""
+	map:
+		apiToken: ""
 
 application:
 	errorPresenter: Error
@@ -152,6 +154,7 @@ services:
 	- App\Transport\Prague\Vehicle\VehicleFactory
 	- App\Transport\Prague\Vehicle\VehiclePositionRepository(App\Transport\Prague\Vehicle\VehiclePosition)
 	- App\Transport\Prague\Vehicle\VehicleRepository(App\Transport\Prague\Vehicle\Vehicle)
+	- App\Transport\Prague\Vehicle\VehicleMapObjectProvider
 
 	- App\UI\Admin\PragueVehiclePosition\Datagrid\VehicleDatagridFactory
 	- App\UI\Admin\PragueVehiclePosition\Datagrid\VehiclePositionDatagridFactory
@@ -182,3 +185,8 @@ services:
 	- App\Transport\Prague\Statistic\TripStatisticDataRepository(App\Transport\Prague\Statistic\TripStatisticData)
 	- App\UI\Admin\PragueStatistic\Datagrid\StatisticDatagridFactory
 	- App\UI\Shared\Statistic\Modal\TripStatisticModalRendererControlFactory
+
+	#Map
+	map:
+		implement: App\UI\Shared\Map\MapControlFactory
+		arguments: [%map.apiToken%]

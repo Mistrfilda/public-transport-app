@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
-class Coordinates
+use JsonSerializable;
+
+class Coordinates implements JsonSerializable
 {
     /** @var float */
     private $latitude;
@@ -26,5 +28,16 @@ class Coordinates
     public function getLongitude(): float
     {
         return $this->longitude;
+    }
+
+    /**
+     * @return array<string, float>
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'lat' => $this->getLatitude(),
+            'lng' => $this->getLongitude(),
+        ];
     }
 }

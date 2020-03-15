@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
+    "@google/markerclustererplus": "^5.0.3",
     "bootstrap": "^4.4.1",
     "bootstrap-datepicker": "^1.9.0",
     "bootstrap-select": "^1.13.12",

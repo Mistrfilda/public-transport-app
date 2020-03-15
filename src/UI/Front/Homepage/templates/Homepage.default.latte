@@ -1,5 +1,5 @@
 {block content}
-    <div class="row p-3">
+    <div class="row px-1 py-3">
         <div class="col-md-6 d-flex">
             <div class="card shadow mb-12">
                 <div class="card-header py-3">
@@ -24,7 +24,8 @@
                             <tr>
                                 <th scope="row">{$departureTable->getId()->toString()}</th>
                                 <td>{$departureTable->getPragueStop()->getFormattedName()}</td>
-                                <td><a n:href="PragueDepartureTable:detail, id => $departureTable->getId()->toString()" class="btn btn-primary"><i class="fas fa-arrow-right"></i></a></td>
+                                <td><a n:href="PragueDepartureTable:detail, id => $departureTable->getId()->toString()"
+                                            class="btn btn-primary"><i class="fas fa-arrow-right"></i></a></td>
                             </tr>
                         {/foreach}
                         </tbody>
@@ -32,8 +33,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 d-flex">
+        <div class="col-md-6 d-flex mt-2 mt-md-0">
             {control statisticControl}
+        </div>
+    </div>
+
+    <div class="row px-1 py-3">
+        <div class="col-md-12">
+            {control mapControl}
         </div>
     </div>
 {/block}

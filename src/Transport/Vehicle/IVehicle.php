@@ -33,4 +33,6 @@ interface IVehicle
     public function getTripId(): string;
 
     public function getCompany(): ?string;
+
+    public function getMapLabel(): string;
 }

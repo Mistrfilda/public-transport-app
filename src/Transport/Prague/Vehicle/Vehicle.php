@@ -205,4 +205,9 @@ class Vehicle implements IEntity, IVehicle
     {
         return $this->getDelayInSeconds() > 0;
     }
+
+    public function getMapLabel(): string
+    {
+        return sprintf('%s %s', $this->getCompany(), $this->getRegistrationNumber());
+    }
 }
