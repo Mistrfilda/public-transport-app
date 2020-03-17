@@ -34,12 +34,11 @@ class StopCacheService
         $this->cache = new Cache($storage, 'stops');
         $this->stopRepository = $stopRepository;
         $this->logger = $logger;
+        $this->loadCache();
     }
 
     public function getStop(string $stopId): string
     {
-        $this->loadCache();
-
         if (array_key_exists($stopId, $this->stopPairs)) {
             return $this->stopPairs[$stopId];
         }

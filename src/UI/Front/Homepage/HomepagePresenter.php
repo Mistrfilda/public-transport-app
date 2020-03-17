@@ -51,6 +51,6 @@ class HomepagePresenter extends FrontPresenter
 
     protected function createComponentMapControl(): MapControl
     {
-        return $this->mapControlFactory->create($this->vehicleMapObjectProvider->getMapObjects());
+        return $this->mapControlFactory->create($this->vehicleMapObjectProvider);
     }
 }

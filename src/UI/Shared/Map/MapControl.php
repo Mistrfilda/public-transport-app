@@ -9,18 +9,15 @@ use Nette\Application\UI\Control;
 
 class MapControl extends Control
 {
-    /** @var MapObject[] */
-    private $mapObjects;
+    /** @var IMapObjectProvider */
+    private $mapObjectProvider;
 
     /** @var string */
     private $mapApiKey;
 
-    /**
-     * @param MapObject[] $mapObjects
-     */
-    public function __construct(string $mapApiKey, array $mapObjects)
+    public function __construct(string $mapApiKey, IMapObjectProvider $mapObjectProvider)
     {
-        $this->mapObjects = $mapObjects;
+        $this->mapObjectProvider = $mapObjectProvider;
         $this->mapApiKey = $mapApiKey;
     }
 
@@ -33,7 +30,7 @@ class MapControl extends Control
 
     public function handleGetMapObjects(): void
     {
-        $response = new JsonResponse($this->mapObjects);
+        $response = new JsonResponse($this->mapObjectProvider->getMapObjects());
         $this->getPresenter()->sendResponse($response);
     }
 }

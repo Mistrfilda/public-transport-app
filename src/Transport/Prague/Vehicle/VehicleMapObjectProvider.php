@@ -43,7 +43,6 @@ class VehicleMapObjectProvider implements IMapObjectProvider
                 $this->getVehicleInfoWindowLines($vehicle)
             );
         }
-
         return $objects;
     }
 
