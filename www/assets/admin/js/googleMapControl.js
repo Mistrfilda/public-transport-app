@@ -51,8 +51,6 @@ export default class googleMap {
                 }
             });
 
-            console.log(mapObject.infoWindowLines);
-
             let contentString = '<ul class="list-group">\n';
 
             let index = 0;
