@@ -15,12 +15,20 @@ class MapObject implements JsonSerializable
     /** @var string */
     private $label;
 
+    /** @var string[] */
+    private $infoWindowLines;
+
+    /**
+     * @param string[] $infoWindowLines
+     */
     public function __construct(
         Coordinates $coordinates,
-        string $label
+        string $label,
+        array $infoWindowLines = []
     ) {
         $this->coordinates = $coordinates;
         $this->label = $label;
+        $this->infoWindowLines = $infoWindowLines;
     }
 
     public function getCoordinates(): Coordinates
@@ -34,6 +42,14 @@ class MapObject implements JsonSerializable
     }
 
     /**
+     * @return string[]
+     */
+    public function getInfoWindowLines(): array
+    {
+        return $this->infoWindowLines;
+    }
+
+    /**
      * @return mixed[]
      */
     public function jsonSerialize(): array
@@ -41,6 +57,7 @@ class MapObject implements JsonSerializable
         return [
             'coordinates' => $this->getCoordinates(),
             'label' => $this->getLabel(),
+            'infoWindowLines' => $this->getInfoWindowLines(),
         ];
     }
 }

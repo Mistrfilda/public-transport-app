@@ -15,9 +15,16 @@
 <nav class="navbar navbar-dark bg-primary">
     <a class="navbar-brand" n:href="Homepage:default"><i class="fas fa-bus rotate-n-15 pr-2"></i> Public transport</a>
 </nav>
-<div class="container-fluid">
-{include content}
-</div>
+
+{ifset content}
+    <div class="container-fluid">
+        {include content}
+    </div>
+{/ifset}
+
+{ifset noContainerContent}
+    {include noContainerContent}
+{/ifset}
 
 {webpackJs 'admin'}
 </body>
