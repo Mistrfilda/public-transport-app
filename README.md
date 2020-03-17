@@ -12,6 +12,7 @@ Currently supported cities:
  - Ability do download stop times (time of leave) for stop
  - Get available vehicles position
  - Departure table to stop
+ - Current position of vehicles (map)
  
 # Deploy
 
