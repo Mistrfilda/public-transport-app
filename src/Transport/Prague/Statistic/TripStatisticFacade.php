@@ -79,7 +79,7 @@ class TripStatisticFacade
 pv.trip_id as 'trip_id', 
 pv.route_id as 'route_id',  
 pv.final_station as 'final_station',
-pv.vehicle_type as 'vehicle_type',
+max(pv.vehicle_type) as 'vehicle_type',
 pv.registration_number as 'registration_number', 
 pv.company as 'company',
 pv.wheelchair_accessible as 'wheelchair_accessible',
@@ -90,7 +90,7 @@ min(pp.created_at) as 'newest_known_position',
 count(pv.id) as 'position_count'
 from prague_vehicle pv inner join prague_vehicle_position pp on pv.vehicle_position_id = pp.id 
 where date(pp.created_at) = :created_date 
-group by pv.trip_id, pv.route_id, pv.final_station, pv.vehicle_type, pv.registration_number, pv.company, pv.wheelchair_accessible 
+group by pv.trip_id, pv.route_id, pv.final_station, pv.registration_number, pv.company, pv.wheelchair_accessible 
 having count(pv.id) > 5;
 ";
 
