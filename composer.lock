@@ -4320,16 +4320,16 @@
         },
         {
             "name": "ublaboo/datagrid",
-            "version": "v6.2.10",
+            "version": "v6.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/datagrid.git",
-                "reference": "c6b1d66dcdcc5e1da48e728b2a0eb58deac9fee2"
+                "reference": "59bfa46ca9e79c990d8e55b6de1d7fa8d4e36807"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/datagrid/zipball/c6b1d66dcdcc5e1da48e728b2a0eb58deac9fee2",
-                "reference": "c6b1d66dcdcc5e1da48e728b2a0eb58deac9fee2",
+                "url": "https://api.github.com/repos/contributte/datagrid/zipball/59bfa46ca9e79c990d8e55b6de1d7fa8d4e36807",
+                "reference": "59bfa46ca9e79c990d8e55b6de1d7fa8d4e36807",
                 "shasum": ""
             },
             "require": {
@@ -4386,7 +4386,7 @@
                 "grid",
                 "nette"
             ],
-            "time": "2020-02-21T12:25:09+00:00"
+            "time": "2020-03-17T11:00:45+00:00"
         },
         {
             "name": "zendframework/zend-code",
@@ -4777,16 +4777,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.15",
+            "version": "0.12.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3928a303954338eb8ed201cfe69134950318b470"
+                "reference": "b2c37bda79fdb11d801ce208ce391cffc0f572e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3928a303954338eb8ed201cfe69134950318b470",
-                "reference": "3928a303954338eb8ed201cfe69134950318b470",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b2c37bda79fdb11d801ce208ce391cffc0f572e6",
+                "reference": "b2c37bda79fdb11d801ce208ce391cffc0f572e6",
                 "shasum": ""
             },
             "require": {
@@ -4812,7 +4812,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2020-03-16T15:27:38+00:00"
+            "time": "2020-03-17T15:39:11+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
@@ -4934,16 +4934,16 @@
         },
         {
             "name": "phpstan/phpstan-nette",
-            "version": "0.12.4",
+            "version": "0.12.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-nette.git",
-                "reference": "edc43c41ac29c14929f2312f499f90b01b47de5b"
+                "reference": "87aa0f68df743dd820434da0eacfd0dcb59fd541"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/edc43c41ac29c14929f2312f499f90b01b47de5b",
-                "reference": "edc43c41ac29c14929f2312f499f90b01b47de5b",
+                "url": "https://api.github.com/repos/phpstan/phpstan-nette/zipball/87aa0f68df743dd820434da0eacfd0dcb59fd541",
+                "reference": "87aa0f68df743dd820434da0eacfd0dcb59fd541",
                 "shasum": ""
             },
             "require": {
@@ -4963,11 +4963,6 @@
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
                 "ergebnis/composer-normalize": "^2.0.2",
                 "jakub-onderka/php-parallel-lint": "^1.0",
-                "nette/application": "^2.3.0 || ^3.0.0",
-                "nette/component-model": "^2.3.0 || ^3.0.0",
-                "nette/di": "^2.3.0 || ^3.0.0",
-                "nette/forms": "^2.3.0 || ^3.0.0",
-                "nette/http": "^2.3.0 || ^3.0.0",
                 "nette/utils": "^2.3.0 || ^3.0.0",
                 "phing/phing": "^2.13.0",
                 "phpstan/phpstan-php-parser": "^0.12",
@@ -4999,7 +4994,7 @@
                 "MIT"
             ],
             "description": "Nette Framework class reflection extension for PHPStan",
-            "time": "2020-03-05T15:58:47+00:00"
+            "time": "2020-03-17T14:27:55+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
@@ -5317,16 +5312,16 @@
         },
         {
             "name": "symplify/easy-coding-standard-prefixed",
-            "version": "v7.2.4",
+            "version": "v7.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/easy-coding-standard-prefixed.git",
-                "reference": "5c7bb164cafa67e6daa8588a9def5ef1aad2b965"
+                "reference": "fd8c0e9aa9dd59cc47520b7ac26ff6cc3614c3c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/easy-coding-standard-prefixed/zipball/5c7bb164cafa67e6daa8588a9def5ef1aad2b965",
-                "reference": "5c7bb164cafa67e6daa8588a9def5ef1aad2b965",
+                "url": "https://api.github.com/repos/symplify/easy-coding-standard-prefixed/zipball/fd8c0e9aa9dd59cc47520b7ac26ff6cc3614c3c0",
+                "reference": "fd8c0e9aa9dd59cc47520b7ac26ff6cc3614c3c0",
                 "shasum": ""
             },
             "require": {
@@ -5353,7 +5348,7 @@
                 "MIT"
             ],
             "description": "Prefixed version of ECS compiled in PHAR",
-            "time": "2020-03-12T09:46:15+00:00"
+            "time": "2020-03-18T23:28:13+00:00"
         }
     ],
     "aliases": [],
