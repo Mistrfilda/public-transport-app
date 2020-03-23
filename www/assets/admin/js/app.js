@@ -18,14 +18,19 @@ import 'bootstrap-select';
 //Google maps
 import markerCluster from '@google/markerclustererplus';
 
+//Charts
+import chart from 'chart.js';
+
 //Custom js
 import clock from "./clock";
 import departureTableRefresh from './departureTableRefresh';
 import modalExtension from "./modalExtension";
 import googleMap from './googleMapControl';
+import chartRenderer from "./chartRenderer";
 
 let najaDepartureTableHandler = new departureTableRefresh(naja, $);
 let googleMapControl = new googleMap(naja, markerCluster);
+let chartRendererControl = new chartRenderer(naja, chart, $);
 
 netteForms.initOnLoad();
 window.Nette = netteForms;
@@ -38,6 +43,9 @@ $(document).ready(function () {
     clock();
     najaDepartureTableHandler.placeListener();
     googleMapControl.load();
+    console.log('tohle je async');
+    chartRendererControl.bindGraphs();
+    console.log('tohle je async');
 });
 
 naja.snippetHandler.addEventListener('afterUpdate', function () {

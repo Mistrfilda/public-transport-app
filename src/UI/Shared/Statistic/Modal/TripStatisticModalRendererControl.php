@@ -25,6 +25,7 @@ class TripStatisticModalRendererControl extends ModalRendererControl
     public function render(): void
     {
         $this->templateFile = __DIR__ . '/modal.latte';
+        $this->getTemplate()->tripId = $this->tripId;
         $this->getTemplate()->tripStatistics = $this->tripStatisticDataRepository->findByTripId($this->tripId);
         parent::render();
     }
