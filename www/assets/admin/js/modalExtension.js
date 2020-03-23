@@ -5,6 +5,10 @@ export default class departureTableRefresh {
     }
 
     openModal({xhr, response, options}) {
+        if (response === null || !response.hasOwnProperty('modalId')) {
+            return;
+        }
+
         let modalId = response.modalId;
         let showModal = response.showModal;
 

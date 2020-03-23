@@ -6,11 +6,11 @@ namespace App\UI\Shared\Statistic\Control;
 
 use App\Transport\Prague\Stop\StopRepository;
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
-use App\UI\Admin\Base\BaseControl;
 use App\UI\Shared\Statistic\Statistic;
 use App\Utils\DatetimeFactory;
+use Nette\Application\UI\Control;
 
-class StatisticControl extends BaseControl
+class StatisticControl extends Control
 {
     /** @var VehiclePositionRepository */
     private $vehiclePositionRepository;
