@@ -53,4 +53,9 @@ class TripStatisticControl extends BaseControl
     {
         return $this->chartControlFactory->create(ChartType::LINE, $this->tripStatisticChartDataProvider);
     }
+
+    protected function createComponentTestGraph3(): ChartControl
+    {
+        return $this->chartControlFactory->create(ChartType::DOUGHNUT, $this->tripStatisticChartDataProvider);
+    }
 }

@@ -36,6 +36,7 @@ export default class chartRenderer {
     async bindGraphs() {
         this.createBarCharts();
         this.createLineCharts();
+        this.createDoughnutCharts();
     }
 
     createLineCharts() {
@@ -44,7 +45,6 @@ export default class chartRenderer {
             let graphData = this.fetchData(graphElement);
 
             graphData.then(function (response) {
-                console.log(response);
                 let myChart = new this.chart(graphElement, {
                     type: 'line',
                     data: {
@@ -83,7 +83,6 @@ export default class chartRenderer {
             let graphData = this.fetchData(graphElement);
 
             graphData.then(function (response) {
-                console.log(response);
                 let myChart = new this.chart(graphElement, {
                     type: 'bar',
                     data: {
@@ -91,23 +90,8 @@ export default class chartRenderer {
                         datasets: [{
                             label: response.datasets.label,
                             data: response.datasets.data,
-                            backgroundColor: this.defaultBackgroundColor,
-                            // backgroundColor: [
-                            //     'rgba(255, 99, 132, 0.2)',
-                            //     'rgba(54, 162, 235, 0.2)',
-                            //     'rgba(255, 206, 86, 0.2)',
-                            //     'rgba(75, 192, 192, 0.2)',
-                            //     'rgba(153, 102, 255, 0.2)',
-                            //     'rgba(255, 159, 64, 0.2)'
-                            // ],
-                            // borderColor: [
-                            //     'rgba(255, 99, 132, 1)',
-                            //     'rgba(54, 162, 235, 1)',
-                            //     'rgba(255, 206, 86, 1)',
-                            //     'rgba(75, 192, 192, 1)',
-                            //     'rgba(153, 102, 255, 1)',
-                            //     'rgba(255, 159, 64, 1)'
-                            // ],
+                            backgroundColor: response.datasets.backgroundColors,
+                            borderColor: response.datasets.borderColors,
                             borderWidth: 1
                         }]
                     },
@@ -129,9 +113,38 @@ export default class chartRenderer {
         }.bind(this));
     }
 
-    fetchData(element) {
-        console.log(element.attr('data-chart-method'));
+    createDoughnutCharts() {
+        $('.chart--doughnut').each(function (index, element) {
+            let graphElement = $(element);
+            let graphData = this.fetchData(graphElement);
 
+            graphData.then(function (response) {
+                let myChart = new this.chart(graphElement, {
+                    type: 'doughnut',
+                    data: {
+                        labels: response.labels,
+                        datasets: [{
+                            label: response.datasets.label,
+                            data: response.datasets.data,
+                            borderWidth: 1,
+                            fill: false,
+                            backgroundColor: response.datasets.backgroundColors,
+                            borderColor: response.datasets.borderColors,
+                            lineTension: 0.1
+                        }]
+                    },
+                    options: {
+                        tooltips: this.tooltipDefaults
+                    }
+                });
+
+                this.removeGraphSpinner(graphElement.prop('id'));
+            }.bind(this));
+
+        }.bind(this));
+    }
+
+    fetchData(element) {
         return naja.makeRequest(
             'GET',
             element.attr('data-chart-method'),
