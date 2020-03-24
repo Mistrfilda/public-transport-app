@@ -8,5 +8,5 @@ use App\UI\Shared\Statistic\Chart\LineChart\IChartDataProvider;
 
 interface ChartControlFactory
 {
-    public function create(string $type, IChartDataProvider $chartDataProvider): ChartControl;
+    public function create(string $type, string $cardHeading, IChartDataProvider $chartDataProvider): ChartControl;
 }

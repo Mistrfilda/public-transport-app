@@ -6,6 +6,18 @@ namespace App\UI\Shared\Statistic;
 
 class Statistic
 {
+    public const CONTEXTUAL_SUCCESS = 'success';
+
+    public const CONTEXTUAL_PRIMARY = 'primary';
+
+    public const CONTEXTUAL_DANGER = 'danger';
+
+    public const CONTEXTUAL_WARNING = 'warning';
+
+    public const CONTEXTUAL_INFO = 'info';
+
+    public const CONTEXTUAL_SECONDARY = 'secondary';
+
     /** @var string */
     private $contextualClass;
 

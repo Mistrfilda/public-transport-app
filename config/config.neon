@@ -139,7 +139,9 @@ services:
 	- App\Transport\Prague\StopLine\Trip\Import\TripImportFacade
 	- App\Transport\Prague\StopLine\Trip\TripRepository(App\Transport\Prague\StopLine\Trip\Trip)
 	- App\Transport\Prague\StopLine\Trip\TripFactory
-	- App\Transport\Prague\Statistic\ChartDataProvider\TripStatisticChartDataProvider
+	- App\Transport\Prague\Statistic\ChartDataProvider\TripStatisticDelayChartDataProvider
+	- App\Transport\Prague\Statistic\ChartDataProvider\TripStatisticDataCountChartDataProvider
+	- App\Transport\Prague\Statistic\ChartDataProvider\TripStatisticVehicleRegistrationChartDataProvider
 
 	#STOP TIME
 	- App\Transport\Prague\StopLine\StopTime\Import\StopTimeImportCommand
