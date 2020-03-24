@@ -43,9 +43,7 @@ $(document).ready(function () {
     clock();
     najaDepartureTableHandler.placeListener();
     googleMapControl.load();
-    console.log('tohle je async');
     chartRendererControl.bindGraphs();
-    console.log('tohle je async');
 });
 
 naja.snippetHandler.addEventListener('afterUpdate', function () {
