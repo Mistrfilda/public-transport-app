@@ -10,6 +10,8 @@ class ChartType
 
     public const BAR = 'bar';
 
+    public const DOUGHNUT = 'doughnut';
+
     public static function typeExists(string $type): void
     {
         if (! in_array($type, self::getAll(), true)) {
@@ -25,6 +27,7 @@ class ChartType
         return [
             self::LINE,
             self::BAR,
+            self::DOUGHNUT,
         ];
     }
 }
