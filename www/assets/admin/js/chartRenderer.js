@@ -1,5 +1,3 @@
-import naja from "naja";
-
 export default class chartRenderer {
     constructor(naja, chart, $) {
         this.chart = chart;
