@@ -15,20 +15,26 @@ class ChartControl extends Control
     /** @var string */
     private $type;
 
+    /** @var string */
+    private $cardHeading;
+
     /** @var IChartDataProvider */
     private $chartDataProvider;
 
     public function __construct(
         string $type,
+        string $cardHeading,
         IChartDataProvider $chartDataProvider
     ) {
         ChartType::typeExists($type);
         $this->type = $type;
+        $this->cardHeading = $cardHeading;
         $this->chartDataProvider = $chartDataProvider;
     }
 
     public function render(): void
     {
+        $this->getTemplate()->cardHeading = $this->cardHeading;
         $this->getTemplate()->chartId = $this->getChartId();
         $this->getTemplate()->chartClass = $this->getChartClass();
         $this->getTemplate()->setFile(str_replace('.php', '.latte', __FILE__));

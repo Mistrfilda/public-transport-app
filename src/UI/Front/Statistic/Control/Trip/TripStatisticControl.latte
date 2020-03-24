@@ -1,52 +1,41 @@
 <div class="row px-1 pt-3">
-    <div class="col-md-6">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
-            </div>
-            <div class="card-body">
-                The styling for this basic card example is created by using default Bootstrap utility classes. By using utility classes, the style of the card component can be easily modified with no need for any custom CSS!
+    {varType App\UI\Shared\Statistic\Statistic $statistic}
+    {varType App\UI\Shared\Statistic\Statistic[] $statisticBoxes}
+    {foreach $statisticBoxes as $statistic}
+        <div class="{$statistic->getSize()} mb-4">
+            <div class="card {$statistic->getBorder()} shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-{$statistic->getContextualClass()} text-uppercase mb-1">
+                                {$statistic->getHeading()}
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {$statistic->getValue()}
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="{$statistic->getIcon()} text-{$statistic->getContextualClass()}"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
-            </div>
-            <div class="card-body">
-                The styling for this basic card example is created by using default Bootstrap utility classes. By using utility classes, the style of the card component can be easily modified with no need for any custom CSS!
-            </div>
-        </div>
-    </div>
+    {/foreach}
 </div>
 
 <div class="row">
     <div class="col-md-6">
-        {control testGraph}
+        {control tripDataCountChart}
     </div>
     <div class="col-md-6">
-        {control testGraph2}
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6">
-        {control testGraph3}
+        {control tripVehicleTypeChart}
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
-            </div>
-            <div class="card-body">
-                The styling for this basic card example is created by using default Bootstrap utility classes. By using utility classes, the style of the card component can be easily modified with no need for any custom CSS!
-            </div>
-        </div>
+        {control lineDelayChart}
     </div>
 </div>
 
@@ -66,7 +55,7 @@
                     <table class="table table-striped table-dark m-0">
                         <thead>
                         <tr>
-                            <th scope="col">Linka ID</th>
+                            {*<th scope="col">Linka ID</th>*}
                             <th scope="col">Datum</th>
                             <th scope="col">Route id</th>
                             <th scope="col">Společnost</th>
@@ -78,7 +67,7 @@
                         <tbody>
                         {foreach $tripStatistics as $tripStatistic}
                             <tr>
-                                <th scope="row">{$tripStatistic->getTripId()}</th>
+                                {*<th scope="row">{$tripStatistic->getTripId()}</th>*}
                                 <td>{$tripStatistic->getDate()|date:'d. m. Y'}</td>
                                 <td>{$tripStatistic->getRouteId()}</td>
                                 <td>{$tripStatistic->getCompany()}</td>

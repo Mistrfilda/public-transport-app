@@ -43,7 +43,7 @@ class StatisticControl extends Control
 
         if ($lastVehiclePosition !== null) {
             $statistics[] = new Statistic(
-                'success',
+                Statistic::CONTEXTUAL_SUCCESS,
                 'Poslední známa poloha vozidel',
                 $lastVehiclePosition->getCreatedAt()->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT),
                 'fas fa-clock fa-2x text-gray-300',
@@ -52,7 +52,7 @@ class StatisticControl extends Control
             );
 
             $statistics[] = new Statistic(
-                'success',
+                Statistic::CONTEXTUAL_SUCCESS,
                 'Počet poloh vozidel',
                 (string) $lastVehiclePosition->getVehiclesCount(),
                 'fas fa-bus fa-2x text-gray-300'
@@ -60,7 +60,7 @@ class StatisticControl extends Control
         }
 
         $statistics[] = new Statistic(
-            'primary',
+            Statistic::CONTEXTUAL_PRIMARY,
             'Celkový počet zastávek',
             (string) $this->stopRepository->getStopsCount(),
             'fas fa-ruler-vertical fa-2x text-gray-300'
