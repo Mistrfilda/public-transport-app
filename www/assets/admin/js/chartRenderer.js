@@ -43,6 +43,13 @@ export default class chartRenderer {
             let graphData = this.fetchData(graphElement);
 
             graphData.then(function (response) {
+                let tooltipDefaults = this.getTooltipDefaults();
+                tooltipDefaults.callbacks = {
+                    label: function(tooltipItem, chart) {
+                        return tooltipItem.yLabel + ' ' + response.tooltipSuffix;
+                    }
+                };
+
                 let myChart = new this.chart(graphElement, {
                     type: 'line',
                     data: {
@@ -65,7 +72,7 @@ export default class chartRenderer {
                                 }
                             }]
                         },
-                        tooltips: this.tooltipDefaults
+                        tooltips: tooltipDefaults
                     }
                 });
 
@@ -81,6 +88,12 @@ export default class chartRenderer {
             let graphData = this.fetchData(graphElement);
 
             graphData.then(function (response) {
+                let tooltipDefaults = this.getTooltipDefaults();
+                tooltipDefaults.callbacks = {
+                    label: function(tooltipItem, chart) {
+                        return tooltipItem.yLabel + ' ' + response.tooltipSuffix;
+                    }
+                };
                 let myChart = new this.chart(graphElement, {
                     type: 'bar',
                     data: {
@@ -101,7 +114,7 @@ export default class chartRenderer {
                                 }
                             }]
                         },
-                        tooltips: this.tooltipDefaults
+                        tooltips: tooltipDefaults
                     }
                 });
 

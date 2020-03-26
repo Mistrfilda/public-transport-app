@@ -36,7 +36,11 @@ class TripStatisticDataCountChartDataProvider implements IChartDataProvider, ITr
 
         $tripData = $this->tripStatisticDataRepository->findByTripId($this->tripId, 30);
 
-        $chartData = new ChartData('Počet poloh vozidel během 30 dní', true);
+        $chartData = new ChartData(
+            'Počet poloh vozidel během 30 dní',
+            true,
+            'poloh vozidel'
+        );
 
         foreach (array_reverse($tripData) as $trip) {
             $chartData->add(

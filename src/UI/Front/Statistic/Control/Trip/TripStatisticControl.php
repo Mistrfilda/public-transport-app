@@ -96,7 +96,7 @@ class TripStatisticControl extends BaseControl
         return $this->chartControlFactory->create(
             ChartType::LINE,
             'Průměrné zpoždění během 30 dnů',
-            $this->tripStatisticChartDataProvider
+            $this->tripStatisticChartDataProvider,
         );
     }
 

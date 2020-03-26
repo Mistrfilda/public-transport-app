@@ -64,7 +64,9 @@
                                         <td>----</td>
                                         <td>----</td>
                                     {/if}
-                                    <td><a n:href="tripIdStatistics, tripId => $stopLine->getTripId()" class="btn btn-primary ajax" data-naja-history="off"><i class="fas fa-arrow-right"></i></a></td>
+                                    <td><a n:href="tripIdStatistics, tripId => $stopLine->getTripId()" class="btn btn-primary ajax" data-naja-history="off"><i class="fas fa-arrow-right"></i></a>
+                                        <a href="{plink Statistic:trip, $stopLine->getTripId()}" class="btn btn-success"><i class="fas fa-arrow-right"></i></a>
+                                    </td>
                                 </tr>
                             {/foreach}
                         </table>

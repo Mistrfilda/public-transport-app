@@ -36,7 +36,11 @@ class TripStatisticDelayChartDataProvider implements IChartDataProvider, ITripSt
 
         $tripData = $this->tripStatisticDataRepository->findByTripId($this->tripId, 30);
 
-        $chartData = new ChartData('Zpoždění za posledních 30 dnů', false);
+        $chartData = new ChartData(
+            'Zpoždění za posledních 30 dnů',
+            false,
+            'sekund'
+        );
 
         foreach (array_reverse($tripData) as $trip) {
             $chartData->add(

@@ -11,6 +11,9 @@ class ChartData implements JsonSerializable
     /** @var string */
     private $label;
 
+    /** @var string */
+    private $tooltipSuffix;
+
     /** @var bool */
     private $useBackgroundColors;
 
@@ -26,7 +29,7 @@ class ChartData implements JsonSerializable
     /** @var array<int, string> */
     private $borderColors;
 
-    public function __construct(string $label, bool $useBackgroundColors = true)
+    public function __construct(string $label, bool $useBackgroundColors = true, string $tooltipSuffix = '')
     {
         $this->label = $label;
         $this->labels = [];
@@ -34,6 +37,7 @@ class ChartData implements JsonSerializable
         $this->backgroundColors = [];
         $this->borderColors = [];
         $this->useBackgroundColors = $useBackgroundColors;
+        $this->tooltipSuffix = $tooltipSuffix;
     }
 
     public function add(string $label, int $item): void
@@ -53,6 +57,7 @@ class ChartData implements JsonSerializable
     {
         return [
             'labels' => $this->labels,
+            'tooltipSuffix' => $this->tooltipSuffix,
             'datasets' => [
                 'label' => $this->label,
                 'data' => $this->data,
