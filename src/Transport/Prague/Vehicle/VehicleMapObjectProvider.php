@@ -8,6 +8,8 @@ use App\Transport\Prague\Stop\StopCacheService;
 use App\Transport\Vehicle\IVehicle;
 use App\UI\Shared\Map\IMapObjectProvider;
 use App\UI\Shared\Map\MapObject;
+use Nette\Application\LinkGenerator;
+use Nette\Utils\Html;
 
 class VehicleMapObjectProvider implements IMapObjectProvider
 {
@@ -17,12 +19,17 @@ class VehicleMapObjectProvider implements IMapObjectProvider
     /** @var StopCacheService */
     private $stopCacheService;
 
+    /** @var LinkGenerator */
+    private $linkGenerator;
+
     public function __construct(
         VehiclePositionRepository $vehiclePositionRepository,
-        StopCacheService $stopCacheService
+        StopCacheService $stopCacheService,
+        LinkGenerator $linkGenerator
     ) {
         $this->vehiclePositionRepository = $vehiclePositionRepository;
         $this->stopCacheService = $stopCacheService;
+        $this->linkGenerator = $linkGenerator;
     }
 
     /**
@@ -82,6 +89,13 @@ class VehicleMapObjectProvider implements IMapObjectProvider
                 $this->stopCacheService->getStop($vehicle->getNextStopId())
             );
         }
+
+        $statisticButton = Html::el('a');
+        $statisticButton->class = 'btn btn-primary btn-sm';
+        $statisticButton->href = $this->linkGenerator->link('Front:Statistic:trip', ['tripId' => $vehicle->getTripId()]);
+        $statisticButton->setText('Podrobné statistiky');
+
+        $lines[] = $statisticButton->toHtml();
 
         return $lines;
     }

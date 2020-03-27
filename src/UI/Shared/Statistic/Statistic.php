@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Shared\Statistic;
 
+use Nette\Utils\Strings;
+
 class Statistic
 {
     public const CONTEXTUAL_SUCCESS = 'success';
@@ -65,8 +67,12 @@ class Statistic
         return $this->heading;
     }
 
-    public function getValue(): string
+    public function getValue(bool $useTruncate = true): string
     {
+        if ($useTruncate) {
+            return Strings::truncate($this->value, 22);
+        }
+
         return $this->value;
     }
 

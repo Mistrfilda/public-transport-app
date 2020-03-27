@@ -10,6 +10,8 @@ use App\Transport\Prague\Statistic\ChartDataProvider\TripStatisticVehicleRegistr
 use App\Transport\Prague\Statistic\TripStatisticData;
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
 use App\UI\Front\Base\BaseControl;
+use App\UI\Front\Base\FrontDatagrid;
+use App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory;
 use App\UI\Shared\Statistic\Chart\ChartType;
 use App\UI\Shared\Statistic\Chart\Control\ChartControl;
 use App\UI\Shared\Statistic\Chart\Control\ChartControlFactory;
@@ -37,13 +39,17 @@ class TripStatisticControl extends BaseControl
     /** @var TripStatisticVehicleRegistrationChartDataProvider */
     private $tripStatisticVehicleRegistrationChartDataProvider;
 
+    /** @var TripStatisticDataDatagridFactory */
+    private $tripStatisticDataDatagridFactory;
+
     public function __construct(
         string $tripId,
         TripStatisticDataRepository $tripStatisticDataRepository,
         ChartControlFactory $chartControlFactory,
         TripStatisticDelayChartDataProvider $tripStatisticChartDataProvider,
         TripStatisticDataCountChartDataProvider $tripStatisticDataCountChartDataProvider,
-        TripStatisticVehicleRegistrationChartDataProvider $tripStatisticVehicleRegistrationChartDataProvider
+        TripStatisticVehicleRegistrationChartDataProvider $tripStatisticVehicleRegistrationChartDataProvider,
+        TripStatisticDataDatagridFactory $tripStatisticDataDatagridFactory
     ) {
         $this->tripStatisticDataRepository = $tripStatisticDataRepository;
         $this->tripId = $tripId;
@@ -51,6 +57,7 @@ class TripStatisticControl extends BaseControl
         $this->tripStatisticChartDataProvider = $tripStatisticChartDataProvider;
         $this->tripStatisticDataCountChartDataProvider = $tripStatisticDataCountChartDataProvider;
         $this->tripStatisticVehicleRegistrationChartDataProvider = $tripStatisticVehicleRegistrationChartDataProvider;
+        $this->tripStatisticDataDatagridFactory = $tripStatisticDataDatagridFactory;
 
         $this->prepareChartDataProviders();
     }
@@ -68,7 +75,6 @@ class TripStatisticControl extends BaseControl
         $tripStatisticCount = $this->tripStatisticDataRepository->getCountTripsByTripId($this->tripId);
 
         $this->getTemplate()->statisticBoxes = $this->buildStatisticBoxes($tripStatistic, $tripStatisticCount);
-        $this->getTemplate()->tripStatistics = $this->tripStatisticDataRepository->findByTripId($this->tripId, null);
         $this->getTemplate()->setFile(str_replace('.php', '.latte', __FILE__));
         $this->getTemplate()->render();
     }
@@ -98,6 +104,11 @@ class TripStatisticControl extends BaseControl
             'Průměrné zpoždění během 30 dnů',
             $this->tripStatisticChartDataProvider,
         );
+    }
+
+    protected function createComponentTripStatisticDataDatagrid(): FrontDatagrid
+    {
+        return $this->tripStatisticDataDatagridFactory->create($this->tripId);
     }
 
     private function prepareChartDataProviders(): void

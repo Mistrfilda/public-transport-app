@@ -51,7 +51,7 @@ export default class googleMap {
                 }
             });
 
-            let contentString = '<ul class="list-group">\n';
+            let contentString = '<ul class="list-group app-map-infowindow">\n';
 
             let index = 0;
             mapObject.infoWindowLines.forEach(function (line) {

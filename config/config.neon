@@ -118,6 +118,8 @@ services:
 	- App\Admin\CurrentAppAdminGetter
 	- App\Admin\Command\CreateAppAdminCommand
 
+	#Front
+	- App\UI\Front\Base\FrontDatagridFactory
 
 	#Login
 	- App\UI\Admin\Login\Form\LoginFormFactory
@@ -189,6 +191,7 @@ services:
 	- App\UI\Admin\PragueStatistic\Datagrid\StatisticDatagridFactory
 	- App\UI\Shared\Statistic\Modal\TripStatisticModalRendererControlFactory
 	- App\UI\Front\Statistic\Control\Trip\TripStatisticControlFactory
+	- App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory
 
 	- App\UI\Shared\Statistic\Chart\Control\ChartControlFactory
 

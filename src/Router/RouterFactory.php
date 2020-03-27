@@ -19,6 +19,7 @@ final class RouterFactory
         $adminRouter->addRoute('admin/<presenter>/<action>[/<id>]', 'Dashboard:default');
 
         $frontRouter = new RouteList('Front');
+        $frontRouter->addRoute('statistic/trip/<tripId>', 'Statistic:trip');
         $frontRouter->addRoute('<presenter>/<action>[/<id>]', 'Homepage:default');
 
         $router->add($adminRouter);
