@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Transport\Prague\Stop\Stop;
 use App\Transport\Prague\StopLine\Trip\TripFactory;
-use Ofce\Pid\Api\Trip\Trip as PIDTrip;
+use Mistrfilda\Pid\Api\Trip\Trip as PIDTrip;
 use Tester\Assert;
 
 require __DIR__ . '/../../../Bootstrap.php';

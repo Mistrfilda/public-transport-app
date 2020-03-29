@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Transport\Prague\Stop\Stop;
 use App\Transport\Prague\Stop\StopFactory;
-use Ofce\Pid\Api\Stop\Stop as PIDStop;
+use Mistrfilda\Pid\Api\Stop\Stop as PIDStop;
 use Tester\Assert;
 
 require __DIR__ . '/../../Bootstrap.php';

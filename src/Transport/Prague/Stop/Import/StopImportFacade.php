@@ -8,7 +8,7 @@ use App\Doctrine\NoEntityFoundException;
 use App\Transport\Prague\Stop\StopFactory;
 use App\Transport\Prague\Stop\StopRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Ofce\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\PidService;
 use Psr\Log\LoggerInterface;
 use Throwable;
 

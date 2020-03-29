@@ -32,7 +32,7 @@
 		"nettrine/migrations": "^0.6",
 		"nettrine/cache": "^0.1",
 		"nettrine/annotations": "^0.6",
-		"mistrfilda/pid-api": "^0.1",
+		"mistrfilda/pid-api": "^0.2",
 		"ramsey/uuid-doctrine": "^1.6",
 		"contributte/monolog": "^0.4.1",
 		"ublaboo/datagrid": "^6.2",
@@ -68,6 +68,7 @@
 		}
 	},
 	"scripts": {
+		"comload": "composer dump-autoload -o",
 		"stan": "vendor/bin/phpstan analyse -l max -c phpstan.neon src tests --ansi",
 		"lint": "vendor/bin/parallel-lint --colors src/ tests/",
 		"cs": "vendor/bin/ecs -c ecs.yaml check src tests --ansi",
@@ -96,6 +97,7 @@
 			"@test"
 		],
 		"build-all-local": [
+			"@comload",
 			"@test-db-init",
 			"@build-all"
 		],

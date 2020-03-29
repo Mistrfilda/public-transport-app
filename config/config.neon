@@ -100,7 +100,7 @@ services:
 	secondsformatFilter: App\UI\Filter\SecondsFormatFilter
 
 	datetimefactory: App\Utils\DatetimeFactory
-	pidservice: Ofce\Pid\Api\PidService(%pid.accessToken%)
+	pidservice: Mistrfilda\Pid\Api\PidService(%pid.accessToken%)
 
 	#Forms
 	- App\UI\Admin\Base\AdminFormFactory

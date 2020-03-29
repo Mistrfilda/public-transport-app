@@ -11,10 +11,10 @@ use App\Transport\Prague\Stop\StopCacheService;
 use App\Transport\Prague\Stop\StopFactory;
 use App\Transport\Prague\Stop\StopRepository;
 use InvalidArgumentException;
+use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\Stop\Stop as PIDStop;
+use Mistrfilda\Pid\Api\Stop\StopResponse;
 use Mockery;
-use Ofce\Pid\Api\PidService;
-use Ofce\Pid\Api\Stop\Stop as PIDStop;
-use Ofce\Pid\Api\Stop\StopResponse;
 use Test\Integration\BaseTest;
 use Tester\Assert;
 

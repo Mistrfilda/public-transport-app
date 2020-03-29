@@ -10,7 +10,7 @@ use App\Transport\Prague\StopLine\Trip\TripFactory;
 use App\Transport\Prague\StopLine\Trip\TripRepository;
 use App\Utils\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Ofce\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\PidService;
 use Psr\Log\LoggerInterface;
 use Throwable;
 

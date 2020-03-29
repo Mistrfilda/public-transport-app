@@ -6,7 +6,7 @@ namespace App\Transport\Prague\StopLine\StopTime;
 
 use App\Transport\Prague\Stop\Stop;
 use DateTimeImmutable;
-use Ofce\Pid\Api\StopTime\StopTime as PIDStopTime;
+use Mistrfilda\Pid\Api\StopTime\StopTime as PIDStopTime;
 
 class StopTimeFactory
 {

@@ -9,10 +9,10 @@ use App\Transport\Prague\StopLine\StopTime\Import\StopTimeImportFacade;
 use App\Transport\Prague\StopLine\StopTime\StopTime;
 use App\Transport\Prague\StopLine\StopTime\StopTimeRepository;
 use InvalidArgumentException;
+use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\StopTime\StopTime as PIDStopTime;
+use Mistrfilda\Pid\Api\StopTime\StopTimeResponse;
 use Mockery;
-use Ofce\Pid\Api\PidService;
-use Ofce\Pid\Api\StopTime\StopTime as PIDStopTime;
-use Ofce\Pid\Api\StopTime\StopTimeResponse;
 use Test\Integration\BaseTest;
 use Tester\Assert;
 

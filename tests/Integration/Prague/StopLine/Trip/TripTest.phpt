@@ -10,10 +10,10 @@ use App\Transport\Prague\StopLine\Trip\Trip;
 use App\Transport\Prague\StopLine\Trip\TripFactory;
 use App\Transport\Prague\StopLine\Trip\TripRepository;
 use InvalidArgumentException;
+use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\Trip\Trip as PIDTrip;
+use Mistrfilda\Pid\Api\Trip\TripResponse;
 use Mockery;
-use Ofce\Pid\Api\PidService;
-use Ofce\Pid\Api\Trip\Trip as PIDTrip;
-use Ofce\Pid\Api\Trip\TripResponse;
 use Test\Integration\BaseTest;
 use Tester\Assert;
 

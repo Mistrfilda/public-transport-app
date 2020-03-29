@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Transport\Prague\Stop;
 
-use Ofce\Pid\Api\Stop\Stop as PIDStop;
+use Mistrfilda\Pid\Api\Stop\Stop as PIDStop;
 
 class StopFactory
 {

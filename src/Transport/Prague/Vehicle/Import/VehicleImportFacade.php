@@ -8,7 +8,7 @@ use App\Transport\Prague\Vehicle\VehicleFactory;
 use App\Transport\Prague\Vehicle\VehiclePosition;
 use App\Utils\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Ofce\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\PidService;
 use Psr\Log\LoggerInterface;
 use Throwable;
 

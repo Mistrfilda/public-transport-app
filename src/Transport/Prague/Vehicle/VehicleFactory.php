@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Transport\Prague\Vehicle;
 
-use Ofce\Pid\Api\VehiclePosition\VehiclePosition as PIDVehiclePosition;
+use Mistrfilda\Pid\Api\VehiclePosition\VehiclePosition as PIDVehiclePosition;
 
 class VehicleFactory
 {
