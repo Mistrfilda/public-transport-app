@@ -7,6 +7,7 @@ namespace App\UI\Front\Base;
 use App\Utils\DatetimeFactory;
 use App\Utils\SelectPicker;
 use DateTimeImmutable;
+use Nette\Utils\Strings;
 use Ublaboo\DataGrid\Column\ColumnDateTime;
 use Ublaboo\DataGrid\Column\FilterableColumn;
 use Ublaboo\DataGrid\DataGrid;
@@ -48,5 +49,17 @@ class FrontDatagrid extends DataGrid
         }
 
         return $time->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT);
+    }
+
+    public function render(): void
+    {
+        $this->getTemplate()->originalTemplatesFilePath = $this->getOriginalTemplatesFilePath();
+        parent::render();
+    }
+
+    private function getOriginalTemplatesFilePath(): string
+    {
+        $filePath = $this->getOriginalTemplateFile();
+        return Strings::substring($filePath, 0, Strings::indexOf($filePath, '/', -1)) . '/';
     }
 }

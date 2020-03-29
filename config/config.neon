@@ -192,6 +192,8 @@ services:
 	- App\UI\Shared\Statistic\Modal\TripStatisticModalRendererControlFactory
 	- App\UI\Front\Statistic\Control\Trip\TripStatisticControlFactory
 	- App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory
+	- App\UI\Front\Statistic\Control\Main\MainStatisticControlFactory
+	- App\UI\Front\Statistic\Datagrid\Trip\RouteStatisticDatagridFactory
 
 	- App\UI\Shared\Statistic\Chart\Control\ChartControlFactory
 
