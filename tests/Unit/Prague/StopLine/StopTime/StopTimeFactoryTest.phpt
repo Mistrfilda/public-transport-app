@@ -37,8 +37,14 @@ $stopTime = $stopTimeFactory->create(
     $stopSequence
 );
 
-Assert::equal($stopTimeTimeFactory->createDatetime($date, $arrivalTime)->getTimestamp(), $stopTime->getArrivalTime()->getTimestamp());
-Assert::equal($stopTimeTimeFactory->createDatetime($date, $departureTime)->getTimestamp(), $stopTime->getDepartureTime()->getTimestamp());
+Assert::equal(
+    $stopTimeTimeFactory->createDatetime($date, $arrivalTime)->getTimestamp(),
+    $stopTime->getArrivalTime()->getTimestamp()
+);
+Assert::equal(
+    $stopTimeTimeFactory->createDatetime($date, $departureTime)->getTimestamp(),
+    $stopTime->getDepartureTime()->getTimestamp()
+);
 Assert::equal($tripId, $stopTime->getTripId());
 Assert::equal($stopSequence, $stopTime->getStopSequence());
 
@@ -51,7 +57,13 @@ $pidStopTime = new PIDStopTime(
 
 $stopTime = $stopTimeFactory->createFromPidLibrary($pidStopTime, $testStop, $date);
 
-Assert::equal($stopTimeTimeFactory->createDatetime($date, $arrivalTime)->getTimestamp(), $stopTime->getArrivalTime()->getTimestamp());
-Assert::equal($stopTimeTimeFactory->createDatetime($date, $departureTime)->getTimestamp(), $stopTime->getDepartureTime()->getTimestamp());
+Assert::equal(
+    $stopTimeTimeFactory->createDatetime($date, $arrivalTime)->getTimestamp(),
+    $stopTime->getArrivalTime()->getTimestamp()
+);
+Assert::equal(
+    $stopTimeTimeFactory->createDatetime($date, $departureTime)->getTimestamp(),
+    $stopTime->getDepartureTime()->getTimestamp()
+);
 Assert::equal($tripId, $stopTime->getTripId());
 Assert::equal($stopSequence, $stopTime->getStopSequence());

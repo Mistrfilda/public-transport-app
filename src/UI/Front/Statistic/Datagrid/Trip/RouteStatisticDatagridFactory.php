@@ -29,7 +29,9 @@ class RouteStatisticDatagridFactory
         $grid = $this->frontDatagridFactory->create();
 
         $qb = $this->tripStatisticDataRepository->createQueryBuilder();
-        $qb->select('tripStatistic.tripId, tripStatistic.routeId, tripStatistic.finalStation, max(tripStatistic.newestKnownPosition) as newestKnownPosition');
+        $qb->select(
+            'tripStatistic.tripId, tripStatistic.routeId, tripStatistic.finalStation, max(tripStatistic.newestKnownPosition) as newestKnownPosition'
+        );
         $qb->groupBy('tripStatistic.tripId, tripStatistic.routeId, tripStatistic.finalStation');
 
         $grid->setPrimaryKey('tripId');

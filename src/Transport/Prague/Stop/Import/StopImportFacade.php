@@ -58,7 +58,10 @@ class StopImportFacade
             try {
                 $this->logger->info(
                     'Sending request get stops',
-                    ['step' => $step, 'currentStep' => $currentStep]
+                    [
+                        'step' => $step,
+                        'currentStep' => $currentStep,
+                    ]
                 );
 
                 $stopResponse = $this->pidApiService->sendGetStopsRequest(
@@ -92,7 +95,10 @@ class StopImportFacade
 
                 $this->logger->info(
                     'Stops successfully imported',
-                    ['step' => $step, 'currentStep' => $currentStep]
+                    [
+                        'step' => $step,
+                        'currentStep' => $currentStep,
+                    ]
                 );
             } catch (Throwable $e) {
                 $this->entityManager->rollback();
@@ -103,7 +109,11 @@ class StopImportFacade
 
         $this->logger->info(
             'Import stops finished',
-            ['step' => $step, 'currentStep' => $currentStep, 'noResult' => $noResult]
+            [
+                'step' => $step,
+                'currentStep' => $currentStep,
+                'noResult' => $noResult,
+            ]
         );
     }
 }

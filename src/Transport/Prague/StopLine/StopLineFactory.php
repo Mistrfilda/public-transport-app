@@ -41,7 +41,10 @@ class StopLineFactory
      */
     public function getStopLinesForStop(Stop $stop, int $limit = 10): array
     {
-        $stopTimes = $this->stopTimeRepository->findForDepartureTable($stop->getId(), $this->datetimeFactory->createNow());
+        $stopTimes = $this->stopTimeRepository->findForDepartureTable(
+            $stop->getId(),
+            $this->datetimeFactory->createNow()
+        );
         $trips = $this->tripRepository->findForDepartureTable($stop->getId(), $this->datetimeFactory->createToday());
 
         $lastVehiclePosition = $this->vehiclePositionRepository->findLast();

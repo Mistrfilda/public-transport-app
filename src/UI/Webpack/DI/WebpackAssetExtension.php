@@ -43,7 +43,10 @@ class WebpackAssetExtension extends CompilerExtension
 
         /** @var FactoryDefinition $latteFactory */
         $latteFactory = $builder->getDefinition('latte.latteFactory');
-        $latteFactory->getResultDefinition()->addSetup(WebpackEncoreMacro::class . '::install(?->getCompiler())', ['@self']);
+        $latteFactory->getResultDefinition()->addSetup(
+            WebpackEncoreMacro::class . '::install(?->getCompiler())',
+            ['@self']
+        );
 
         $latteFactory->getResultDefinition()->addSetup('addProvider', [
             'name' => 'webpackEncoreTagRenderer',

@@ -92,7 +92,10 @@ class VehicleMapObjectProvider implements IMapObjectProvider
 
         $statisticButton = Html::el('a');
         $statisticButton->class = 'btn btn-primary btn-sm';
-        $statisticButton->href = $this->linkGenerator->link('Front:Statistic:trip', ['tripId' => $vehicle->getTripId()]);
+        $statisticButton->href = $this->linkGenerator->link(
+            'Front:Statistic:trip',
+            ['tripId' => $vehicle->getTripId()]
+        );
         $statisticButton->setText('Podrobné statistiky');
 
         $lines[] = $statisticButton->toHtml();

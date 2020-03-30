@@ -153,7 +153,10 @@ class StopLineTest extends BaseTest
     private function assertStopLine(StopTime $expectedStopTime, Trip $expectedTrip, StopLine $stopLine): void
     {
         Assert::equal($expectedStopTime->getStop()->getStopId(), $stopLine->getStop()->getStopId());
-        Assert::equal($expectedStopTime->getDepartureTime()->getTimestamp(), $stopLine->getDepartureTime()->getTimestamp());
+        Assert::equal(
+            $expectedStopTime->getDepartureTime()->getTimestamp(),
+            $stopLine->getDepartureTime()->getTimestamp()
+        );
         Assert::equal($expectedStopTime->getTripId(), $stopLine->getTripId());
 
         Assert::equal($expectedTrip->getTripId(), $stopLine->getTripId());

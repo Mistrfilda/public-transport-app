@@ -98,7 +98,10 @@ class DepartureTableFormFactory
         DepartureTableFormDTO $values,
         callable $onSucces
     ): void {
-        $departureTable = $this->departureTableFacade->updateDepartureTable($id->toString(), $values->getNumberOfFutureDays());
+        $departureTable = $this->departureTableFacade->updateDepartureTable(
+            $id->toString(),
+            $values->getNumberOfFutureDays()
+        );
         $onSucces($departureTable);
     }
 }

@@ -78,7 +78,9 @@ class DepartureTableConsumer implements IConsumer
 
             $request = $this->requestRepository->findById($messageContents['requestId']);
 
-            $departureTable = $this->departureTableRepository->findById(Uuid::fromString($messageContents['departureTableId']));
+            $departureTable = $this->departureTableRepository->findById(
+                Uuid::fromString($messageContents['departureTableId'])
+            );
 
             $this->stopTimeImportFacade->import(
                 $departureTable->getPragueStop()->getId(),

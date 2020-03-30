@@ -1,17 +1,61 @@
+services:
+    Symplify\CodingStandard\Sniffs\CleanCode\CognitiveComplexitySniff:
+        maxCognitiveComplexity: 10
+
+    Symplify\CodingStandard\Sniffs\Commenting\AnnotationTypeExistsSniff: ~
+
+    Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer: ~
+
+    Symplify\CodingStandard\Sniffs\Architecture\PreferredClassSniff:
+        oldToPreferredClasses:
+            DateTime: 'DateTimeImmutable'
+
+    Symplify\CodingStandard\Fixer\ArrayNotation\StandaloneLineInMultilineArrayFixer: ~
+
+    Symplify\CodingStandard\Fixer\Commenting\RemoveEmptyDocBlockFixer: ~
+
+    Symplify\CodingStandard\Fixer\Commenting\RemoveSuperfluousDocBlockWhitespaceFixer: ~
+
+    Symplify\CodingStandard\Fixer\ControlStructure\PregDelimiterFixer:
+        delimiter: '~'
+
+    Symplify\CodingStandard\Fixer\ControlStructure\RequireFollowedByAbsolutePathFixer: ~
+
+    Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer:
+        max_line_length: 140
+        break_long_lines: true
+        inline_short_lines: false
+
+    #Symplify\CodingStandard\Sniffs\Architecture\ExplicitExceptionSniff: ~
+
+    Symplify\CodingStandard\Sniffs\CleanCode\ForbiddenReferenceSniff: ~
+
+    Symplify\CodingStandard\Sniffs\ControlStructure\ForbiddenDoubleAssignSniff: ~
+
+    Symplify\CodingStandard\Sniffs\Debug\DebugFunctionCallSniff: ~
+
 parameters:
-  sets:
-    - 'clean-code'
-    - 'psr12'
-    - 'php70'
-    - 'php71'
-    - 'common'
-    - 'php-cs-fixer-psr2'
-    - 'dead-code'
-    - 'types'
+    sets:
+        - 'clean-code'
+        - 'psr12'
+        - 'php70'
+        - 'php71'
+        - 'common'
+        - 'php-cs-fixer-psr2'
+        - 'dead-code'
+        - 'types'
 
-  file_extensions:
-    - 'php'
-    - 'phpt'
+    file_extensions:
+        - 'php'
+        - 'phpt'
 
-  exclude_files:
-    - tests/Integration/TestsBootstrap.php
+    exclude_files:
+        - tests/Integration/TestsBootstrap.php
+
+
+    skip:
+        Symplify\CodingStandard\Sniffs\CleanCode\CognitiveComplexitySniff:
+            -  'src/UI/Admin/Base/BootstrapFormRenderer.php'
+
+        Symplify\CodingStandard\Sniffs\CleanCode\ForbiddenReferenceSniff:
+            - 'src/UI/Admin/Menu/MenuItem.php'

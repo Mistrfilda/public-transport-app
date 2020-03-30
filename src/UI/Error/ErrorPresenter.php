@@ -37,7 +37,10 @@ final class ErrorPresenter extends Presenter
         }
 
         $this->logger->log($exception, ILogger::EXCEPTION);
-        return new Responses\CallbackResponse(function (Http\IRequest $httpRequest, Http\IResponse $httpResponse): void {
+        return new Responses\CallbackResponse(function (
+            Http\IRequest $httpRequest,
+            Http\IResponse $httpResponse
+        ): void {
             $exception = preg_match('#^text/html(?:;|$)#', (string) $httpResponse->getHeader('Content-Type'));
             if ($exception === 1) {
                 require __DIR__ . '/templates/500.phtml';

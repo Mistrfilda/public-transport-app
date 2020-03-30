@@ -43,7 +43,11 @@ class AppAdminFacade
     ): AppAdmin {
         $this->logger->info(
             'Creating app admin',
-            ['name' => $name, 'username' => $username, 'email' => $email]
+            [
+                'name' => $name,
+                'username' => $username,
+                'email' => $email,
+            ]
         );
 
         $appAdmin = new AppAdmin(
@@ -67,7 +71,11 @@ class AppAdminFacade
     ): AppAdmin {
         $this->logger->info(
             'Updating app admin',
-            ['appAdminId' => $appAdminId->toString(), 'name' => $name, 'password' => $password]
+            [
+                'appAdminId' => $appAdminId->toString(),
+                'name' => $name,
+                'password' => $password,
+            ]
         );
 
         $appAdmin = $this->appAdminRepository->findById($appAdminId);
