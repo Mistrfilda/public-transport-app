@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Shared\Statistic\Chart\Control;
 
 use App\UI\Shared\Statistic\Chart\ChartType;
-use App\UI\Shared\Statistic\Chart\LineChart\IChartDataProvider;
+use App\UI\Shared\Statistic\Chart\IChartDataProvider;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI\Control;
 use Nette\Utils\Random;

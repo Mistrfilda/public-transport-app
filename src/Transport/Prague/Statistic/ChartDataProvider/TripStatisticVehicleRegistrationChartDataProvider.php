@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Transport\Prague\Statistic\ChartDataProvider;
 
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
+use App\UI\Shared\Statistic\Chart\ChartData;
 use App\UI\Shared\Statistic\Chart\ChartException;
-use App\UI\Shared\Statistic\Chart\LineChart\ChartData;
-use App\UI\Shared\Statistic\Chart\LineChart\IChartDataProvider;
+use App\UI\Shared\Statistic\Chart\IChartDataProvider;
 
 class TripStatisticVehicleRegistrationChartDataProvider implements IChartDataProvider, ITripStatisticChartDataProvider
 {
