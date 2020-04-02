@@ -73,7 +73,20 @@ class RequestFacade implements IRequestFacade
             return;
         }
 
+        $departureTableId = null;
+        if ($conditions->hasParameter('departureTableId')) {
+            $departureTableId = $conditions->getParameter('departureTableId');
+        }
+
         foreach ($this->departureTableRepository->findAll() as $departureTable) {
+            if ($departureTableId !== null && $departureTable->getId()->toString() !== $departureTableId) {
+                $this->logger->debug(
+                    'Skiping generating request for departure table from conditions',
+                    $departureTable->jsonSerialize()
+                );
+                continue;
+            }
+
             $this->logger->info('Generating departure table request', $departureTable->jsonSerialize());
 
             if (

@@ -1,6 +1,6 @@
 services:
     Symplify\CodingStandard\Sniffs\CleanCode\CognitiveComplexitySniff:
-        maxCognitiveComplexity: 10
+        maxCognitiveComplexity: 12
 
     Symplify\CodingStandard\Sniffs\Commenting\AnnotationTypeExistsSniff: ~
 

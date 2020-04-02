@@ -98,11 +98,56 @@ class StopTimeRepository extends BaseRepository
     }
 
     /**
+     * @return array<string, int>
+     */
+    public function findIdsByDate(int $stopId, DateTimeImmutable $date): array
+    {
+        $qb = $this->createQueryBuilder();
+
+        $qb->where($qb->expr()->eq('stopTime.stop', ':stopId'));
+        $qb->setParameter('stopId', $stopId);
+
+        $qb->andWhere($qb->expr()->eq('stopTime.date', ':date'));
+        $qb->setParameter('date', $date);
+
+        $pairs = [];
+        $stopTimes = $qb->getQuery()->getResult();
+
+        /** @var StopTime $stopTime */
+        foreach ($stopTimes as $stopTime) {
+            $pairs[$stopTime->getTripId()] = $stopTime->getId();
+        }
+
+        return $pairs;
+    }
+
+    /**
+     * @param array<int|string,int> $stopTimesIds
+     * @return StopTime[]
+     */
+    public function findByIds(array $stopTimesIds): array
+    {
+        $qb = $this->createQueryBuilder();
+
+        $qb->andWhere($qb->expr()->in('stopTime.id', $stopTimesIds));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * @return StopTime[]
      */
     public function findAll(): array
     {
         return $this->doctrineRepository->findAll();
+    }
+
+    /**
+     * @return StopTime[]
+     */
+    public function findAllSorted(): array
+    {
+        return $this->doctrineRepository->findBy([], ['departureTime' => OrderBy::ASC]);
     }
 
     public function createQueryBuilder(): QueryBuilder

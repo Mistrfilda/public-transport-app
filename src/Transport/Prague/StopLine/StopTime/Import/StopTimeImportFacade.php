@@ -84,6 +84,12 @@ class StopTimeImportFacade
             }
 
             $this->entityManager->beginTransaction();
+
+            $allExistingStopTimes = $this->stopTimeRepository->findIdsByDate(
+                $stop->getId(),
+                $date
+            );
+
             try {
                 foreach ($stopTimeResponse->getStopTimes() as $stopTime) {
                     try {
@@ -104,6 +110,15 @@ class StopTimeImportFacade
                         $newStopTime = $this->stopTimeFactory->createFromPidLibrary($stopTime, $stop, $date);
                         $this->entityManager->persist($newStopTime);
                     }
+
+                    //DELETE STOP TIMES WHICH WERE DELETED FROM TIME SCHEDULE
+                    if (array_key_exists($stopTime->getTripId(), $allExistingStopTimes)) {
+                        unset($allExistingStopTimes[$stopTime->getTripId()]);
+                    }
+                }
+
+                if (count($allExistingStopTimes) > 0) {
+                    $this->deleteOldStopTimes($allExistingStopTimes);
                 }
             } catch (Throwable $e) {
                 $this->entityManager->rollback();
@@ -130,6 +145,26 @@ class StopTimeImportFacade
                     'stopId' => $stop->getStopId(),
                 ]
             );
+        }
+    }
+
+    /**
+     * @param array<string, int> $stopTimesIds
+     */
+    private function deleteOldStopTimes(array $stopTimesIds): void
+    {
+        $stopTimes = $this->stopTimeRepository->findByIds($stopTimesIds);
+        foreach ($stopTimes as $stopTime) {
+            $this->logger->debug(
+                'Removing old stoptime because stoptime doesn\'t exists in new schedule',
+                [
+                    'tripId' => $stopTime->getTripId(),
+                    'date' => $stopTime->getDate(),
+                    'departuretTime' => $stopTime->getDepartureTime(),
+                ]
+            );
+
+            $this->entityManager->remove($stopTime);
         }
     }
 }
