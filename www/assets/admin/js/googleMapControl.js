@@ -80,7 +80,7 @@ export default class googleMap {
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
 
-    load() {
+    async load() {
         if (this.mapElement === null || this.mapElement.dataset.mapObjectsMethod === undefined || this.mapElement.dataset.mapApikey === undefined) {
             return;
         }
