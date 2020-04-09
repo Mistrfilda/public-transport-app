@@ -13,36 +13,36 @@ use Nette\Security\Passwords;
 
 class AppAdminAuthenticator implements IAuthenticator
 {
-    /** @var AppAdminRepository */
-    private $appAdminRepository;
+	/** @var AppAdminRepository */
+	private $appAdminRepository;
 
-    /** @var Passwords */
-    private $passwords;
+	/** @var Passwords */
+	private $passwords;
 
-    public function __construct(AppAdminRepository $appAdminRepository, Passwords $passwords)
-    {
-        $this->appAdminRepository = $appAdminRepository;
-        $this->passwords = $passwords;
-    }
+	public function __construct(AppAdminRepository $appAdminRepository, Passwords $passwords)
+	{
+		$this->appAdminRepository = $appAdminRepository;
+		$this->passwords = $passwords;
+	}
 
-    /**
-     * @param string[] $credentials
-     * @throws AuthenticationException
-     */
-    public function authenticate(array $credentials): IIdentity
-    {
-        [$username, $password] = $credentials;
+	/**
+	 * @param string[] $credentials
+	 * @throws AuthenticationException
+	 */
+	public function authenticate(array $credentials): IIdentity
+	{
+		[$username, $password] = $credentials;
 
-        try {
-            $user = $this->appAdminRepository->findByUsername($username);
-        } catch (NoEntityFoundException $e) {
-            throw new AuthenticationException('User not found');
-        }
+		try {
+			$user = $this->appAdminRepository->findByUsername($username);
+		} catch (NoEntityFoundException $e) {
+			throw new AuthenticationException('User not found');
+		}
 
-        if (! $this->passwords->verify($password, $user->getPassword())) {
-            throw new AuthenticationException('Invalid password');
-        }
+		if (! $this->passwords->verify($password, $user->getPassword())) {
+			throw new AuthenticationException('Invalid password');
+		}
 
-        return new Identity($user->getId());
-    }
+		return new Identity($user->getId());
+	}
 }

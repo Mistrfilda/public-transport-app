@@ -10,28 +10,28 @@ use Nette\Application\UI\Presenter;
 
 class LoginPresenter extends Presenter
 {
-    /**
-     * @persistent
-     * @var string
-     */
-    public $backlink = '';
+	/**
+	 * @persistent
+	 * @var string
+	 */
+	public $backlink = '';
 
-    /** @var LoginFormFactory */
-    private $loginFormFactory;
+	/** @var LoginFormFactory */
+	private $loginFormFactory;
 
-    public function __construct(LoginFormFactory $loginFormFactory)
-    {
-        parent::__construct();
-        $this->loginFormFactory = $loginFormFactory;
-    }
+	public function __construct(LoginFormFactory $loginFormFactory)
+	{
+		parent::__construct();
+		$this->loginFormFactory = $loginFormFactory;
+	}
 
-    protected function createComponentLoginForm(): AdminForm
-    {
-        $onSuccess = function (): void {
-            $this->restoreRequest($this->backlink);
-            $this->redirect('Dashboard:default');
-        };
+	protected function createComponentLoginForm(): AdminForm
+	{
+		$onSuccess = function (): void {
+			$this->restoreRequest($this->backlink);
+			$this->redirect('Dashboard:default');
+		};
 
-        return $this->loginFormFactory->create($onSuccess);
-    }
+		return $this->loginFormFactory->create($onSuccess);
+	}
 }

@@ -6,9 +6,9 @@ namespace App\Utils;
 
 class FlashMessageType
 {
-    public const INFO = 'info';
+	public const INFO = 'info';
 
-    public const WARNING = 'warning';
+	public const WARNING = 'warning';
 
-    public const DANGER = 'danger';
+	public const DANGER = 'danger';
 }

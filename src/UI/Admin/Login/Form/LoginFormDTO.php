@@ -8,11 +8,11 @@ use Nette\SmartObject;
 
 class LoginFormDTO
 {
-    use SmartObject;
+	use SmartObject;
 
-    /** @var string */
-    public $username;
+	/** @var string */
+	public $username;
 
-    /** @var string */
-    public $password;
+	/** @var string */
+	public $password;
 }

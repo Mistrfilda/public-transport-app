@@ -10,17 +10,17 @@ use App\UI\Admin\PragueStatistic\Datagrid\StatisticDatagridFactory;
 
 class PragueStatisticPresenter extends AdminPresenter
 {
-    /** @var StatisticDatagridFactory */
-    private $statisticDatagridFactory;
+	/** @var StatisticDatagridFactory */
+	private $statisticDatagridFactory;
 
-    public function __construct(StatisticDatagridFactory $statisticDatagridFactory)
-    {
-        parent::__construct();
-        $this->statisticDatagridFactory = $statisticDatagridFactory;
-    }
+	public function __construct(StatisticDatagridFactory $statisticDatagridFactory)
+	{
+		parent::__construct();
+		$this->statisticDatagridFactory = $statisticDatagridFactory;
+	}
 
-    protected function createComponentStatisticDatagrid(): AdminDatagrid
-    {
-        return $this->statisticDatagridFactory->create();
-    }
+	protected function createComponentStatisticDatagrid(): AdminDatagrid
+	{
+		return $this->statisticDatagridFactory->create();
+	}
 }

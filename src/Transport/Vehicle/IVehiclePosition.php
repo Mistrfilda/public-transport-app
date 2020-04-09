@@ -9,14 +9,14 @@ use Ramsey\Uuid\UuidInterface;
 
 interface IVehiclePosition
 {
-    public function getId(): UuidInterface;
+	public function getId(): UuidInterface;
 
-    public function getCreatedAt(): DateTimeImmutable;
+	public function getCreatedAt(): DateTimeImmutable;
 
-    public function getCity(): string;
+	public function getCity(): string;
 
-    /**
-     * @return IVehicle[]
-     */
-    public function getVehicles(): array;
+	/**
+	 * @return IVehicle[]
+	 */
+	public function getVehicles(): array;
 }

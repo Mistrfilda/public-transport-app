@@ -10,60 +10,60 @@ use Ramsey\Uuid\UuidInterface;
 
 class DepartureTablePaginatorService
 {
-    private const SESSION_PREFIX = 'departure-table-';
+	private const SESSION_PREFIX = 'departure-table-';
 
-    private const LOAD_STEP = 10;
+	private const LOAD_STEP = 10;
 
-    /** @var SessionSection */
-    private $sessionSection;
+	/** @var SessionSection */
+	private $sessionSection;
 
-    /** @var int */
-    private $currentStep;
+	/** @var int */
+	private $currentStep;
 
-    /** @var int */
-    private $loadedCount;
+	/** @var int */
+	private $loadedCount;
 
-    public function __construct(
-        UuidInterface $departureTableId,
-        Session $session
-    ) {
-        $sectionName = self::SESSION_PREFIX . $departureTableId->toString();
-        if (! $session->hasSection($sectionName)) {
-            $this->sessionSection = $session->getSection($sectionName);
-            $this->reset();
-        } else {
-            $this->sessionSection = $session->getSection($sectionName);
-        }
+	public function __construct(
+		UuidInterface $departureTableId,
+		Session $session
+	) {
+		$sectionName = self::SESSION_PREFIX . $departureTableId->toString();
+		if (! $session->hasSection($sectionName)) {
+			$this->sessionSection = $session->getSection($sectionName);
+			$this->reset();
+		} else {
+			$this->sessionSection = $session->getSection($sectionName);
+		}
 
-        $this->sessionSection->setExpiration('2 minutes');
-        $this->currentStep = $this->sessionSection->currentStep;
-        $this->loadedCount = $this->sessionSection->loadedCount;
-    }
+		$this->sessionSection->setExpiration('2 minutes');
+		$this->currentStep = $this->sessionSection->currentStep;
+		$this->loadedCount = $this->sessionSection->loadedCount;
+	}
 
-    public function increase(): void
-    {
-        ++$this->currentStep;
-        $this->loadedCount += self::LOAD_STEP;
+	public function increase(): void
+	{
+		++$this->currentStep;
+		$this->loadedCount += self::LOAD_STEP;
 
-        $this->sessionSection->currentStep = $this->currentStep;
-        $this->sessionSection->loadedCount = $this->loadedCount;
-    }
+		$this->sessionSection->currentStep = $this->currentStep;
+		$this->sessionSection->loadedCount = $this->loadedCount;
+	}
 
-    public function reset(): void
-    {
-        $this->sessionSection->currentStep = 1;
-        $this->sessionSection->loadedCount = self::LOAD_STEP;
-        $this->currentStep = $this->sessionSection->currentStep;
-        $this->loadedCount = $this->sessionSection->loadedCount;
-    }
+	public function reset(): void
+	{
+		$this->sessionSection->currentStep = 1;
+		$this->sessionSection->loadedCount = self::LOAD_STEP;
+		$this->currentStep = $this->sessionSection->currentStep;
+		$this->loadedCount = $this->sessionSection->loadedCount;
+	}
 
-    public function getCurrentStep(): int
-    {
-        return $this->currentStep;
-    }
+	public function getCurrentStep(): int
+	{
+		return $this->currentStep;
+	}
 
-    public function getLoadedCount(): int
-    {
-        return $this->loadedCount;
-    }
+	public function getLoadedCount(): int
+	{
+		return $this->loadedCount;
+	}
 }

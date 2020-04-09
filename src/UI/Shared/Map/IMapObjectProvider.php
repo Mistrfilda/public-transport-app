@@ -6,6 +6,6 @@ namespace App\UI\Shared\Map;
 
 interface IMapObjectProvider
 {
-    /** @return MapObject[] */
-    public function getMapObjects(): array;
+	/** @return MapObject[] */
+	public function getMapObjects(): array;
 }

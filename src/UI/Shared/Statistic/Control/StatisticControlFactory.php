@@ -6,5 +6,5 @@ namespace App\UI\Shared\Statistic\Control;
 
 interface StatisticControlFactory
 {
-    public function create(): StatisticControl;
+	public function create(): StatisticControl;
 }

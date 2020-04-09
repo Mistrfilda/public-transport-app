@@ -13,35 +13,35 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateTripStatisticCommand extends Command
 {
-    /** @var TripStatisticFacade */
-    private $tripStatisticFacade;
+	/** @var TripStatisticFacade */
+	private $tripStatisticFacade;
 
-    public function __construct(TripStatisticFacade $tripStatisticFacade)
-    {
-        parent::__construct(null);
-        $this->tripStatisticFacade = $tripStatisticFacade;
-    }
+	public function __construct(TripStatisticFacade $tripStatisticFacade)
+	{
+		parent::__construct(null);
+		$this->tripStatisticFacade = $tripStatisticFacade;
+	}
 
-    public function configure(): void
-    {
-        parent::configure();
-        $this->setName('prague:statistic:generate');
-        $this->addArgument(
-            'numberOfDays',
-            InputArgument::REQUIRED,
-            'Number of days to download'
-        );
-    }
+	public function configure(): void
+	{
+		parent::configure();
+		$this->setName('prague:statistic:generate');
+		$this->addArgument(
+			'numberOfDays',
+			InputArgument::REQUIRED,
+			'Number of days to download'
+		);
+	}
 
-    public function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $numberOfDays = $input->getArgument('numberOfDays');
+	public function execute(InputInterface $input, OutputInterface $output): int
+	{
+		$numberOfDays = $input->getArgument('numberOfDays');
 
-        if (is_string($numberOfDays) === false) {
-            throw new InvalidArgumentException();
-        }
+		if (is_string($numberOfDays) === false) {
+			throw new InvalidArgumentException();
+		}
 
-        $this->tripStatisticFacade->processStatistics((int) $numberOfDays);
-        return 0;
-    }
+		$this->tripStatisticFacade->processStatistics((int) $numberOfDays);
+		return 0;
+	}
 }

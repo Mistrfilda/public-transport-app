@@ -6,5 +6,5 @@ namespace App\UI\Front\Statistic\Control\Main;
 
 interface MainStatisticControlFactory
 {
-    public function create(): MainStatisticControl;
+	public function create(): MainStatisticControl;
 }

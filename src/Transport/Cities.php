@@ -6,5 +6,5 @@ namespace App\Transport;
 
 class Cities
 {
-    public const PRAGUE = 'prague';
+	public const PRAGUE = 'prague';
 }

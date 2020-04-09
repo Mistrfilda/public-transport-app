@@ -12,90 +12,90 @@ use Ramsey\Uuid\Uuid;
 
 class DepartureTableFacade
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+	/** @var EntityManagerInterface */
+	private $entityManager;
 
-    /** @var LoggerInterface */
-    private $logger;
+	/** @var LoggerInterface */
+	private $logger;
 
-    /** @var DepartureTableRepository */
-    private $departureTableRepository;
+	/** @var DepartureTableRepository */
+	private $departureTableRepository;
 
-    /** @var StopRepository */
-    private $stopRepository;
+	/** @var StopRepository */
+	private $stopRepository;
 
-    /** @var DatetimeFactory */
-    private $datetimeFactory;
+	/** @var DatetimeFactory */
+	private $datetimeFactory;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        LoggerInterface $logger,
-        DepartureTableRepository $departureTableRepository,
-        StopRepository $stopRepository,
-        DatetimeFactory $datetimeFactory
-    ) {
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
-        $this->departureTableRepository = $departureTableRepository;
-        $this->stopRepository = $stopRepository;
-        $this->datetimeFactory = $datetimeFactory;
-    }
+	public function __construct(
+		EntityManagerInterface $entityManager,
+		LoggerInterface $logger,
+		DepartureTableRepository $departureTableRepository,
+		StopRepository $stopRepository,
+		DatetimeFactory $datetimeFactory
+	) {
+		$this->entityManager = $entityManager;
+		$this->logger = $logger;
+		$this->departureTableRepository = $departureTableRepository;
+		$this->stopRepository = $stopRepository;
+		$this->datetimeFactory = $datetimeFactory;
+	}
 
-    public function createDepartureTable(int $stopId, int $numberOfFutureDays): DepartureTable
-    {
-        $this->logger->info(
-            'Creating new departure table',
-            [
-                'stopId' => $stopId,
-                'numberOfFutureDays' => $numberOfFutureDays,
-            ]
-        );
+	public function createDepartureTable(int $stopId, int $numberOfFutureDays): DepartureTable
+	{
+		$this->logger->info(
+			'Creating new departure table',
+			[
+				'stopId' => $stopId,
+				'numberOfFutureDays' => $numberOfFutureDays,
+			]
+		);
 
-        $stop = $this->stopRepository->findById($stopId);
-        $departureTable = new DepartureTable(
-            $stop,
-            $numberOfFutureDays,
-            $this->datetimeFactory->createNow()
-        );
+		$stop = $this->stopRepository->findById($stopId);
+		$departureTable = new DepartureTable(
+			$stop,
+			$numberOfFutureDays,
+			$this->datetimeFactory->createNow()
+		);
 
-        $this->entityManager->persist($departureTable);
-        $this->entityManager->flush();
-        $this->entityManager->refresh($departureTable);
+		$this->entityManager->persist($departureTable);
+		$this->entityManager->flush();
+		$this->entityManager->refresh($departureTable);
 
-        return $departureTable;
-    }
+		return $departureTable;
+	}
 
-    public function updateDepartureTable(string $departureTableId, int $numberOfFutureDays): DepartureTable
-    {
-        $this->logger->info(
-            'Updating departure table',
-            [
-                'id' => $departureTableId,
-                'numberOfFutureDays' => $numberOfFutureDays,
-            ]
-        );
+	public function updateDepartureTable(string $departureTableId, int $numberOfFutureDays): DepartureTable
+	{
+		$this->logger->info(
+			'Updating departure table',
+			[
+				'id' => $departureTableId,
+				'numberOfFutureDays' => $numberOfFutureDays,
+			]
+		);
 
-        $departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));
-        $departureTable->update($numberOfFutureDays, $this->datetimeFactory->createNow());
+		$departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));
+		$departureTable->update($numberOfFutureDays, $this->datetimeFactory->createNow());
 
-        $this->entityManager->flush();
-        $this->entityManager->refresh($departureTable);
+		$this->entityManager->flush();
+		$this->entityManager->refresh($departureTable);
 
-        return $departureTable;
-    }
+		return $departureTable;
+	}
 
-    public function deleteDepartureTable(string $departureTableId): void
-    {
-        $this->logger->info(
-            'Deleting departure table',
-            [
-                'id' => $departureTableId,
-            ]
-        );
+	public function deleteDepartureTable(string $departureTableId): void
+	{
+		$this->logger->info(
+			'Deleting departure table',
+			[
+				'id' => $departureTableId,
+			]
+		);
 
-        $departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));
+		$departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));
 
-        $this->entityManager->remove($departureTable);
-        $this->entityManager->flush();
-    }
+		$this->entityManager->remove($departureTable);
+		$this->entityManager->flush();
+	}
 }

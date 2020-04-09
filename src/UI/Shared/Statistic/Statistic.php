@@ -8,86 +8,86 @@ use Nette\Utils\Strings;
 
 class Statistic
 {
-    public const CONTEXTUAL_SUCCESS = 'success';
+	public const CONTEXTUAL_SUCCESS = 'success';
 
-    public const CONTEXTUAL_PRIMARY = 'primary';
+	public const CONTEXTUAL_PRIMARY = 'primary';
 
-    public const CONTEXTUAL_DANGER = 'danger';
+	public const CONTEXTUAL_DANGER = 'danger';
 
-    public const CONTEXTUAL_WARNING = 'warning';
+	public const CONTEXTUAL_WARNING = 'warning';
 
-    public const CONTEXTUAL_INFO = 'info';
+	public const CONTEXTUAL_INFO = 'info';
 
-    public const CONTEXTUAL_SECONDARY = 'secondary';
+	public const CONTEXTUAL_SECONDARY = 'secondary';
 
-    /** @var string */
-    private $contextualClass;
+	/** @var string */
+	private $contextualClass;
 
-    /** @var string */
-    private $heading;
+	/** @var string */
+	private $heading;
 
-    /** @var string */
-    private $value;
+	/** @var string */
+	private $value;
 
-    /** @var string */
-    private $icon;
+	/** @var string */
+	private $icon;
 
-    /** @var string */
-    private $border;
+	/** @var string */
+	private $border;
 
-    /** @var string */
-    private $size;
+	/** @var string */
+	private $size;
 
-    /**
-     * Statistic constructor.
-     */
-    public function __construct(
-        string $contextualClass,
-        string $heading,
-        string $value,
-        string $icon,
-        string $border = 'border-left-',
-        string $size = 'col-xl-6 col-md-6'
-    ) {
-        $this->contextualClass = $contextualClass;
-        $this->heading = $heading;
-        $this->value = $value;
-        $this->icon = $icon;
-        $this->border = $border;
-        $this->size = $size;
-    }
+	/**
+	 * Statistic constructor.
+	 */
+	public function __construct(
+		string $contextualClass,
+		string $heading,
+		string $value,
+		string $icon,
+		string $border = 'border-left-',
+		string $size = 'col-xl-6 col-md-6'
+	) {
+		$this->contextualClass = $contextualClass;
+		$this->heading = $heading;
+		$this->value = $value;
+		$this->icon = $icon;
+		$this->border = $border;
+		$this->size = $size;
+	}
 
-    public function getContextualClass(): string
-    {
-        return $this->contextualClass;
-    }
+	public function getContextualClass(): string
+	{
+		return $this->contextualClass;
+	}
 
-    public function getHeading(): string
-    {
-        return $this->heading;
-    }
+	public function getHeading(): string
+	{
+		return $this->heading;
+	}
 
-    public function getValue(bool $useTruncate = true): string
-    {
-        if ($useTruncate) {
-            return Strings::truncate($this->value, 22);
-        }
+	public function getValue(bool $useTruncate = true): string
+	{
+		if ($useTruncate) {
+			return Strings::truncate($this->value, 22);
+		}
 
-        return $this->value;
-    }
+		return $this->value;
+	}
 
-    public function getIcon(): string
-    {
-        return $this->icon;
-    }
+	public function getIcon(): string
+	{
+		return $this->icon;
+	}
 
-    public function getBorder(): string
-    {
-        return $this->border . $this->getContextualClass();
-    }
+	public function getBorder(): string
+	{
+		return $this->border . $this->getContextualClass();
+	}
 
-    public function getSize(): string
-    {
-        return $this->size;
-    }
+	public function getSize(): string
+	{
+		return $this->size;
+	}
 }

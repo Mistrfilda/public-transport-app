@@ -14,144 +14,144 @@ use Doctrine\ORM\QueryBuilder;
 
 class StopTimeRepository extends BaseRepository
 {
-    public function findById(int $id): StopTime
-    {
-        /** @var StopTime|null $stop */
-        $stop = $this->doctrineRepository->findOneBy(['id' => $id]);
+	public function findById(int $id): StopTime
+	{
+		/** @var StopTime|null $stop */
+		$stop = $this->doctrineRepository->findOneBy(['id' => $id]);
 
-        if ($stop === null) {
-            throw new NoEntityFoundException();
-        }
+		if ($stop === null) {
+			throw new NoEntityFoundException();
+		}
 
-        return $stop;
-    }
+		return $stop;
+	}
 
-    /**
-     * @return StopTime[]
-     */
-    public function findByStop(int $stopId): array
-    {
-        $qb = $this->createQueryBuilder();
+	/**
+	 * @return StopTime[]
+	 */
+	public function findByStop(int $stopId): array
+	{
+		$qb = $this->createQueryBuilder();
 
-        $qb->where($qb->expr()->eq('stopTime.stop', ':stopId'));
-        $qb->setParameter('stopId', $stopId);
+		$qb->where($qb->expr()->eq('stopTime.stop', ':stopId'));
+		$qb->setParameter('stopId', $stopId);
 
-        return $qb->getQuery()->getResult();
-    }
+		return $qb->getQuery()->getResult();
+	}
 
-    /**
-     * @return StopTime[]
-     */
-    public function findByStopAndDate(int $stopId, DateTimeImmutable $date): array
-    {
-        $qb = $this->createQueryBuilder();
+	/**
+	 * @return StopTime[]
+	 */
+	public function findByStopAndDate(int $stopId, DateTimeImmutable $date): array
+	{
+		$qb = $this->createQueryBuilder();
 
-        $qb->where($qb->expr()->eq('stopTime.stop', ':stopId'));
-        $qb->setParameter('stopId', $stopId);
+		$qb->where($qb->expr()->eq('stopTime.stop', ':stopId'));
+		$qb->setParameter('stopId', $stopId);
 
-        $qb->andWhere($qb->expr()->eq('stopTime.date', ':date'));
-        $qb->setParameter('date', $date);
+		$qb->andWhere($qb->expr()->eq('stopTime.date', ':date'));
+		$qb->setParameter('date', $date);
 
-        return $qb->getQuery()->getResult();
-    }
+		return $qb->getQuery()->getResult();
+	}
 
-    /**
-     * @return StopTime[]
-     */
-    public function findForDepartureTable(int $stopId, DateTimeImmutable $now): array
-    {
-        $qb = $this->doctrineRepository->createQueryBuilder('stopTime', 'stopTime.dateTripId');
+	/**
+	 * @return StopTime[]
+	 */
+	public function findForDepartureTable(int $stopId, DateTimeImmutable $now): array
+	{
+		$qb = $this->doctrineRepository->createQueryBuilder('stopTime', 'stopTime.dateTripId');
 
-        $qb->andWhere($qb->expr()->eq('stopTime.stop', ':stopId'));
-        $qb->setParameter('stopId', $stopId);
+		$qb->andWhere($qb->expr()->eq('stopTime.stop', ':stopId'));
+		$qb->setParameter('stopId', $stopId);
 
-        $qb->andWhere($qb->expr()->gte('stopTime.departureTime', ':now'));
-        $qb->setParameter('now', $now->modify('- 2 hours'));
+		$qb->andWhere($qb->expr()->gte('stopTime.departureTime', ':now'));
+		$qb->setParameter('now', $now->modify('- 2 hours'));
 
-        $qb->orderBy('stopTime.departureTime', OrderBy::ASC);
+		$qb->orderBy('stopTime.departureTime', OrderBy::ASC);
 
-        return $qb->getQuery()->getResult();
-    }
+		return $qb->getQuery()->getResult();
+	}
 
-    /**
-     * @throws NoEntityFoundException
-     * @throws NonUniqueResultException
-     */
-    public function findByStopDateTripId(int $stopId, DateTimeImmutable $date, string $tripId): StopTime
-    {
-        $qb = $this->createQueryBuilder();
+	/**
+	 * @throws NoEntityFoundException
+	 * @throws NonUniqueResultException
+	 */
+	public function findByStopDateTripId(int $stopId, DateTimeImmutable $date, string $tripId): StopTime
+	{
+		$qb = $this->createQueryBuilder();
 
-        $qb->where($qb->expr()->eq('stopTime.stop', ':stopId'));
-        $qb->setParameter('stopId', $stopId);
+		$qb->where($qb->expr()->eq('stopTime.stop', ':stopId'));
+		$qb->setParameter('stopId', $stopId);
 
-        $qb->andWhere($qb->expr()->eq('stopTime.date', ':date'));
-        $qb->setParameter('date', $date);
+		$qb->andWhere($qb->expr()->eq('stopTime.date', ':date'));
+		$qb->setParameter('date', $date);
 
-        $qb->andWhere($qb->expr()->eq('stopTime.tripId', ':tripId'));
-        $qb->setParameter('tripId', $tripId);
+		$qb->andWhere($qb->expr()->eq('stopTime.tripId', ':tripId'));
+		$qb->setParameter('tripId', $tripId);
 
-        try {
-            return $qb->getQuery()->getSingleResult();
-        } catch (NoResultException $e) {
-            throw new NoEntityFoundException();
-        }
-    }
+		try {
+			return $qb->getQuery()->getSingleResult();
+		} catch (NoResultException $e) {
+			throw new NoEntityFoundException();
+		}
+	}
 
-    /**
-     * @return array<string, int>
-     */
-    public function findIdsByDate(int $stopId, DateTimeImmutable $date): array
-    {
-        $qb = $this->createQueryBuilder();
+	/**
+	 * @return array<string, int>
+	 */
+	public function findIdsByDate(int $stopId, DateTimeImmutable $date): array
+	{
+		$qb = $this->createQueryBuilder();
 
-        $qb->where($qb->expr()->eq('stopTime.stop', ':stopId'));
-        $qb->setParameter('stopId', $stopId);
+		$qb->where($qb->expr()->eq('stopTime.stop', ':stopId'));
+		$qb->setParameter('stopId', $stopId);
 
-        $qb->andWhere($qb->expr()->eq('stopTime.date', ':date'));
-        $qb->setParameter('date', $date);
+		$qb->andWhere($qb->expr()->eq('stopTime.date', ':date'));
+		$qb->setParameter('date', $date);
 
-        $pairs = [];
-        $stopTimes = $qb->getQuery()->getResult();
+		$pairs = [];
+		$stopTimes = $qb->getQuery()->getResult();
 
-        /** @var StopTime $stopTime */
-        foreach ($stopTimes as $stopTime) {
-            $pairs[$stopTime->getTripId()] = $stopTime->getId();
-        }
+		/** @var StopTime $stopTime */
+		foreach ($stopTimes as $stopTime) {
+			$pairs[$stopTime->getTripId()] = $stopTime->getId();
+		}
 
-        return $pairs;
-    }
+		return $pairs;
+	}
 
-    /**
-     * @param array<int|string,int> $stopTimesIds
-     * @return StopTime[]
-     */
-    public function findByIds(array $stopTimesIds): array
-    {
-        $qb = $this->createQueryBuilder();
+	/**
+	 * @param array<int|string,int> $stopTimesIds
+	 * @return StopTime[]
+	 */
+	public function findByIds(array $stopTimesIds): array
+	{
+		$qb = $this->createQueryBuilder();
 
-        $qb->andWhere($qb->expr()->in('stopTime.id', $stopTimesIds));
+		$qb->andWhere($qb->expr()->in('stopTime.id', $stopTimesIds));
 
-        return $qb->getQuery()->getResult();
-    }
+		return $qb->getQuery()->getResult();
+	}
 
-    /**
-     * @return StopTime[]
-     */
-    public function findAll(): array
-    {
-        return $this->doctrineRepository->findAll();
-    }
+	/**
+	 * @return StopTime[]
+	 */
+	public function findAll(): array
+	{
+		return $this->doctrineRepository->findAll();
+	}
 
-    /**
-     * @return StopTime[]
-     */
-    public function findAllSorted(): array
-    {
-        return $this->doctrineRepository->findBy([], ['departureTime' => OrderBy::ASC]);
-    }
+	/**
+	 * @return StopTime[]
+	 */
+	public function findAllSorted(): array
+	{
+		return $this->doctrineRepository->findBy([], ['departureTime' => OrderBy::ASC]);
+	}
 
-    public function createQueryBuilder(): QueryBuilder
-    {
-        return $this->doctrineRepository->createQueryBuilder('stopTime');
-    }
+	public function createQueryBuilder(): QueryBuilder
+	{
+		return $this->doctrineRepository->createQueryBuilder('stopTime');
+	}
 }

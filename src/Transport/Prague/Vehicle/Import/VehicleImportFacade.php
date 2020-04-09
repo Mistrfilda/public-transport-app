@@ -14,78 +14,78 @@ use Throwable;
 
 class VehicleImportFacade
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+	/** @var EntityManagerInterface */
+	private $entityManager;
 
-    /** @var LoggerInterface */
-    private $logger;
+	/** @var LoggerInterface */
+	private $logger;
 
-    /** @var PidService */
-    private $pidService;
+	/** @var PidService */
+	private $pidService;
 
-    /** @var VehicleFactory */
-    private $vehicleFactory;
+	/** @var VehicleFactory */
+	private $vehicleFactory;
 
-    /** @var DatetimeFactory */
-    private $datetimeFactory;
+	/** @var DatetimeFactory */
+	private $datetimeFactory;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        LoggerInterface $logger,
-        PidService $pidService,
-        VehicleFactory $vehicleFactory,
-        DatetimeFactory $datetimeFactory
-    ) {
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
-        $this->pidService = $pidService;
-        $this->vehicleFactory = $vehicleFactory;
-        $this->datetimeFactory = $datetimeFactory;
-    }
+	public function __construct(
+		EntityManagerInterface $entityManager,
+		LoggerInterface $logger,
+		PidService $pidService,
+		VehicleFactory $vehicleFactory,
+		DatetimeFactory $datetimeFactory
+	) {
+		$this->entityManager = $entityManager;
+		$this->logger = $logger;
+		$this->pidService = $pidService;
+		$this->vehicleFactory = $vehicleFactory;
+		$this->datetimeFactory = $datetimeFactory;
+	}
 
-    public function import(): void
-    {
-        $this->logger->info('Sending vehicle position request');
-        $vehiclePositionResponse = $this->pidService->sendGetVehiclePositionRequest(5000);
+	public function import(): void
+	{
+		$this->logger->info('Sending vehicle position request');
+		$vehiclePositionResponse = $this->pidService->sendGetVehiclePositionRequest(5000);
 
-        $this->entityManager->beginTransaction();
-        try {
-            $vehiclePosition = new VehiclePosition($this->datetimeFactory->createNow());
-            $this->entityManager->persist($vehiclePosition);
-            $this->entityManager->flush();
+		$this->entityManager->beginTransaction();
+		try {
+			$vehiclePosition = new VehiclePosition($this->datetimeFactory->createNow());
+			$this->entityManager->persist($vehiclePosition);
+			$this->entityManager->flush();
 
-            $this->logger->info(
-                'Saving vehicle position',
-                [
-                    'count' => $vehiclePositionResponse->getCount(),
-                ]
-            );
+			$this->logger->info(
+				'Saving vehicle position',
+				[
+					'count' => $vehiclePositionResponse->getCount(),
+				]
+			);
 
-            foreach ($vehiclePositionResponse->getVehiclePositions() as $currentVehiclePosition) {
-                $vehicle = $this->vehicleFactory->createFromPidLibrary($currentVehiclePosition, $vehiclePosition);
-                $this->entityManager->persist($vehicle);
-            }
+			foreach ($vehiclePositionResponse->getVehiclePositions() as $currentVehiclePosition) {
+				$vehicle = $this->vehicleFactory->createFromPidLibrary($currentVehiclePosition, $vehiclePosition);
+				$this->entityManager->persist($vehicle);
+			}
 
-            $this->entityManager->flush();
-            $this->entityManager->commit();
-            $this->entityManager->clear();
-        } catch (Throwable $e) {
-            $this->entityManager->rollback();
-            $this->logger->critical(
-                'Exception occurred while downloading vehicle positions, rollbacking',
-                [
-                    'exception' => $e,
-                ]
-            );
+			$this->entityManager->flush();
+			$this->entityManager->commit();
+			$this->entityManager->clear();
+		} catch (Throwable $e) {
+			$this->entityManager->rollback();
+			$this->logger->critical(
+				'Exception occurred while downloading vehicle positions, rollbacking',
+				[
+					'exception' => $e,
+				]
+			);
 
-            throw $e;
-        }
+			throw $e;
+		}
 
-        $this->logger->info(
-            'Downloading new vehicle positions successfully finished',
-            [
-                'vehiclePositionId' => $vehiclePosition->getId()->toString(),
-            ]
-        );
-    }
+		$this->logger->info(
+			'Downloading new vehicle positions successfully finished',
+			[
+				'vehiclePositionId' => $vehiclePosition->getId()->toString(),
+			]
+		);
+	}
 }

@@ -11,49 +11,49 @@ use Nette\Utils\IHtmlString;
 
 abstract class BasePresenter extends Presenter
 {
-    /** @var string */
-    public const DEFAULT_MODAL_COMPONENT_NAME = 'modalRendererControl';
+	/** @var string */
+	public const DEFAULT_MODAL_COMPONENT_NAME = 'modalRendererControl';
 
-    /** @var ModalRendererControlFactory */
-    protected $modalRendererControlFactory;
+	/** @var ModalRendererControlFactory */
+	protected $modalRendererControlFactory;
 
-    /** @var string|null */
-    private $modalComponentName = null;
+	/** @var string|null */
+	private $modalComponentName = null;
 
-    public function injectModalRendererControlFactory(ModalRendererControlFactory $modalRendererControlFactory): void
-    {
-        $this->modalRendererControlFactory = $modalRendererControlFactory;
-    }
+	public function injectModalRendererControlFactory(ModalRendererControlFactory $modalRendererControlFactory): void
+	{
+		$this->modalRendererControlFactory = $modalRendererControlFactory;
+	}
 
-    public function showModal(
-        string $componentName = self::DEFAULT_MODAL_COMPONENT_NAME,
-        ?string $heading = null,
-        ?IHtmlString $content = null
-    ): void {
-        $modalComponent = $this->getComponent($componentName);
-        if (! $modalComponent instanceof ModalRendererControl) {
-            throw new LogicException(sprintf(
-                'Component %s is not instance of %s',
-                $componentName,
-                ModalRendererControl::class
-            ));
-        }
+	public function showModal(
+		string $componentName = self::DEFAULT_MODAL_COMPONENT_NAME,
+		?string $heading = null,
+		?IHtmlString $content = null
+	): void {
+		$modalComponent = $this->getComponent($componentName);
+		if (! $modalComponent instanceof ModalRendererControl) {
+			throw new LogicException(sprintf(
+				'Component %s is not instance of %s',
+				$componentName,
+				ModalRendererControl::class
+			));
+		}
 
-        $modalComponent->setParameters($heading, $content);
-        $this->modalComponentName = $componentName;
+		$modalComponent->setParameters($heading, $content);
+		$this->modalComponentName = $componentName;
 
-        $this->payload->showModal = true;
-        $this->payload->modalId = $modalComponent->getModalId();
-        $this->redrawControl('modalComponentSnippet');
-    }
+		$this->payload->showModal = true;
+		$this->payload->modalId = $modalComponent->getModalId();
+		$this->redrawControl('modalComponentSnippet');
+	}
 
-    public function getModalComponentName(): ?string
-    {
-        return $this->modalComponentName;
-    }
+	public function getModalComponentName(): ?string
+	{
+		return $this->modalComponentName;
+	}
 
-    protected function createComponentModalRendererControl(): ModalRendererControl
-    {
-        return $this->modalRendererControlFactory->create();
-    }
+	protected function createComponentModalRendererControl(): ModalRendererControl
+	{
+		return $this->modalRendererControlFactory->create();
+	}
 }

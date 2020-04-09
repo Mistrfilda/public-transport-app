@@ -6,5 +6,5 @@ namespace App\UI\Shared\Modal;
 
 interface ModalRendererControlFactory
 {
-    public function create(): ModalRendererControl;
+	public function create(): ModalRendererControl;
 }

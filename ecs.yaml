@@ -41,9 +41,10 @@ parameters:
         - 'php70'
         - 'php71'
         - 'common'
-        - 'php-cs-fixer-psr2'
         - 'dead-code'
         - 'types'
+
+    indentation: 'tab'
 
     file_extensions:
         - 'php'

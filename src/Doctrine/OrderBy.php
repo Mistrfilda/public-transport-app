@@ -6,7 +6,7 @@ namespace App\Doctrine;
 
 class OrderBy
 {
-    public const ASC = 'asc';
+	public const ASC = 'asc';
 
-    public const DESC = 'desc';
+	public const DESC = 'desc';
 }

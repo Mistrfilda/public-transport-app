@@ -8,8 +8,8 @@ use App\Transport\Prague\Vehicle\VehicleType;
 
 class VehicleTypeFilter
 {
-    public function format(int $vehicleTypeId): ?string
-    {
-        return VehicleType::getIcon($vehicleTypeId);
-    }
+	public function format(int $vehicleTypeId): ?string
+	{
+		return VehicleType::getIcon($vehicleTypeId);
+	}
 }

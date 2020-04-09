@@ -6,19 +6,19 @@ namespace App\UI\Admin\Base;
 
 class AdminDatagridFactory
 {
-    public function create(): AdminDatagrid
-    {
-        $grid = new AdminDatagrid();
+	public function create(): AdminDatagrid
+	{
+		$grid = new AdminDatagrid();
 
-        $grid::$iconPrefix = 'fa fa-';
+		$grid::$iconPrefix = 'fa fa-';
 
-        //GLOBAL PRESETS
-        $grid->setRememberState(false);
-        $grid->setOuterFilterRendering(true);
-        $grid->setAutoSubmit(false);
+		//GLOBAL PRESETS
+		$grid->setRememberState(false);
+		$grid->setOuterFilterRendering(true);
+		$grid->setAutoSubmit(false);
 
-        $grid->setTemplateFile(__DIR__ . '/templates/adminDatagrid.latte');
+		$grid->setTemplateFile(__DIR__ . '/templates/adminDatagrid.latte');
 
-        return $grid;
-    }
+		return $grid;
+	}
 }

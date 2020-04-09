@@ -12,29 +12,29 @@ use Nette\Utils\Html;
 
 class DashboardPresenter extends AdminPresenter
 {
-    /** @var StatisticControlFactory */
-    private $statisticControlFactory;
+	/** @var StatisticControlFactory */
+	private $statisticControlFactory;
 
-    public function __construct(
-        StatisticControlFactory $statisticControlFactory
-    ) {
-        parent::__construct();
-        $this->statisticControlFactory = $statisticControlFactory;
-    }
+	public function __construct(
+		StatisticControlFactory $statisticControlFactory
+	) {
+		parent::__construct();
+		$this->statisticControlFactory = $statisticControlFactory;
+	}
 
-    public function handleTestik(): void
-    {
-        $content = Html::el('p')->setText('takhle to jen vyzkousim co to udela :D');
+	public function handleTestik(): void
+	{
+		$content = Html::el('p')->setText('takhle to jen vyzkousim co to udela :D');
 
-        $this->showModal(
-            BasePresenter::DEFAULT_MODAL_COMPONENT_NAME,
-            'Thoel je jen a pouze test',
-            $content
-        );
-    }
+		$this->showModal(
+			BasePresenter::DEFAULT_MODAL_COMPONENT_NAME,
+			'Thoel je jen a pouze test',
+			$content
+		);
+	}
 
-    protected function createComponentStatisticControl(): StatisticControl
-    {
-        return $this->statisticControlFactory->create();
-    }
+	protected function createComponentStatisticControl(): StatisticControl
+	{
+		return $this->statisticControlFactory->create();
+	}
 }

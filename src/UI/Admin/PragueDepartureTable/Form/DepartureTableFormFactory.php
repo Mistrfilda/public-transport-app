@@ -15,93 +15,93 @@ use Ramsey\Uuid\UuidInterface;
 
 class DepartureTableFormFactory
 {
-    /** @var DepartureTableRepository */
-    private $departureTableRepository;
+	/** @var DepartureTableRepository */
+	private $departureTableRepository;
 
-    /** @var DepartureTableFacade */
-    private $departureTableFacade;
+	/** @var DepartureTableFacade */
+	private $departureTableFacade;
 
-    /** @var StopRepository */
-    private $stopRepository;
+	/** @var StopRepository */
+	private $stopRepository;
 
-    /** @var AdminFormFactory */
-    private $adminFormFactory;
+	/** @var AdminFormFactory */
+	private $adminFormFactory;
 
-    public function __construct(
-        DepartureTableRepository $departureTableRepository,
-        DepartureTableFacade $departureTableFacade,
-        StopRepository $stopRepository,
-        AdminFormFactory $adminFormFactory
-    ) {
-        $this->departureTableRepository = $departureTableRepository;
-        $this->departureTableFacade = $departureTableFacade;
-        $this->stopRepository = $stopRepository;
-        $this->adminFormFactory = $adminFormFactory;
-    }
+	public function __construct(
+		DepartureTableRepository $departureTableRepository,
+		DepartureTableFacade $departureTableFacade,
+		StopRepository $stopRepository,
+		AdminFormFactory $adminFormFactory
+	) {
+		$this->departureTableRepository = $departureTableRepository;
+		$this->departureTableFacade = $departureTableFacade;
+		$this->stopRepository = $stopRepository;
+		$this->adminFormFactory = $adminFormFactory;
+	}
 
-    public function create(callable $onSuccess, ?UuidInterface $id = null): AdminForm
-    {
-        $form = $this->adminFormFactory->create(DepartureTableFormDTO::class);
+	public function create(callable $onSuccess, ?UuidInterface $id = null): AdminForm
+	{
+		$form = $this->adminFormFactory->create(DepartureTableFormDTO::class);
 
-        $stopSelect = $form->addSelect('stopId', 'Stop', $this->stopRepository->findPairs())
-            ->setRequired()
-            ->setPrompt(SelectPicker::PROMPT);
+		$stopSelect = $form->addSelect('stopId', 'Stop', $this->stopRepository->findPairs())
+			->setRequired()
+			->setPrompt(SelectPicker::PROMPT);
 
-        $form->addInteger('numberOfFutureDays', 'Number of future days to download')
-            ->setRequired()
-            ->addRule(Form::RANGE, 'Please select value between %s and %s', [1, 15]);
+		$form->addInteger('numberOfFutureDays', 'Number of future days to download')
+			->setRequired()
+			->addRule(Form::RANGE, 'Please select value between %s and %s', [1, 15]);
 
-        $form->onSuccess[] = function (AdminForm $form, $values) use ($onSuccess, $id): void {
-            if ($id === null) {
-                $this->createDepartureTable($form, $values, $onSuccess);
-            } else {
-                $this->updateDepartureTable($id, $form, $values, $onSuccess);
-            }
-        };
+		$form->onSuccess[] = function (AdminForm $form, $values) use ($onSuccess, $id): void {
+			if ($id === null) {
+				$this->createDepartureTable($form, $values, $onSuccess);
+			} else {
+				$this->updateDepartureTable($id, $form, $values, $onSuccess);
+			}
+		};
 
-        if ($id !== null) {
-            $stopSelect->setDisabled();
-            $this->setDefaults($id, $form);
-        }
+		if ($id !== null) {
+			$stopSelect->setDisabled();
+			$this->setDefaults($id, $form);
+		}
 
-        $form->addSubmit('submit');
+		$form->addSubmit('submit');
 
-        return $form;
-    }
+		return $form;
+	}
 
-    private function setDefaults(UuidInterface $id, AdminForm $form): void
-    {
-        $departureTable = $this->departureTableRepository->findById($id);
-        $defaults = [
-            'stopId' => $departureTable->getPragueStop()->getId(),
-            'numberOfFutureDays' => $departureTable->getNumberOfFutureDays(),
-        ];
+	private function setDefaults(UuidInterface $id, AdminForm $form): void
+	{
+		$departureTable = $this->departureTableRepository->findById($id);
+		$defaults = [
+			'stopId' => $departureTable->getPragueStop()->getId(),
+			'numberOfFutureDays' => $departureTable->getNumberOfFutureDays(),
+		];
 
-        $form->setDefaults($defaults);
-    }
+		$form->setDefaults($defaults);
+	}
 
-    private function createDepartureTable(
-        AdminForm $form,
-        DepartureTableFormDTO $values,
-        callable $onSuccess
-    ): void {
-        $departureTable = $this->departureTableFacade->createDepartureTable(
-            $values->getStopId(),
-            $values->getNumberOfFutureDays()
-        );
-        $onSuccess($departureTable);
-    }
+	private function createDepartureTable(
+		AdminForm $form,
+		DepartureTableFormDTO $values,
+		callable $onSuccess
+	): void {
+		$departureTable = $this->departureTableFacade->createDepartureTable(
+			$values->getStopId(),
+			$values->getNumberOfFutureDays()
+		);
+		$onSuccess($departureTable);
+	}
 
-    private function updateDepartureTable(
-        UuidInterface $id,
-        AdminForm $form,
-        DepartureTableFormDTO $values,
-        callable $onSucces
-    ): void {
-        $departureTable = $this->departureTableFacade->updateDepartureTable(
-            $id->toString(),
-            $values->getNumberOfFutureDays()
-        );
-        $onSucces($departureTable);
-    }
+	private function updateDepartureTable(
+		UuidInterface $id,
+		AdminForm $form,
+		DepartureTableFormDTO $values,
+		callable $onSucces
+	): void {
+		$departureTable = $this->departureTableFacade->updateDepartureTable(
+			$id->toString(),
+			$values->getNumberOfFutureDays()
+		);
+		$onSucces($departureTable);
+	}
 }

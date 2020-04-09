@@ -10,17 +10,17 @@ use App\UI\Admin\Request\Datagrid\RequestDatagridFactory;
 
 class RequestPresenter extends AdminPresenter
 {
-    /** @var RequestDatagridFactory */
-    private $requestDatagridFactory;
+	/** @var RequestDatagridFactory */
+	private $requestDatagridFactory;
 
-    public function __construct(RequestDatagridFactory $requestDatagridFactory)
-    {
-        parent::__construct();
-        $this->requestDatagridFactory = $requestDatagridFactory;
-    }
+	public function __construct(RequestDatagridFactory $requestDatagridFactory)
+	{
+		parent::__construct();
+		$this->requestDatagridFactory = $requestDatagridFactory;
+	}
 
-    public function createComponentRequestGrid(): AdminDatagrid
-    {
-        return $this->requestDatagridFactory->create();
-    }
+	public function createComponentRequestGrid(): AdminDatagrid
+	{
+		return $this->requestDatagridFactory->create();
+	}
 }

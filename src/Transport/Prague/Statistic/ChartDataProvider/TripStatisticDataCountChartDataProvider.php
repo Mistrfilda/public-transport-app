@@ -12,43 +12,43 @@ use App\Utils\DatetimeFactory;
 
 class TripStatisticDataCountChartDataProvider implements IChartDataProvider, ITripStatisticChartDataProvider
 {
-    /** @var TripStatisticDataRepository */
-    private $tripStatisticDataRepository;
+	/** @var TripStatisticDataRepository */
+	private $tripStatisticDataRepository;
 
-    /** @var string|null */
-    private $tripId = null;
+	/** @var string|null */
+	private $tripId = null;
 
-    public function __construct(TripStatisticDataRepository $tripStatisticDataRepository)
-    {
-        $this->tripStatisticDataRepository = $tripStatisticDataRepository;
-    }
+	public function __construct(TripStatisticDataRepository $tripStatisticDataRepository)
+	{
+		$this->tripStatisticDataRepository = $tripStatisticDataRepository;
+	}
 
-    public function prepare(string $tripId): void
-    {
-        $this->tripId = $tripId;
-    }
+	public function prepare(string $tripId): void
+	{
+		$this->tripId = $tripId;
+	}
 
-    public function getChartData(): ChartData
-    {
-        if ($this->tripId === null) {
-            throw new ChartException('Please call ::prepare before calling getChartData');
-        }
+	public function getChartData(): ChartData
+	{
+		if ($this->tripId === null) {
+			throw new ChartException('Please call ::prepare before calling getChartData');
+		}
 
-        $tripData = $this->tripStatisticDataRepository->findByTripId($this->tripId, 30);
+		$tripData = $this->tripStatisticDataRepository->findByTripId($this->tripId, 30);
 
-        $chartData = new ChartData(
-            'Počet poloh vozidel během 30 dní',
-            true,
-            'poloh vozidel'
-        );
+		$chartData = new ChartData(
+			'Počet poloh vozidel během 30 dní',
+			true,
+			'poloh vozidel'
+		);
 
-        foreach (array_reverse($tripData) as $trip) {
-            $chartData->add(
-                $trip->getDate()->format(DatetimeFactory::DEFAULT_DATE_FORMAT),
-                $trip->getPositionsCount()
-            );
-        }
+		foreach (array_reverse($tripData) as $trip) {
+			$chartData->add(
+				$trip->getDate()->format(DatetimeFactory::DEFAULT_DATE_FORMAT),
+				$trip->getPositionsCount()
+			);
+		}
 
-        return $chartData;
-    }
+		return $chartData;
+	}
 }

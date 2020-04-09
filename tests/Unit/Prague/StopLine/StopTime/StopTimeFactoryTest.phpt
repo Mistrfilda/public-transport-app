@@ -15,10 +15,10 @@ $stopTimeFactory = new StopTimeFactory($stopTimeTimeFactory);
 
 
 $testStop = new Stop(
-    '123456',
-    'U123456',
-    50.01,
-    15.01
+	'123456',
+	'U123456',
+	50.01,
+	15.01
 );
 
 
@@ -29,41 +29,41 @@ $tripId = '113-11-22';
 $stopSequence = 8;
 
 $stopTime = $stopTimeFactory->create(
-    $testStop,
-    $arrivalTime,
-    $departureTime,
-    $date,
-    $tripId,
-    $stopSequence
+	$testStop,
+	$arrivalTime,
+	$departureTime,
+	$date,
+	$tripId,
+	$stopSequence
 );
 
 Assert::equal(
-    $stopTimeTimeFactory->createDatetime($date, $arrivalTime)->getTimestamp(),
-    $stopTime->getArrivalTime()->getTimestamp()
+	$stopTimeTimeFactory->createDatetime($date, $arrivalTime)->getTimestamp(),
+	$stopTime->getArrivalTime()->getTimestamp()
 );
 Assert::equal(
-    $stopTimeTimeFactory->createDatetime($date, $departureTime)->getTimestamp(),
-    $stopTime->getDepartureTime()->getTimestamp()
+	$stopTimeTimeFactory->createDatetime($date, $departureTime)->getTimestamp(),
+	$stopTime->getDepartureTime()->getTimestamp()
 );
 Assert::equal($tripId, $stopTime->getTripId());
 Assert::equal($stopSequence, $stopTime->getStopSequence());
 
 $pidStopTime = new PIDStopTime(
-    $arrivalTime,
-    $departureTime,
-    $tripId,
-    $stopSequence
+	$arrivalTime,
+	$departureTime,
+	$tripId,
+	$stopSequence
 );
 
 $stopTime = $stopTimeFactory->createFromPidLibrary($pidStopTime, $testStop, $date);
 
 Assert::equal(
-    $stopTimeTimeFactory->createDatetime($date, $arrivalTime)->getTimestamp(),
-    $stopTime->getArrivalTime()->getTimestamp()
+	$stopTimeTimeFactory->createDatetime($date, $arrivalTime)->getTimestamp(),
+	$stopTime->getArrivalTime()->getTimestamp()
 );
 Assert::equal(
-    $stopTimeTimeFactory->createDatetime($date, $departureTime)->getTimestamp(),
-    $stopTime->getDepartureTime()->getTimestamp()
+	$stopTimeTimeFactory->createDatetime($date, $departureTime)->getTimestamp(),
+	$stopTime->getDepartureTime()->getTimestamp()
 );
 Assert::equal($tripId, $stopTime->getTripId());
 Assert::equal($stopSequence, $stopTime->getStopSequence());

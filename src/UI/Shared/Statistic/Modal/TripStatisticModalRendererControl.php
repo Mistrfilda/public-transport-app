@@ -9,24 +9,24 @@ use App\UI\Shared\Modal\ModalRendererControl;
 
 class TripStatisticModalRendererControl extends ModalRendererControl
 {
-    /** @var TripStatisticDataRepository */
-    private $tripStatisticDataRepository;
+	/** @var TripStatisticDataRepository */
+	private $tripStatisticDataRepository;
 
-    /** @var string */
-    private $tripId;
+	/** @var string */
+	private $tripId;
 
-    public function __construct(string $tripId, TripStatisticDataRepository $tripStatisticDataRepository)
-    {
-        parent::__construct();
-        $this->tripStatisticDataRepository = $tripStatisticDataRepository;
-        $this->tripId = $tripId;
-    }
+	public function __construct(string $tripId, TripStatisticDataRepository $tripStatisticDataRepository)
+	{
+		parent::__construct();
+		$this->tripStatisticDataRepository = $tripStatisticDataRepository;
+		$this->tripId = $tripId;
+	}
 
-    public function render(): void
-    {
-        $this->templateFile = __DIR__ . '/modal.latte';
-        $this->getTemplate()->tripId = $this->tripId;
-        $this->getTemplate()->tripStatistics = $this->tripStatisticDataRepository->findByTripId($this->tripId);
-        parent::render();
-    }
+	public function render(): void
+	{
+		$this->templateFile = __DIR__ . '/modal.latte';
+		$this->getTemplate()->tripId = $this->tripId;
+		$this->getTemplate()->tripStatistics = $this->tripStatisticDataRepository->findByTripId($this->tripId);
+		parent::render();
+	}
 }

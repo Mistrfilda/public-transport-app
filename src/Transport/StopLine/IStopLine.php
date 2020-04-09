@@ -10,28 +10,28 @@ use DateTimeImmutable;
 
 interface IStopLine
 {
-    public function getStop(): IStop;
+	public function getStop(): IStop;
 
-    public function getArrivalTime(): DateTimeImmutable;
+	public function getArrivalTime(): DateTimeImmutable;
 
-    public function getDepartureTime(): DateTimeImmutable;
+	public function getDepartureTime(): DateTimeImmutable;
 
-    public function getTripId(): string;
+	public function getTripId(): string;
 
-    public function getLineNumber(): string;
+	public function getLineNumber(): string;
 
-    public function getFinalDestination(): string;
+	public function getFinalDestination(): string;
 
-    /** Nullable, vehicle can be at depot! */
-    public function getVehicle(): ?IVehicle;
+	/** Nullable, vehicle can be at depot! */
+	public function getVehicle(): ?IVehicle;
 
-    public function hasVehicle(): bool;
+	public function hasVehicle(): bool;
 
-    public function hasVehicleLeft(): bool;
+	public function hasVehicleLeft(): bool;
 
-    public function getRealDepartureTime(): DateTimeImmutable;
+	public function getRealDepartureTime(): DateTimeImmutable;
 
-    public function isNearDeparture(): bool;
+	public function isNearDeparture(): bool;
 
-    public function hasBigDelay(): bool;
+	public function hasBigDelay(): bool;
 }

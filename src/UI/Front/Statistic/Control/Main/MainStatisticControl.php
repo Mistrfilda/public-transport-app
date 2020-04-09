@@ -10,23 +10,23 @@ use App\UI\Front\Statistic\Datagrid\Trip\RouteStatisticDatagridFactory;
 
 class MainStatisticControl extends BaseControl
 {
-    /** @var RouteStatisticDatagridFactory */
-    private $routeStatisticDatagridFactory;
+	/** @var RouteStatisticDatagridFactory */
+	private $routeStatisticDatagridFactory;
 
-    public function __construct(RouteStatisticDatagridFactory $routeStatisticDatagridFactory)
-    {
-        $this->routeStatisticDatagridFactory = $routeStatisticDatagridFactory;
-    }
+	public function __construct(RouteStatisticDatagridFactory $routeStatisticDatagridFactory)
+	{
+		$this->routeStatisticDatagridFactory = $routeStatisticDatagridFactory;
+	}
 
-    public function render(): void
-    {
-        $template = $this->getTemplate();
-        $template->setFile(str_replace('.php', '.latte', __FILE__));
-        $template->render();
-    }
+	public function render(): void
+	{
+		$template = $this->getTemplate();
+		$template->setFile(str_replace('.php', '.latte', __FILE__));
+		$template->render();
+	}
 
-    protected function createComponentRouteStatisticDatagrid(): FrontDatagrid
-    {
-        return $this->routeStatisticDatagridFactory->create();
-    }
+	protected function createComponentRouteStatisticDatagrid(): FrontDatagrid
+	{
+		return $this->routeStatisticDatagridFactory->create();
+	}
 }

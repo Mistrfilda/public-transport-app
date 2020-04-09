@@ -24,161 +24,161 @@ use Nette\Utils\Html;
  */
 class BootstrapFormRenderer extends DefaultFormRenderer
 {
-    const HORIZONTAL = 'horizontal';
+	public const HORIZONTAL = 'horizontal';
 
-    const VERTICAL = 'vertical';
+	public const VERTICAL = 'vertical';
 
-    const INLINE = 'inline';
+	public const INLINE = 'inline';
 
-    /** @var Controls\Button */
-    public $primaryButton;
+	/** @var Controls\Button */
+	public $primaryButton;
 
-    /** @var bool */
-    private $controlsInit = false;
+	/** @var bool */
+	private $controlsInit = false;
 
-    /** @var string */
-    private $layout;
+	/** @var string */
+	private $layout;
 
-    public function __construct(string $layout = self::HORIZONTAL)
-    {
-        $this->layout = $layout;
+	public function __construct(string $layout = self::HORIZONTAL)
+	{
+		$this->layout = $layout;
 
-        $groupClasses = 'form-group';
-        if ($layout === self::HORIZONTAL) {
-            $groupClasses .= ' row';
-        } elseif ($layout === self::INLINE) {
-            $groupClasses .= ' mb-2 mr-sm-2';
-        }
+		$groupClasses = 'form-group';
+		if ($layout === self::HORIZONTAL) {
+			$groupClasses .= ' row';
+		} elseif ($layout === self::INLINE) {
+			$groupClasses .= ' mb-2 mr-sm-2';
+		}
 
-        $this->wrappers['controls']['container'] = null;
-        $this->wrappers['pair']['container'] = 'div class="' . $groupClasses . '"';
-        $this->wrappers['control']['container'] = $layout === self::HORIZONTAL ? 'div class=col-sm-9' : null;
-        $this->wrappers['label']['container'] = $layout === self::HORIZONTAL ? 'div class="col-sm-3 col-form-label"' : null;
-        $this->wrappers['control']['description'] = 'small class="form-text text-muted"';
-        $this->wrappers['control']['errorcontainer'] = 'div class=invalid-feedback';
-        $this->wrappers['control']['.error'] = 'is-invalid';
-        $this->wrappers['control']['.file'] = 'form-file';
-        $this->wrappers['error']['container'] = null;
-        $this->wrappers['error']['item'] = 'div class="alert alert-danger" role=alert';
+		$this->wrappers['controls']['container'] = null;
+		$this->wrappers['pair']['container'] = 'div class="' . $groupClasses . '"';
+		$this->wrappers['control']['container'] = $layout === self::HORIZONTAL ? 'div class=col-sm-9' : null;
+		$this->wrappers['label']['container'] = $layout === self::HORIZONTAL ? 'div class="col-sm-3 col-form-label"' : null;
+		$this->wrappers['control']['description'] = 'small class="form-text text-muted"';
+		$this->wrappers['control']['errorcontainer'] = 'div class=invalid-feedback';
+		$this->wrappers['control']['.error'] = 'is-invalid';
+		$this->wrappers['control']['.file'] = 'form-file';
+		$this->wrappers['error']['container'] = null;
+		$this->wrappers['error']['item'] = 'div class="alert alert-danger" role=alert';
 
-        if ($layout === self::INLINE) {
-            $this->wrappers['group']['container'] = null;
-            $this->wrappers['group']['label'] = 'h2';
-        }
-    }
+		if ($layout === self::INLINE) {
+			$this->wrappers['group']['container'] = null;
+			$this->wrappers['group']['label'] = 'h2';
+		}
+	}
 
-    public function render(Form $form, ?string $mode = null): string
-    {
-        if ($this->form !== $form) {
-            $this->controlsInit = false;
-        }
+	public function render(Form $form, ?string $mode = null): string
+	{
+		if ($this->form !== $form) {
+			$this->controlsInit = false;
+		}
 
-        return parent::render($form, $mode);
-    }
+		return parent::render($form, $mode);
+	}
 
-    public function renderBegin(): string
-    {
-        $this->controlsInit();
-        return parent::renderBegin();
-    }
+	public function renderBegin(): string
+	{
+		$this->controlsInit();
+		return parent::renderBegin();
+	}
 
-    public function renderEnd(): string
-    {
-        $this->controlsInit();
-        return parent::renderEnd();
-    }
+	public function renderEnd(): string
+	{
+		$this->controlsInit();
+		return parent::renderEnd();
+	}
 
-    public function renderBody(): string
-    {
-        $this->controlsInit();
-        return parent::renderBody();
-    }
+	public function renderBody(): string
+	{
+		$this->controlsInit();
+		return parent::renderBody();
+	}
 
-    /**
-     * @param Container|ControlGroup $parent
-     */
-    public function renderControls($parent): string
-    {
-        $this->controlsInit();
-        return parent::renderControls($parent);
-    }
+	/**
+	 * @param Container|ControlGroup $parent
+	 */
+	public function renderControls($parent): string
+	{
+		$this->controlsInit();
+		return parent::renderControls($parent);
+	}
 
-    public function renderPair(IControl $control): string
-    {
-        $this->controlsInit();
-        return parent::renderPair($control);
-    }
+	public function renderPair(IControl $control): string
+	{
+		$this->controlsInit();
+		return parent::renderPair($control);
+	}
 
-    /**
-     * @param IControl[] $controls
-     */
-    public function renderPairMulti(array $controls): string
-    {
-        $this->controlsInit();
-        return parent::renderPairMulti($controls);
-    }
+	/**
+	 * @param IControl[] $controls
+	 */
+	public function renderPairMulti(array $controls): string
+	{
+		$this->controlsInit();
+		return parent::renderPairMulti($controls);
+	}
 
-    public function renderLabel(IControl $control): Html
-    {
-        $this->controlsInit();
-        return parent::renderLabel($control);
-    }
+	public function renderLabel(IControl $control): Html
+	{
+		$this->controlsInit();
+		return parent::renderLabel($control);
+	}
 
-    public function renderControl(IControl $control): Html
-    {
-        $this->controlsInit();
-        return parent::renderControl($control);
-    }
+	public function renderControl(IControl $control): Html
+	{
+		$this->controlsInit();
+		return parent::renderControl($control);
+	}
 
-    private function controlsInit(): void
-    {
-        if ($this->controlsInit) {
-            return;
-        }
+	private function controlsInit(): void
+	{
+		if ($this->controlsInit) {
+			return;
+		}
 
-        $this->controlsInit = true;
+		$this->controlsInit = true;
 
-        if ($this->layout === self::INLINE) {
-            $this->form->getElementPrototype()->addClass('form-inline');
-        }
+		if ($this->layout === self::INLINE) {
+			$this->form->getElementPrototype()->addClass('form-inline');
+		}
 
-        if ($this->form instanceof AdminForm && $this->form->isAjax()) {
-            $this->form->getElementPrototype()->addClass('ajax');
-        }
+		if ($this->form instanceof AdminForm && $this->form->isAjax()) {
+			$this->form->getElementPrototype()->addClass('ajax');
+		}
 
-        foreach ($this->form->getControls() as $control) {
-            if ($this->layout === self::INLINE && ! $control instanceof Controls\Checkbox) {
-                $control->getLabelPrototype()->addClass('my-1')->addClass('mr-2');
-            }
+		foreach ($this->form->getControls() as $control) {
+			if ($this->layout === self::INLINE && ! $control instanceof Controls\Checkbox) {
+				$control->getLabelPrototype()->addClass('my-1')->addClass('mr-2');
+			}
 
-            if ($control instanceof Controls\Button) {
-                $markAsPrimary = $control === $this->primaryButton || (! isset($this->primaryButton) && $control->parent instanceof Form);
-                if ($markAsPrimary) {
-                    $class = 'btn btn-primary';
-                } else {
-                    $class = 'btn btn-secondary';
-                }
-                $control->getControlPrototype()
-                    ->addClass($class)
-                    ->appendAttribute('class', 'mb-2 mr-sm-2', $this->layout === self::INLINE);
-            } elseif ($control instanceof Controls\TextBase || $control instanceof Controls\MultiSelectBox) {
-                $control->getControlPrototype()->addClass('form-control');
-            } elseif ($control instanceof Controls\Checkbox || $control instanceof Controls\CheckboxList || $control instanceof Controls\RadioList) {
-                $control->getControlPrototype()->addClass('form-check-input');
+			if ($control instanceof Controls\Button) {
+				$markAsPrimary = $control === $this->primaryButton || (! isset($this->primaryButton) && $control->parent instanceof Form);
+				if ($markAsPrimary) {
+					$class = 'btn btn-primary';
+				} else {
+					$class = 'btn btn-secondary';
+				}
+				$control->getControlPrototype()
+					->addClass($class)
+					->appendAttribute('class', 'mb-2 mr-sm-2', $this->layout === self::INLINE);
+			} elseif ($control instanceof Controls\TextBase || $control instanceof Controls\MultiSelectBox) {
+				$control->getControlPrototype()->addClass('form-control');
+			} elseif ($control instanceof Controls\Checkbox || $control instanceof Controls\CheckboxList || $control instanceof Controls\RadioList) {
+				$control->getControlPrototype()->addClass('form-check-input');
 
-                $control->getSeparatorPrototype()
-                    ->setName('div')
-                    ->appendAttribute('class', 'form-check')
-                    ->appendAttribute('class', 'form-check-inline', $this->layout === self::INLINE);
+				$control->getSeparatorPrototype()
+					->setName('div')
+					->appendAttribute('class', 'form-check')
+					->appendAttribute('class', 'form-check-inline', $this->layout === self::INLINE);
 
-                if ($control instanceof Controls\Checkbox) {
-                    $control->getLabelPrototype()->addClass('form-check-label');
-                } else {
-                    $control->getItemLabelPrototype()->addClass('form-check-label');
-                }
-            } elseif ($control instanceof Controls\SelectBox) {
-                $control->getControlPrototype()->addClass('form-control bootstrap-selectpicker');
-            }
-        }
-    }
+				if ($control instanceof Controls\Checkbox) {
+					$control->getLabelPrototype()->addClass('form-check-label');
+				} else {
+					$control->getItemLabelPrototype()->addClass('form-check-label');
+				}
+			} elseif ($control instanceof Controls\SelectBox) {
+				$control->getControlPrototype()->addClass('form-control bootstrap-selectpicker');
+			}
+		}
+	}
 }

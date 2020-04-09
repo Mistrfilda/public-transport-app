@@ -10,16 +10,16 @@ use Gamee\RabbitMQ\Producer\Producer;
 
 class VehiclePositionProducer extends BaseProducer
 {
-    /** @var Producer */
-    private $producer;
+	/** @var Producer */
+	private $producer;
 
-    public function __construct(Producer $producer)
-    {
-        $this->producer = $producer;
-    }
+	public function __construct(Producer $producer)
+	{
+		$this->producer = $producer;
+	}
 
-    public function publish(Request $request): void
-    {
-        $this->producer->publish($this->messageFactory->getMessage($request));
-    }
+	public function publish(Request $request): void
+	{
+		$this->producer->publish($this->messageFactory->getMessage($request));
+	}
 }

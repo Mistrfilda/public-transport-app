@@ -13,35 +13,35 @@ use Ramsey\Uuid\UuidInterface;
 
 class VehiclePositionRepository extends BaseRepository
 {
-    public function findById(UuidInterface $id): VehiclePosition
-    {
-        $qb = $this->createQueryBuilder();
+	public function findById(UuidInterface $id): VehiclePosition
+	{
+		$qb = $this->createQueryBuilder();
 
-        $qb->where($qb->expr()->eq('vehiclePosition.id', ':id'));
-        $qb->setParameter('id', $id);
+		$qb->where($qb->expr()->eq('vehiclePosition.id', ':id'));
+		$qb->setParameter('id', $id);
 
-        try {
-            return $qb->getQuery()->getSingleResult();
-        } catch (NoResultException $e) {
-            throw new NoEntityFoundException();
-        }
-    }
+		try {
+			return $qb->getQuery()->getSingleResult();
+		} catch (NoResultException $e) {
+			throw new NoEntityFoundException();
+		}
+	}
 
-    public function findLast(): ?VehiclePosition
-    {
-        $qb = $this->createQueryBuilder();
-        $qb->orderBy('vehiclePosition.createdAt', OrderBy::DESC);
-        $qb->setMaxResults(1);
+	public function findLast(): ?VehiclePosition
+	{
+		$qb = $this->createQueryBuilder();
+		$qb->orderBy('vehiclePosition.createdAt', OrderBy::DESC);
+		$qb->setMaxResults(1);
 
-        try {
-            return $qb->getQuery()->getSingleResult();
-        } catch (NoResultException $e) {
-            return null;
-        }
-    }
+		try {
+			return $qb->getQuery()->getSingleResult();
+		} catch (NoResultException $e) {
+			return null;
+		}
+	}
 
-    public function createQueryBuilder(): QueryBuilder
-    {
-        return $this->doctrineRepository->createQueryBuilder('vehiclePosition');
-    }
+	public function createQueryBuilder(): QueryBuilder
+	{
+		return $this->doctrineRepository->createQueryBuilder('vehiclePosition');
+	}
 }

@@ -12,43 +12,43 @@ use App\Utils\DatetimeFactory;
 
 class TripStatisticDelayChartDataProvider implements IChartDataProvider, ITripStatisticChartDataProvider
 {
-    /** @var TripStatisticDataRepository */
-    private $tripStatisticDataRepository;
+	/** @var TripStatisticDataRepository */
+	private $tripStatisticDataRepository;
 
-    /** @var string|null */
-    private $tripId = null;
+	/** @var string|null */
+	private $tripId = null;
 
-    public function __construct(TripStatisticDataRepository $tripStatisticDataRepository)
-    {
-        $this->tripStatisticDataRepository = $tripStatisticDataRepository;
-    }
+	public function __construct(TripStatisticDataRepository $tripStatisticDataRepository)
+	{
+		$this->tripStatisticDataRepository = $tripStatisticDataRepository;
+	}
 
-    public function prepare(string $tripId): void
-    {
-        $this->tripId = $tripId;
-    }
+	public function prepare(string $tripId): void
+	{
+		$this->tripId = $tripId;
+	}
 
-    public function getChartData(): ChartData
-    {
-        if ($this->tripId === null) {
-            throw new ChartException('Please call ::prepare before calling getChartData');
-        }
+	public function getChartData(): ChartData
+	{
+		if ($this->tripId === null) {
+			throw new ChartException('Please call ::prepare before calling getChartData');
+		}
 
-        $tripData = $this->tripStatisticDataRepository->findByTripId($this->tripId, 30);
+		$tripData = $this->tripStatisticDataRepository->findByTripId($this->tripId, 30);
 
-        $chartData = new ChartData(
-            'Zpoždění za posledních 30 dnů',
-            false,
-            'sekund'
-        );
+		$chartData = new ChartData(
+			'Zpoždění za posledních 30 dnů',
+			false,
+			'sekund'
+		);
 
-        foreach (array_reverse($tripData) as $trip) {
-            $chartData->add(
-                $trip->getDate()->format(DatetimeFactory::DEFAULT_DATE_FORMAT),
-                $trip->getAverageDelay()
-            );
-        }
+		foreach (array_reverse($tripData) as $trip) {
+			$chartData->add(
+				$trip->getDate()->format(DatetimeFactory::DEFAULT_DATE_FORMAT),
+				$trip->getAverageDelay()
+			);
+		}
 
-        return $chartData;
-    }
+		return $chartData;
+	}
 }

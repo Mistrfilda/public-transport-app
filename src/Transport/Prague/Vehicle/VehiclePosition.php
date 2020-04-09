@@ -20,44 +20,44 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class VehiclePosition implements IEntity, IVehiclePosition
 {
-    use Uuid;
-    use CreatedAt;
+	use Uuid;
+	use CreatedAt;
 
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    private $city;
+	/**
+	 * @var string
+	 * @ORM\Column(type="string")
+	 */
+	private $city;
 
-    /**
-     * @var Collection<int,Vehicle>
-     * @ORM\OneToMany(targetEntity="App\Transport\Prague\Vehicle\Vehicle", mappedBy="vehiclePosition", indexBy="dateTripId")
-     */
-    private $vehicles;
+	/**
+	 * @var Collection<int,Vehicle>
+	 * @ORM\OneToMany(targetEntity="App\Transport\Prague\Vehicle\Vehicle", mappedBy="vehiclePosition", indexBy="dateTripId")
+	 */
+	private $vehicles;
 
-    public function __construct(
-        DateTimeImmutable $now
-    ) {
-        $this->createdAt = $now;
-        $this->city = Cities::PRAGUE;
-        $this->vehicles = new ArrayCollection();
-    }
+	public function __construct(
+		DateTimeImmutable $now
+	) {
+		$this->createdAt = $now;
+		$this->city = Cities::PRAGUE;
+		$this->vehicles = new ArrayCollection();
+	}
 
-    public function getCity(): string
-    {
-        return $this->city;
-    }
+	public function getCity(): string
+	{
+		return $this->city;
+	}
 
-    /**
-     * @return Vehicle[]
-     */
-    public function getVehicles(): array
-    {
-        return $this->vehicles->toArray();
-    }
+	/**
+	 * @return Vehicle[]
+	 */
+	public function getVehicles(): array
+	{
+		return $this->vehicles->toArray();
+	}
 
-    public function getVehiclesCount(): int
-    {
-        return $this->vehicles->count();
-    }
+	public function getVehiclesCount(): int
+	{
+		return $this->vehicles->count();
+	}
 }

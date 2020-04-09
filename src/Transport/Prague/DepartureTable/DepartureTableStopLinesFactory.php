@@ -12,29 +12,29 @@ use Ramsey\Uuid\Uuid;
 
 class DepartureTableStopLinesFactory implements IDepartureTableStopLinesFactory
 {
-    /** @var StopLineFactory */
-    private $stopLineFactory;
+	/** @var StopLineFactory */
+	private $stopLineFactory;
 
-    /** @var DepartureTableRepository */
-    private $departureTableRepository;
+	/** @var DepartureTableRepository */
+	private $departureTableRepository;
 
-    public function __construct(
-        StopLineFactory $stopLineFactory,
-        DepartureTableRepository $departureTableRepository
-    ) {
-        $this->stopLineFactory = $stopLineFactory;
-        $this->departureTableRepository = $departureTableRepository;
-    }
+	public function __construct(
+		StopLineFactory $stopLineFactory,
+		DepartureTableRepository $departureTableRepository
+	) {
+		$this->stopLineFactory = $stopLineFactory;
+		$this->departureTableRepository = $departureTableRepository;
+	}
 
-    /**
-     * @return StopLine[]
-     */
-    public function getStopLines(string $departureTableId): array
-    {
-        $departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));
+	/**
+	 * @return StopLine[]
+	 */
+	public function getStopLines(string $departureTableId): array
+	{
+		$departureTable = $this->departureTableRepository->findById(Uuid::fromString($departureTableId));
 
-        /** @var Stop $stop */
-        $stop = $departureTable->getStop();
-        return $this->stopLineFactory->getStopLinesForStop($stop);
-    }
+		/** @var Stop $stop */
+		$stop = $departureTable->getStop();
+		return $this->stopLineFactory->getStopLinesForStop($stop);
+	}
 }

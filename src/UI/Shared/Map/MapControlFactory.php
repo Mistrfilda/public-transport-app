@@ -6,5 +6,5 @@ namespace App\UI\Shared\Map;
 
 interface MapControlFactory
 {
-    public function create(IMapObjectProvider $mapObjectProvider): MapControl;
+	public function create(IMapObjectProvider $mapObjectProvider): MapControl;
 }

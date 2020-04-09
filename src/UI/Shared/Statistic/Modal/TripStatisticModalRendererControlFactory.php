@@ -6,5 +6,5 @@ namespace App\UI\Shared\Statistic\Modal;
 
 interface TripStatisticModalRendererControlFactory
 {
-    public function create(string $tripId): TripStatisticModalRendererControl;
+	public function create(string $tripId): TripStatisticModalRendererControl;
 }

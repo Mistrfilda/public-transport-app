@@ -8,7 +8,7 @@ use App\Transport\Stop\IStop;
 
 interface IDepartureTable
 {
-    public function getStop(): IStop;
+	public function getStop(): IStop;
 
-    public function getDownloadNumberOfDays(): int;
+	public function getDownloadNumberOfDays(): int;
 }

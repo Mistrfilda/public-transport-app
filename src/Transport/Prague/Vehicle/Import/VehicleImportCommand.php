@@ -10,24 +10,24 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class VehicleImportCommand extends Command
 {
-    /** @var VehicleImportFacade */
-    private $vehicleImportFacade;
+	/** @var VehicleImportFacade */
+	private $vehicleImportFacade;
 
-    public function __construct(VehicleImportFacade $vehicleImportFacade)
-    {
-        parent::__construct();
-        $this->vehicleImportFacade = $vehicleImportFacade;
-    }
+	public function __construct(VehicleImportFacade $vehicleImportFacade)
+	{
+		parent::__construct();
+		$this->vehicleImportFacade = $vehicleImportFacade;
+	}
 
-    public function configure(): void
-    {
-        parent::configure();
-        $this->setName('prague:import:vehicle');
-    }
+	public function configure(): void
+	{
+		parent::configure();
+		$this->setName('prague:import:vehicle');
+	}
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $this->vehicleImportFacade->import();
-        return 0;
-    }
+	protected function execute(InputInterface $input, OutputInterface $output): int
+	{
+		$this->vehicleImportFacade->import();
+		return 0;
+	}
 }

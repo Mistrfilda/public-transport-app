@@ -11,27 +11,27 @@ use App\UI\Front\FrontPresenter;
 
 class PragueDepartureTablePresenter extends FrontPresenter
 {
-    /** @var DepartureTableControlFactory */
-    private $departureTableControlFactory;
+	/** @var DepartureTableControlFactory */
+	private $departureTableControlFactory;
 
-    public function __construct(
-        DepartureTableControlFactory $departureTableControlFactory
-    ) {
-        parent::__construct();
-        $this->departureTableControlFactory = $departureTableControlFactory;
-    }
+	public function __construct(
+		DepartureTableControlFactory $departureTableControlFactory
+	) {
+		parent::__construct();
+		$this->departureTableControlFactory = $departureTableControlFactory;
+	}
 
-    public function renderDetail(string $id): void
-    {
-    }
+	public function renderDetail(string $id): void
+	{
+	}
 
-    protected function createComponentDepartureTableControl(): DepartureTableControl
-    {
-        $id = $this->getParameter('id');
-        if ($id === null) {
-            throw new InvalidArgumentException('Missing parameter ID');
-        }
+	protected function createComponentDepartureTableControl(): DepartureTableControl
+	{
+		$id = $this->getParameter('id');
+		if ($id === null) {
+			throw new InvalidArgumentException('Missing parameter ID');
+		}
 
-        return $this->departureTableControlFactory->create($id);
-    }
+		return $this->departureTableControlFactory->create($id);
+	}
 }

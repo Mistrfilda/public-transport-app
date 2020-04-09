@@ -8,21 +8,21 @@ use Nette\SmartObject;
 
 class DepartureTableFormDTO
 {
-    use SmartObject;
+	use SmartObject;
 
-    /** @var int */
-    public $stopId;
+	/** @var int */
+	public $stopId;
 
-    /** @var int */
-    public $numberOfFutureDays;
+	/** @var int */
+	public $numberOfFutureDays;
 
-    public function getStopId(): int
-    {
-        return $this->stopId;
-    }
+	public function getStopId(): int
+	{
+		return $this->stopId;
+	}
 
-    public function getNumberOfFutureDays(): int
-    {
-        return $this->numberOfFutureDays;
-    }
+	public function getNumberOfFutureDays(): int
+	{
+		return $this->numberOfFutureDays;
+	}
 }

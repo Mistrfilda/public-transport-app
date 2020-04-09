@@ -23,102 +23,102 @@ use Tracy\ILogger;
 
 class DepartureTableConsumer implements IConsumer
 {
-    /** @var LoggerInterface */
-    private $logger;
+	/** @var LoggerInterface */
+	private $logger;
 
-    /** @var ILogger */
-    private $tracyLogger;
+	/** @var ILogger */
+	private $tracyLogger;
 
-    /** @var StopTimeImportFacade */
-    private $stopTimeImportFacade;
+	/** @var StopTimeImportFacade */
+	private $stopTimeImportFacade;
 
-    /** @var TripImportFacade */
-    private $tripImportFacade;
+	/** @var TripImportFacade */
+	private $tripImportFacade;
 
-    /** @var DepartureTableRepository */
-    private $departureTableRepository;
+	/** @var DepartureTableRepository */
+	private $departureTableRepository;
 
-    /** @var RequestRepository */
-    private $requestRepository;
+	/** @var RequestRepository */
+	private $requestRepository;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+	/** @var EntityManagerInterface */
+	private $entityManager;
 
-    /** @var DatetimeFactory */
-    private $datetimeFactory;
+	/** @var DatetimeFactory */
+	private $datetimeFactory;
 
-    public function __construct(
-        LoggerInterface $logger,
-        ILogger $tracyLogger,
-        StopTimeImportFacade $stopTimeImportFacade,
-        TripImportFacade $tripImportFacade,
-        DepartureTableRepository $departureTableRepository,
-        RequestRepository $requestRepository,
-        EntityManagerInterface $entityManager,
-        DatetimeFactory $datetimeFactory
-    ) {
-        $this->logger = $logger;
-        $this->stopTimeImportFacade = $stopTimeImportFacade;
-        $this->tripImportFacade = $tripImportFacade;
-        $this->departureTableRepository = $departureTableRepository;
-        $this->requestRepository = $requestRepository;
-        $this->entityManager = $entityManager;
-        $this->datetimeFactory = $datetimeFactory;
-        $this->tracyLogger = $tracyLogger;
-    }
+	public function __construct(
+		LoggerInterface $logger,
+		ILogger $tracyLogger,
+		StopTimeImportFacade $stopTimeImportFacade,
+		TripImportFacade $tripImportFacade,
+		DepartureTableRepository $departureTableRepository,
+		RequestRepository $requestRepository,
+		EntityManagerInterface $entityManager,
+		DatetimeFactory $datetimeFactory
+	) {
+		$this->logger = $logger;
+		$this->stopTimeImportFacade = $stopTimeImportFacade;
+		$this->tripImportFacade = $tripImportFacade;
+		$this->departureTableRepository = $departureTableRepository;
+		$this->requestRepository = $requestRepository;
+		$this->entityManager = $entityManager;
+		$this->datetimeFactory = $datetimeFactory;
+		$this->tracyLogger = $tracyLogger;
+	}
 
-    public function consume(Message $message): int
-    {
-        /** @var Request|null $request */
-        $request = null;
-        try {
-            $messageContents = Json::decode($message->content, Json::FORCE_ARRAY);
-            $this->logger->info('Proccesing departure table request', $messageContents);
-            $this->validateMessageContents($messageContents);
+	public function consume(Message $message): int
+	{
+		/** @var Request|null $request */
+		$request = null;
+		try {
+			$messageContents = Json::decode($message->content, Json::FORCE_ARRAY);
+			$this->logger->info('Proccesing departure table request', $messageContents);
+			$this->validateMessageContents($messageContents);
 
-            $request = $this->requestRepository->findById($messageContents['requestId']);
+			$request = $this->requestRepository->findById($messageContents['requestId']);
 
-            $departureTable = $this->departureTableRepository->findById(
-                Uuid::fromString($messageContents['departureTableId'])
-            );
+			$departureTable = $this->departureTableRepository->findById(
+				Uuid::fromString($messageContents['departureTableId'])
+			);
 
-            $this->stopTimeImportFacade->import(
-                $departureTable->getPragueStop()->getId(),
-                $departureTable->getNumberOfFutureDays()
-            );
+			$this->stopTimeImportFacade->import(
+				$departureTable->getPragueStop()->getId(),
+				$departureTable->getNumberOfFutureDays()
+			);
 
-            $this->tripImportFacade->import(
-                $departureTable->getPragueStop()->getId(),
-                $departureTable->getNumberOfFutureDays()
-            );
+			$this->tripImportFacade->import(
+				$departureTable->getPragueStop()->getId(),
+				$departureTable->getNumberOfFutureDays()
+			);
 
-            $this->logger->info('Departure table request successfully finished', $messageContents);
+			$this->logger->info('Departure table request successfully finished', $messageContents);
 
-            $request->finished($this->datetimeFactory->createNow());
-            $this->entityManager->flush();
-        } catch (Throwable $e) {
-            if ($request !== null) {
-                $request->failed($this->datetimeFactory->createNow());
-                $this->entityManager->flush();
-            }
+			$request->finished($this->datetimeFactory->createNow());
+			$this->entityManager->flush();
+		} catch (Throwable $e) {
+			if ($request !== null) {
+				$request->failed($this->datetimeFactory->createNow());
+				$this->entityManager->flush();
+			}
 
-            $this->tracyLogger->log($e);
-        }
+			$this->tracyLogger->log($e);
+		}
 
-        return IConsumer::MESSAGE_ACK;
-    }
+		return IConsumer::MESSAGE_ACK;
+	}
 
-    /**
-     * @param array<string, string|int> $messageContents
-     */
-    private function validateMessageContents(array $messageContents): void
-    {
-        $schema = Expect::structure([
-            'requestId' => Expect::int(),
-            'departureTableId' => Expect::string(),
-            'dateTimestamp' => Expect::int(),
-        ]);
+	/**
+	 * @param array<string, string|int> $messageContents
+	 */
+	private function validateMessageContents(array $messageContents): void
+	{
+		$schema = Expect::structure([
+			'requestId' => Expect::int(),
+			'departureTableId' => Expect::string(),
+			'dateTimestamp' => Expect::int(),
+		]);
 
-        (new Processor())->process($schema, $messageContents);
-    }
+		(new Processor())->process($schema, $messageContents);
+	}
 }

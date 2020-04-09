@@ -8,31 +8,31 @@ use App\Utils\Coordinates;
 
 interface IVehicle
 {
-    public function getVehiclePosition(): IVehiclePosition;
+	public function getVehiclePosition(): IVehiclePosition;
 
-    public function getRouteId(): string;
+	public function getRouteId(): string;
 
-    public function getCoordinates(): Coordinates;
+	public function getCoordinates(): Coordinates;
 
-    public function getFinalStation(): string;
+	public function getFinalStation(): string;
 
-    public function getDelayInSeconds(): int;
+	public function getDelayInSeconds(): int;
 
-    public function hasDelay(): bool;
+	public function hasDelay(): bool;
 
-    public function isWheelchairAccessible(): bool;
+	public function isWheelchairAccessible(): bool;
 
-    public function getLastStopId(): ?string;
+	public function getLastStopId(): ?string;
 
-    public function getNextStopId(): ?string;
+	public function getNextStopId(): ?string;
 
-    public function getRegistrationNumber(): ?string;
+	public function getRegistrationNumber(): ?string;
 
-    public function getVehicleType(): int;
+	public function getVehicleType(): int;
 
-    public function getTripId(): string;
+	public function getTripId(): string;
 
-    public function getCompany(): ?string;
+	public function getCompany(): ?string;
 
-    public function getMapLabel(): string;
+	public function getMapLabel(): string;
 }

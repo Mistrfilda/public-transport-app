@@ -13,44 +13,44 @@ use Nette\Schema\Schema;
 
 class WebpackAssetExtension extends CompilerExtension
 {
-    public function getConfigSchema(): Schema
-    {
-        return Expect::structure([
-            'buildedAssetsDir' => Expect::string(),
-        ])->castTo('array');
-    }
+	public function getConfigSchema(): Schema
+	{
+		return Expect::structure([
+			'buildedAssetsDir' => Expect::string(),
+		])->castTo('array');
+	}
 
-    public function loadConfiguration(): void
-    {
-        $config = $this->getConfig();
+	public function loadConfiguration(): void
+	{
+		$config = $this->getConfig();
 
-        if (! is_array($config)) {
-            $config = (array) $config;
-        }
+		if (! is_array($config)) {
+			$config = (array) $config;
+		}
 
-        $builder = $this->getContainerBuilder();
+		$builder = $this->getContainerBuilder();
 
-        $builder->addDefinition($this->prefix('webpackAssetFactory'))
-            ->setType(WebpackAssetsFactory::class)
-            ->setArguments([
-                'buildedAssetsDir' => $config['buildedAssetsDir'],
-            ]);
-    }
+		$builder->addDefinition($this->prefix('webpackAssetFactory'))
+			->setType(WebpackAssetsFactory::class)
+			->setArguments([
+				'buildedAssetsDir' => $config['buildedAssetsDir'],
+			]);
+	}
 
-    public function beforeCompile(): void
-    {
-        $builder = $this->getContainerBuilder();
+	public function beforeCompile(): void
+	{
+		$builder = $this->getContainerBuilder();
 
-        /** @var FactoryDefinition $latteFactory */
-        $latteFactory = $builder->getDefinition('latte.latteFactory');
-        $latteFactory->getResultDefinition()->addSetup(
-            WebpackEncoreMacro::class . '::install(?->getCompiler())',
-            ['@self']
-        );
+		/** @var FactoryDefinition $latteFactory */
+		$latteFactory = $builder->getDefinition('latte.latteFactory');
+		$latteFactory->getResultDefinition()->addSetup(
+			WebpackEncoreMacro::class . '::install(?->getCompiler())',
+			['@self']
+		);
 
-        $latteFactory->getResultDefinition()->addSetup('addProvider', [
-            'name' => 'webpackEncoreTagRenderer',
-            'value' => $this->prefix('@webpackAssetFactory'),
-        ]);
-    }
+		$latteFactory->getResultDefinition()->addSetup('addProvider', [
+			'name' => 'webpackEncoreTagRenderer',
+			'value' => $this->prefix('@webpackAssetFactory'),
+		]);
+	}
 }

@@ -11,13 +11,13 @@ use Nette\DI\Definitions\ServiceDefinition;
 
 class CustomPresenterFactoryExtension extends CompilerExtension
 {
-    public function beforeCompile(): void
-    {
-        $builder = $this->getContainerBuilder();
+	public function beforeCompile(): void
+	{
+		$builder = $this->getContainerBuilder();
 
-        /** @var ServiceDefinition $nettePresenterFactory */
-        $nettePresenterFactory = $builder->getDefinitionByType(IPresenterFactory::class);
-        $arguments = $nettePresenterFactory->getFactory()->arguments;
-        $nettePresenterFactory->setFactory(CustomPresenterFactory::class, $arguments);
-    }
+		/** @var ServiceDefinition $nettePresenterFactory */
+		$nettePresenterFactory = $builder->getDefinitionByType(IPresenterFactory::class);
+		$arguments = $nettePresenterFactory->getFactory()->arguments;
+		$nettePresenterFactory->setFactory(CustomPresenterFactory::class, $arguments);
+	}
 }

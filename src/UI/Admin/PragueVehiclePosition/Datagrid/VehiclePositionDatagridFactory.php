@@ -10,36 +10,36 @@ use App\UI\Admin\Base\AdminDatagridFactory;
 
 class VehiclePositionDatagridFactory
 {
-    /** @var AdminDatagridFactory */
-    private $adminDatagridFactory;
+	/** @var AdminDatagridFactory */
+	private $adminDatagridFactory;
 
-    /** @var VehiclePositionRepository */
-    private $vehiclePositionRepository;
+	/** @var VehiclePositionRepository */
+	private $vehiclePositionRepository;
 
-    public function __construct(
-        AdminDatagridFactory $adminDatagridFactory,
-        VehiclePositionRepository $vehiclePositionRepository
-    ) {
-        $this->adminDatagridFactory = $adminDatagridFactory;
-        $this->vehiclePositionRepository = $vehiclePositionRepository;
-    }
+	public function __construct(
+		AdminDatagridFactory $adminDatagridFactory,
+		VehiclePositionRepository $vehiclePositionRepository
+	) {
+		$this->adminDatagridFactory = $adminDatagridFactory;
+		$this->vehiclePositionRepository = $vehiclePositionRepository;
+	}
 
-    public function create(): AdminDatagrid
-    {
-        $grid = $this->adminDatagridFactory->create();
-        $grid->setDataSource($this->vehiclePositionRepository->createQueryBuilder());
+	public function create(): AdminDatagrid
+	{
+		$grid = $this->adminDatagridFactory->create();
+		$grid->setDataSource($this->vehiclePositionRepository->createQueryBuilder());
 
-        $grid->addColumnText('id', 'ID');
-        $grid->addColumnDateTime('createdAt', 'Created at')->setSortable()->setFilterDate();
+		$grid->addColumnText('id', 'ID');
+		$grid->addColumnDateTime('createdAt', 'Created at')->setSortable()->setFilterDate();
 
-        $grid->addColumnText('vehiclesCount', 'Vehicles count')->setSortable();
+		$grid->addColumnText('vehiclesCount', 'Vehicles count')->setSortable();
 
-        $grid->setDefaultSort(['createdAt' => 'desc']);
+		$grid->setDefaultSort(['createdAt' => 'desc']);
 
-        $grid->addAction('vehicle', 'Vehicles', 'vehicle')
-            ->setIcon('bus')
-            ->setClass('btn btn-sm btn-primary');
+		$grid->addAction('vehicle', 'Vehicles', 'vehicle')
+			->setIcon('bus')
+			->setClass('btn btn-sm btn-primary');
 
-        return $grid;
-    }
+		return $grid;
+	}
 }

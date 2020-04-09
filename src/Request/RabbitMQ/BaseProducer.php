@@ -8,13 +8,13 @@ use App\Request\Request;
 
 abstract class BaseProducer
 {
-    /** @var MessageFactory */
-    protected $messageFactory;
+	/** @var MessageFactory */
+	protected $messageFactory;
 
-    public function injectMessageFactory(MessageFactory $messageFactory): void
-    {
-        $this->messageFactory = $messageFactory;
-    }
+	public function injectMessageFactory(MessageFactory $messageFactory): void
+	{
+		$this->messageFactory = $messageFactory;
+	}
 
-    abstract public function publish(Request $request): void;
+	abstract public function publish(Request $request): void;
 }

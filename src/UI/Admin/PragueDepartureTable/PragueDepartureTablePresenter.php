@@ -19,76 +19,76 @@ use Ramsey\Uuid\Uuid;
 
 class PragueDepartureTablePresenter extends AdminPresenter
 {
-    /** @var DepartureTableDatagridFactory */
-    private $departureTableDatagridFactory;
+	/** @var DepartureTableDatagridFactory */
+	private $departureTableDatagridFactory;
 
-    /** @var DepartureTableFormFactory */
-    private $departureTableFormFactory;
+	/** @var DepartureTableFormFactory */
+	private $departureTableFormFactory;
 
-    /** @var DepartureTableFacade */
-    private $departureTableFacade;
+	/** @var DepartureTableFacade */
+	private $departureTableFacade;
 
-    /** @var DepartureTableControlFactory */
-    private $departureTableControlFactory;
+	/** @var DepartureTableControlFactory */
+	private $departureTableControlFactory;
 
-    public function __construct(
-        DepartureTableDatagridFactory $departureTableDatagridFactory,
-        DepartureTableFormFactory $departureTableFormFactory,
-        DepartureTableFacade $departureTableFacade,
-        DepartureTableControlFactory $departureTableControlFactory
-    ) {
-        parent::__construct();
-        $this->departureTableDatagridFactory = $departureTableDatagridFactory;
-        $this->departureTableFormFactory = $departureTableFormFactory;
-        $this->departureTableFacade = $departureTableFacade;
-        $this->departureTableControlFactory = $departureTableControlFactory;
-    }
+	public function __construct(
+		DepartureTableDatagridFactory $departureTableDatagridFactory,
+		DepartureTableFormFactory $departureTableFormFactory,
+		DepartureTableFacade $departureTableFacade,
+		DepartureTableControlFactory $departureTableControlFactory
+	) {
+		parent::__construct();
+		$this->departureTableDatagridFactory = $departureTableDatagridFactory;
+		$this->departureTableFormFactory = $departureTableFormFactory;
+		$this->departureTableFacade = $departureTableFacade;
+		$this->departureTableControlFactory = $departureTableControlFactory;
+	}
 
-    public function renderEdit(?string $id): void
-    {
-    }
+	public function renderEdit(?string $id): void
+	{
+	}
 
-    public function renderTable(string $id): void
-    {
-    }
+	public function renderTable(string $id): void
+	{
+	}
 
-    public function handleDeleteDepartureTable(string $id): void
-    {
-        $this->departureTableFacade->deleteDepartureTable($id);
-        $this->flashMessage('Departure table successfully deleted');
-    }
+	public function handleDeleteDepartureTable(string $id): void
+	{
+		$this->departureTableFacade->deleteDepartureTable($id);
+		$this->flashMessage('Departure table successfully deleted');
+	}
 
-    protected function createComponentDepartureTableGrid(): AdminDatagrid
-    {
-        return $this->departureTableDatagridFactory->create();
-    }
+	protected function createComponentDepartureTableGrid(): AdminDatagrid
+	{
+		return $this->departureTableDatagridFactory->create();
+	}
 
-    protected function createComponentDepartureTableForm(): AdminForm
-    {
-        $id = $this->getParameter('id');
+	protected function createComponentDepartureTableForm(): AdminForm
+	{
+		$id = $this->getParameter('id');
 
-        if ($id !== null) {
-            $id = Uuid::fromString($id);
-        }
+		if ($id !== null) {
+			$id = Uuid::fromString($id);
+		}
 
-        $onSuccess = function (DepartureTable $departureTable): void {
-            $this->flashMessage(
-                sprintf('Departure table %s successfuly saved', $departureTable->getId()->toString()),
-                FlashMessageType::INFO
-            );
-            $this->redirect('default');
-        };
+		$onSuccess = function (DepartureTable $departureTable): void {
+			$this->flashMessage(
+				sprintf('Departure table %s successfuly saved', $departureTable->getId()->toString()),
+				FlashMessageType::INFO
+			);
+			$this->redirect('default');
+		};
 
-        return $this->departureTableFormFactory->create($onSuccess, $id);
-    }
+		return $this->departureTableFormFactory->create($onSuccess, $id);
+	}
 
-    protected function createComponentDepartureTableControl(): DepartureTableControl
-    {
-        $id = $this->getParameter('id');
-        if ($id === null) {
-            throw new InvalidArgumentException('Missing parameter ID');
-        }
+	protected function createComponentDepartureTableControl(): DepartureTableControl
+	{
+		$id = $this->getParameter('id');
+		if ($id === null) {
+			throw new InvalidArgumentException('Missing parameter ID');
+		}
 
-        return $this->departureTableControlFactory->create($id);
-    }
+		return $this->departureTableControlFactory->create($id);
+	}
 }

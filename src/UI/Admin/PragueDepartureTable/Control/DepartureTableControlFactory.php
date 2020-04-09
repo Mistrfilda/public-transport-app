@@ -6,5 +6,5 @@ namespace App\UI\Admin\PragueDepartureTable\Control;
 
 interface DepartureTableControlFactory
 {
-    public function create(string $id): DepartureTableControl;
+	public function create(string $id): DepartureTableControl;
 }

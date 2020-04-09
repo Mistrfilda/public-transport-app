@@ -6,28 +6,28 @@ namespace App\UI\Shared\Statistic\Chart;
 
 class ChartType
 {
-    public const LINE = 'line';
+	public const LINE = 'line';
 
-    public const BAR = 'bar';
+	public const BAR = 'bar';
 
-    public const DOUGHNUT = 'doughnut';
+	public const DOUGHNUT = 'doughnut';
 
-    public static function typeExists(string $type): void
-    {
-        if (! in_array($type, self::getAll(), true)) {
-            throw new ChartException('Invalid chart type');
-        }
-    }
+	public static function typeExists(string $type): void
+	{
+		if (! in_array($type, self::getAll(), true)) {
+			throw new ChartException('Invalid chart type');
+		}
+	}
 
-    /**
-     * @return string[]
-     */
-    public static function getAll(): array
-    {
-        return [
-            self::LINE,
-            self::BAR,
-            self::DOUGHNUT,
-        ];
-    }
+	/**
+	 * @return string[]
+	 */
+	public static function getAll(): array
+	{
+		return [
+			self::LINE,
+			self::BAR,
+			self::DOUGHNUT,
+		];
+	}
 }

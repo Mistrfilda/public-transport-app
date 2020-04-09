@@ -11,23 +11,23 @@ use App\UI\Shared\Map\MapControlFactory;
 
 class MapPresenter extends FrontPresenter
 {
-    /** @var MapControlFactory */
-    private $mapControlFactory;
+	/** @var MapControlFactory */
+	private $mapControlFactory;
 
-    /** @var VehicleMapObjectProvider */
-    private $vehicleMapObjectProvider;
+	/** @var VehicleMapObjectProvider */
+	private $vehicleMapObjectProvider;
 
-    public function __construct(
-        MapControlFactory $mapControlFactory,
-        VehicleMapObjectProvider $vehicleMapObjectProvider
-    ) {
-        parent::__construct();
-        $this->mapControlFactory = $mapControlFactory;
-        $this->vehicleMapObjectProvider = $vehicleMapObjectProvider;
-    }
+	public function __construct(
+		MapControlFactory $mapControlFactory,
+		VehicleMapObjectProvider $vehicleMapObjectProvider
+	) {
+		parent::__construct();
+		$this->mapControlFactory = $mapControlFactory;
+		$this->vehicleMapObjectProvider = $vehicleMapObjectProvider;
+	}
 
-    protected function createComponentMapControl(): MapControl
-    {
-        return $this->mapControlFactory->create($this->vehicleMapObjectProvider);
-    }
+	protected function createComponentMapControl(): MapControl
+	{
+		return $this->mapControlFactory->create($this->vehicleMapObjectProvider);
+	}
 }

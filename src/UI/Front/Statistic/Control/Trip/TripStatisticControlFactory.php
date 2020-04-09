@@ -6,5 +6,5 @@ namespace App\UI\Front\Statistic\Control\Trip;
 
 interface TripStatisticControlFactory
 {
-    public function create(string $tripId): TripStatisticControl;
+	public function create(string $tripId): TripStatisticControl;
 }

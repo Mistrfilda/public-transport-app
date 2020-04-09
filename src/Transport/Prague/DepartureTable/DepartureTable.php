@@ -21,73 +21,73 @@ use JsonSerializable;
  */
 class DepartureTable implements IDepartureTable, IEntity, JsonSerializable
 {
-    use Uuid;
-    use CreatedAt;
-    use UpdatedAt;
+	use Uuid;
+	use CreatedAt;
+	use UpdatedAt;
 
-    /**
-     * @var Stop
-     * @ORM\ManyToOne(targetEntity="App\Transport\Prague\Stop\Stop")
-     */
-    private $stop;
+	/**
+	 * @var Stop
+	 * @ORM\ManyToOne(targetEntity="App\Transport\Prague\Stop\Stop")
+	 */
+	private $stop;
 
-    /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    private $numberOfFutureDays;
+	/**
+	 * @var int
+	 * @ORM\Column(type="integer")
+	 */
+	private $numberOfFutureDays;
 
-    public function __construct(
-        Stop $stop,
-        int $numberOfFutureDays,
-        DateTimeImmutable $now
-    ) {
-        $this->stop = $stop;
-        $this->numberOfFutureDays = $numberOfFutureDays;
-        $this->createdAt = $now;
-        $this->updatedAt = $now;
-    }
+	public function __construct(
+		Stop $stop,
+		int $numberOfFutureDays,
+		DateTimeImmutable $now
+	) {
+		$this->stop = $stop;
+		$this->numberOfFutureDays = $numberOfFutureDays;
+		$this->createdAt = $now;
+		$this->updatedAt = $now;
+	}
 
-    public function update(
-        int $numberOfFutureDays,
-        DateTimeImmutable $now
-    ): void {
-        $this->numberOfFutureDays = $numberOfFutureDays;
-        $this->updatedAt = $now;
-    }
+	public function update(
+		int $numberOfFutureDays,
+		DateTimeImmutable $now
+	): void {
+		$this->numberOfFutureDays = $numberOfFutureDays;
+		$this->updatedAt = $now;
+	}
 
-    public function getStop(): IStop
-    {
-        return $this->stop;
-    }
+	public function getStop(): IStop
+	{
+		return $this->stop;
+	}
 
-    public function getDownloadNumberOfDays(): int
-    {
-        return $this->numberOfFutureDays;
-    }
+	public function getDownloadNumberOfDays(): int
+	{
+		return $this->numberOfFutureDays;
+	}
 
-    public function getNumberOfFutureDays(): int
-    {
-        return $this->numberOfFutureDays;
-    }
+	public function getNumberOfFutureDays(): int
+	{
+		return $this->numberOfFutureDays;
+	}
 
-    public function getPragueStop(): Stop
-    {
-        return $this->stop;
-    }
+	public function getPragueStop(): Stop
+	{
+		return $this->stop;
+	}
 
-    public function getAdminFormatedName(): string
-    {
-        return sprintf('%s (%s)', $this->getPragueStop()->getName(), $this->getId()->toString());
-    }
+	public function getAdminFormatedName(): string
+	{
+		return sprintf('%s (%s)', $this->getPragueStop()->getName(), $this->getId()->toString());
+	}
 
-    /**
-     * @return array<string, string|int>
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'id' => $this->getId()->toString(),
-        ];
-    }
+	/**
+	 * @return array<string, string|int>
+	 */
+	public function jsonSerialize(): array
+	{
+		return [
+			'id' => $this->getId()->toString(),
+		];
+	}
 }

@@ -20,79 +20,79 @@ use Tracy\ILogger;
 
 class VehiclePositionConsumer implements IConsumer
 {
-    /** @var LoggerInterface */
-    private $logger;
+	/** @var LoggerInterface */
+	private $logger;
 
-    /** @var ILogger */
-    private $tracyLogger;
+	/** @var ILogger */
+	private $tracyLogger;
 
-    /** @var DatetimeFactory */
-    private $datetimeFactory;
+	/** @var DatetimeFactory */
+	private $datetimeFactory;
 
-    /** @var VehicleImportFacade */
-    private $vehicleImportFacade;
+	/** @var VehicleImportFacade */
+	private $vehicleImportFacade;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+	/** @var EntityManagerInterface */
+	private $entityManager;
 
-    /** @var RequestRepository */
-    private $requestRepository;
+	/** @var RequestRepository */
+	private $requestRepository;
 
-    public function __construct(
-        LoggerInterface $logger,
-        ILogger $tracyLogger,
-        DatetimeFactory $datetimeFactory,
-        VehicleImportFacade $vehicleImportFacade,
-        EntityManagerInterface $entityManager,
-        RequestRepository $requestRepository
-    ) {
-        $this->logger = $logger;
-        $this->tracyLogger = $tracyLogger;
-        $this->datetimeFactory = $datetimeFactory;
-        $this->vehicleImportFacade = $vehicleImportFacade;
-        $this->entityManager = $entityManager;
-        $this->requestRepository = $requestRepository;
-    }
+	public function __construct(
+		LoggerInterface $logger,
+		ILogger $tracyLogger,
+		DatetimeFactory $datetimeFactory,
+		VehicleImportFacade $vehicleImportFacade,
+		EntityManagerInterface $entityManager,
+		RequestRepository $requestRepository
+	) {
+		$this->logger = $logger;
+		$this->tracyLogger = $tracyLogger;
+		$this->datetimeFactory = $datetimeFactory;
+		$this->vehicleImportFacade = $vehicleImportFacade;
+		$this->entityManager = $entityManager;
+		$this->requestRepository = $requestRepository;
+	}
 
-    public function consume(Message $message): int
-    {
-        /** @var Request|null $request */
-        $request = null;
-        try {
-            $messageContents = Json::decode($message->content, Json::FORCE_ARRAY);
-            $this->logger->info('Proccesing vehicle position request', $messageContents);
-            $this->validateMessageContents($messageContents);
+	public function consume(Message $message): int
+	{
+		/** @var Request|null $request */
+		$request = null;
+		try {
+			$messageContents = Json::decode($message->content, Json::FORCE_ARRAY);
+			$this->logger->info('Proccesing vehicle position request', $messageContents);
+			$this->validateMessageContents($messageContents);
 
-            $request = $this->requestRepository->findById($messageContents['requestId']);
+			$request = $this->requestRepository->findById($messageContents['requestId']);
 
-            $this->vehicleImportFacade->import();
+			$this->vehicleImportFacade->import();
 
-            $this->logger->info('vehicle position request successfully finished', $messageContents);
+			$this->logger->info('vehicle position request successfully finished', $messageContents);
 
-            $request->finished($this->datetimeFactory->createNow());
-            $this->entityManager->flush();
-        } catch (Throwable $e) {
-            if ($request !== null) {
-                $request->failed($this->datetimeFactory->createNow());
-                $this->entityManager->flush();
-            }
+			$request->finished($this->datetimeFactory->createNow());
+			$this->entityManager->flush();
+		} catch (Throwable $e) {
+			if ($request !== null) {
+				$request->failed($this->datetimeFactory->createNow());
+				$this->entityManager->flush();
+			}
 
-            $this->tracyLogger->log($e);
-        }
+			$this->tracyLogger->log($e);
+		}
 
-        return IConsumer::MESSAGE_ACK;
-    }
+		return IConsumer::MESSAGE_ACK;
+	}
 
-    /**
-     * @param array<string, string|int> $messageContents
-     */
-    private function validateMessageContents(array $messageContents): void
-    {
-        $schema = Expect::structure([
-            'requestId' => Expect::int(),
-            'dateTimestamp' => Expect::int(),
-        ]);
+	/**
+	 * @param array<string, string|int> $messageContents
+	 */
+	private function validateMessageContents(array $messageContents): void
+	{
+		$schema = Expect::structure([
+			'requestId' => Expect::int(),
+			'dateTimestamp' => Expect::int(),
+		]);
 
-        (new Processor())->process($schema, $messageContents);
-    }
+		(new Processor())->process($schema, $messageContents);
+	}
 }

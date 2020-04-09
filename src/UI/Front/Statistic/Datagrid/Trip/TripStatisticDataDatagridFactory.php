@@ -10,40 +10,40 @@ use App\UI\Front\Base\FrontDatagridFactory;
 
 class TripStatisticDataDatagridFactory
 {
-    /** @var FrontDatagridFactory */
-    private $frontDatagridFactory;
+	/** @var FrontDatagridFactory */
+	private $frontDatagridFactory;
 
-    /** @var TripStatisticDataRepository */
-    private $tripStatisticDataRepository;
+	/** @var TripStatisticDataRepository */
+	private $tripStatisticDataRepository;
 
-    public function __construct(
-        FrontDatagridFactory $frontDatagridFactory,
-        TripStatisticDataRepository $tripStatisticDataRepository
-    ) {
-        $this->frontDatagridFactory = $frontDatagridFactory;
-        $this->tripStatisticDataRepository = $tripStatisticDataRepository;
-    }
+	public function __construct(
+		FrontDatagridFactory $frontDatagridFactory,
+		TripStatisticDataRepository $tripStatisticDataRepository
+	) {
+		$this->frontDatagridFactory = $frontDatagridFactory;
+		$this->tripStatisticDataRepository = $tripStatisticDataRepository;
+	}
 
-    public function create(string $tripId): FrontDatagrid
-    {
-        $grid = $this->frontDatagridFactory->create();
+	public function create(string $tripId): FrontDatagrid
+	{
+		$grid = $this->frontDatagridFactory->create();
 
-        $qb = $this->tripStatisticDataRepository->createQueryBuilder();
-        $qb->andWhere($qb->expr()->eq('tripStatistic.tripId', ':tripId'));
-        $qb->setParameter('tripId', $tripId);
-        $grid->setDataSource($qb);
+		$qb = $this->tripStatisticDataRepository->createQueryBuilder();
+		$qb->andWhere($qb->expr()->eq('tripStatistic.tripId', ':tripId'));
+		$qb->setParameter('tripId', $tripId);
+		$grid->setDataSource($qb);
 
-        $grid->addColumnDate('date', 'Datum')->setSortable()->setFilterDate();
-        $grid->addColumnText('routeId', 'Route ID')->setFilterText();
-        $grid->addColumnText('company', 'Společnost')->setFilterText();
-        $grid->addColumnText('vehicleId', 'Vozidlo')->setFilterText();
-        $grid->addColumnText('finalStation', 'Konečná stanice')->setFilterText();
+		$grid->addColumnDate('date', 'Datum')->setSortable()->setFilterDate();
+		$grid->addColumnText('routeId', 'Route ID')->setFilterText();
+		$grid->addColumnText('company', 'Společnost')->setFilterText();
+		$grid->addColumnText('vehicleId', 'Vozidlo')->setFilterText();
+		$grid->addColumnText('finalStation', 'Konečná stanice')->setFilterText();
 
-        $grid->addColumnText('averageDelay', 'Průměrné zpoždění')->setSortable();
-        $grid->addColumnText('highestDelay', 'Nejvyšší zpoždění')->setSortable();
+		$grid->addColumnText('averageDelay', 'Průměrné zpoždění')->setSortable();
+		$grid->addColumnText('highestDelay', 'Nejvyšší zpoždění')->setSortable();
 
-        $grid->setDefaultSort(['date' => 'desc']);
+		$grid->setDefaultSort(['date' => 'desc']);
 
-        return $grid;
-    }
+		return $grid;
+	}
 }

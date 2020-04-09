@@ -10,74 +10,74 @@ use Nette\Utils\Json;
 
 class WebpackAssetsFactory
 {
-    private const ENTRYPOINT_NAME = 'entrypoints.json';
+	private const ENTRYPOINT_NAME = 'entrypoints.json';
 
-    /** @var string */
-    private $buildedAssetsDir;
+	/** @var string */
+	private $buildedAssetsDir;
 
-    /** @var string[] */
-    private $loadedAssets = null;
+	/** @var string[] */
+	private $loadedAssets = null;
 
-    public function __construct(string $buildedAssetsDir)
-    {
-        $this->buildedAssetsDir = $buildedAssetsDir;
-    }
+	public function __construct(string $buildedAssetsDir)
+	{
+		$this->buildedAssetsDir = $buildedAssetsDir;
+	}
 
-    public function getCssAssets(string $entryName): string
-    {
-        $assets = $this->loadAssets();
-        if (! array_key_exists($entryName, $assets)) {
-            throw new WebpackException('Unknown entry name "' . $entryName . '"');
-        }
+	public function getCssAssets(string $entryName): string
+	{
+		$assets = $this->loadAssets();
+		if (! array_key_exists($entryName, $assets)) {
+			throw new WebpackException('Unknown entry name "' . $entryName . '"');
+		}
 
-        $cssAssets = [];
-        foreach ($assets[$entryName]['css'] as $cssAsset) {
-            $link = Html::el('link')->addAttributes(
-                [
-                    'rel' => 'stylesheet',
-                    'href' => $cssAsset,
-                ]
-            );
+		$cssAssets = [];
+		foreach ($assets[$entryName]['css'] as $cssAsset) {
+			$link = Html::el('link')->addAttributes(
+				[
+					'rel' => 'stylesheet',
+					'href' => $cssAsset,
+				]
+			);
 
-            $cssAssets[] = $link->render();
-        }
+			$cssAssets[] = $link->render();
+		}
 
-        return implode('', $cssAssets);
-    }
+		return implode('', $cssAssets);
+	}
 
-    public function getJsAssets(string $entryName): string
-    {
-        $assets = $this->loadAssets();
-        if (! array_key_exists($entryName, $assets)) {
-            throw new WebpackException('Unknown entry name "' . $entryName . '"');
-        }
+	public function getJsAssets(string $entryName): string
+	{
+		$assets = $this->loadAssets();
+		if (! array_key_exists($entryName, $assets)) {
+			throw new WebpackException('Unknown entry name "' . $entryName . '"');
+		}
 
-        $jsAssets = [];
-        foreach ($assets[$entryName]['js'] as $jsAsset) {
-            $script = Html::el('script')->addAttributes(
-                [
-                    'src' => $jsAsset,
-                    'type' => 'text/javascript',
-                ]
-            );
+		$jsAssets = [];
+		foreach ($assets[$entryName]['js'] as $jsAsset) {
+			$script = Html::el('script')->addAttributes(
+				[
+					'src' => $jsAsset,
+					'type' => 'text/javascript',
+				]
+			);
 
-            $jsAssets[] = $script->render();
-        }
+			$jsAssets[] = $script->render();
+		}
 
-        return implode('', $jsAssets);
-    }
+		return implode('', $jsAssets);
+	}
 
-    /**
-     * @return mixed[]
-     */
-    private function loadAssets(): array
-    {
-        if ($this->loadedAssets !== null) {
-            return $this->loadedAssets;
-        }
+	/**
+	 * @return mixed[]
+	 */
+	private function loadAssets(): array
+	{
+		if ($this->loadedAssets !== null) {
+			return $this->loadedAssets;
+		}
 
-        $entryPointContets = FileSystem::read($this->buildedAssetsDir . '/' . self::ENTRYPOINT_NAME);
-        $this->loadedAssets = Json::decode($entryPointContets, Json::FORCE_ARRAY)['entrypoints'];
-        return $this->loadedAssets;
-    }
+		$entryPointContets = FileSystem::read($this->buildedAssetsDir . '/' . self::ENTRYPOINT_NAME);
+		$this->loadedAssets = Json::decode($entryPointContets, Json::FORCE_ARRAY)['entrypoints'];
+		return $this->loadedAssets;
+	}
 }

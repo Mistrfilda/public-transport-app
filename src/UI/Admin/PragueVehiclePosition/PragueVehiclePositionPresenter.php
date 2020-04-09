@@ -13,40 +13,40 @@ use Ramsey\Uuid\Uuid;
 
 class PragueVehiclePositionPresenter extends AdminPresenter
 {
-    /** @var VehiclePositionDatagridFactory */
-    private $vehiclePositionDatagridFactory;
+	/** @var VehiclePositionDatagridFactory */
+	private $vehiclePositionDatagridFactory;
 
-    /** @var VehicleDatagridFactory */
-    private $vehicleDatagridFactory;
+	/** @var VehicleDatagridFactory */
+	private $vehicleDatagridFactory;
 
-    public function __construct(
-        VehiclePositionDatagridFactory $vehiclePositionDatagridFactory,
-        VehicleDatagridFactory $vehicleDatagridFactory
-    ) {
-        parent::__construct();
-        $this->vehiclePositionDatagridFactory = $vehiclePositionDatagridFactory;
-        $this->vehicleDatagridFactory = $vehicleDatagridFactory;
-    }
+	public function __construct(
+		VehiclePositionDatagridFactory $vehiclePositionDatagridFactory,
+		VehicleDatagridFactory $vehicleDatagridFactory
+	) {
+		parent::__construct();
+		$this->vehiclePositionDatagridFactory = $vehiclePositionDatagridFactory;
+		$this->vehicleDatagridFactory = $vehicleDatagridFactory;
+	}
 
-    public function renderVehicle(string $id): void
-    {
-    }
+	public function renderVehicle(string $id): void
+	{
+	}
 
-    protected function createComponentVehiclePositionDatagrid(): AdminDatagrid
-    {
-        return $this->vehiclePositionDatagridFactory->create();
-    }
+	protected function createComponentVehiclePositionDatagrid(): AdminDatagrid
+	{
+		return $this->vehiclePositionDatagridFactory->create();
+	}
 
-    protected function createComponentVehicleDatagrid(): AdminDatagrid
-    {
-        $id = $this->getParameter('id');
+	protected function createComponentVehicleDatagrid(): AdminDatagrid
+	{
+		$id = $this->getParameter('id');
 
-        if ($id === null) {
-            throw new BadRequestException('Invalid parameter ID');
-        }
+		if ($id === null) {
+			throw new BadRequestException('Invalid parameter ID');
+		}
 
-        $id = Uuid::fromString($id);
+		$id = Uuid::fromString($id);
 
-        return $this->vehicleDatagridFactory->create($id);
-    }
+		return $this->vehicleDatagridFactory->create($id);
+	}
 }

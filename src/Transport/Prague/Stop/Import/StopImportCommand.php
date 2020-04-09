@@ -10,24 +10,24 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class StopImportCommand extends Command
 {
-    /** @var StopImportFacade */
-    private $stopImportFacade;
+	/** @var StopImportFacade */
+	private $stopImportFacade;
 
-    public function __construct(StopImportFacade $stopImportFacade)
-    {
-        parent::__construct();
-        $this->stopImportFacade = $stopImportFacade;
-    }
+	public function __construct(StopImportFacade $stopImportFacade)
+	{
+		parent::__construct();
+		$this->stopImportFacade = $stopImportFacade;
+	}
 
-    public function configure(): void
-    {
-        parent::configure();
-        $this->setName('prague:import:stop');
-    }
+	public function configure(): void
+	{
+		parent::configure();
+		$this->setName('prague:import:stop');
+	}
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $this->stopImportFacade->import();
-        return 0;
-    }
+	protected function execute(InputInterface $input, OutputInterface $output): int
+	{
+		$this->stopImportFacade->import();
+		return 0;
+	}
 }

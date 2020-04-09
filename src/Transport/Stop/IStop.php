@@ -8,9 +8,9 @@ use App\Utils\Coordinates;
 
 interface IStop
 {
-    public function getName(): string;
+	public function getName(): string;
 
-    public function getStopId(): string;
+	public function getStopId(): string;
 
-    public function getCoordinates(): Coordinates;
+	public function getCoordinates(): Coordinates;
 }

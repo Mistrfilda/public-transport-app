@@ -6,5 +6,5 @@ namespace App\Transport\Prague\Statistic\ChartDataProvider;
 
 interface ITripStatisticChartDataProvider
 {
-    public function prepare(string $tripId): void;
+	public function prepare(string $tripId): void;
 }

@@ -11,42 +11,42 @@ use Nette\Security\AuthenticationException;
 
 class LoginFormFactory
 {
-    /** @var AdminFormFactory */
-    private $adminFormFactory;
+	/** @var AdminFormFactory */
+	private $adminFormFactory;
 
-    /** @var CurrentAppAdminGetter */
-    private $currentAppAdminGetter;
+	/** @var CurrentAppAdminGetter */
+	private $currentAppAdminGetter;
 
-    public function __construct(
-        AdminFormFactory $adminFormFactory,
-        CurrentAppAdminGetter $currentAppAdminGetter
-    ) {
-        $this->adminFormFactory = $adminFormFactory;
-        $this->currentAppAdminGetter = $currentAppAdminGetter;
-    }
+	public function __construct(
+		AdminFormFactory $adminFormFactory,
+		CurrentAppAdminGetter $currentAppAdminGetter
+	) {
+		$this->adminFormFactory = $adminFormFactory;
+		$this->currentAppAdminGetter = $currentAppAdminGetter;
+	}
 
-    public function create(callable $onSuccess): AdminForm
-    {
-        $form = $this->adminFormFactory->create(LoginFormDTO::class);
+	public function create(callable $onSuccess): AdminForm
+	{
+		$form = $this->adminFormFactory->create(LoginFormDTO::class);
 
-        $form->addText('username', 'Username')
-            ->setRequired();
+		$form->addText('username', 'Username')
+			->setRequired();
 
-        $form->addPassword('password', 'Password')
-            ->setRequired();
+		$form->addPassword('password', 'Password')
+			->setRequired();
 
-        $form->addSubmit('submit', 'Submit');
+		$form->addSubmit('submit', 'Submit');
 
-        $form->onSuccess[] = function (AdminForm $form, LoginFormDTO $values) use ($onSuccess): void {
-            try {
-                $this->currentAppAdminGetter->login($values->username, $values->password);
-            } catch (AuthenticationException $e) {
-                $form->addError('Invalid username/password combination');
-                return;
-            }
-            $onSuccess();
-        };
+		$form->onSuccess[] = function (AdminForm $form, LoginFormDTO $values) use ($onSuccess): void {
+			try {
+				$this->currentAppAdminGetter->login($values->username, $values->password);
+			} catch (AuthenticationException $e) {
+				$form->addError('Invalid username/password combination');
+				return;
+			}
+			$onSuccess();
+		};
 
-        return $form;
-    }
+		return $form;
+	}
 }

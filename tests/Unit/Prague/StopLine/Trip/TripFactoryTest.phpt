@@ -13,10 +13,10 @@ require __DIR__ . '/../../../Bootstrap.php';
 $tripFactory = new TripFactory();
 
 $testStop = new Stop(
-    '123456',
-    'U123456',
-    50.01,
-    15.01
+	'123456',
+	'U123456',
+	50.01,
+	15.01
 );
 
 $serviceId = '11112-0';
@@ -26,13 +26,13 @@ $date = new DateTimeImmutable();
 $lineNumber = '113';
 
 $trip = $tripFactory->create(
-    $testStop,
-    $serviceId,
-    $tripId,
-    $tripHeadsign,
-    true,
-    new DateTimeImmutable(),
-    $lineNumber
+	$testStop,
+	$serviceId,
+	$tripId,
+	$tripHeadsign,
+	true,
+	new DateTimeImmutable(),
+	$lineNumber
 );
 
 Assert::equal($serviceId, $trip->getServiceId());

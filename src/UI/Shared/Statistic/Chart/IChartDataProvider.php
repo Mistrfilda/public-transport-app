@@ -6,5 +6,5 @@ namespace App\UI\Shared\Statistic\Chart;
 
 interface IChartDataProvider
 {
-    public function getChartData(): ChartData;
+	public function getChartData(): ChartData;
 }

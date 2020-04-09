@@ -10,64 +10,64 @@ use Nette\Utils\Random;
 
 class ModalRendererControl extends Control
 {
-    /**
-     * @var string
-     */
-    protected $modalId;
+	/**
+	 * @var string
+	 */
+	protected $modalId;
 
-    /**
-     * @var string|null
-     */
-    protected $templateFile = null;
+	/**
+	 * @var string|null
+	 */
+	protected $templateFile = null;
 
-    /**
-     * @var string|null
-     */
-    private $heading = null;
+	/**
+	 * @var string|null
+	 */
+	private $heading = null;
 
-    /**
-     * @var IHtmlString|null
-     */
-    private $content = null;
+	/**
+	 * @var IHtmlString|null
+	 */
+	private $content = null;
 
-    public function __construct()
-    {
-        $this->modalId = 'modal-' . Random::generate(4, '0-9');
-    }
+	public function __construct()
+	{
+		$this->modalId = 'modal-' . Random::generate(4, '0-9');
+	}
 
-    public function setParameters(?string $heading, ?IHtmlString $content): void
-    {
-        $this->heading = $heading;
-        $this->content = $content;
-    }
+	public function setParameters(?string $heading, ?IHtmlString $content): void
+	{
+		$this->heading = $heading;
+		$this->content = $content;
+	}
 
-    public function render(): void
-    {
-        $this->getTemplate()->modalId = $this->modalId;
-        $this->getTemplate()->heading = $this->heading;
-        $this->getTemplate()->content = $this->content;
-        $this->getTemplate()->originalTemplateFile = $this->getOriginalTemplateFile();
+	public function render(): void
+	{
+		$this->getTemplate()->modalId = $this->modalId;
+		$this->getTemplate()->heading = $this->heading;
+		$this->getTemplate()->content = $this->content;
+		$this->getTemplate()->originalTemplateFile = $this->getOriginalTemplateFile();
 
-        $this->getTemplate()->setFile($this->getTemplateFile());
-        $this->getTemplate()->render();
-    }
+		$this->getTemplate()->setFile($this->getTemplateFile());
+		$this->getTemplate()->render();
+	}
 
-    public function getModalId(): string
-    {
-        return $this->modalId;
-    }
+	public function getModalId(): string
+	{
+		return $this->modalId;
+	}
 
-    protected function getOriginalTemplateFile(): string
-    {
-        return __DIR__ . '/modal.latte';
-    }
+	protected function getOriginalTemplateFile(): string
+	{
+		return __DIR__ . '/modal.latte';
+	}
 
-    protected function getTemplateFile(): string
-    {
-        if ($this->templateFile === null) {
-            return $this->getOriginalTemplateFile();
-        }
+	protected function getTemplateFile(): string
+	{
+		if ($this->templateFile === null) {
+			return $this->getOriginalTemplateFile();
+		}
 
-        return $this->templateFile;
-    }
+		return $this->templateFile;
+	}
 }

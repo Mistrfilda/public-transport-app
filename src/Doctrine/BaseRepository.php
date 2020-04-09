@@ -11,24 +11,24 @@ use Doctrine\ORM\QueryBuilder;
 
 abstract class BaseRepository
 {
-    /** @var EntityManagerInterface */
-    protected $entityManager;
+	/** @var EntityManagerInterface */
+	protected $entityManager;
 
-    /** @var EntityRepository */
-    protected $doctrineRepository;
+	/** @var EntityRepository */
+	protected $doctrineRepository;
 
-    public function __construct(string $class, EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
+	public function __construct(string $class, EntityManagerInterface $entityManager)
+	{
+		$this->entityManager = $entityManager;
 
-        $repository = $entityManager->getRepository($class);
+		$repository = $entityManager->getRepository($class);
 
-        if (! $repository instanceof EntityRepository) {
-            throw new DBALException('Invalid entity repository!');
-        }
+		if (! $repository instanceof EntityRepository) {
+			throw new DBALException('Invalid entity repository!');
+		}
 
-        $this->doctrineRepository = $repository;
-    }
+		$this->doctrineRepository = $repository;
+	}
 
-    abstract public function createQueryBuilder(): QueryBuilder;
+	abstract public function createQueryBuilder(): QueryBuilder;
 }

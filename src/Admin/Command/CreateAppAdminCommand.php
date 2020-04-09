@@ -13,48 +13,48 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateAppAdminCommand extends Command
 {
-    /** @var AppAdminFacade */
-    private $appAdminFacade;
+	/** @var AppAdminFacade */
+	private $appAdminFacade;
 
-    public function __construct(AppAdminFacade $appAdminFacade)
-    {
-        parent::__construct(null);
-        $this->appAdminFacade = $appAdminFacade;
-    }
+	public function __construct(AppAdminFacade $appAdminFacade)
+	{
+		parent::__construct(null);
+		$this->appAdminFacade = $appAdminFacade;
+	}
 
-    public function configure(): void
-    {
-        parent::configure();
-        $this->setName('user:create');
-        $this->addArgument('name', InputArgument::REQUIRED);
-        $this->addArgument('username', InputArgument::REQUIRED);
-        $this->addArgument('email', InputArgument::REQUIRED);
-        $this->addArgument('password', InputArgument::REQUIRED);
-    }
+	public function configure(): void
+	{
+		parent::configure();
+		$this->setName('user:create');
+		$this->addArgument('name', InputArgument::REQUIRED);
+		$this->addArgument('username', InputArgument::REQUIRED);
+		$this->addArgument('email', InputArgument::REQUIRED);
+		$this->addArgument('password', InputArgument::REQUIRED);
+	}
 
-    public function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $name = $input->getArgument('name');
-        $username = $input->getArgument('username');
-        $email = $input->getArgument('email');
-        $password = $input->getArgument('password');
+	public function execute(InputInterface $input, OutputInterface $output): int
+	{
+		$name = $input->getArgument('name');
+		$username = $input->getArgument('username');
+		$email = $input->getArgument('email');
+		$password = $input->getArgument('password');
 
-        if (
-            is_string($name) === false
-            || is_string($username) === false
-            || is_string($email) === false
-            || is_string($password) === false
-        ) {
-            throw new InvalidArgumentException();
-        }
+		if (
+			is_string($name) === false
+			|| is_string($username) === false
+			|| is_string($email) === false
+			|| is_string($password) === false
+		) {
+			throw new InvalidArgumentException();
+		}
 
-        $this->appAdminFacade->createAppAdmin(
-            $name,
-            $username,
-            $email,
-            $password
-        );
+		$this->appAdminFacade->createAppAdmin(
+			$name,
+			$username,
+			$email,
+			$password
+		);
 
-        return 0;
-    }
+		return 0;
+	}
 }
