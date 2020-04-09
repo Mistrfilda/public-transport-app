@@ -39,7 +39,7 @@ abstract class BaseTest extends TestCase
     {
         $this->container = $container;
 
-        $this->mockBaseClasses();
+        $this->mockDatetimeFactory();
         $this->mockTestSpecificClasses();
 
         $this->connection = $container->getByType(Connection::class);
@@ -59,9 +59,9 @@ abstract class BaseTest extends TestCase
     {
     }
 
-    private function mockBaseClasses(): void
+    protected function mockDatetimeFactory(int $secondsToAdd = 0): void
     {
-        $this->now = new DateTimeImmutable();
+        $this->now = (new DateTimeImmutable())->modify('+ ' . $secondsToAdd . ' seconds');
         $dateTimeFactory = Mockery::mock(DatetimeFactory::class);
         $dateTimeFactory->shouldReceive('createNow')->andReturn($this->now);
 

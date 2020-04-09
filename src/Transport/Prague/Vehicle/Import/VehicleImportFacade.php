@@ -54,6 +54,13 @@ class VehicleImportFacade
             $this->entityManager->persist($vehiclePosition);
             $this->entityManager->flush();
 
+            $this->logger->info(
+                'Saving vehicle position',
+                [
+                    'count' => $vehiclePositionResponse->getCount(),
+                ]
+            );
+
             foreach ($vehiclePositionResponse->getVehiclePositions() as $currentVehiclePosition) {
                 $vehicle = $this->vehicleFactory->createFromPidLibrary($currentVehiclePosition, $vehiclePosition);
                 $this->entityManager->persist($vehicle);
@@ -61,6 +68,7 @@ class VehicleImportFacade
 
             $this->entityManager->flush();
             $this->entityManager->commit();
+            $this->entityManager->clear();
         } catch (Throwable $e) {
             $this->entityManager->rollback();
             $this->logger->critical(

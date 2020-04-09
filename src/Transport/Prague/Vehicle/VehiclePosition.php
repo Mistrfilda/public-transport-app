@@ -10,6 +10,7 @@ use App\Doctrine\Uuid;
 use App\Transport\Cities;
 use App\Transport\Vehicle\IVehiclePosition;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -39,6 +40,7 @@ class VehiclePosition implements IEntity, IVehiclePosition
     ) {
         $this->createdAt = $now;
         $this->city = Cities::PRAGUE;
+        $this->vehicles = new ArrayCollection();
     }
 
     public function getCity(): string

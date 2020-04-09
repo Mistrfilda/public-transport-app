@@ -24,12 +24,13 @@ For deploy look at https://github.com/Mistrfilda/public-transport-app-deploy - d
 - Nette 3.0 components
 - Doctrine ORM
 - RabbitMQ, MariaDB
-- PHPStan, ECS, Nette tester, ESL lint
+- PHPStan, ECS, Nette tester
 
 ### Front
 - Yarn
 - Webpack (Symfony encore bundle)
 - Naja.js 
+- ESL lint
 - Bootstrap 4 
 
 # Configuration
@@ -64,6 +65,18 @@ rabbitmq:
 Download data for single departure table
 ```bash
 bin/console requests:generate '{"generateDepartureTables":true,"generateVehiclePositions":false}' '{"departureTableId": "bb7266f2-f3c2-48f5-852f-4555e065c8d8"}'
+```
+
+Download stops
+
+```bash
+bin/console  prague:import:stop
+```
+
+Generate statistics
+
+```bash
+bin/console prague:statistic:generate 2
 ```
 
 # RabbitMQ commands

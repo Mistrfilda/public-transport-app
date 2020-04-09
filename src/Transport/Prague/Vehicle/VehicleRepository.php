@@ -9,6 +9,14 @@ use Doctrine\ORM\QueryBuilder;
 
 class VehicleRepository extends BaseRepository
 {
+    /**
+     * @return Vehicle[]
+     */
+    public function findAll(): array
+    {
+        return $this->doctrineRepository->findAll();
+    }
+
     public function createQueryBuilder(): QueryBuilder
     {
         return $this->doctrineRepository->createQueryBuilder('vehicle');
