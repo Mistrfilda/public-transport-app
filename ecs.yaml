@@ -26,8 +26,6 @@ services:
         break_long_lines: true
         inline_short_lines: false
 
-    #Symplify\CodingStandard\Sniffs\Architecture\ExplicitExceptionSniff: ~
-
     Symplify\CodingStandard\Sniffs\CleanCode\ForbiddenReferenceSniff: ~
 
     Symplify\CodingStandard\Sniffs\ControlStructure\ForbiddenDoubleAssignSniff: ~
