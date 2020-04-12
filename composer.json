@@ -27,7 +27,7 @@
 		"latte/latte": "^2.7",
 		"tracy/tracy": "^2.6",
 		"contributte/console": "^0.8",
-		"nettrine/orm": "^0.5",
+		"nettrine/orm": "^0.6",
 		"nettrine/dbal": "^0.6",
 		"nettrine/migrations": "^0.6",
 		"nettrine/cache": "^0.1",

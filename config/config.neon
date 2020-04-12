@@ -60,6 +60,8 @@ dbal:
 				commented: false
 
 orm.annotations:
+	namespaces:
+		- App
 	paths:
 		- %appDir%
 
