@@ -68,7 +68,7 @@ class VehicleImportFacade
 
 			$this->entityManager->flush();
 			$this->entityManager->commit();
-			$this->entityManager->clear();
+			$this->entityManager->refresh($vehiclePosition);
 		} catch (Throwable $e) {
 			$this->entityManager->rollback();
 			$this->logger->critical(

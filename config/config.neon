@@ -81,7 +81,7 @@ monolog:
 		default:
 			handlers:
 				- Monolog\Handler\RotatingFileHandler(%appDir%/../log/app-log.log, 30)
-#				- Monolog\Handler\StreamHandler("php://stdout")
+				- Monolog\Handler\StreamHandler("php://stdout")
 			processors:
 				- Monolog\Processor\MemoryPeakUsageProcessor()
 				- Monolog\Processor\WebProcessor()
