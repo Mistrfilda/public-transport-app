@@ -37,16 +37,20 @@ abstract class BaseTest extends TestCase
 
 	public function __construct(Container $container)
 	{
+		Environment::lock('db', __DIR__ . '/../../temp');
 		$this->container = $container;
+
+		$this->connection = $container->getByType(Connection::class);
+		$this->entityManager = $container->getByType(EntityManagerInterface::class);
 
 		$this->mockDatetimeFactory();
 		$this->mockTestSpecificClasses();
+	}
 
-		$this->connection = $container->getByType(Connection::class);
+	protected function setUp(): void
+	{
+		parent::setUp();
 		$this->connection->beginTransaction();
-
-		$this->entityManager = $container->getByType(EntityManagerInterface::class);
-		Environment::lock('db', __DIR__ . '/../../temp');
 	}
 
 	protected function tearDown(): void

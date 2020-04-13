@@ -25,6 +25,14 @@ class RequestRepository extends BaseRepository
 		return $request;
 	}
 
+	/**
+	 * @return Request[]
+	 */
+	public function findAll(): array
+	{
+		return $this->doctrineRepository->findAll();
+	}
+
 	public function findLastRequestByType(string $type, DateTimeImmutable $now): ?Request
 	{
 		$qb = $this->createQueryBuilder();

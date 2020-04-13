@@ -1,0 +1,10 @@
+services:
+	dummyProducer: Gamee\RabbitMQ\Producer\Producer(null, null, 'application/json', 0)
+
+	pragueDepartureTableConsumer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableConsumer
+	pragueDepartureTableProducer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableProducer(@dummyProducer)
+
+	pragueVehiclePositionConsumer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionConsumer
+	pragueVehiclePositionProducer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer(@dummyProducer)
+
+	- App\Transport\Prague\Request\RequestFacade

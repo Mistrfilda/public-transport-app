@@ -35,6 +35,7 @@ class TripTest extends BaseTest
 
 	protected function setUp(): void
 	{
+		parent::setUp();
 		$this->tripRepository = $this->container->getByType(TripRepository::class);
 		$this->tripFactory = $this->container->getByType(TripFactory::class);
 		$this->tripImportFacade = $this->container->getByType(TripImportFacade::class);

@@ -36,6 +36,7 @@ class StopTest extends BaseTest
 
 	protected function setUp(): void
 	{
+		parent::setUp();
 		$this->stopRepository = $this->container->getByType(StopRepository::class);
 		$this->stopFactory = $this->container->getByType(StopFactory::class);
 		$this->stopImportFacade = $this->container->getByType(StopImportFacade::class);

@@ -31,6 +31,7 @@ class StopTimeRemovingTest extends BaseTest
 
 	protected function setUp(): void
 	{
+		parent::setUp();
 		$this->stopTimeRepository = $this->container->getByType(StopTimeRepository::class);
 		$this->stopTimeImportFacade = $this->container->getByType(StopTimeImportFacade::class);
 
