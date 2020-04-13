@@ -33,14 +33,6 @@ class VehiclePositionTest extends BaseTest
 	/** @var VehicleRepository */
 	private $vehicleRepository;
 
-	protected function setUp(): void
-	{
-		parent::setUp();
-		$this->vehiclePositionRepository = $this->container->getByType(VehiclePositionRepository::class);
-		$this->vehicleImportFacade = $this->container->getByType(VehicleImportFacade::class);
-		$this->vehicleRepository = $this->container->getByType(VehicleRepository::class);
-	}
-
 	public function testVehiclePosition(): void
 	{
 		Assert::null($this->vehiclePositionRepository->findLast());
@@ -59,6 +51,14 @@ class VehiclePositionTest extends BaseTest
 		});
 
 		Assert::count(6, $this->vehicleRepository->findAll());
+	}
+
+	protected function setUp(): void
+	{
+		parent::setUp();
+		$this->vehiclePositionRepository = $this->container->getByType(VehiclePositionRepository::class);
+		$this->vehicleImportFacade = $this->container->getByType(VehicleImportFacade::class);
+		$this->vehicleRepository = $this->container->getByType(VehicleRepository::class);
 	}
 
 	protected function mockTestSpecificClasses(): void

@@ -29,25 +29,6 @@ class StopTimeRemovingTest extends BaseTest
 	/** @var Stop */
 	private $testStop;
 
-	protected function setUp(): void
-	{
-		parent::setUp();
-		$this->stopTimeRepository = $this->container->getByType(StopTimeRepository::class);
-		$this->stopTimeImportFacade = $this->container->getByType(StopTimeImportFacade::class);
-
-		$testStop = new Stop(
-			'Testovaci zastavka',
-			'U123456789',
-			50.01,
-			15.01
-		);
-
-		$this->entityManager->persist($testStop);
-		$this->entityManager->flush();
-		$this->entityManager->refresh($testStop);
-		$this->testStop = $testStop;
-	}
-
 	public function testImport(): void
 	{
 		Assert::noError(function (): void {
@@ -214,6 +195,25 @@ class StopTimeRemovingTest extends BaseTest
 			),
 			$stopTimes[4]
 		);
+	}
+
+	protected function setUp(): void
+	{
+		parent::setUp();
+		$this->stopTimeRepository = $this->container->getByType(StopTimeRepository::class);
+		$this->stopTimeImportFacade = $this->container->getByType(StopTimeImportFacade::class);
+
+		$testStop = new Stop(
+			'Testovaci zastavka',
+			'U123456789',
+			50.01,
+			15.01
+		);
+
+		$this->entityManager->persist($testStop);
+		$this->entityManager->flush();
+		$this->entityManager->refresh($testStop);
+		$this->testStop = $testStop;
 	}
 
 	protected function mockTestSpecificClasses(): void

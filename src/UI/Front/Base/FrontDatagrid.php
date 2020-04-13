@@ -17,6 +17,15 @@ class FrontDatagrid extends DataGrid
 {
 	public const NULLABLE_PLACEHOLDER = '----';
 
+	public static function formatNullableDatetimeColumn(?DateTimeImmutable $time): string
+	{
+		if ($time === null) {
+			return self::NULLABLE_PLACEHOLDER;
+		}
+
+		return $time->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT);
+	}
+
 	/**
 	 * @param array<int|string, string> $options
 	 */
@@ -40,15 +49,6 @@ class FrontDatagrid extends DataGrid
 		$column = parent::addColumnDateTime($key, $name, $column);
 		$column->setFormat(DatetimeFactory::DEFAULT_DATE_FORMAT);
 		return $column;
-	}
-
-	public static function formatNullableDatetimeColumn(?DateTimeImmutable $time): string
-	{
-		if ($time === null) {
-			return self::NULLABLE_PLACEHOLDER;
-		}
-
-		return $time->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT);
 	}
 
 	public function render(): void

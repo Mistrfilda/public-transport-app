@@ -30,26 +30,6 @@ class StopLineTest extends BaseTest
 	/** @var TripRepository */
 	private $tripRepository;
 
-	protected function setUp(): void
-	{
-		parent::setUp();
-		$this->stopLineFactory = $this->container->getByType(StopLineFactory::class);
-		$this->stopTimeRepository = $this->container->getByType(StopTimeRepository::class);
-		$this->tripRepository = $this->container->getByType(TripRepository::class);
-
-		$testStop = new Stop(
-			'Testovaci zastavka',
-			'U123456789',
-			50.01,
-			15.01
-		);
-
-		$this->entityManager->persist($testStop);
-		$this->entityManager->flush();
-		$this->entityManager->refresh($testStop);
-		$this->testStop = $testStop;
-	}
-
 	public function testStopLine(): void
 	{
 		$date = $this->today->modify('+ 2 days');
@@ -148,6 +128,26 @@ class StopLineTest extends BaseTest
 		$this->assertStopLine($stopTimes[1], $trips[1], $stopLines[1]);
 		$this->assertStopLine($stopTimes[2], $trips[2], $stopLines[2]);
 		$this->assertStopLine($stopTimes[3], $trips[3], $stopLines[3]);
+	}
+
+	protected function setUp(): void
+	{
+		parent::setUp();
+		$this->stopLineFactory = $this->container->getByType(StopLineFactory::class);
+		$this->stopTimeRepository = $this->container->getByType(StopTimeRepository::class);
+		$this->tripRepository = $this->container->getByType(TripRepository::class);
+
+		$testStop = new Stop(
+			'Testovaci zastavka',
+			'U123456789',
+			50.01,
+			15.01
+		);
+
+		$this->entityManager->persist($testStop);
+		$this->entityManager->flush();
+		$this->entityManager->refresh($testStop);
+		$this->testStop = $testStop;
 	}
 
 	private function assertStopLine(StopTime $expectedStopTime, Trip $expectedTrip, StopLine $stopLine): void

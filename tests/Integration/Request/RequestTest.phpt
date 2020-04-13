@@ -41,26 +41,6 @@ class RequestTest extends BaseTest
 	/** @var Stop */
 	private $testStop;
 
-	protected function setUp(): void
-	{
-		parent::setUp();
-		$this->messageFactory = $this->container->getByType(MessageFactory::class);
-		$this->requestFacade = $this->container->getByType(RequestFacade::class);
-		$this->requestRepository = $this->container->getByType(RequestRepository::class);
-
-		$testStop = new Stop(
-			'Testovaci zastavka',
-			'U123456789',
-			50.01,
-			15.01
-		);
-
-		$this->entityManager->persist($testStop);
-		$this->entityManager->flush();
-		$this->entityManager->refresh($testStop);
-		$this->testStop = $testStop;
-	}
-
 	public function testCreateRequest(): void
 	{
 		$request = new Request(
@@ -120,6 +100,26 @@ class RequestTest extends BaseTest
 		$this->requestFacade->generateRequests(new RequestConditions());
 		$requests = $this->requestRepository->findAll();
 		Assert::count(2, $requests);
+	}
+
+	protected function setUp(): void
+	{
+		parent::setUp();
+		$this->messageFactory = $this->container->getByType(MessageFactory::class);
+		$this->requestFacade = $this->container->getByType(RequestFacade::class);
+		$this->requestRepository = $this->container->getByType(RequestRepository::class);
+
+		$testStop = new Stop(
+			'Testovaci zastavka',
+			'U123456789',
+			50.01,
+			15.01
+		);
+
+		$this->entityManager->persist($testStop);
+		$this->entityManager->flush();
+		$this->entityManager->refresh($testStop);
+		$this->testStop = $testStop;
 	}
 
 	protected function mockTestSpecificClasses(): void

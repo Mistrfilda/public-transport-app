@@ -34,15 +34,6 @@ class StopTest extends BaseTest
 	/** @var StopCacheService */
 	private $stopCacheService;
 
-	protected function setUp(): void
-	{
-		parent::setUp();
-		$this->stopRepository = $this->container->getByType(StopRepository::class);
-		$this->stopFactory = $this->container->getByType(StopFactory::class);
-		$this->stopImportFacade = $this->container->getByType(StopImportFacade::class);
-		$this->stopCacheService = $this->container->getByType(StopCacheService::class);
-	}
-
 	public function testImport(): void
 	{
 		Assert::noError(function (): void {
@@ -115,6 +106,15 @@ class StopTest extends BaseTest
 		Assert::equal('Testovací zastávka 4 (U56789)', $filter->format('U56789'));
 		Assert::equal('Testovací zastávka 2 (U54321)', $filter->format('U54321'));
 		Assert::equal(StopCacheService::UNDEFINED_STOP_PLACEHOLDER, $filter->format(null));
+	}
+
+	protected function setUp(): void
+	{
+		parent::setUp();
+		$this->stopRepository = $this->container->getByType(StopRepository::class);
+		$this->stopFactory = $this->container->getByType(StopFactory::class);
+		$this->stopImportFacade = $this->container->getByType(StopImportFacade::class);
+		$this->stopCacheService = $this->container->getByType(StopCacheService::class);
 	}
 
 	protected function mockTestSpecificClasses(): void
