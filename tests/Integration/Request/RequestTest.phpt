@@ -19,6 +19,7 @@ use Mockery;
 use Nette\Utils\Json;
 use Test\Integration\BaseTest;
 use Tester\Assert;
+use Tester\Environment;
 
 $container = require __DIR__ . '/../TestsBootstrap.php';
 
@@ -134,4 +135,6 @@ class RequestTest extends BaseTest
 	}
 }
 
-(new RequestTest($container))->run();
+if (getenv(Environment::RUNNER) === '1') {
+	(new RequestTest($container))->run();
+}

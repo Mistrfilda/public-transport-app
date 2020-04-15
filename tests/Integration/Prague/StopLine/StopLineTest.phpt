@@ -13,6 +13,7 @@ use App\Transport\Prague\StopLine\Trip\Trip;
 use App\Transport\Prague\StopLine\Trip\TripRepository;
 use Test\Integration\BaseTest;
 use Tester\Assert;
+use Tester\Environment;
 
 $container = require __DIR__ . '/../../TestsBootstrap.php';
 
@@ -165,4 +166,6 @@ class StopLineTest extends BaseTest
 	}
 }
 
-(new StopLineTest($container))->run();
+if (getenv(Environment::RUNNER) === '1') {
+	(new StopLineTest($container))->run();
+}

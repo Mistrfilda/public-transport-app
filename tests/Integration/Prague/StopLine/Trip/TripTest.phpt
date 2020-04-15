@@ -16,6 +16,7 @@ use Mistrfilda\Pid\Api\Trip\TripResponse;
 use Mockery;
 use Test\Integration\BaseTest;
 use Tester\Assert;
+use Tester\Environment;
 
 $container = require __DIR__ . '/../../../TestsBootstrap.php';
 
@@ -171,4 +172,6 @@ class TripTest extends BaseTest
 	}
 }
 
-(new TripTest($container))->run();
+if (getenv(Environment::RUNNER) === '1') {
+	(new TripTest($container))->run();
+}

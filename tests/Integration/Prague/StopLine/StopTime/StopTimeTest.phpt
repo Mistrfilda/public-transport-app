@@ -15,6 +15,7 @@ use Mistrfilda\Pid\Api\StopTime\StopTimeResponse;
 use Mockery;
 use Test\Integration\BaseTest;
 use Tester\Assert;
+use Tester\Environment;
 
 $container = require __DIR__ . '/../../../TestsBootstrap.php';
 
@@ -176,4 +177,6 @@ class StopTimeTest extends BaseTest
 	}
 }
 
-(new StopTimeTest($container))->run();
+if (getenv(Environment::RUNNER) === '1') {
+	(new StopTimeTest($container))->run();
+}

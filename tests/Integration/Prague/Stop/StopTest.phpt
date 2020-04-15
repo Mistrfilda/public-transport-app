@@ -17,6 +17,7 @@ use Mistrfilda\Pid\Api\Stop\StopResponse;
 use Mockery;
 use Test\Integration\BaseTest;
 use Tester\Assert;
+use Tester\Environment;
 
 $container = require __DIR__ . '/../../TestsBootstrap.php';
 
@@ -170,4 +171,6 @@ class StopTest extends BaseTest
 	}
 }
 
-(new StopTest($container))->run();
+if (getenv(Environment::RUNNER) === '1') {
+	(new StopTest($container))->run();
+}

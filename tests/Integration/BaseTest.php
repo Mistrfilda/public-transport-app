@@ -13,11 +13,9 @@ use Nette\DI\Container;
 use Tester\Environment;
 use Tester\TestCase;
 
-require __DIR__ . '/TestsBootstrap.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
-/**
- * @skip
- */
+
 abstract class BaseTest extends TestCase
 {
 	/** @var Container */
@@ -42,14 +40,13 @@ abstract class BaseTest extends TestCase
 
 		$this->connection = $container->getByType(Connection::class);
 		$this->entityManager = $container->getByType(EntityManagerInterface::class);
-
-		$this->mockDatetimeFactory();
-		$this->mockTestSpecificClasses();
 	}
 
 	protected function setUp(): void
 	{
 		parent::setUp();
+		$this->mockDatetimeFactory();
+		$this->mockTestSpecificClasses();
 		$this->connection->beginTransaction();
 	}
 
