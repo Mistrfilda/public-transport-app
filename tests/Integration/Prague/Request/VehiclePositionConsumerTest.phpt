@@ -202,6 +202,6 @@ class VehiclePositionConsumerTest extends BaseTest
 	}
 }
 
-//if (getenv(Environment::RUNNER) === '1') {
+if (getenv(Environment::RUNNER) === '1') {
 	(new VehiclePositionConsumerTest($container))->run();
-//}
+}

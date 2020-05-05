@@ -54,7 +54,7 @@ class DepartureTableConsumerTest extends BaseTest
 
 		$departureTable = new DepartureTable(
 			$stop,
-			2,
+			3,
 			$this->now
 		);
 
@@ -88,7 +88,6 @@ class DepartureTableConsumerTest extends BaseTest
 		$rabbitCode = $this->departureTableConsumer->consume($mockedMessage);
 
 		Assert::equal(IConsumer::MESSAGE_ACK, $rabbitCode);
-
 		Assert::count(6, $this->stopLineFactory->getStopLinesForStop($stop));
 
 		$this->entityManager->refresh($request);
@@ -141,17 +140,23 @@ class DepartureTableConsumerTest extends BaseTest
 		$firstStoptimeResponse = Mockery::mock(StopTimeResponse::class)
 			->makePartial();
 
-		$firstStoptimeResponse->shouldReceive('getCount')->andReturn(2);
-		$firstStoptimeResponse->shouldReceive('getStopTimes')->andReturn([
-			new PIDStopTime('12:55:00', '12:55:00', '113-11-22', 4),
-			new PIDStopTime('13:55:00', '13:55:00', '113-11-23', 4),
-		]);
+		$firstStoptimeResponse->shouldReceive('getCount')->andReturn(0);
+		$firstStoptimeResponse->shouldReceive('getStopTimes')->andReturn([]);
 
 		$secondStoptimeResponse = Mockery::mock(StopTimeResponse::class)
 			->makePartial();
 
-		$secondStoptimeResponse->shouldReceive('getCount')->andReturn(4);
+		$secondStoptimeResponse->shouldReceive('getCount')->andReturn(2);
 		$secondStoptimeResponse->shouldReceive('getStopTimes')->andReturn([
+			new PIDStopTime('14:55:00', '12:55:00', '113-11-22', 4),
+			new PIDStopTime('13:55:00', '13:55:00', '113-11-23', 4),
+		]);
+
+		$thirdStoptimeResponse = Mockery::mock(StopTimeResponse::class)
+			->makePartial();
+
+		$thirdStoptimeResponse->shouldReceive('getCount')->andReturn(4);
+		$thirdStoptimeResponse->shouldReceive('getStopTimes')->andReturn([
 			new PIDStopTime('12:55:00', '12:55:00', '113-11-22', 4),
 			new PIDStopTime('13:55:00', '13:55:00', '113-11-23', 4),
 			new PIDStopTime('18:55:00', '18:55:00', '113-11-24', 4),
@@ -161,17 +166,23 @@ class DepartureTableConsumerTest extends BaseTest
 		$firstTripResponse = Mockery::mock(TripResponse::class)
 			->makePartial();
 
-		$firstTripResponse->shouldReceive('getCount')->andReturn(2);
-		$firstTripResponse->shouldReceive('getTrips')->andReturn([
-			new PIDTrip('113', '111101-1', '113-11-22', 'Test', true),
-			new PIDTrip('113', '111101-2', '113-11-23', 'Test', false),
-		]);
+		$firstTripResponse->shouldReceive('getCount')->andReturn(0);
+		$firstTripResponse->shouldReceive('getTrips')->andReturn([]);
 
 		$secondTripResponse = Mockery::mock(TripResponse::class)
 			->makePartial();
 
-		$secondTripResponse->shouldReceive('getCount')->andReturn(4);
+		$secondTripResponse->shouldReceive('getCount')->andReturn(2);
 		$secondTripResponse->shouldReceive('getTrips')->andReturn([
+			new PIDTrip('113', '111101-1', '113-11-22', 'Test', true),
+			new PIDTrip('113', '111101-2', '113-11-23', 'Test', false),
+		]);
+
+		$thirdTripResponse = Mockery::mock(TripResponse::class)
+			->makePartial();
+
+		$thirdTripResponse->shouldReceive('getCount')->andReturn(4);
+		$thirdTripResponse->shouldReceive('getTrips')->andReturn([
 			new PIDTrip('113', '111101-1', '113-11-22', 'Test', true),
 			new PIDTrip('113', '111101-2', '113-11-23', 'Test', false),
 			new PIDTrip('113', '111101-3', '113-11-24', 'Test', true),
@@ -193,6 +204,11 @@ class DepartureTableConsumerTest extends BaseTest
 		$mockedPidService
 			->shouldReceive('sendGetStopTimesRequest')
 			->once()
+			->andReturn($thirdStoptimeResponse);
+
+		$mockedPidService
+			->shouldReceive('sendGetStopTimesRequest')
+			->once()
 			->andThrow(InvalidArgumentException::class, 'Exception!');
 
 		$mockedPidService
@@ -204,6 +220,11 @@ class DepartureTableConsumerTest extends BaseTest
 			->shouldReceive('sendGetStopTripsRequest')
 			->once()
 			->andReturn($secondTripResponse);
+
+		$mockedPidService
+			->shouldReceive('sendGetStopTripsRequest')
+			->once()
+			->andReturn($thirdTripResponse);
 
 		$mockedPidService
 			->shouldReceive('sendGetStopTripsRequest')

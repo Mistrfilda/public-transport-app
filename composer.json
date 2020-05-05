@@ -36,7 +36,7 @@
 		"ramsey/uuid-doctrine": "^1.6",
 		"contributte/monolog": "^0.4.1",
 		"ublaboo/datagrid": "^6.2",
-		"gamee/nette-rabbitmq": "^4.1"
+		"contributte/rabbitmq": "^4.1"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3",
@@ -49,7 +49,7 @@
 		"jakub-onderka/php-parallel-lint": "^1.0",
 		"tracy/tracy": "^2.6",
 		"mockery/mockery": "^1.2",
-		"symplify/easy-coding-standard-prefixed": "^7.2",
+		"symplify/easy-coding-standard-prefixed": "~7.2.0",
 		"roave/security-advisories": "dev-master"
 	},
 	"autoload": {
