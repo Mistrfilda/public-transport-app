@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Transport\Prague\Statistic;
 
+use App\Transport\Prague\Statistic\TripList\TripListFacade;
 use App\Utils\DatetimeFactory;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,14 +23,19 @@ class TripStatisticFacade
 	/** @var DatetimeFactory */
 	private $datetimeFactory;
 
+	/** @var TripListFacade */
+	private $tripListFacade;
+
 	public function __construct(
 		EntityManagerInterface $entityManager,
 		LoggerInterface $logger,
-		DatetimeFactory $datetimeFactory
+		DatetimeFactory $datetimeFactory,
+		TripListFacade $tripListFacade
 	) {
 		$this->entityManager = $entityManager;
 		$this->logger = $logger;
 		$this->datetimeFactory = $datetimeFactory;
+		$this->tripListFacade = $tripListFacade;
 	}
 
 	public function processStatistics(int $numberOfDays = 1): void
@@ -165,6 +171,7 @@ where date(pp.created_at) = :created_date
 				throw $e;
 			}
 		}
-		die();
+
+		$this->tripListFacade->generateTripList();
 	}
 }
