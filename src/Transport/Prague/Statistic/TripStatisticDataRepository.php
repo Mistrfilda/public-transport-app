@@ -87,6 +87,20 @@ class TripStatisticDataRepository extends BaseRepository
 		return $qb->getQuery()->getResult();
 	}
 
+	/**
+	 * @return array<array<string, string>>
+	 */
+	public function findTripList(): array
+	{
+		$qb = $this->createQueryBuilder();
+		$qb->select(
+			'tripStatistic.tripId, tripStatistic.routeId, max(tripStatistic.finalStation) as finalStation, max(tripStatistic.newestKnownPosition) as newestKnownPosition'
+		);
+		$qb->groupBy('tripStatistic.tripId, tripStatistic.routeId, tripStatistic.finalStation');
+
+		return $qb->getQuery()->getResult();
+	}
+
 	public function createQueryBuilder(): QueryBuilder
 	{
 		return $this->doctrineRepository->createQueryBuilder('tripStatistic');

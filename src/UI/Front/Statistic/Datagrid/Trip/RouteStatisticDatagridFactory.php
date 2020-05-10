@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Statistic\Datagrid\Trip;
 
-use App\Transport\Prague\Statistic\TripStatisticDataRepository;
+use App\Transport\Prague\Statistic\TripList\TripListRepository;
 use App\UI\Front\Base\FrontDatagrid;
 use App\UI\Front\Base\FrontDatagridFactory;
 
@@ -13,32 +13,25 @@ class RouteStatisticDatagridFactory
 	/** @var FrontDatagridFactory */
 	private $frontDatagridFactory;
 
-	/** @var TripStatisticDataRepository */
-	private $tripStatisticDataRepository;
+	/** @var TripListRepository */
+	private $tripListRepository;
 
 	public function __construct(
 		FrontDatagridFactory $frontDatagridFactory,
-		TripStatisticDataRepository $tripStatisticDataRepository
+		TripListRepository $tripListRepository
 	) {
 		$this->frontDatagridFactory = $frontDatagridFactory;
-		$this->tripStatisticDataRepository = $tripStatisticDataRepository;
+		$this->tripListRepository = $tripListRepository;
 	}
 
 	public function create(): FrontDatagrid
 	{
 		$grid = $this->frontDatagridFactory->create();
 
-		$qb = $this->tripStatisticDataRepository->createQueryBuilder();
-		$qb->select(
-			'tripStatistic.tripId, tripStatistic.routeId, tripStatistic.finalStation, max(tripStatistic.newestKnownPosition) as newestKnownPosition'
-		);
-		$qb->groupBy('tripStatistic.tripId, tripStatistic.routeId, tripStatistic.finalStation');
-
-		$grid->setPrimaryKey('tripId');
-		$grid->setDataSource($qb->getQuery()->getResult());
+		$grid->setDataSource($this->tripListRepository->createQueryBuilder());
 		$grid->addColumnText('routeId', 'Route ID')->setFilterText();
 		$grid->addColumnText('tripId', 'Trip ID')->setFilterText();
-		$grid->addColumnText('finalStation', 'Poslední cílová stanice')->setFilterText();
+		$grid->addColumnText('lastFinalStation', 'Poslední cílová stanice')->setFilterText();
 		$grid->addColumnDateTime('newestKnownPosition', 'Poslední známá poloha')->setSortable();
 
 		$grid->addAction('detail', 'Detail', 'Statistic:trip', ['tripId' => 'tripId'])

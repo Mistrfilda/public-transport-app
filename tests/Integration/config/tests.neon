@@ -8,3 +8,10 @@ services:
 	pragueVehiclePositionProducer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer(@dummyProducer)
 
 	- App\Transport\Prague\Request\RequestFacade
+
+
+monolog:
+	channel:
+		default:
+			handlers!:
+				- Monolog\Handler\NullHandler

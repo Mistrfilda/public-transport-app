@@ -200,6 +200,10 @@ services:
 
 	- App\UI\Shared\Statistic\Chart\Control\ChartControlFactory
 
+	- App\Transport\Prague\Statistic\TripList\TripListRepository(App\Transport\Prague\Statistic\TripList\TripList)
+	- App\Transport\Prague\Statistic\TripList\TripListFacade
+	- App\Transport\Prague\Statistic\Command\GenerateTripListCommand
+
 	#Map
 	map:
 		implement: App\UI\Shared\Map\MapControlFactory
