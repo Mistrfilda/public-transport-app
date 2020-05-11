@@ -96,7 +96,7 @@ class TripStatisticDataRepository extends BaseRepository
 		$qb->select(
 			'tripStatistic.tripId, tripStatistic.routeId, max(tripStatistic.finalStation) as finalStation, max(tripStatistic.newestKnownPosition) as newestKnownPosition'
 		);
-		$qb->groupBy('tripStatistic.tripId, tripStatistic.routeId, tripStatistic.finalStation');
+		$qb->groupBy('tripStatistic.tripId, tripStatistic.routeId');
 
 		return $qb->getQuery()->getResult();
 	}
