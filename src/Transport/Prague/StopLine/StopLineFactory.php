@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Transport\Prague\StopLine;
 
+use App\Transport\Prague\Statistic\TripList\TripListCacheService;
 use App\Transport\Prague\Stop\Stop;
 use App\Transport\Prague\StopLine\StopTime\StopTimeRepository;
 use App\Transport\Prague\StopLine\Trip\TripRepository;
@@ -24,16 +25,21 @@ class StopLineFactory
 	/** @var DatetimeFactory */
 	private $datetimeFactory;
 
+	/** @var TripListCacheService */
+	private $tripListCacheService;
+
 	public function __construct(
 		StopTimeRepository $stopTimeRepository,
 		TripRepository $tripRepository,
 		VehiclePositionRepository $vehiclePositionRepository,
-		DatetimeFactory $datetimeFactory
+		DatetimeFactory $datetimeFactory,
+		TripListCacheService $tripListCacheService
 	) {
 		$this->stopTimeRepository = $stopTimeRepository;
 		$this->tripRepository = $tripRepository;
 		$this->vehiclePositionRepository = $vehiclePositionRepository;
 		$this->datetimeFactory = $datetimeFactory;
+		$this->tripListCacheService = $tripListCacheService;
 	}
 
 	/**
@@ -75,7 +81,8 @@ class StopLineFactory
 				$trip->getLineNumber(),
 				$trip->getTripHeadsign(),
 				$vehicle,
-				$this->datetimeFactory->createNow()
+				$this->datetimeFactory->createNow(),
+				$this->tripListCacheService->hasTripList($stopTime->getTripId())
 			);
 
 			if ($stopLine->hasVehicleLeft()) {

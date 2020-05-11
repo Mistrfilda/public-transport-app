@@ -34,4 +34,6 @@ interface IStopLine
 	public function isNearDeparture(): bool;
 
 	public function hasBigDelay(): bool;
+
+	public function hasStatistics(): bool;
 }

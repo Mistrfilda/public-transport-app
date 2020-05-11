@@ -203,6 +203,7 @@ services:
 	- App\Transport\Prague\Statistic\TripList\TripListRepository(App\Transport\Prague\Statistic\TripList\TripList)
 	- App\Transport\Prague\Statistic\TripList\TripListFacade
 	- App\Transport\Prague\Statistic\Command\GenerateTripListCommand
+	- App\Transport\Prague\Statistic\TripList\TripListCacheService
 
 	#Map
 	map:

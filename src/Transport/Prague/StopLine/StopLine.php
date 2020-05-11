@@ -37,6 +37,9 @@ class StopLine implements IStopLine
 	/** @var DateTimeImmutable */
 	private $now;
 
+	/** @var bool */
+	private $hasStatistics;
+
 	public function __construct(
 		Stop $stop,
 		DateTimeImmutable $arrivalTime,
@@ -45,7 +48,8 @@ class StopLine implements IStopLine
 		string $lineNumber,
 		string $finalDestination,
 		?Vehicle $vehicle,
-		DateTimeImmutable $now
+		DateTimeImmutable $now,
+		bool $hasStatistics
 	) {
 		$this->stop = $stop;
 		$this->arrivalTime = $arrivalTime;
@@ -55,6 +59,7 @@ class StopLine implements IStopLine
 		$this->finalDestination = $finalDestination;
 		$this->vehicle = $vehicle;
 		$this->now = $now;
+		$this->hasStatistics = $hasStatistics;
 	}
 
 	public function getStop(): IStop
@@ -137,5 +142,10 @@ class StopLine implements IStopLine
 		}
 
 		return false;
+	}
+
+	public function hasStatistics(): bool
+	{
+		return $this->hasStatistics;
 	}
 }

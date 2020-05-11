@@ -40,6 +40,28 @@ class TripListRepository extends BaseRepository
 		}
 	}
 
+	/**
+	 * @return array<string, int>
+	 */
+	public function findTripIdPairs(): array
+	{
+		$results = $this->findAll();
+		$pairs = [];
+		foreach ($results as $result) {
+			$pairs[$result->getTripId()] = $result->getId();
+		}
+
+		return $pairs;
+	}
+
+	/**
+	 * @return TripList[]
+	 */
+	public function findAll(): array
+	{
+		return $this->doctrineRepository->findAll();
+	}
+
 	public function createQueryBuilder(): QueryBuilder
 	{
 		return $this->doctrineRepository->createQueryBuilder('tripList');
