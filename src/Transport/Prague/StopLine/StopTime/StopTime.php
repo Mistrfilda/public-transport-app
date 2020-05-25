@@ -12,7 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="prague_stop_time")
+ * @ORM\Table(name="prague_stop_time",
+ *     indexes={
+ *        @ORM\Index(name="date_trip_id_index", columns={"date_trip_id"})
+ *	   },
+ *     uniqueConstraints={
+ *        @ORM\UniqueConstraint(name="date_trip_id_unique",columns={"date_trip_id"})
+ *     }
+ * )
  */
 class StopTime implements IEntity
 {
