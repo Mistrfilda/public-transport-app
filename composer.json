@@ -36,7 +36,8 @@
 		"ramsey/uuid-doctrine": "^1.6",
 		"contributte/monolog": "^0.4.1",
 		"ublaboo/datagrid": "^6.2",
-		"contributte/rabbitmq": "^4.1"
+		"contributte/rabbitmq": "^4.1",
+		"beberlei/doctrineextensions": "^1.2"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3",

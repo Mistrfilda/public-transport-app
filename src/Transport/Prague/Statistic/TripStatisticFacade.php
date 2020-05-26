@@ -66,12 +66,13 @@ class TripStatisticFacade
 		);
 		$resultSetMapping->addScalarResult('position_count', 'positionCount', Types::INTEGER);
 
-		$yesterday = $this->datetimeFactory->createToday()->modify('- 1 day');
+		$dateFrom = $this->datetimeFactory->createToday()->modify('- 1 day');
+
 		$count = 0;
 		while ($count < $numberOfDays) {
-			$date = $yesterday;
+			$date = $dateFrom;
 			if ($count >= 1) {
-				$date = $yesterday->modify('- ' . $count . ' days');
+				$date = $dateFrom->modify('- ' . $count . ' days');
 			}
 
 			$this->logger->info(

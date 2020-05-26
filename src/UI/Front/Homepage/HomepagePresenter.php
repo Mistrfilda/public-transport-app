@@ -9,6 +9,8 @@ use App\Transport\Prague\Vehicle\VehicleMapObjectProvider;
 use App\UI\Front\FrontPresenter;
 use App\UI\Shared\Map\MapControl;
 use App\UI\Shared\Map\MapControlFactory;
+use App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListControl;
+use App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListControlFactory;
 use App\UI\Shared\Statistic\Control\StatisticControl;
 use App\UI\Shared\Statistic\Control\StatisticControlFactory;
 
@@ -26,17 +28,22 @@ class HomepagePresenter extends FrontPresenter
 	/** @var VehicleMapObjectProvider */
 	private $vehicleMapObjectProvider;
 
+	/** @var PragueDepartureTableListControlFactory */
+	private $pragueDepartureTableListControlFactory;
+
 	public function __construct(
 		DepartureTableRepository $departureTableRepository,
 		StatisticControlFactory $statisticControlFactory,
 		MapControlFactory $mapControlFactory,
-		VehicleMapObjectProvider $vehicleMapObjectProvider
+		VehicleMapObjectProvider $vehicleMapObjectProvider,
+		PragueDepartureTableListControlFactory $pragueDepartureTableListControlFactory
 	) {
 		parent::__construct();
 		$this->departureTableRepository = $departureTableRepository;
 		$this->statisticControlFactory = $statisticControlFactory;
 		$this->mapControlFactory = $mapControlFactory;
 		$this->vehicleMapObjectProvider = $vehicleMapObjectProvider;
+		$this->pragueDepartureTableListControlFactory = $pragueDepartureTableListControlFactory;
 	}
 
 	public function renderDefault(): void
@@ -52,5 +59,10 @@ class HomepagePresenter extends FrontPresenter
 	protected function createComponentMapControl(): MapControl
 	{
 		return $this->mapControlFactory->create($this->vehicleMapObjectProvider);
+	}
+
+	protected function createComponentPragueDepartureTableListControl(): PragueDepartureTableListControl
+	{
+		return $this->pragueDepartureTableListControlFactory->create();
 	}
 }

@@ -59,6 +59,11 @@ dbal:
 				class: Ramsey\Uuid\Doctrine\UuidType
 				commented: false
 
+orm:
+	configuration:
+		customStringFunctions:
+			group_concat: DoctrineExtensions\Query\Mysql\GroupConcat
+
 orm.annotations:
 	namespaces:
 		- App
@@ -177,6 +182,9 @@ services:
 	- App\UI\Admin\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory
 	- App\UI\Admin\PragueDepartureTable\Form\DepartureTableFormFactory
 	- App\UI\Admin\PragueDepartureTable\Control\DepartureTableControlFactory
+
+	- App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListControlFactory
+	- App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListDataFactory
 
 	#REQUEST
 	- App\Request\RequestRepository(App\Request\Request)

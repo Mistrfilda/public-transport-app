@@ -7,9 +7,11 @@ namespace App\Transport\Prague\StopLine\StopTime;
 use App\Doctrine\BaseRepository;
 use App\Doctrine\NoEntityFoundException;
 use App\Doctrine\OrderBy;
+use App\Transport\Prague\StopLine\Trip\Trip;
 use DateTimeImmutable;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 
 class StopTimeRepository extends BaseRepository
@@ -148,6 +150,35 @@ class StopTimeRepository extends BaseRepository
 	public function findAllSorted(): array
 	{
 		return $this->doctrineRepository->findBy([], ['departureTime' => OrderBy::ASC]);
+	}
+
+	/**
+	 * Return array of destinations, divided by '~'
+	 * @return array<int, string>
+	 */
+	public function findDepartureTablesDestinations(
+		?DateTimeImmutable $from = null,
+		?DateTimeImmutable $to = null
+	): array {
+		$qb = $this->doctrineRepository->createQueryBuilder('stopTime', 'stopTime.id');
+
+		$qb->select('stop.id, GROUP_CONCAT(DISTINCT trip.tripHeadsign SEPARATOR \'~\') as tripHeadsign');
+
+		$qb->innerJoin('stopTime.stop', 'stop');
+		$qb->innerJoin(Trip::class, 'trip', Join::WITH, 'trip.dateTripId = stopTime.dateTripId');
+
+		$qb->groupBy('stop.id');
+
+		$data = [];
+
+		/** @var array<int, array{'id': int, 'tripHeadsign': string}> $queryResult */
+		$queryResult = $qb->getQuery()->getResult();
+
+		foreach ($queryResult as $result) {
+			$data[$result['id']] = $result['tripHeadsign'];
+		}
+
+		return $data;
 	}
 
 	public function createQueryBuilder(): QueryBuilder
