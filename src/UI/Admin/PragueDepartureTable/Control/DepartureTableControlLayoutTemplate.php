@@ -22,7 +22,7 @@ use Nette\Security\User;
  * @property \stdClass $_l
  * @property \stdClass $_g
  * @property \stdClass $_b
- * @method bool isLinkCurrent(string $destination = NULL, $args = [])
+ * @method bool isLinkCurrent(string $destination = null, $args = [])
  * @method bool isModuleCurrent(string $module)
  */
 class DepartureTableControlLayoutTemplate

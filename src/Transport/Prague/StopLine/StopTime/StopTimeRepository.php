@@ -171,7 +171,7 @@ class StopTimeRepository extends BaseRepository
 
 		$data = [];
 
-		/** @var array<int, array{'id': int, 'tripHeadsign': string}> $queryResult */
+		/** @var array<int, array{id: int, tripHeadsign: string}> $queryResult */
 		$queryResult = $qb->getQuery()->getResult();
 
 		foreach ($queryResult as $result) {
