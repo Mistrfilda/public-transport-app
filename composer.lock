@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27f79821154d151177d54154da67b008",
+    "content-hash": "668dce9ab1172912e6e393c90613399f",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -5825,6 +5825,42 @@
             ],
             "description": "Extra strict and opinionated rules for PHPStan",
             "time": "2020-01-20T13:08:52+00:00"
+        },
+        {
+            "name": "rector/rector-prefixed",
+            "version": "v0.7.26",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rectorphp/rector-prefixed.git",
+                "reference": "4b13c1679bb3d742331618dbf0344447ea906141"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rectorphp/rector-prefixed/zipball/4b13c1679bb3d742331618dbf0344447ea906141",
+                "reference": "4b13c1679bb3d742331618dbf0344447ea906141",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "conflict": {
+                "nikic/php-parser": "<4.3",
+                "phpstan/phpstan": "<0.12"
+            },
+            "replace": {
+                "rector/rector": "self.version"
+            },
+            "bin": [
+                "rector",
+                "rector.phar"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Prefixed version of Rector compiled in PHAR",
+            "time": "2020-04-24T12:14:41+00:00"
         },
         {
             "name": "roave/security-advisories",
