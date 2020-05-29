@@ -6,7 +6,7 @@ namespace App\Transport\Prague\Request\RabbitMQ\VehiclePosition;
 
 use App\Request\RabbitMQ\BaseProducer;
 use App\Request\Request;
-use Gamee\RabbitMQ\Producer\Producer;
+use Contributte\RabbitMQ\Producer\Producer;
 
 class VehiclePositionProducer extends BaseProducer
 {

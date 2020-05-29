@@ -12,7 +12,7 @@ use App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableConsumer;
 use App\Transport\Prague\Stop\Stop;
 use App\Transport\Prague\StopLine\StopLineFactory;
 use Bunny\Message;
-use Gamee\RabbitMQ\Consumer\IConsumer;
+use Contributte\RabbitMQ\Consumer\IConsumer;
 use InvalidArgumentException;
 use Mistrfilda\Pid\Api\PidService;
 use Mistrfilda\Pid\Api\StopTime\StopTime as PIDStopTime;
