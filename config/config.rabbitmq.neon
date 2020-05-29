@@ -38,9 +38,9 @@ rabbitmq:
 
 services:
 	pragueDepartureTableConsumer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableConsumer
-	pragueDepartureTableProducer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableProducer(@Gamee\RabbitMQ\Client::getProducer(pragueDepartureTableProducer))
+	pragueDepartureTableProducer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableProducer(@Contributte\RabbitMQ\Client::getProducer(pragueDepartureTableProducer))
 
 	pragueVehiclePositionConsumer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionConsumer
-	pragueVehiclePositionProducer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer(@Gamee\RabbitMQ\Client::getProducer(pragueVehiclePositionProducer))
+	pragueVehiclePositionProducer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer(@Contributte\RabbitMQ\Client::getProducer(pragueVehiclePositionProducer))
 
 	- App\Transport\Prague\Request\RequestFacade

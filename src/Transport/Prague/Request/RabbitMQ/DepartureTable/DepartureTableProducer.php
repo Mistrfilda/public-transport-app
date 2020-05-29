@@ -6,7 +6,7 @@ namespace App\Transport\Prague\Request\RabbitMQ\DepartureTable;
 
 use App\Request\RabbitMQ\BaseProducer;
 use App\Request\Request;
-use Gamee\RabbitMQ\Producer\Producer;
+use Contributte\RabbitMQ\Producer\Producer;
 
 class DepartureTableProducer extends BaseProducer
 {

@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 7.3
+  - 7.4
 
 env:
   - TRAVIS_RABBIT_MQ_QUEUE=TRUE TRAVIS_TESTS_ENV=TRUE

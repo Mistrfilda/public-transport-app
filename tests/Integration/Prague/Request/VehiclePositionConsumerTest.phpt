@@ -12,7 +12,7 @@ use App\Transport\Prague\Vehicle\VehiclePosition;
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
 use App\Transport\Prague\Vehicle\VehicleType;
 use Bunny\Message;
-use Gamee\RabbitMQ\Consumer\IConsumer;
+use Contributte\RabbitMQ\Consumer\IConsumer;
 use InvalidArgumentException;
 use Mistrfilda\Pid\Api\PidService;
 use Mistrfilda\Pid\Api\VehiclePosition\VehiclePosition as PIDVehiclePosition;
