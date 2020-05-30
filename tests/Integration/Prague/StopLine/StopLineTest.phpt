@@ -19,17 +19,13 @@ $container = require __DIR__ . '/../../TestsBootstrap.php';
 
 class StopLineTest extends BaseTest
 {
-	/** @var StopLineFactory */
-	private $stopLineFactory;
+	private StopLineFactory $stopLineFactory;
 
-	/** @var Stop */
-	private $testStop;
+	private Stop $testStop;
 
-	/** @var StopTimeRepository */
-	private $stopTimeRepository;
+	private StopTimeRepository $stopTimeRepository;
 
-	/** @var TripRepository */
-	private $tripRepository;
+	private TripRepository $tripRepository;
 
 	public function testStopLine(): void
 	{

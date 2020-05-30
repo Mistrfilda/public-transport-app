@@ -26,14 +26,11 @@ $container = require __DIR__ . '/../../TestsBootstrap.php';
 
 class VehiclePositionConsumerTest extends BaseTest
 {
-	/** @var VehiclePositionConsumer */
-	private $vehiclePositionConsumer;
+	private VehiclePositionConsumer $vehiclePositionConsumer;
 
-	/** @var VehiclePositionRepository */
-	private $vehiclePositionRepository;
+	private VehiclePositionRepository $vehiclePositionRepository;
 
-	/** @var MessageFactory */
-	private $messageFactory;
+	private MessageFactory $messageFactory;
 
 	public function testConsumeMessage(): void
 	{

@@ -21,14 +21,11 @@ $container = require __DIR__ . '/../../../TestsBootstrap.php';
 
 class StopTimeRemovingTest extends BaseTest
 {
-	/** @var StopTimeRepository */
-	private $stopTimeRepository;
+	private StopTimeRepository $stopTimeRepository;
 
-	/** @var StopTimeImportFacade */
-	private $stopTimeImportFacade;
+	private StopTimeImportFacade $stopTimeImportFacade;
 
-	/** @var Stop */
-	private $testStop;
+	private Stop $testStop;
 
 	public function testImport(): void
 	{

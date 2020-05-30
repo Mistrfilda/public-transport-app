@@ -22,17 +22,13 @@ $container = require __DIR__ . '/../../../TestsBootstrap.php';
 
 class TripTest extends BaseTest
 {
-	/** @var TripRepository */
-	private $tripRepository;
+	private TripRepository $tripRepository;
 
-	/** @var TripFactory */
-	private $tripFactory;
+	private TripFactory $tripFactory;
 
-	/** @var TripImportFacade */
-	private $tripImportFacade;
+	private TripImportFacade $tripImportFacade;
 
-	/** @var Stop */
-	private $testStop;
+	private Stop $testStop;
 
 	public function testImport(): void
 	{

@@ -18,20 +18,15 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 abstract class BaseTest extends TestCase
 {
-	/** @var Container */
-	protected $container;
+	protected Container $container;
 
-	/** @var Connection */
-	protected $connection;
+	protected Connection $connection;
 
-	/** @var EntityManagerInterface */
-	protected $entityManager;
+	protected EntityManagerInterface $entityManager;
 
-	/** @var DateTimeImmutable */
-	protected $now;
+	protected DateTimeImmutable $now;
 
-	/** @var DateTimeImmutable */
-	protected $today;
+	protected DateTimeImmutable $today;
 
 	public function __construct(Container $container)
 	{
