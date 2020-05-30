@@ -8,26 +8,23 @@ use JsonSerializable;
 
 class ChartData implements JsonSerializable
 {
-	/** @var string */
-	private $label;
+	private string $label;
 
-	/** @var string */
-	private $tooltipSuffix;
+	private string $tooltipSuffix;
 
-	/** @var bool */
-	private $useBackgroundColors;
+	private bool $useBackgroundColors;
 
 	/** @var array<int, string> */
-	private $labels;
+	private array $labels;
 
 	/** @var array<int, int> */
-	private $data;
+	private array $data;
 
 	/** @var array<int, string> */
-	private $backgroundColors;
+	private array $backgroundColors;
 
 	/** @var array<int, string> */
-	private $borderColors;
+	private array $borderColors;
 
 	public function __construct(string $label, bool $useBackgroundColors = true, string $tooltipSuffix = '')
 	{

@@ -10,24 +10,18 @@ use Nette\Security\User;
 
 class DashboardDefaultTemplate
 {
-	/** @var User */
-	public $user;
+	public User $user;
 
-	/** @var string */
-	public $baseUrl;
+	public string $baseUrl;
 
-	/** @var string */
-	public $basePath;
+	public string $basePath;
 
 	/** @var mixed[] */
-	public $flashes;
+	public array $flashes;
 
-	/** @var DashboardPresenter */
-	public $control;
+	public DashboardPresenter $control;
 
-	/** @var DashboardPresenter */
-	public $presenter;
+	public DashboardPresenter $presenter;
 
-	/** @var AppAdmin */
-	public $appAdmin;
+	public AppAdmin $appAdmin;
 }

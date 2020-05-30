@@ -10,11 +10,9 @@ use App\UI\Admin\Base\AdminDatagridFactory;
 
 class StatisticDatagridFactory
 {
-	/** @var AdminDatagridFactory */
-	private $adminDatagridFactory;
+	private AdminDatagridFactory $adminDatagridFactory;
 
-	/** @var TripStatisticDataRepository */
-	private $tripStatisticDataRepository;
+	private TripStatisticDataRepository $tripStatisticDataRepository;
 
 	public function __construct(
 		AdminDatagridFactory $adminDatagridFactory,

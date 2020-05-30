@@ -6,6 +6,8 @@ namespace App\Transport\Prague\Statistic;
 
 use App\Doctrine\BaseRepository;
 use App\Doctrine\OrderBy;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 
 class TripStatisticDataRepository extends BaseRepository
@@ -29,6 +31,10 @@ class TripStatisticDataRepository extends BaseRepository
 		return $qb->getQuery()->getResult();
 	}
 
+	/**
+	 * @throws NoResultException
+	 * @throws NonUniqueResultException
+	 */
 	public function findByTripIdSingle(string $tripId): TripStatisticData
 	{
 		$qb = $this->createQueryBuilder();

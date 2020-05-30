@@ -10,25 +10,13 @@ use Nette\Utils\Random;
 
 class ModalRendererControl extends Control
 {
-	/**
-	 * @var string
-	 */
-	protected $modalId;
+	protected string $modalId;
 
-	/**
-	 * @var string|null
-	 */
-	protected $templateFile = null;
+	protected ?string $templateFile = null;
 
-	/**
-	 * @var string|null
-	 */
-	private $heading = null;
+	private ?string $heading = null;
 
-	/**
-	 * @var IHtmlString|null
-	 */
-	private $content = null;
+	private ?IHtmlString $content = null;
 
 	public function __construct()
 	{

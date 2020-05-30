@@ -12,11 +12,9 @@ use Ramsey\Uuid\Uuid;
 
 class DepartureTableStopLinesFactory implements IDepartureTableStopLinesFactory
 {
-	/** @var StopLineFactory */
-	private $stopLineFactory;
+	private StopLineFactory $stopLineFactory;
 
-	/** @var DepartureTableRepository */
-	private $departureTableRepository;
+	private DepartureTableRepository $departureTableRepository;
 
 	public function __construct(
 		StopLineFactory $stopLineFactory,

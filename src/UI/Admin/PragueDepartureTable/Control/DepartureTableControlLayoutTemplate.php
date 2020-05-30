@@ -8,6 +8,7 @@ use App\Transport\Prague\DepartureTable\DepartureTable;
 use App\Transport\Prague\StopLine\StopLine;
 use App\UI\Admin\PragueDepartureTable\PragueDepartureTablePresenter;
 use Nette\Security\User;
+use stdClass;
 
 /**
  * @property User $user
@@ -19,9 +20,9 @@ use Nette\Security\User;
  * @property StopLine[] $stopLines
  * @property DepartureTable $departureTable
  * @property bool $renderModal
- * @property \stdClass $_l
- * @property \stdClass $_g
- * @property \stdClass $_b
+ * @property stdClass $_l
+ * @property stdClass $_g
+ * @property stdClass $_b
  * @method bool isLinkCurrent(string $destination = null, $args = [])
  * @method bool isModuleCurrent(string $module)
  */

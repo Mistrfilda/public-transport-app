@@ -13,20 +13,15 @@ use App\Utils\DatetimeFactory;
 
 class StopLineFactory
 {
-	/** @var StopTimeRepository */
-	private $stopTimeRepository;
+	private StopTimeRepository $stopTimeRepository;
 
-	/** @var TripRepository */
-	private $tripRepository;
+	private TripRepository $tripRepository;
 
-	/** @var VehiclePositionRepository */
-	private $vehiclePositionRepository;
+	private VehiclePositionRepository $vehiclePositionRepository;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
-	/** @var TripListCacheService */
-	private $tripListCacheService;
+	private TripListCacheService $tripListCacheService;
 
 	public function __construct(
 		StopTimeRepository $stopTimeRepository,

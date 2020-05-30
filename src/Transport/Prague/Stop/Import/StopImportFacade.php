@@ -14,20 +14,15 @@ use Throwable;
 
 class StopImportFacade
 {
-	/** @var PidService */
-	private $pidApiService;
+	private PidService $pidApiService;
 
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
-	/** @var StopFactory */
-	private $stopFactory;
+	private StopFactory $stopFactory;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
 	public function __construct(
 		PidService $pidService,
@@ -48,8 +43,8 @@ class StopImportFacade
 		$this->logger->info('Importing stops from pid api');
 
 		//Proccessing 5000 result because thats maxximum of results which api can send back
-		$step = 5000;
-		$maxStep = 30000;
+		$step = 5_000;
+		$maxStep = 30_000;
 		$currentStep = 0;
 		$noResult = false;
 

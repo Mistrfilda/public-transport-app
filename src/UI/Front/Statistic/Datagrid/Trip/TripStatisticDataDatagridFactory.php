@@ -10,11 +10,9 @@ use App\UI\Front\Base\FrontDatagridFactory;
 
 class TripStatisticDataDatagridFactory
 {
-	/** @var FrontDatagridFactory */
-	private $frontDatagridFactory;
+	private FrontDatagridFactory $frontDatagridFactory;
 
-	/** @var TripStatisticDataRepository */
-	private $tripStatisticDataRepository;
+	private TripStatisticDataRepository $tripStatisticDataRepository;
 
 	public function __construct(
 		FrontDatagridFactory $frontDatagridFactory,

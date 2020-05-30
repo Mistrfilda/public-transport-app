@@ -15,10 +15,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class GenerateRequestsCommand extends Command
 {
 	/** @var IRequestFacade[] */
-	private $requestFacades;
+	private array $requestFacades;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
 	/**
 	 * @param IRequestFacade[] $requestFacades

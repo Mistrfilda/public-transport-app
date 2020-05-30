@@ -16,26 +16,19 @@ use Throwable;
 
 class StopTimeImportFacade
 {
-	/** @var PidService */
-	private $pidService;
+	private PidService $pidService;
 
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var StopTimeRepository */
-	private $stopTimeRepository;
+	private StopTimeRepository $stopTimeRepository;
 
-	/** @var StopTimeFactory */
-	private $stopTimeFactory;
+	private StopTimeFactory $stopTimeFactory;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
 	public function __construct(
 		PidService $pidService,
@@ -77,7 +70,7 @@ class StopTimeImportFacade
 			);
 
 			$count++;
-			$stopTimeResponse = $this->pidService->sendGetStopTimesRequest($stop->getStopId(), 5000, 0, $date);
+			$stopTimeResponse = $this->pidService->sendGetStopTimesRequest($stop->getStopId(), 5_000, 0, $date);
 
 			if ($stopTimeResponse->getCount() === 0) {
 				continue;

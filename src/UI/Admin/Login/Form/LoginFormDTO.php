@@ -10,9 +10,7 @@ class LoginFormDTO
 {
 	use SmartObject;
 
-	/** @var string */
-	public $username;
+	public string $username;
 
-	/** @var string */
-	public $password;
+	public string $password;
 }

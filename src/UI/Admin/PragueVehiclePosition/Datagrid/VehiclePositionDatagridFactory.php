@@ -10,11 +10,9 @@ use App\UI\Admin\Base\AdminDatagridFactory;
 
 class VehiclePositionDatagridFactory
 {
-	/** @var AdminDatagridFactory */
-	private $adminDatagridFactory;
+	private AdminDatagridFactory $adminDatagridFactory;
 
-	/** @var VehiclePositionRepository */
-	private $vehiclePositionRepository;
+	private VehiclePositionRepository $vehiclePositionRepository;
 
 	public function __construct(
 		AdminDatagridFactory $adminDatagridFactory,

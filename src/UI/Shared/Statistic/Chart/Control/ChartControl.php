@@ -12,14 +12,11 @@ use Nette\Utils\Random;
 
 class ChartControl extends Control
 {
-	/** @var string */
-	private $type;
+	private string $type;
 
-	/** @var string */
-	private $cardHeading;
+	private string $cardHeading;
 
-	/** @var IChartDataProvider */
-	private $chartDataProvider;
+	private IChartDataProvider $chartDataProvider;
 
 	public function __construct(
 		string $type,

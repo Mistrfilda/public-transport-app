@@ -10,14 +10,11 @@ use App\Utils\DatetimeFactory;
 
 class PragueDepartureTableListDataFactory
 {
-	/** @var DepartureTableRepository */
-	private $departureTableRepository;
+	private DepartureTableRepository $departureTableRepository;
 
-	/** @var StopTimeRepository */
-	private $stopTimeRepository;
+	private StopTimeRepository $stopTimeRepository;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
 	public function __construct(
 		DepartureTableRepository $departureTableRepository,

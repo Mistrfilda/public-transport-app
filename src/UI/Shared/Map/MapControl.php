@@ -9,11 +9,9 @@ use Nette\Application\UI\Control;
 
 class MapControl extends Control
 {
-	/** @var IMapObjectProvider */
-	private $mapObjectProvider;
+	private IMapObjectProvider $mapObjectProvider;
 
-	/** @var string */
-	private $mapApiKey;
+	private string $mapApiKey;
 
 	public function __construct(string $mapApiKey, IMapObjectProvider $mapObjectProvider)
 	{

@@ -10,8 +10,7 @@ use App\UI\Front\Statistic\Datagrid\Trip\RouteStatisticDatagridFactory;
 
 class MainStatisticControl extends BaseControl
 {
-	/** @var RouteStatisticDatagridFactory */
-	private $routeStatisticDatagridFactory;
+	private RouteStatisticDatagridFactory $routeStatisticDatagridFactory;
 
 	public function __construct(RouteStatisticDatagridFactory $routeStatisticDatagridFactory)
 	{

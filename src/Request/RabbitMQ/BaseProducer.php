@@ -8,8 +8,7 @@ use App\Request\Request;
 
 abstract class BaseProducer
 {
-	/** @var MessageFactory */
-	protected $messageFactory;
+	protected MessageFactory $messageFactory;
 
 	public function injectMessageFactory(MessageFactory $messageFactory): void
 	{

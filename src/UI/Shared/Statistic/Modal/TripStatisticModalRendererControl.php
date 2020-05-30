@@ -9,11 +9,9 @@ use App\UI\Shared\Modal\ModalRendererControl;
 
 class TripStatisticModalRendererControl extends ModalRendererControl
 {
-	/** @var TripStatisticDataRepository */
-	private $tripStatisticDataRepository;
+	private TripStatisticDataRepository $tripStatisticDataRepository;
 
-	/** @var string */
-	private $tripId;
+	private string $tripId;
 
 	public function __construct(string $tripId, TripStatisticDataRepository $tripStatisticDataRepository)
 	{

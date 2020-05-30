@@ -13,11 +13,9 @@ use Nette\Security\Passwords;
 
 class AppAdminAuthenticator implements IAuthenticator
 {
-	/** @var AppAdminRepository */
-	private $appAdminRepository;
+	private AppAdminRepository $appAdminRepository;
 
-	/** @var Passwords */
-	private $passwords;
+	private Passwords $passwords;
 
 	public function __construct(AppAdminRepository $appAdminRepository, Passwords $passwords)
 	{

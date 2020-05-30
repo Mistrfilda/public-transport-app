@@ -11,8 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateTripListCommand extends Command
 {
-	/** @var TripListFacade */
-	private $tripListFacade;
+	private TripListFacade $tripListFacade;
 
 	public function __construct(TripListFacade $tripListFacade)
 	{

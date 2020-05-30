@@ -11,17 +11,13 @@ use Ramsey\Uuid\UuidInterface;
 
 class AppAdminFacade
 {
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var AppAdminRepository */
-	private $appAdminRepository;
+	private AppAdminRepository $appAdminRepository;
 
-	/** @var Passwords */
-	private $passwords;
+	private Passwords $passwords;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
 	public function __construct(
 		EntityManagerInterface $entityManager,

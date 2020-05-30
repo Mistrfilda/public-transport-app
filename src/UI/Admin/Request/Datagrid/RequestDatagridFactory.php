@@ -16,14 +16,11 @@ use Nette\Utils\Html;
 
 class RequestDatagridFactory
 {
-	/** @var AdminDatagridFactory */
-	private $datagridFactory;
+	private AdminDatagridFactory $datagridFactory;
 
-	/** @var RequestRepository */
-	private $requestRepository;
+	private RequestRepository $requestRepository;
 
-	/** @var DepartureTableRepository */
-	private $pragueDepartureTableRepository;
+	private DepartureTableRepository $pragueDepartureTableRepository;
 
 	public function __construct(
 		AdminDatagridFactory $datagridFactory,
@@ -57,22 +54,18 @@ class RequestDatagridFactory
 		$grid->setFilterSelect($type, $types);
 
 		$grid->addColumnDateTime('createdAt', 'Created at')
-			->setRenderer(function (Request $request): string {
-				return AdminDatagrid::formatNullableDatetimeColumn($request->getCreatedAt());
-			})
+			->setRenderer(fn (Request $request): string => AdminDatagrid::formatNullableDatetimeColumn($request->getCreatedAt()))
 			->setSortable()
 			->setFilterDate();
 
 		$grid->addColumnDateTime('finishedAt', 'Finished at')
-			->setRenderer(function (Request $request): string {
-				return AdminDatagrid::formatNullableDatetimeColumn($request->getFinishedAt());
-			})
+			->setRenderer(
+				fn (Request $request): string => AdminDatagrid::formatNullableDatetimeColumn($request->getFinishedAt())
+			)
 			->setFilterDate();
 
 		$grid->addColumnDateTime('failedAt', 'Failed at')
-			->setRenderer(function (Request $request): string {
-				return AdminDatagrid::formatNullableDatetimeColumn($request->getFailedAt());
-			})
+			->setRenderer(fn (Request $request): string => AdminDatagrid::formatNullableDatetimeColumn($request->getFailedAt()))
 			->setFilterDate();
 
 		$departureTable = $grid->addColumnText('departureTableName', 'Departure table')

@@ -23,29 +23,21 @@ use Tracy\ILogger;
 
 class DepartureTableConsumer implements IConsumer
 {
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var ILogger */
-	private $tracyLogger;
+	private ILogger $tracyLogger;
 
-	/** @var StopTimeImportFacade */
-	private $stopTimeImportFacade;
+	private StopTimeImportFacade $stopTimeImportFacade;
 
-	/** @var TripImportFacade */
-	private $tripImportFacade;
+	private TripImportFacade $tripImportFacade;
 
-	/** @var DepartureTableRepository */
-	private $departureTableRepository;
+	private DepartureTableRepository $departureTableRepository;
 
-	/** @var RequestRepository */
-	private $requestRepository;
+	private RequestRepository $requestRepository;
 
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
 	public function __construct(
 		LoggerInterface $logger,

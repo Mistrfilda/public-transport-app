@@ -12,11 +12,10 @@ class WebpackAssetsFactory
 {
 	private const ENTRYPOINT_NAME = 'entrypoints.json';
 
-	/** @var string */
-	private $buildedAssetsDir;
+	private string $buildedAssetsDir;
 
 	/** @var string[] */
-	private $loadedAssets = null;
+	private ?array $loadedAssets = null;
 
 	public function __construct(string $buildedAssetsDir)
 	{

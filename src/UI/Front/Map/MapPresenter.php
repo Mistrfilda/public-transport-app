@@ -11,11 +11,9 @@ use App\UI\Shared\Map\MapControlFactory;
 
 class MapPresenter extends FrontPresenter
 {
-	/** @var MapControlFactory */
-	private $mapControlFactory;
+	private MapControlFactory $mapControlFactory;
 
-	/** @var VehicleMapObjectProvider */
-	private $vehicleMapObjectProvider;
+	private VehicleMapObjectProvider $vehicleMapObjectProvider;
 
 	public function __construct(
 		MapControlFactory $mapControlFactory,

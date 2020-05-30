@@ -6,20 +6,16 @@ namespace App\UI\Admin\Menu;
 
 class MenuItem
 {
-	/** @var string */
-	private $presenter;
+	private string $presenter;
 
-	/** @var string */
-	private $action;
+	private string $action;
 
-	/** @var string */
-	private $icon;
+	private string $icon;
 
-	/** @var string */
-	private $label;
+	private string $label;
 
 	/** @var MenuItem[] */
-	private $childrens;
+	private array $childrens;
 
 	/**
 	 * MenuItem constructor.

@@ -14,17 +14,14 @@ class StopCacheService
 
 	private const STOP_PAIRS_KEY = 'stopsByStopId';
 
-	/** @var Cache */
-	private $cache;
+	private Cache $cache;
 
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
 	/** @var string[] */
-	private $stopPairs;
+	private array $stopPairs;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
 	public function __construct(
 		IStorage $storage,

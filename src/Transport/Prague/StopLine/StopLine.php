@@ -13,32 +13,23 @@ use DateTimeImmutable;
 
 class StopLine implements IStopLine
 {
-	/** @var Stop */
-	private $stop;
+	private IStop $stop;
 
-	/** @var DateTimeImmutable */
-	private $arrivalTime;
+	private DateTimeImmutable $arrivalTime;
 
-	/** @var DateTimeImmutable */
-	private $departureTime;
+	private DateTimeImmutable $departureTime;
 
-	/** @var string */
-	private $tripId;
+	private string $tripId;
 
-	/** @var string */
-	private $lineNumber;
+	private string $lineNumber;
 
-	/** @var string */
-	private $finalDestination;
+	private string $finalDestination;
 
-	/** @var Vehicle|null */
-	private $vehicle;
+	private ?IVehicle $vehicle = null;
 
-	/** @var DateTimeImmutable */
-	private $now;
+	private DateTimeImmutable $now;
 
-	/** @var bool */
-	private $hasStatistics;
+	private bool $hasStatistics;
 
 	public function __construct(
 		Stop $stop,

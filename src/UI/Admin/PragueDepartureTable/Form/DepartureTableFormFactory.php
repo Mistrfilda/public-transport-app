@@ -15,17 +15,13 @@ use Ramsey\Uuid\UuidInterface;
 
 class DepartureTableFormFactory
 {
-	/** @var DepartureTableRepository */
-	private $departureTableRepository;
+	private DepartureTableRepository $departureTableRepository;
 
-	/** @var DepartureTableFacade */
-	private $departureTableFacade;
+	private DepartureTableFacade $departureTableFacade;
 
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
-	/** @var AdminFormFactory */
-	private $adminFormFactory;
+	private AdminFormFactory $adminFormFactory;
 
 	public function __construct(
 		DepartureTableRepository $departureTableRepository,

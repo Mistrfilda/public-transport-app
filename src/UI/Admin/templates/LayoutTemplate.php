@@ -9,6 +9,7 @@ use App\UI\Admin\AdminPresenter;
 use App\UI\Admin\Dashboard\DashboardPresenter;
 use App\UI\Admin\Menu\MenuGroup;
 use Nette\Security\User;
+use stdClass;
 
 /**
  * @property User $user
@@ -19,9 +20,9 @@ use Nette\Security\User;
  * @property AdminPresenter $presenter
  * @property AppAdmin $appAdmin
  * @property MenuGroup[] $menuItems
- * @property \stdClass $_l
- * @property \stdClass $_g
- * @property \stdClass $_b
+ * @property stdClass $_l
+ * @property stdClass $_g
+ * @property stdClass $_b
  * @method bool isLinkCurrent(string $destination = null, $args = [])
  * @method bool isModuleCurrent(string $module)
  * @method string|null getModalComponentName()

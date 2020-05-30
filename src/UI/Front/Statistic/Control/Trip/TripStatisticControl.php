@@ -21,26 +21,19 @@ use Doctrine\ORM\NoResultException;
 
 class TripStatisticControl extends BaseControl
 {
-	/** @var string */
-	private $tripId;
+	private string $tripId;
 
-	/** @var TripStatisticDataRepository */
-	private $tripStatisticDataRepository;
+	private TripStatisticDataRepository $tripStatisticDataRepository;
 
-	/** @var ChartControlFactory */
-	private $chartControlFactory;
+	private ChartControlFactory $chartControlFactory;
 
-	/** @var TripStatisticDelayChartDataProvider */
-	private $tripStatisticChartDataProvider;
+	private TripStatisticDelayChartDataProvider $tripStatisticChartDataProvider;
 
-	/** @var TripStatisticDataCountChartDataProvider */
-	private $tripStatisticDataCountChartDataProvider;
+	private TripStatisticDataCountChartDataProvider $tripStatisticDataCountChartDataProvider;
 
-	/** @var TripStatisticVehicleRegistrationChartDataProvider */
-	private $tripStatisticVehicleRegistrationChartDataProvider;
+	private TripStatisticVehicleRegistrationChartDataProvider $tripStatisticVehicleRegistrationChartDataProvider;
 
-	/** @var TripStatisticDataDatagridFactory */
-	private $tripStatisticDataDatagridFactory;
+	private TripStatisticDataDatagridFactory $tripStatisticDataDatagridFactory;
 
 	public function __construct(
 		string $tripId,

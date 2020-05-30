@@ -11,8 +11,7 @@ use App\UI\Front\FrontPresenter;
 
 class PragueDepartureTablePresenter extends FrontPresenter
 {
-	/** @var DepartureTableControlFactory */
-	private $departureTableControlFactory;
+	private DepartureTableControlFactory $departureTableControlFactory;
 
 	public function __construct(
 		DepartureTableControlFactory $departureTableControlFactory

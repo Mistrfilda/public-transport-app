@@ -12,11 +12,9 @@ use App\Utils\DatetimeFactory;
 
 class TripStatisticDataCountChartDataProvider implements IChartDataProvider, ITripStatisticChartDataProvider
 {
-	/** @var TripStatisticDataRepository */
-	private $tripStatisticDataRepository;
+	private TripStatisticDataRepository $tripStatisticDataRepository;
 
-	/** @var string|null */
-	private $tripId = null;
+	private ?string $tripId = null;
 
 	public function __construct(TripStatisticDataRepository $tripStatisticDataRepository)
 	{

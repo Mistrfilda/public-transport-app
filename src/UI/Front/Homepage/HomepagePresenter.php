@@ -16,20 +16,15 @@ use App\UI\Shared\Statistic\Control\StatisticControlFactory;
 
 class HomepagePresenter extends FrontPresenter
 {
-	/** @var DepartureTableRepository */
-	private $departureTableRepository;
+	private DepartureTableRepository $departureTableRepository;
 
-	/** @var StatisticControlFactory */
-	private $statisticControlFactory;
+	private StatisticControlFactory $statisticControlFactory;
 
-	/** @var MapControlFactory */
-	private $mapControlFactory;
+	private MapControlFactory $mapControlFactory;
 
-	/** @var VehicleMapObjectProvider */
-	private $vehicleMapObjectProvider;
+	private VehicleMapObjectProvider $vehicleMapObjectProvider;
 
-	/** @var PragueDepartureTableListControlFactory */
-	private $pragueDepartureTableListControlFactory;
+	private PragueDepartureTableListControlFactory $pragueDepartureTableListControlFactory;
 
 	public function __construct(
 		DepartureTableRepository $departureTableRepository,

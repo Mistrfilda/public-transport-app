@@ -8,8 +8,7 @@ use Nette\Application\UI\Control;
 
 class PragueDepartureTableListControl extends Control
 {
-	/** @var PragueDepartureTableListDataFactory */
-	private $departureTableListDataFactory;
+	private PragueDepartureTableListDataFactory $departureTableListDataFactory;
 
 	public function __construct(
 		PragueDepartureTableListDataFactory $departureTableListDataFactory

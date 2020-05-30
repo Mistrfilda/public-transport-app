@@ -12,20 +12,15 @@ use Ramsey\Uuid\Uuid;
 
 class DepartureTableFacade
 {
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var DepartureTableRepository */
-	private $departureTableRepository;
+	private DepartureTableRepository $departureTableRepository;
 
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
 	public function __construct(
 		EntityManagerInterface $entityManager,

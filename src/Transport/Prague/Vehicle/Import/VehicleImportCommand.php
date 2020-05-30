@@ -10,8 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class VehicleImportCommand extends Command
 {
-	/** @var VehicleImportFacade */
-	private $vehicleImportFacade;
+	private VehicleImportFacade $vehicleImportFacade;
 
 	public function __construct(VehicleImportFacade $vehicleImportFacade)
 	{

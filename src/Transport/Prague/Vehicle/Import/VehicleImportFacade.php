@@ -14,20 +14,15 @@ use Throwable;
 
 class VehicleImportFacade
 {
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var PidService */
-	private $pidService;
+	private PidService $pidService;
 
-	/** @var VehicleFactory */
-	private $vehicleFactory;
+	private VehicleFactory $vehicleFactory;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
 	public function __construct(
 		EntityManagerInterface $entityManager,
@@ -46,7 +41,7 @@ class VehicleImportFacade
 	public function import(): void
 	{
 		$this->logger->info('Sending vehicle position request');
-		$vehiclePositionResponse = $this->pidService->sendGetVehiclePositionRequest(5000);
+		$vehiclePositionResponse = $this->pidService->sendGetVehiclePositionRequest(5_000);
 
 		$this->entityManager->beginTransaction();
 		try {

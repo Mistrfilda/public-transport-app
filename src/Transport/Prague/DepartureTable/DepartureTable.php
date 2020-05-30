@@ -26,16 +26,14 @@ class DepartureTable implements IDepartureTable, IEntity, JsonSerializable
 	use UpdatedAt;
 
 	/**
-	 * @var Stop
 	 * @ORM\ManyToOne(targetEntity="App\Transport\Prague\Stop\Stop")
 	 */
-	private $stop;
+	private Stop $stop;
 
 	/**
-	 * @var int
 	 * @ORM\Column(type="integer")
 	 */
-	private $numberOfFutureDays;
+	private int $numberOfFutureDays;
 
 	public function __construct(
 		Stop $stop,

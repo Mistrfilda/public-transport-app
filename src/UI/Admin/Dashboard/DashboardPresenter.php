@@ -12,8 +12,7 @@ use Nette\Utils\Html;
 
 class DashboardPresenter extends AdminPresenter
 {
-	/** @var StatisticControlFactory */
-	private $statisticControlFactory;
+	private StatisticControlFactory $statisticControlFactory;
 
 	public function __construct(
 		StatisticControlFactory $statisticControlFactory

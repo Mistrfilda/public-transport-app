@@ -16,9 +16,7 @@ class StopTimeTimeFactory
 			throw new InvalidTimeException();
 		}
 
-		$apiTimeParts = array_map(function (string $value): int {
-			return (int) $value;
-		}, $apiTimeParts);
+		$apiTimeParts = array_map(fn (string $value): int => (int) $value, $apiTimeParts);
 
 		//API WTF? There are tiems like 24:55:00, 26:33:00
 		if ($apiTimeParts[0] >= 24) {

@@ -10,8 +10,7 @@ use Mistrfilda\Pid\Api\StopTime\StopTime as PIDStopTime;
 
 class StopTimeFactory
 {
-	/** @var StopTimeTimeFactory */
-	private $stopTimeTimeFactory;
+	private StopTimeTimeFactory $stopTimeTimeFactory;
 
 	public function __construct(StopTimeTimeFactory $stopTimeTimeFactory)
 	{

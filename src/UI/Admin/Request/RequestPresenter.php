@@ -10,8 +10,7 @@ use App\UI\Admin\Request\Datagrid\RequestDatagridFactory;
 
 class RequestPresenter extends AdminPresenter
 {
-	/** @var RequestDatagridFactory */
-	private $requestDatagridFactory;
+	private RequestDatagridFactory $requestDatagridFactory;
 
 	public function __construct(RequestDatagridFactory $requestDatagridFactory)
 	{

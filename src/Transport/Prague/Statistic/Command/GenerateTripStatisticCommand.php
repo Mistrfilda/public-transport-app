@@ -13,8 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateTripStatisticCommand extends Command
 {
-	/** @var TripStatisticFacade */
-	private $tripStatisticFacade;
+	private TripStatisticFacade $tripStatisticFacade;
 
 	public function __construct(TripStatisticFacade $tripStatisticFacade)
 	{

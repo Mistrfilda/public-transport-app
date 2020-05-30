@@ -11,8 +11,7 @@ use Nette\Application\UI\InvalidLinkException;
 
 abstract class AdminPresenter extends BasePresenter
 {
-	/** @var CurrentAppAdminGetter */
-	protected $currentAppAdminGetter;
+	protected CurrentAppAdminGetter $currentAppAdminGetter;
 
 	public function injectCurrentAppAdminGetter(CurrentAppAdminGetter $currentAppAdminGetter): void
 	{
@@ -35,7 +34,7 @@ abstract class AdminPresenter extends BasePresenter
 	 */
 	public function formatLayoutTemplateFiles(): array
 	{
-		return array_merge([__DIR__ . '/templates/@layout.latte'], parent::formatLayoutTemplateFiles());
+		return [...[__DIR__ . '/templates/@layout.latte'], ...parent::formatLayoutTemplateFiles()];
 	}
 
 	public function handleLogout(): void
