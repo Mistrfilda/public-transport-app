@@ -37,6 +37,10 @@ services:
     SlevomatCodingStandard\Sniffs\Namespaces\ReferenceUsedNamesOnlySniff:
         searchAnnotations: true
 
+    SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff: ~
+    SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff: ~
+    SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff: ~
+
     PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer:
         order:
             - 'use_trait'
@@ -64,7 +68,6 @@ parameters:
         - 'php71'
         - 'common'
         - 'dead-code'
-        - 'types'
 
     indentation: 'tab'
 

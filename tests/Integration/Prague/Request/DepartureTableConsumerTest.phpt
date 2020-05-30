@@ -28,14 +28,11 @@ $container = require __DIR__ . '/../../TestsBootstrap.php';
 
 class DepartureTableConsumerTest extends BaseTest
 {
-	/** @var StopLineFactory */
-	private $stopLineFactory;
+	private StopLineFactory $stopLineFactory;
 
-	/** @var DepartureTableConsumer */
-	private $departureTableConsumer;
+	private DepartureTableConsumer $departureTableConsumer;
 
-	/** @var MessageFactory */
-	private $messageFactory;
+	private MessageFactory $messageFactory;
 
 	public function testConsumeMessage(): void
 	{

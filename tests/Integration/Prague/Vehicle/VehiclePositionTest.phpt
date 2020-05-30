@@ -21,18 +21,11 @@ $container = require __DIR__ . '/../../TestsBootstrap.php';
 
 class VehiclePositionTest extends BaseTest
 {
-	/**
-	 * @var VehiclePositionRepository
-	 */
-	private $vehiclePositionRepository;
+	private VehiclePositionRepository $vehiclePositionRepository;
 
-	/**
-	 * @var VehicleImportFacade
-	 */
-	private $vehicleImportFacade;
+	private VehicleImportFacade $vehicleImportFacade;
 
-	/** @var VehicleRepository */
-	private $vehicleRepository;
+	private VehicleRepository $vehicleRepository;
 
 	public function testVehiclePosition(): void
 	{

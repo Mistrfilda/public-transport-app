@@ -30,17 +30,13 @@ class RequestTest extends BaseTest
 		'pragueVehiclePositionProducer' => VehiclePositionProducer::class,
 	];
 
-	/** @var MessageFactory */
-	private $messageFactory;
+	private MessageFactory $messageFactory;
 
-	/** @var RequestFacade */
-	private $requestFacade;
+	private RequestFacade $requestFacade;
 
-	/** @var RequestRepository */
-	private $requestRepository;
+	private RequestRepository $requestRepository;
 
-	/** @var Stop */
-	private $testStop;
+	private Stop $testStop;
 
 	public function testCreateRequest(): void
 	{

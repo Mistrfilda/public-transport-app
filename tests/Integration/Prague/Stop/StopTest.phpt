@@ -23,17 +23,13 @@ $container = require __DIR__ . '/../../TestsBootstrap.php';
 
 class StopTest extends BaseTest
 {
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
-	/** @var StopFactory */
-	private $stopFactory;
+	private StopFactory $stopFactory;
 
-	/** @var StopImportFacade */
-	private $stopImportFacade;
+	private StopImportFacade $stopImportFacade;
 
-	/** @var StopCacheService */
-	private $stopCacheService;
+	private StopCacheService $stopCacheService;
 
 	public function testImport(): void
 	{
