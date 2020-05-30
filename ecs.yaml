@@ -32,6 +32,11 @@ services:
 
     Symplify\CodingStandard\Sniffs\Debug\DebugFunctionCallSniff: ~
 
+    SlevomatCodingStandard\Sniffs\Namespaces\RequireOneNamespaceInFileSniff: ~
+    SlevomatCodingStandard\Sniffs\Namespaces\NamespaceDeclarationSniff: ~
+    SlevomatCodingStandard\Sniffs\Namespaces\ReferenceUsedNamesOnlySniff:
+        searchAnnotations: true
+
     PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer:
         order:
             - 'use_trait'
