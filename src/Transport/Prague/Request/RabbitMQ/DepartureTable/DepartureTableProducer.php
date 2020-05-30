@@ -10,8 +10,7 @@ use Contributte\RabbitMQ\Producer\Producer;
 
 class DepartureTableProducer extends BaseProducer
 {
-	/** @var Producer */
-	private $producer;
+	private Producer $producer;
 
 	public function __construct(Producer $producer)
 	{

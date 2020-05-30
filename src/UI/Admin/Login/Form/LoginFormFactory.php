@@ -11,11 +11,9 @@ use Nette\Security\AuthenticationException;
 
 class LoginFormFactory
 {
-	/** @var AdminFormFactory */
-	private $adminFormFactory;
+	private AdminFormFactory $adminFormFactory;
 
-	/** @var CurrentAppAdminGetter */
-	private $currentAppAdminGetter;
+	private CurrentAppAdminGetter $currentAppAdminGetter;
 
 	public function __construct(
 		AdminFormFactory $adminFormFactory,

@@ -25,28 +25,24 @@ class TripList implements IEntity
 	use UpdatedAt;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $tripId;
+	private string $tripId;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $routeId;
+	private string $routeId;
 
 	/**
-	 * @var DateTimeImmutable
 	 * @ORM\Column(type="datetime_immutable")
 	 */
-	private $newestKnownPosition;
+	private DateTimeImmutable $newestKnownPosition;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $lastFinalStation;
+	private string $lastFinalStation;
 
 	public function __construct(
 		string $tripId,

@@ -19,17 +19,13 @@ use Ramsey\Uuid\Uuid;
 
 class PragueDepartureTablePresenter extends AdminPresenter
 {
-	/** @var DepartureTableDatagridFactory */
-	private $departureTableDatagridFactory;
+	private DepartureTableDatagridFactory $departureTableDatagridFactory;
 
-	/** @var DepartureTableFormFactory */
-	private $departureTableFormFactory;
+	private DepartureTableFormFactory $departureTableFormFactory;
 
-	/** @var DepartureTableFacade */
-	private $departureTableFacade;
+	private DepartureTableFacade $departureTableFacade;
 
-	/** @var DepartureTableControlFactory */
-	private $departureTableControlFactory;
+	private DepartureTableControlFactory $departureTableControlFactory;
 
 	public function __construct(
 		DepartureTableDatagridFactory $departureTableDatagridFactory,

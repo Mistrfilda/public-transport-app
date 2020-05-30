@@ -12,17 +12,14 @@ class TripListCacheService
 {
 	private const TRIP_LIST_KEY = 'tripList';
 
-	/** @var Cache */
-	private $cache;
+	private Cache $cache;
 
-	/** @var TripListRepository */
-	private $tripListRepository;
+	private TripListRepository $tripListRepository;
 
 	/** @var array<string, int> */
-	private $tripListPairs;
+	private array $tripListPairs;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
 	public function __construct(
 		IStorage $storage,

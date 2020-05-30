@@ -11,11 +11,9 @@ use Doctrine\ORM\QueryBuilder;
 
 abstract class BaseRepository
 {
-	/** @var EntityManagerInterface */
-	protected $entityManager;
+	protected EntityManagerInterface $entityManager;
 
-	/** @var EntityRepository */
-	protected $doctrineRepository;
+	protected EntityRepository $doctrineRepository;
 
 	public function __construct(string $class, EntityManagerInterface $entityManager)
 	{

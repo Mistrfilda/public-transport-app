@@ -8,11 +8,9 @@ use JsonSerializable;
 
 class Coordinates implements JsonSerializable
 {
-	/** @var float */
-	private $latitude;
+	private float $latitude;
 
-	/** @var float */
-	private $longitude;
+	private float $longitude;
 
 	public function __construct(float $latitude, float $longitude)
 	{

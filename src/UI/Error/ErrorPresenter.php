@@ -18,8 +18,7 @@ final class ErrorPresenter extends Presenter
 {
 	use SmartObject;
 
-	/** @var ILogger */
-	private $logger;
+	private ILogger $logger;
 
 	public function __construct(ILogger $logger)
 	{

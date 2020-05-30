@@ -24,16 +24,15 @@ class VehiclePosition implements IEntity, IVehiclePosition
 	use CreatedAt;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $city;
+	private string $city;
 
 	/**
 	 * @var Collection<int,Vehicle>
 	 * @ORM\OneToMany(targetEntity="App\Transport\Prague\Vehicle\Vehicle", mappedBy="vehiclePosition", indexBy="dateTripId")
 	 */
-	private $vehicles;
+	private Collection $vehicles;
 
 	public function __construct(
 		DateTimeImmutable $now

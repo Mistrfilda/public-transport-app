@@ -18,26 +18,19 @@ use Psr\Log\LoggerInterface;
 
 class RequestFacade implements IRequestFacade
 {
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
-	/** @var DepartureTableRepository */
-	private $departureTableRepository;
+	private DepartureTableRepository $departureTableRepository;
 
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var DepartureTableProducer */
-	private $departureTableProducer;
+	private DepartureTableProducer $departureTableProducer;
 
-	/** @var VehiclePositionProducer */
-	private $vehiclePositionProducer;
+	private VehiclePositionProducer $vehiclePositionProducer;
 
-	/** @var RequestRepository */
-	private $requestRepository;
+	private RequestRepository $requestRepository;
 
 	public function __construct(
 		LoggerInterface $logger,

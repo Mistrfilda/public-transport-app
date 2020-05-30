@@ -26,52 +26,44 @@ class Trip implements IEntity
 	use Identifier;
 
 	/**
-	 * @var Stop
 	 * @ORM\ManyToOne(targetEntity="App\Transport\Prague\Stop\Stop")
 	 */
-	private $stop;
+	private Stop $stop;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $serviceId;
+	private string $serviceId;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $tripId;
+	private string $tripId;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $dateTripId;
+	private string $dateTripId;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $tripHeadsign;
+	private string $tripHeadsign;
 
 	/**
-	 * @var bool
 	 * @ORM\Column(type="string")
 	 */
-	private $wheelchairAccessible;
+	private bool $wheelchairAccessible;
 
 	/**
-	 * @var DateTimeImmutable
 	 * @ORM\Column(type="date_immutable")
 	 */
-	private $date;
+	private DateTimeImmutable $date;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $lineNumber;
+	private string $lineNumber;
 
 	public function __construct(
 		Stop $stop,

@@ -15,20 +15,15 @@ use Throwable;
 
 class TripListFacade
 {
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
-	/** @var TripListRepository */
-	private $tripListRepository;
+	private TripListRepository $tripListRepository;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var TripStatisticDataRepository */
-	private $tripStatisticDataRepository;
+	private TripStatisticDataRepository $tripStatisticDataRepository;
 
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
 	public function __construct(
 		DatetimeFactory $datetimeFactory,

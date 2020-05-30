@@ -9,10 +9,10 @@ use JsonSerializable;
 class RequestConditions implements JsonSerializable
 {
 	/** @var array<string, bool> */
-	private $conditions;
+	private array $conditions;
 
 	/** @var array<string, string> */
-	private $parameters;
+	private array $parameters;
 
 	/**
 	 * @param array<string, bool> $conditions

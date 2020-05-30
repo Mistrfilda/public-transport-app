@@ -10,11 +10,9 @@ use App\UI\Admin\Base\AdminDatagridFactory;
 
 class StopDatagridFactory
 {
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
-	/** @var AdminDatagridFactory */
-	private $adminDatagridFactory;
+	private AdminDatagridFactory $adminDatagridFactory;
 
 	public function __construct(StopRepository $stopRepository, AdminDatagridFactory $adminDatagridFactory)
 	{

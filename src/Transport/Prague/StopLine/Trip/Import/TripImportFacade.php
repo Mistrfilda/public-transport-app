@@ -16,26 +16,19 @@ use Throwable;
 
 class TripImportFacade
 {
-	/** @var PidService */
-	private $pidService;
+	private PidService $pidService;
 
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var TripRepository */
-	private $tripRepository;
+	private TripRepository $tripRepository;
 
-	/** @var TripFactory */
-	private $tripFactory;
+	private TripFactory $tripFactory;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
 	public function __construct(
 		PidService $pidService,
@@ -77,7 +70,7 @@ class TripImportFacade
 			);
 
 			$count++;
-			$trips = $this->pidService->sendGetStopTripsRequest($stop->getStopId(), 5000, 0, $date);
+			$trips = $this->pidService->sendGetStopTripsRequest($stop->getStopId(), 5_000, 0, $date);
 
 			if ($trips->getCount() === 0) {
 				continue;

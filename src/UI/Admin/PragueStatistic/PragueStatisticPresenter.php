@@ -10,8 +10,7 @@ use App\UI\Admin\PragueStatistic\Datagrid\StatisticDatagridFactory;
 
 class PragueStatisticPresenter extends AdminPresenter
 {
-	/** @var StatisticDatagridFactory */
-	private $statisticDatagridFactory;
+	private StatisticDatagridFactory $statisticDatagridFactory;
 
 	public function __construct(StatisticDatagridFactory $statisticDatagridFactory)
 	{

@@ -20,23 +20,17 @@ use Tracy\ILogger;
 
 class VehiclePositionConsumer implements IConsumer
 {
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var ILogger */
-	private $tracyLogger;
+	private ILogger $tracyLogger;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
-	/** @var VehicleImportFacade */
-	private $vehicleImportFacade;
+	private VehicleImportFacade $vehicleImportFacade;
 
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var RequestRepository */
-	private $requestRepository;
+	private RequestRepository $requestRepository;
 
 	public function __construct(
 		LoggerInterface $logger,

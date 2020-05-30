@@ -12,14 +12,11 @@ use Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation;
 
 class DepartureTableDatagridFactory
 {
-	/** @var AdminDatagridFactory */
-	private $adminDatagridFactory;
+	private AdminDatagridFactory $adminDatagridFactory;
 
-	/** @var DepartureTableRepository */
-	private $departureTableRepository;
+	private DepartureTableRepository $departureTableRepository;
 
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
 	public function __construct(
 		AdminDatagridFactory $adminDatagridFactory,

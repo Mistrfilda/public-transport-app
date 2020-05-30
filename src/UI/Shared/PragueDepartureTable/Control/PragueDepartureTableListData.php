@@ -10,11 +10,9 @@ class PragueDepartureTableListData
 {
 	public const PLACEHOLDER = '----';
 
-	/** @var DepartureTable */
-	private $departureTable;
+	private DepartureTable $departureTable;
 
-	/** @var string|null */
-	private $destinations;
+	private ?string $destinations = null;
 
 	public function __construct(DepartureTable $departureTable, ?string $destinations)
 	{

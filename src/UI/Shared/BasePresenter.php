@@ -14,11 +14,9 @@ abstract class BasePresenter extends Presenter
 	/** @var string */
 	public const DEFAULT_MODAL_COMPONENT_NAME = 'modalRendererControl';
 
-	/** @var ModalRendererControlFactory */
-	protected $modalRendererControlFactory;
+	protected ModalRendererControlFactory $modalRendererControlFactory;
 
-	/** @var string|null */
-	private $modalComponentName = null;
+	private ?string $modalComponentName = null;
 
 	public function injectModalRendererControlFactory(ModalRendererControlFactory $modalRendererControlFactory): void
 	{

@@ -9,10 +9,9 @@ use DateTimeImmutable;
 trait UpdatedAt
 {
 	/**
-	 * @var DateTimeImmutable
 	 * @ORM\Column(type="datetime_immutable")
 	 */
-	private $updatedAt;
+	private DateTimeImmutable $updatedAt;
 
 	public function getUpdatedAt(): DateTimeImmutable
 	{

@@ -10,11 +10,9 @@ class DepartureTableFormDTO
 {
 	use SmartObject;
 
-	/** @var int */
-	public $stopId;
+	public int $stopId;
 
-	/** @var int */
-	public $numberOfFutureDays;
+	public int $numberOfFutureDays;
 
 	public function getStopId(): int
 	{

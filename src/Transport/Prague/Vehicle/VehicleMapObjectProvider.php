@@ -13,14 +13,11 @@ use Nette\Utils\Html;
 
 class VehicleMapObjectProvider implements IMapObjectProvider
 {
-	/** @var VehiclePositionRepository */
-	private $vehiclePositionRepository;
+	private VehiclePositionRepository $vehiclePositionRepository;
 
-	/** @var StopCacheService */
-	private $stopCacheService;
+	private StopCacheService $stopCacheService;
 
-	/** @var LinkGenerator */
-	private $linkGenerator;
+	private LinkGenerator $linkGenerator;
 
 	public function __construct(
 		VehiclePositionRepository $vehiclePositionRepository,

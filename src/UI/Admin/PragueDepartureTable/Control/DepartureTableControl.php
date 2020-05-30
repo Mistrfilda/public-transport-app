@@ -16,26 +16,19 @@ use Ramsey\Uuid\UuidInterface;
 
 class DepartureTableControl extends BaseControl
 {
-	/** @var UuidInterface */
-	private $id;
+	private UuidInterface $id;
 
-	/** @var string|null */
-	private $tripId = null;
+	private ?string $tripId = null;
 
-	/** @var bool */
-	private $renderModal = false;
+	private bool $renderModal = false;
 
-	/** @var DepartureTableRepository */
-	private $departureTableRepository;
+	private DepartureTableRepository $departureTableRepository;
 
-	/** @var StopLineFactory */
-	private $stopLineFactory;
+	private StopLineFactory $stopLineFactory;
 
-	/** @var DepartureTablePaginatorService */
-	private $paginatorService;
+	private DepartureTablePaginatorService $paginatorService;
 
-	/** @var TripStatisticModalRendererControlFactory */
-	private $tripStatisticModalRendererControlFactory;
+	private TripStatisticModalRendererControlFactory $tripStatisticModalRendererControlFactory;
 
 	public function __construct(
 		string $id,

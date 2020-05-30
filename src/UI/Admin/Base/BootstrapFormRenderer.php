@@ -14,6 +14,7 @@ namespace App\UI\Admin\Base;
 use Nette\Forms\Container;
 use Nette\Forms\ControlGroup;
 use Nette\Forms\Controls;
+use Nette\Forms\Controls\Button;
 use Nette\Forms\Form;
 use Nette\Forms\IControl;
 use Nette\Forms\Rendering\DefaultFormRenderer;
@@ -30,14 +31,11 @@ class BootstrapFormRenderer extends DefaultFormRenderer
 
 	public const INLINE = 'inline';
 
-	/** @var Controls\Button */
-	public $primaryButton;
+	public Button $primaryButton;
 
-	/** @var bool */
-	private $controlsInit = false;
+	private bool $controlsInit = false;
 
-	/** @var string */
-	private $layout;
+	private string $layout;
 
 	public function __construct(string $layout = self::HORIZONTAL)
 	{

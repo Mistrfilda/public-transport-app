@@ -8,11 +8,9 @@ use Nette\Security\User;
 
 class CurrentAppAdminGetter
 {
-	/** @var User */
-	private $user;
+	private User $user;
 
-	/** @var AppAdminRepository */
-	private $appAdminRepository;
+	private AppAdminRepository $appAdminRepository;
 
 	public function __construct(User $user, AppAdminRepository $appAdminRepository)
 	{

@@ -12,14 +12,11 @@ use Ramsey\Uuid\UuidInterface;
 
 class VehicleDatagridFactory
 {
-	/** @var AdminDatagridFactory */
-	private $adminDatagridFactory;
+	private AdminDatagridFactory $adminDatagridFactory;
 
-	/** @var VehicleRepository */
-	private $vehicleRepository;
+	private VehicleRepository $vehicleRepository;
 
-	/** @var VehiclePositionRepository */
-	private $vehiclePositionRepository;
+	private VehiclePositionRepository $vehiclePositionRepository;
 
 	public function __construct(
 		AdminDatagridFactory $adminDatagridFactory,

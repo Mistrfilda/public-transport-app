@@ -17,28 +17,24 @@ class AppAdmin implements IEntity
 	use Uuid;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $name;
+	private string $name;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string", unique=true)
 	 */
-	private $username;
+	private string $username;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string", unique=true)
 	 */
-	private $email;
+	private string $email;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $password;
+	private string $password;
 
 	public function __construct(
 		string $name,

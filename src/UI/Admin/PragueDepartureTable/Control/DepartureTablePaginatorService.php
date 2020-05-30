@@ -14,14 +14,11 @@ class DepartureTablePaginatorService
 
 	private const LOAD_STEP = 10;
 
-	/** @var SessionSection */
-	private $sessionSection;
+	private SessionSection $sessionSection;
 
-	/** @var int */
-	private $currentStep;
+	private int $currentStep;
 
-	/** @var int */
-	private $loadedCount;
+	private int $loadedCount;
 
 	public function __construct(
 		UuidInterface $departureTableId,

@@ -10,8 +10,7 @@ use App\UI\Admin\PragueStop\Datagrid\StopDatagridFactory;
 
 class PragueStopPresenter extends AdminPresenter
 {
-	/** @var StopDatagridFactory */
-	private $stopDatagridFactory;
+	private StopDatagridFactory $stopDatagridFactory;
 
 	public function __construct(StopDatagridFactory $stopDatagridFactory)
 	{

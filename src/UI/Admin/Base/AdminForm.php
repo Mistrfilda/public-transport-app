@@ -8,8 +8,7 @@ use Nette\Application\UI\Form;
 
 class AdminForm extends Form
 {
-	/** @var bool */
-	private $isAjax = false;
+	private bool $isAjax = false;
 
 	public function ajax(): void
 	{

@@ -26,82 +26,69 @@ class TripStatisticData implements IEntity
 	use Identifier;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $tripId;
+	private string $tripId;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $routeId;
+	private string $routeId;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $finalStation;
+	private string $finalStation;
 
 	/**
-	 * @var bool
 	 * @ORM\Column(type="boolean")
 	 */
-	private $wheelchairAccessible;
+	private bool $wheelchairAccessible;
 
 	/**
-	 * @var DateTimeImmutable
 	 * @ORM\Column(type="datetime_immutable")
 	 */
-	private $date;
+	private DateTimeImmutable $date;
 
 	/**
-	 * @var DateTimeImmutable
 	 * @ORM\Column(type="datetime_immutable")
 	 */
-	private $oldestKnownPosition;
+	private DateTimeImmutable $oldestKnownPosition;
 
 	/**
-	 * @var DateTimeImmutable
 	 * @ORM\Column(type="datetime_immutable")
 	 */
-	private $newestKnownPosition;
+	private DateTimeImmutable $newestKnownPosition;
 
 	/**
-	 * @var int
 	 * @ORM\Column(type="integer")
 	 */
-	private $highestDelay;
+	private int $highestDelay;
 
 	/**
-	 * @var int
 	 * @ORM\Column(type="integer")
 	 */
-	private $averageDelay;
+	private int $averageDelay;
 
 	/**
-	 * @var string|null
 	 * @ORM\Column(type="string", nullable=true)
 	 */
-	private $company;
+	private ?string $company = null;
 
 	/**
-	 * @var string|null
 	 * @ORM\Column(type="string", nullable=true)
 	 */
-	private $vehicleId;
+	private ?string $vehicleId = null;
 
 	/**
-	 * @var int
 	 * @ORM\Column(type="integer")
 	 */
-	private $vehicleType;
+	private int $vehicleType;
 
 	/**
-	 * @var int
 	 * @ORM\Column(type="integer")
 	 */
-	private $positionsCount;
+	private int $positionsCount;
 
 	public function __construct(
 		string $tripId,

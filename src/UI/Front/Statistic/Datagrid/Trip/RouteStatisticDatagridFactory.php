@@ -10,11 +10,9 @@ use App\UI\Front\Base\FrontDatagridFactory;
 
 class RouteStatisticDatagridFactory
 {
-	/** @var FrontDatagridFactory */
-	private $frontDatagridFactory;
+	private FrontDatagridFactory $frontDatagridFactory;
 
-	/** @var TripListRepository */
-	private $tripListRepository;
+	private TripListRepository $tripListRepository;
 
 	public function __construct(
 		FrontDatagridFactory $frontDatagridFactory,

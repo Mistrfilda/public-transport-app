@@ -12,8 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class StopTimeImportCommand extends Command
 {
-	/** @var StopTimeImportFacade */
-	private $stopTimeImportFacade;
+	private StopTimeImportFacade $stopTimeImportFacade;
 
 	public function __construct(StopTimeImportFacade $stopTimeImportFacade)
 	{

@@ -8,8 +8,7 @@ use App\Transport\Prague\Stop\StopCacheService;
 
 class StopIdFilter
 {
-	/** @var StopCacheService */
-	private $stopCacheService;
+	private StopCacheService $stopCacheService;
 
 	public function __construct(StopCacheService $stopCacheService)
 	{

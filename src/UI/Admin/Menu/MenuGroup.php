@@ -6,14 +6,12 @@ namespace App\UI\Admin\Menu;
 
 class MenuGroup
 {
-	/** @var string */
-	private $label;
+	private string $label;
 
-	/** @var bool */
-	private $showLabel = true;
+	private bool $showLabel = true;
 
 	/** @var MenuItem[] */
-	private $menuItems;
+	private array $menuItems;
 
 	/**
 	 * MenuGroup constructor.

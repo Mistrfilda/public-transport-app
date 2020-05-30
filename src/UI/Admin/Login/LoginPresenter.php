@@ -12,12 +12,10 @@ class LoginPresenter extends Presenter
 {
 	/**
 	 * @persistent
-	 * @var string
 	 */
-	public $backlink = '';
+	public string $backlink = '';
 
-	/** @var LoginFormFactory */
-	private $loginFormFactory;
+	private LoginFormFactory $loginFormFactory;
 
 	public function __construct(LoginFormFactory $loginFormFactory)
 	{

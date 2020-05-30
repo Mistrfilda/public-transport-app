@@ -12,11 +12,9 @@ use Nette\Application\UI\Control;
 
 class StatisticControl extends Control
 {
-	/** @var VehiclePositionRepository */
-	private $vehiclePositionRepository;
+	private VehiclePositionRepository $vehiclePositionRepository;
 
-	/** @var StopRepository */
-	private $stopRepository;
+	private StopRepository $stopRepository;
 
 	public function __construct(
 		VehiclePositionRepository $VehiclePositionRepository,

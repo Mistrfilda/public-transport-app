@@ -13,11 +13,9 @@ use App\UI\Front\Statistic\Control\Trip\TripStatisticControlFactory;
 
 class StatisticPresenter extends FrontPresenter
 {
-	/** @var MainStatisticControlFactory */
-	private $mainStatisticControlFactory;
+	private MainStatisticControlFactory $mainStatisticControlFactory;
 
-	/** @var TripStatisticControlFactory */
-	private $tripStatisticControlFactory;
+	private TripStatisticControlFactory $tripStatisticControlFactory;
 
 	public function __construct(
 		MainStatisticControlFactory $mainStatisticControlFactory,

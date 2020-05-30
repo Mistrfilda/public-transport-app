@@ -13,8 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateAppAdminCommand extends Command
 {
-	/** @var AppAdminFacade */
-	private $appAdminFacade;
+	private AppAdminFacade $appAdminFacade;
 
 	public function __construct(AppAdminFacade $appAdminFacade)
 	{

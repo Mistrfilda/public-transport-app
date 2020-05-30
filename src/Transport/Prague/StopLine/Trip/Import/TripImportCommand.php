@@ -12,8 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TripImportCommand extends Command
 {
-	/** @var TripImportFacade */
-	private $tripImportFacade;
+	private TripImportFacade $tripImportFacade;
 
 	public function __construct(TripImportFacade $tripImportFacade)
 	{

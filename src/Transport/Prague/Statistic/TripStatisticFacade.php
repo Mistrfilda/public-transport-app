@@ -14,17 +14,13 @@ use Throwable;
 
 class TripStatisticFacade
 {
-	/** @var EntityManagerInterface */
-	private $entityManager;
+	private EntityManagerInterface $entityManager;
 
-	/** @var LoggerInterface */
-	private $logger;
+	private LoggerInterface $logger;
 
-	/** @var DatetimeFactory */
-	private $datetimeFactory;
+	private DatetimeFactory $datetimeFactory;
 
-	/** @var TripListFacade */
-	private $tripListFacade;
+	private TripListFacade $tripListFacade;
 
 	public function __construct(
 		EntityManagerInterface $entityManager,

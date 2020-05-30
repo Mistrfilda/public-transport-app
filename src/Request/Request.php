@@ -21,35 +21,30 @@ class Request implements IEntity
 	use CreatedAt;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $type;
+	private string $type;
 
 	/**
-	 * @var DateTimeImmutable|null
 	 * @ORM\Column(type="datetime_immutable", nullable=true)
 	 */
-	private $finishedAt = null;
+	private ?DateTimeImmutable $finishedAt = null;
 
 	/**
-	 * @var DateTimeImmutable|null
 	 * @ORM\Column(type="datetime_immutable", nullable=true)
 	 */
-	private $failedAt = null;
+	private ?DateTimeImmutable $failedAt = null;
 
 	/**
-	 * @var DateTimeImmutable|null
 	 * @ORM\Column(type="datetime_immutable", nullable=true)
 	 */
-	private $requeuedAt = null;
+	private ?DateTimeImmutable $requeuedAt = null;
 
 	/**
-	 * @var DepartureTable|null
 	 * @ORM\ManyToOne(targetEntity="App\Transport\Prague\DepartureTable\DepartureTable")
 	 * @ORM\JoinColumn(onDelete="set null")
 	 */
-	private $pragueDepartureTable;
+	private ?DepartureTable $pragueDepartureTable = null;
 
 	public function __construct(
 		string $type,

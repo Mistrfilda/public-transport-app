@@ -20,23 +20,17 @@ class Statistic
 
 	public const CONTEXTUAL_SECONDARY = 'secondary';
 
-	/** @var string */
-	private $contextualClass;
+	private string $contextualClass;
 
-	/** @var string */
-	private $heading;
+	private string $heading;
 
-	/** @var string */
-	private $value;
+	private string $value;
 
-	/** @var string */
-	private $icon;
+	private string $icon;
 
-	/** @var string */
-	private $border;
+	private string $border;
 
-	/** @var string */
-	private $size;
+	private string $size;
 
 	/**
 	 * Statistic constructor.

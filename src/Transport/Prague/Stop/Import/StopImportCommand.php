@@ -10,8 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class StopImportCommand extends Command
 {
-	/** @var StopImportFacade */
-	private $stopImportFacade;
+	private StopImportFacade $stopImportFacade;
 
 	public function __construct(StopImportFacade $stopImportFacade)
 	{

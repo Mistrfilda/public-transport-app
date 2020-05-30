@@ -19,28 +19,24 @@ class Stop implements IStop, IEntity
 	use Identifier;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $name;
+	private string $name;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string", unique=true)
 	 */
-	private $stopId;
+	private string $stopId;
 
 	/**
-	 * @var float
 	 * @ORM\Column(type="float")
 	 */
-	private $latitude;
+	private float $latitude;
 
 	/**
-	 * @var float
 	 * @ORM\Column(type="float")
 	 */
-	private $longitude;
+	private float $longitude;
 
 	public function __construct(
 		string $name,

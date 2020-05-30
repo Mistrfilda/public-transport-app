@@ -13,11 +13,9 @@ use Ramsey\Uuid\Uuid;
 
 class PragueVehiclePositionPresenter extends AdminPresenter
 {
-	/** @var VehiclePositionDatagridFactory */
-	private $vehiclePositionDatagridFactory;
+	private VehiclePositionDatagridFactory $vehiclePositionDatagridFactory;
 
-	/** @var VehicleDatagridFactory */
-	private $vehicleDatagridFactory;
+	private VehicleDatagridFactory $vehicleDatagridFactory;
 
 	public function __construct(
 		VehiclePositionDatagridFactory $vehiclePositionDatagridFactory,

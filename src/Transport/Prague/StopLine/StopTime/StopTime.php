@@ -26,46 +26,39 @@ class StopTime implements IEntity
 	use Identifier;
 
 	/**
-	 * @var Stop
 	 * @ORM\ManyToOne(targetEntity="App\Transport\Prague\Stop\Stop")
 	 */
-	private $stop;
+	private Stop $stop;
 
 	/**
-	 * @var DateTimeImmutable
 	 * @ORM\Column(type="datetime_immutable")
 	 */
-	private $arrivalTime;
+	private DateTimeImmutable $arrivalTime;
 
 	/**
-	 * @var DateTimeImmutable
 	 * @ORM\Column(type="datetime_immutable")
 	 */
-	private $departureTime;
+	private DateTimeImmutable $departureTime;
 
 	/**
-	 * @var DateTimeImmutable
 	 * @ORM\Column(type="date_immutable")
 	 */
-	private $date;
+	private DateTimeImmutable $date;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $tripId;
+	private string $tripId;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $dateTripId;
+	private string $dateTripId;
 
 	/**
-	 * @var int
 	 * @ORM\Column(type="integer")
 	 */
-	private $stopSequence;
+	private int $stopSequence;
 
 	public function __construct(
 		Stop $stop,

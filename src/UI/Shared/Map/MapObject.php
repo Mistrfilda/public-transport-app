@@ -9,14 +9,12 @@ use JsonSerializable;
 
 class MapObject implements JsonSerializable
 {
-	/** @var Coordinates */
-	private $coordinates;
+	private Coordinates $coordinates;
 
-	/** @var string */
-	private $label;
+	private string $label;
 
 	/** @var string[] */
-	private $infoWindowLines;
+	private array $infoWindowLines;
 
 	/**
 	 * @param string[] $infoWindowLines

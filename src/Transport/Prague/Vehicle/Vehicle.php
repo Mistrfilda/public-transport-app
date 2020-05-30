@@ -20,88 +20,74 @@ class Vehicle implements IEntity, IVehicle
 	use Identifier;
 
 	/**
-	 * @var VehiclePosition
 	 * @ORM\ManyToOne(targetEntity="App\Transport\Prague\Vehicle\VehiclePosition", inversedBy="vehicles")
 	 */
-	private $vehiclePosition;
+	private IVehiclePosition $vehiclePosition;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $routeId;
+	private string $routeId;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $tripId;
+	private string $tripId;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $dateTripId;
+	private string $dateTripId;
 
 	/**
-	 * @var float
 	 * @ORM\Column(type="float")
 	 */
-	private $latitude;
+	private float $latitude;
 
 	/**
-	 * @var float
 	 * @ORM\Column(type="float")
 	 */
-	private $longitude;
+	private float $longitude;
 
 	/**
-	 * @var string
 	 * @ORM\Column(type="string")
 	 */
-	private $finalStation;
+	private string $finalStation;
 
 	/**
-	 * @var int
 	 * @ORM\Column(type="integer")
 	 */
-	private $delayInSeconds;
+	private int $delayInSeconds;
 
 	/**
-	 * @var bool
 	 * @ORM\Column(type="boolean")
 	 */
-	private $wheelchairAccessible;
+	private bool $wheelchairAccessible;
 
 	/**
-	 * @var string|null
 	 * @ORM\Column(type="string", nullable=true)
 	 */
-	private $lastStopId;
+	private ?string $lastStopId = null;
 
 	/**
-	 * @var string|null
 	 * @ORM\Column(type="string", nullable=true)
 	 */
-	private $nextStopId;
+	private ?string $nextStopId = null;
 
 	/**
-	 * @var string|null
 	 * @ORM\Column(type="string", nullable=true)
 	 */
-	private $registrationNumber;
+	private ?string $registrationNumber = null;
 
 	/**
-	 * @var int
 	 * @ORM\Column(type="integer")
 	 */
-	private $vehicleType;
+	private int $vehicleType;
 
 	/**
-	 * @var string|null
 	 * @ORM\Column(type="string", nullable=true)
 	 */
-	private $company;
+	private ?string $company = null;
 
 	public function __construct(
 		VehiclePosition $vehiclePosition,
