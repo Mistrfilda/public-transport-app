@@ -31,6 +31,7 @@ class RouteStatisticDatagridFactory
 		$grid->addColumnText('tripId', 'Trip ID')->setFilterText();
 		$grid->addColumnText('lastFinalStation', 'Poslední cílová stanice')->setFilterText();
 		$grid->addColumnDateTime('newestKnownPosition', 'Poslední známá poloha')->setSortable();
+		$grid->addColumnText('countOfStatistics', 'Počet statistik')->setSortable()->setFilterText();
 
 		$grid->addAction('detail', 'Detail', 'Statistic:trip', ['tripId' => 'tripId'])
 			->setIcon('arrow-right')

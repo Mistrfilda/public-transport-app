@@ -64,7 +64,8 @@ class TripListFacade
 					$tripList->update(
 						$this->datetimeFactory->createDatetimeFromMysqlFormat($trip['newestKnownPosition']),
 						$trip['finalStation'],
-						$this->datetimeFactory->createNow()
+						$this->datetimeFactory->createNow(),
+						(int) $trip['rowCount']
 					);
 				} catch (NoEntityFoundException $e) {
 					$tripList = new TripList(
@@ -72,7 +73,8 @@ class TripListFacade
 						$trip['routeId'],
 						$this->datetimeFactory->createDatetimeFromMysqlFormat($trip['newestKnownPosition']),
 						$trip['finalStation'],
-						$this->datetimeFactory->createNow()
+						$this->datetimeFactory->createNow(),
+						(int) $trip['rowCount']
 					);
 
 					$this->entityManager->persist($tripList);

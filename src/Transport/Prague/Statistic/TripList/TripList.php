@@ -44,28 +44,37 @@ class TripList implements IEntity
 	 */
 	private string $lastFinalStation;
 
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	private int $countOfStatistics;
+
 	public function __construct(
 		string $tripId,
 		string $routeId,
 		DateTimeImmutable $newestKnownPosition,
 		string $lastFinalStation,
-		DateTimeImmutable $now
+		DateTimeImmutable $now,
+		int $countOfStatistics
 	) {
 		$this->tripId = $tripId;
 		$this->routeId = $routeId;
 		$this->newestKnownPosition = $newestKnownPosition;
 		$this->lastFinalStation = $lastFinalStation;
 		$this->updatedAt = $now;
+		$this->countOfStatistics = $countOfStatistics;
 	}
 
 	public function update(
 		DateTimeImmutable $newestKnownPosition,
 		string $lastFinalStation,
-		DateTimeImmutable $now
+		DateTimeImmutable $now,
+		int $countOfStatistics
 	): void {
 		$this->newestKnownPosition = $newestKnownPosition;
 		$this->lastFinalStation = $lastFinalStation;
 		$this->updatedAt = $now;
+		$this->countOfStatistics = $countOfStatistics;
 	}
 
 	public function getTripId(): string
@@ -86,5 +95,10 @@ class TripList implements IEntity
 	public function getLastFinalStation(): string
 	{
 		return $this->lastFinalStation;
+	}
+
+	public function getCountOfStatistics(): int
+	{
+		return $this->countOfStatistics;
 	}
 }

@@ -100,7 +100,7 @@ class TripStatisticDataRepository extends BaseRepository
 	{
 		$qb = $this->createQueryBuilder();
 		$qb->select(
-			'tripStatistic.tripId, tripStatistic.routeId, max(tripStatistic.finalStation) as finalStation, max(tripStatistic.newestKnownPosition) as newestKnownPosition'
+			'tripStatistic.tripId, tripStatistic.routeId, max(tripStatistic.finalStation) as finalStation, max(tripStatistic.newestKnownPosition) as newestKnownPosition, count(tripStatistic.id) as rowCount'
 		);
 		$qb->groupBy('tripStatistic.tripId, tripStatistic.routeId');
 
