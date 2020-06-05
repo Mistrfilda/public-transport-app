@@ -92,6 +92,7 @@ class TripListFacade
 				$index++;
 			}
 
+			$this->entityManager->flush();
 			$this->entityManager->commit();
 			$this->logger->info('Generating new trip list finished');
 		} catch (Throwable $e) {
