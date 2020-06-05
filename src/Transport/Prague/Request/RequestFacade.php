@@ -12,7 +12,7 @@ use App\Request\RequestType;
 use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableProducer;
 use App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 

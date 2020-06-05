@@ -6,7 +6,7 @@ namespace App\Transport\Prague\Vehicle\Import;
 
 use App\Transport\Prague\Vehicle\VehicleFactory;
 use App\Transport\Prague\Vehicle\VehiclePosition;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Mistrfilda\Pid\Api\PidService;
 use Psr\Log\LoggerInterface;

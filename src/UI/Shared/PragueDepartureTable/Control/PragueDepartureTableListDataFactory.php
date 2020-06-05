@@ -6,7 +6,7 @@ namespace App\UI\Shared\PragueDepartureTable\Control;
 
 use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\StopLine\StopTime\StopTimeRepository;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 
 class PragueDepartureTableListDataFactory
 {

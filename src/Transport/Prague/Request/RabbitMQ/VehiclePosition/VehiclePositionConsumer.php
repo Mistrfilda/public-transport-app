@@ -7,7 +7,7 @@ namespace App\Transport\Prague\Request\RabbitMQ\VehiclePosition;
 use App\Request\Request;
 use App\Request\RequestRepository;
 use App\Transport\Prague\Vehicle\Import\VehicleImportFacade;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Bunny\Message;
 use Contributte\RabbitMQ\Consumer\IConsumer;
 use Doctrine\ORM\EntityManagerInterface;

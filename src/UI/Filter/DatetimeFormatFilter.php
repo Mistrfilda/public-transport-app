@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Filter;
 
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use DateTimeImmutable;
 
 class DatetimeFormatFilter
