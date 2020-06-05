@@ -7,7 +7,7 @@ namespace App\UI\Shared\Statistic\Control;
 use App\Transport\Prague\Stop\StopRepository;
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
 use App\UI\Shared\Statistic\Statistic;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Nette\Application\UI\Control;
 
 class StatisticControl extends Control

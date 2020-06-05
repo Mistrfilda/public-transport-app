@@ -16,7 +16,7 @@ use App\UI\Shared\Statistic\Chart\ChartType;
 use App\UI\Shared\Statistic\Chart\Control\ChartControl;
 use App\UI\Shared\Statistic\Chart\Control\ChartControlFactory;
 use App\UI\Shared\Statistic\Statistic;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\NoResultException;
 
 class TripStatisticControl extends BaseControl

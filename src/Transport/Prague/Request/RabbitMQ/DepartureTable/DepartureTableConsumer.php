@@ -9,7 +9,7 @@ use App\Request\RequestRepository;
 use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\StopLine\StopTime\Import\StopTimeImportFacade;
 use App\Transport\Prague\StopLine\Trip\Import\TripImportFacade;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Bunny\Message;
 use Contributte\RabbitMQ\Consumer\IConsumer;
 use Doctrine\ORM\EntityManagerInterface;

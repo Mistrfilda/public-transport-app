@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Base;
 
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use App\Utils\SelectPicker;
 use DateTimeImmutable;
 use Nette\Utils\Strings;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Integration;
 
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;

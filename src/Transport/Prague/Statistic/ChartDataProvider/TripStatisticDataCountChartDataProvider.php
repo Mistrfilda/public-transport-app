@@ -8,7 +8,7 @@ use App\Transport\Prague\Statistic\TripStatisticDataRepository;
 use App\UI\Shared\Statistic\Chart\ChartData;
 use App\UI\Shared\Statistic\Chart\ChartException;
 use App\UI\Shared\Statistic\Chart\IChartDataProvider;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 
 class TripStatisticDataCountChartDataProvider implements IChartDataProvider, ITripStatisticChartDataProvider
 {

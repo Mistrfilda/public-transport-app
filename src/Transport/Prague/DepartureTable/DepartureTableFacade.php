@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Transport\Prague\DepartureTable;
 
 use App\Transport\Prague\Stop\StopRepository;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;

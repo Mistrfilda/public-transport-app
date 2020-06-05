@@ -107,7 +107,7 @@ services:
 	datetimeformatfilter: App\UI\Filter\DatetimeFormatFilter
 	secondsformatFilter: App\UI\Filter\SecondsFormatFilter
 
-	datetimefactory: App\Utils\DatetimeFactory
+	datetimefactory: App\Utils\Datetime\DatetimeFactory
 	pidservice: Mistrfilda\Pid\Api\PidService(%pid.accessToken%)
 
 	#Forms

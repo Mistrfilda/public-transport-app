@@ -8,7 +8,7 @@ use App\Doctrine\NoEntityFoundException;
 use App\Transport\Prague\Stop\StopRepository;
 use App\Transport\Prague\StopLine\Trip\TripFactory;
 use App\Transport\Prague\StopLine\Trip\TripRepository;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Mistrfilda\Pid\Api\PidService;
 use Psr\Log\LoggerInterface;

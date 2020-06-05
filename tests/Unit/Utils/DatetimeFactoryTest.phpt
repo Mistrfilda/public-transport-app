@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Tester\Assert;
 
 require __DIR__ . '/../Bootstrap.php';

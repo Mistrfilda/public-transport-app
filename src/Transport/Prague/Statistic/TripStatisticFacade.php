@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Transport\Prague\Statistic;
 
 use App\Transport\Prague\Statistic\TripList\TripListFacade;
-use App\Utils\DatetimeFactory;
+use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
