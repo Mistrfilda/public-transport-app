@@ -31,7 +31,7 @@ class BootstrapFormRenderer extends DefaultFormRenderer
 
 	public const INLINE = 'inline';
 
-	public Button $primaryButton;
+	public ?Button $primaryButton;
 
 	private bool $controlsInit = false;
 
@@ -40,6 +40,7 @@ class BootstrapFormRenderer extends DefaultFormRenderer
 	public function __construct(string $layout = self::HORIZONTAL)
 	{
 		$this->layout = $layout;
+		$this->primaryButton = null;
 
 		$groupClasses = 'form-group';
 		if ($layout === self::HORIZONTAL) {
