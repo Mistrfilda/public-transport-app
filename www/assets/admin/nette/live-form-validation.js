@@ -6,434 +6,464 @@
  * @url https://github.com/Robyer/nette-live-form-validation/
  */
 
-/*global Nette, define, module, $ */
-
-var LiveForm = {
-    options: {
-        // CSS class of control's parent where error/valid class should be added; or "false" to use control directly
-        showMessageClassOnParent: "form-control",
-
-        // CSS class of control's parent where error/valid message should be added (fallback to direct parent if not found); or "false" to use control's direct parent
-        messageParentClass: false,
-
-        // CSS class for an invalid control
-        controlErrorClass: 'is-invalid',
-
-
-        // CSS class for a valid control
-        controlValidClass: 'has-success',
-
-        // CSS class for an error message
-        messageErrorClass: 'invalid-feedback',
-
-        // control with this CSS class will show error/valid message even when control itself is hidden (useful for controls which are hidden and wrapped into special component)
-        enableHiddenMessageClass: 'show-hidden-error',
-
-        // control with this CSS class will have disabled live validation
-        disableLiveValidationClass: 'no-live-validation',
-
-        // control with this CSS class will not show valid message
-        disableShowValidClass: 'no-show-valid',
-
-        // tag that will hold the error/valid message
-        messageTag: 'div',
-
-        // message element id = control id + this postfix
-        messageIdPostfix: '_message',
-
-        // show this html before error message itself
-        messageErrorPrefix: '&nbsp;<i class="fas fa-exclamation-circle"></i>&nbsp;',
-
-        // show all errors when submitting form; or use "false" to show only first error
-        showAllErrors: true,
-
-        // show message when valid
-        showValid: false,
-
-        // delay in ms before validating on keyup/keydown; or use "false" to disable it
-        wait: false,
-
-        // vertical screen offset in px to scroll after focusing element with error (useful when using fixed navbar menu which may otherwise obscure the element in focus); or use "false" for default behavior
-        focusScreenOffsetY: false
-    },
-
-    forms: { }
-};
-
-LiveForm.setOptions = function(userOptions) {
-    for (var prop in userOptions) {
-        if (Object.prototype.hasOwnProperty.call(this.options, prop)) {
-            this.options[prop] = userOptions[prop];
-        }
-    }
-}
-
-// Allow setting options before loading the script just by creating global LiveFormOptions object with options.
-if (typeof window.LiveFormOptions !== 'undefined') {
-    LiveForm.setOptions(window.LiveFormOptions);
-}
-
-LiveForm.isSpecialKey = function(k) {
-    // http://stackoverflow.com/questions/7770561/jquery-javascript-reject-control-keys-on-keydown-event
-    return (k == 20 /* Caps lock */
-        || k == 16 /* Shift */
-        || k == 9 /* Tab */
-        || k == 27 /* Escape Key */
-        || k == 17 /* Control Key */
-        || k == 91 /* Windows Command Key */
-        || k == 19 /* Pause Break */
-        || k == 18 /* Alt Key */
-        || k == 93 /* Right Click Point Key */
-        || (k >= 35 && k <= 40) /* Home, End, Arrow Keys */
-        || k == 45 /* Insert Key */
-        || (k >= 33 && k <= 34) /*Page Down, Page Up */
-        || (k >= 112 && k <= 123) /* F1 - F12 */
-        || (k >= 144 && k <= 145)); /* Num Lock, Scroll Lock */
-}
-
-/**
- * Handlers for all the events that trigger validation
- * YOU CAN CHANGE these handlers (ie. to use jQuery events instead)
- */
-LiveForm.setupHandlers = function(el) {
-    if (this.hasClass(el, this.options.disableLiveValidationClass))
-        return;
-
-    // Check if element was already initialized
-    if (el.getAttribute("data-lfv-initialized"))
-        return;
-
-    // Remember we initialized this element so we won't do it again
-    el.setAttribute('data-lfv-initialized', 'true');
-
-    var handler = function(event) {
-        event = event || window.event;
-        Nette.validateControl(event.target ? event.target : event.srcElement);
-    };
-
-    var self = this;
-
-    el.addEventListener('change', handler);
-    el.addEventListener('blur', handler);
-    el.addEventListener('keydown', function (event) {
-        if (!self.isSpecialKey(event.which) && (self.options.wait === false || self.options.wait >= 200)) {
-            // Hide validation span tag.
-            self.removeClass(self.getGroupElement(this), self.options.controlErrorClass);
-            self.removeClass(self.getGroupElement(this), self.options.controlValidClass);
-
-            var messageEl = self.getMessageElement(this);
-            messageEl.innerHTML = '';
-            messageEl.className = '';
-
-            // Cancel timeout to run validation handler
-            if (self.timeout) {
-                clearTimeout(self.timeout);
-            }
-        }
-    });
-    el.addEventListener('keyup', function (event) {
-        if (self.options.wait !== false) {
-            event = event || window.event;
-            if (event.keyCode !== 9) {
-                if (self.timeout) clearTimeout(self.timeout);
-                self.timeout = setTimeout(function() {
-                    handler(event);
-                }, self.options.wait);
-            }
-        }
-    });
-};
-
-LiveForm.processServerErrors = function(el) {
-    var messageEl = this.getMessageElement(el);
-    var parentEl = this.getMessageParent(el); // This is parent element which contain the error elements
-
-    var errors = [];
-
-    // Find existing error elements by class (from server-validation)
-    var errorEls = parentEl.getElementsByClassName(this.options.messageErrorClass);
-    for (var i = errorEls.length - 1; i > -1; i--) {
-        // Don't touch our main message element
-        if (errorEls[i] == messageEl)
-            continue;
-
-        // Remove only direct children
-        var errorParent = errorEls[i].parentNode;
-        if (errorParent == parentEl) {
-            errors.push(errorEls[i].outerHTML);
-            errorParent.removeChild(errorEls[i]);
-        }
-    }
-
-    // Wrap all server errors into one element
-    if (errors.length > 0) {
-        messageEl.innerHTML = errors.join("");
-    }
-};
-
-LiveForm.addError = function(el, message) {
-    // Ignore elements with disabled live validation
-    if (this.hasClass(el, this.options.disableLiveValidationClass))
-        return;
-
-    var groupEl = this.getGroupElement(el);
-    this.setFormProperty(el.form, "hasError", true);
-    this.addClass(groupEl, this.options.controlErrorClass);
-
-    let groupSelector = $(el);
-    if (groupSelector.is("select")) {
-        let selectButton = groupSelector.parent().children('button');
-        selectButton.removeClass('btn-primary');
-        selectButton.addClass('btn-danger');
-    }
-
-
-    if (this.options.showValid) {
-        this.removeClass(groupEl, this.options.controlValidClass);
-    }
-
-    if (!message) {
-        message = '&nbsp;';
-    } else {
-        message = this.options.messageErrorPrefix + message;
-    }
-
-    var messageEl = this.getMessageElement(el);
-    messageEl.innerHTML = message;
-    messageEl.className = this.options.messageErrorClass;
-};
-
-LiveForm.removeError = function(el) {
-    // We don't want to remove any errors during onLoadValidation
-    if (this.getFormProperty(el.form, "onLoadValidation"))
-        return;
-
-    var groupEl = this.getGroupElement(el);
-
-    let groupSelector = $(el);
-    if (groupSelector.is("select")) {
-        let selectButton = groupSelector.parent().children('button');
-        selectButton.removeClass('btn-danger');
-        selectButton.addClass('btn-primary');
-    }
-
-    this.removeClass(groupEl, this.options.controlErrorClass);
-
-    var id = el.getAttribute('data-lfv-message-id');
-    if (id) {
-        var messageEl = this.getMessageElement(el);
-        messageEl.innerHTML = '';
-        messageEl.className = '';
-    }
-
-    if (this.options.showValid) {
-        if (this.showValid(el))
-            this.addClass(groupEl, this.options.controlValidClass);
-        else
-            this.removeClass(groupEl, this.options.controlValidClass);
-    }
-};
-
-LiveForm.showValid = function(el) {
-    if (el.type) {
-        var type = el.type.toLowerCase();
-        if (type == 'checkbox' || type == 'radio') {
-            return false;
-        }
-    }
-
-    var rules = Nette.parseJSON(el.getAttribute('data-nette-rules'));
-    if (rules.length == 0) {
-        return false;
-    }
-
-    if (Nette.getEffectiveValue(el) == '') {
-        return false;
-    }
-
-    if (this.hasClass(el, this.options.disableShowValidClass)) {
-        return false;
-    }
-
-    return true;
-};
-
-LiveForm.getGroupElement = function(el) {
-    if (this.options.showMessageClassOnParent === false)
-        return el;
-
-    var groupEl = el;
-
-    while (!this.hasClass(groupEl, this.options.showMessageClassOnParent)) {
-        groupEl = groupEl.parentNode;
-
-        if (groupEl === null) {
-            return el;
-        }
-    }
-
-    return groupEl;
-}
-
-LiveForm.getMessageId = function(el) {
-    var tmp = el.id + this.options.messageIdPostfix;
-
-    // For elements without ID, or multi elements (with same name), we must generate whole ID ourselves
-    if (el.name && (!el.id || !el.form.elements[el.name].tagName)) {
-        // Strip possible [] from name
-        var name = el.name.match(/\[\]$/) ? el.name.match(/(.*)\[\]$/)[1] : el.name;
-        // Generate new ID based on form ID, element name and messageIdPostfix from options
-        tmp = (el.form.id ? el.form.id : 'frm') + '-' + name + this.options.messageIdPostfix;
-    }
-
-    // We want unique ID which doesn't exist yet
-    var id = tmp,
-        i = 0;
-    while (document.getElementById(id)) {
-        id = id + '_' + ++i;
-    }
-
-    return id;
-}
-
-LiveForm.getMessageElement = function(el) {
-    // For multi elements (with same name) work only with first element attributes
-    if (el.name && el.name.match(/\[\]$/)) {
-        el = el.form.elements[el.name].tagName ? el : el.form.elements[el.name][0];
-    }
-
-    var id = el.getAttribute('data-lfv-message-id');
-    if (!id) {
-        // ID is not specified yet, let's create a new one
-        id = this.getMessageId(el);
-
-        // Remember this id for next use
-        el.setAttribute('data-lfv-message-id', id);
-    }
-
-    var messageEl = document.getElementById(id);
-    if (!messageEl) {
-        // Message element doesn't exist, lets create a new one
-        messageEl = document.createElement(this.options.messageTag);
-        messageEl.id = id;
-        if (el.style.display == 'none' && !this.hasClass(el, this.options.enableHiddenMessageClass)) {
-            messageEl.style.display = 'none';
-        }
-
-        var parentEl = this.getMessageParent(el);
-        if (parentEl === el.parentNode) {
-            parentEl.insertBefore(messageEl, el.nextSibling);
-        } else if(parentEl) {
-            typeof parentEl.append === 'function' ? parentEl.append(messageEl) : parentEl.appendChild(messageEl);
-        }
-    }
-
-    return messageEl;
-};
-
-LiveForm.getMessageParent = function(el) {
-    var parentEl = el.parentNode;
-    var parentFound = false;
-
-    if (this.options.messageParentClass !== false) {
-        parentFound = true;
-        while (!this.hasClass(parentEl, this.options.messageParentClass)) {
-            parentEl = parentEl.parentNode;
-
-            if (parentEl === null) {
-                // We didn't found wanted parent, so use element's direct parent
-                parentEl = el.parentNode;
-                parentFound = false;
-                break;
-            }
-        }
-    }
-
-    // Don't append error message to radio/checkbox input's label, but along label
-    if (el.type) {
-        var type = el.type.toLowerCase();
-        if ((type == 'checkbox' || type == 'radio') && parentEl.tagName == 'LABEL') {
-            parentEl = parentEl.parentNode;
-        }
-    }
-
-    // For multi elements (with same name) use parent's parent as parent (if wanted one is not found)
-    if (!parentFound && el.name && !el.form.elements[el.name].tagName) {
-        parentEl = parentEl.parentNode;
-    }
-
-    return parentEl;
-}
-
-LiveForm.addClass = function(el, className) {
-    if (!el.className) {
-        el.className = className;
-    } else if (!this.hasClass(el, className)) {
-        el.className += ' ' + className;
-    }
-};
-
-LiveForm.hasClass = function(el, className) {
-    if (el.className)
-        return el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
-    return false;
-};
-
-LiveForm.removeClass = function(el, className) {
-    if (this.hasClass(el, className)) {
-        var reg = new RegExp('(\\s|^)'+ className + '(\\s|$)');
-        var m = el.className.match(reg);
-        el.className = el.className.replace(reg, (m[1] == ' ' && m[2] == ' ') ? ' ' : '');
-    }
-};
-
-LiveForm.getFormProperty = function(form, propertyName) {
-    if (form == null || this.forms[form.id] == null)
-        return false;
-
-    return this.forms[form.id][propertyName];
-};
-
-LiveForm.setFormProperty = function(form, propertyName, value) {
-    if (form == null)
-        return;
-
-    if (this.forms[form.id] == null)
-        this.forms[form.id] = {};
-
-    this.forms[form.id][propertyName] = value;
-};
-
-////////////////////////////   modified netteForms.js   ///////////////////////////////////
-
-/**
- * NetteForms - simple form validation.
- *
- * This file is part of the Nette Framework (https://nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
- */
-
-(function(global, factory) {
-    if (!global.JSON) {
-        return;
-    }
+(function (global, factoryLiveValidation, factoryNetteForm) {
 
     if (typeof define === 'function' && define.amd) {
-        define(function() {
-            return factory(global);
-        });
-    } else if (typeof module === 'object' && typeof module.exports === 'object') {
-        module.exports = factory(global);
+        // AMD
+        define(function () {
+            return {
+                LiveForm: factoryLiveValidation(global),
+                Nette: factoryNetteForm(global)
+            }
+        })
+    } else if (typeof exports === 'object') {
+        // Node, CommonJS-like
+        module.exports = {
+            LiveForm: factoryLiveValidation(global),
+            Nette: factoryNetteForm(global)
+        }
     } else {
+        global.LiveForm = factoryLiveValidation(global);
+        // Browser globals (root is window)
         var init = !global.Nette || !global.Nette.noInit;
-        global.Nette = factory(global);
+        global.Nette = factoryNetteForm(global);
         if (init) {
             global.Nette.initOnLoad();
         }
     }
 
-}(typeof window !== 'undefined' ? window : this, function(window) {
 
+}(typeof window !== 'undefined' ? window : this, function (window) {
+    'use strict'
+
+
+    var LiveForm = {
+        options: {
+            // CSS class of control's parent where error/valid class should be added; or "false" to use control directly
+            showMessageClassOnParent: "form-control",
+
+            // CSS class of control's parent where error/valid message should be added (fallback to direct parent if not found); or "false" to use control's direct parent
+            messageParentClass: false,
+
+            // CSS class for an invalid control
+            controlErrorClass: 'is-invalid',
+
+
+            // CSS class for a valid control
+            controlValidClass: 'has-success',
+
+            // CSS class for an error message
+            messageErrorClass: 'invalid-feedback',
+
+            // control with this CSS class will show error/valid message even when control itself is hidden (useful for controls which are hidden and wrapped into special component)
+            enableHiddenMessageClass: 'show-hidden-error',
+
+            // control with this CSS class will have disabled live validation
+            disableLiveValidationClass: 'no-live-validation',
+
+            // control with this CSS class will not show valid message
+            disableShowValidClass: 'no-show-valid',
+
+            // tag that will hold the error/valid message
+            messageTag: 'div',
+
+            // message element id = control id + this postfix
+            messageIdPostfix: '_message',
+
+            // show this html before error message itself
+            messageErrorPrefix: '&nbsp;<i class="fas fa-exclamation-circle"></i>&nbsp;',
+
+            // show all errors when submitting form; or use "false" to show only first error
+            showAllErrors: true,
+
+            // show message when valid
+            showValid: false,
+
+            // delay in ms before validating on keyup/keydown; or use "false" to disable it
+            wait: false,
+
+            // vertical screen offset in px to scroll after focusing element with error (useful when using fixed navbar menu which may otherwise obscure the element in focus); or use "false" for default behavior
+            focusScreenOffsetY: false
+        },
+
+        forms: { }
+    };
+
+    LiveForm.setOptions = function (userOptions) {
+        for (var prop in userOptions) {
+            if (Object.prototype.hasOwnProperty.call(this.options, prop)) {
+                this.options[prop] = userOptions[prop];
+            }
+        }
+    }
+
+// Allow setting options before loading the script just by creating global LiveFormOptions object with options.
+    if (typeof window.LiveFormOptions !== 'undefined') {
+        LiveForm.setOptions(window.LiveFormOptions);
+    }
+
+    LiveForm.isSpecialKey = function (k) {
+        // http://stackoverflow.com/questions/7770561/jquery-javascript-reject-control-keys-on-keydown-event
+        return (k == 20 /* Caps lock */
+            || k == 16 /* Shift */
+            || k == 9 /* Tab */
+            || k == 27 /* Escape Key */
+            || k == 17 /* Control Key */
+            || k == 91 /* Windows Command Key */
+            || k == 19 /* Pause Break */
+            || k == 18 /* Alt Key */
+            || k == 93 /* Right Click Point Key */
+            || (k >= 35 && k <= 40) /* Home, End, Arrow Keys */
+            || k == 45 /* Insert Key */
+            || (k >= 33 && k <= 34) /*Page Down, Page Up */
+            || (k >= 112 && k <= 123) /* F1 - F12 */
+            || (k >= 144 && k <= 145)); /* Num Lock, Scroll Lock */
+    }
+
+    /**
+     * Handlers for all the events that trigger validation
+     * YOU CAN CHANGE these handlers (ie. to use jQuery events instead)
+     */
+    LiveForm.setupHandlers = function (el) {
+        if (this.hasClass(el, this.options.disableLiveValidationClass))
+            return;
+
+        // Check if element was already initialized
+        if (el.getAttribute("data-lfv-initialized"))
+            return;
+
+        // Remember we initialized this element so we won't do it again
+        el.setAttribute('data-lfv-initialized', 'true');
+
+        var handler = function (event) {
+            event = event || window.event;
+            Nette.validateControl(event.target ? event.target : event.srcElement);
+        };
+
+        var self = this;
+
+        el.addEventListener('change', handler);
+        el.addEventListener('blur', handler);
+        el.addEventListener('keydown', function (event) {
+            if (!self.isSpecialKey(event.which) && (self.options.wait === false || self.options.wait >= 200)) {
+                // Hide validation span tag.
+                self.removeClass(self.getGroupElement(this), self.options.controlErrorClass);
+                self.removeClass(self.getGroupElement(this), self.options.controlValidClass);
+
+                var messageEl = self.getMessageElement(this);
+                messageEl.innerHTML = '';
+                messageEl.className = '';
+
+                // Cancel timeout to run validation handler
+                if (self.timeout) {
+                    clearTimeout(self.timeout);
+                }
+            }
+        });
+        el.addEventListener('keyup', function (event) {
+            if (self.options.wait !== false) {
+                event = event || window.event;
+                if (event.keyCode !== 9) {
+                    if (self.timeout) clearTimeout(self.timeout);
+                    self.timeout = setTimeout(function () {
+                        handler(event);
+                    }, self.options.wait);
+                }
+            }
+        });
+    };
+
+    LiveForm.processServerErrors = function (el) {
+        var messageEl = this.getMessageElement(el);
+        var parentEl = this.getMessageParent(el); // This is parent element which contain the error elements
+
+        var errors = [];
+
+        // Find existing error elements by class (from server-validation)
+        var errorEls = parentEl.getElementsByClassName(this.options.messageErrorClass);
+        for (var i = errorEls.length - 1; i > -1; i--) {
+            // Don't touch our main message element
+            if (errorEls[i] == messageEl)
+                continue;
+
+            // Remove only direct children
+            var errorParent = errorEls[i].parentNode;
+            if (errorParent == parentEl) {
+                errors.push(errorEls[i].outerHTML);
+                errorParent.removeChild(errorEls[i]);
+            }
+        }
+
+        // Wrap all server errors into one element
+        if (errors.length > 0) {
+            messageEl.innerHTML = errors.join("");
+        }
+    };
+
+    LiveForm.addError = function (el, message) {
+        // Ignore elements with disabled live validation
+        if (this.hasClass(el, this.options.disableLiveValidationClass))
+            return;
+
+        var groupEl = this.getGroupElement(el);
+        this.setFormProperty(el.form, "hasError", true);
+        this.addClass(groupEl, this.options.controlErrorClass);
+
+        let groupSelector = $(el);
+        if (groupSelector.is("select")) {
+            let selectButton = groupSelector.parent().children('button');
+            selectButton.removeClass('btn-primary');
+            selectButton.addClass('btn-danger');
+        }
+
+        if (this.options.showValid) {
+            this.removeClass(groupEl, this.options.controlValidClass);
+        }
+
+        if (!message) {
+            message = '&nbsp;';
+        } else {
+            message = this.options.messageErrorPrefix + message;
+        }
+
+        var messageEl = this.getMessageElement(el);
+        messageEl.innerHTML = message;
+        messageEl.className = this.options.messageErrorClass;
+    };
+
+    LiveForm.removeError = function (el) {
+        // We don't want to remove any errors during onLoadValidation
+        if (this.getFormProperty(el.form, "onLoadValidation"))
+            return;
+
+        var groupEl = this.getGroupElement(el);
+
+        let groupSelector = $(el);
+        if (groupSelector.is("select")) {
+            let selectButton = groupSelector.parent().children('button');
+            selectButton.removeClass('btn-danger');
+            selectButton.addClass('btn-primary');
+        }
+
+        this.removeClass(groupEl, this.options.controlErrorClass);
+
+        var id = el.getAttribute('data-lfv-message-id');
+        if (id) {
+            var messageEl = this.getMessageElement(el);
+            messageEl.innerHTML = '';
+            messageEl.className = '';
+        }
+
+        if (this.options.showValid) {
+            if (this.showValid(el))
+                this.addClass(groupEl, this.options.controlValidClass);
+            else
+                this.removeClass(groupEl, this.options.controlValidClass);
+        }
+    };
+
+    LiveForm.showValid = function (el) {
+        if (el.type) {
+            var type = el.type.toLowerCase();
+            if (type == 'checkbox' || type == 'radio') {
+                return false;
+            }
+        }
+
+        var rules = JSON.parse(el.getAttribute('data-nette-rules'));
+        if (rules === null || rules.length == 0) {
+            return false;
+        }
+
+        if (Nette.getEffectiveValue(el) == '') {
+            return false;
+        }
+
+        if (this.hasClass(el, this.options.disableShowValidClass)) {
+            return false;
+        }
+
+        return true;
+    };
+
+    LiveForm.getGroupElement = function (el) {
+        if (this.options.showMessageClassOnParent === false)
+            return el;
+
+        var groupEl = el;
+
+        while (!this.hasClass(groupEl, this.options.showMessageClassOnParent)) {
+            groupEl = groupEl.parentNode;
+
+            if (groupEl === null) {
+                return el;
+            }
+        }
+
+        return groupEl;
+    }
+
+    LiveForm.getMessageId = function (el) {
+        var tmp = el.id + this.options.messageIdPostfix;
+
+        // For elements without ID, or multi elements (with same name), we must generate whole ID ourselves
+        if (el.name && (!el.id || !el.form.elements[el.name].tagName)) {
+            // Strip possible [] from name
+            var name = el.name.match(/\[\]$/) ? el.name.match(/(.*)\[\]$/)[1] : el.name;
+            // Generate new ID based on form ID, element name and messageIdPostfix from options
+            tmp = (el.form.id ? el.form.id : 'frm') + '-' + name + this.options.messageIdPostfix;
+        }
+
+        // We want unique ID which doesn't exist yet
+        var id = tmp,
+            i = 0;
+        while (document.getElementById(id)) {
+            id = id + '_' + ++i;
+        }
+
+        return id;
+    }
+
+    LiveForm.getMessageElement = function (el) {
+        // For multi elements (with same name) work only with first element attributes
+        if (el.name && el.name.match(/\[\]$/)) {
+            el = el.form.elements[el.name].tagName ? el : el.form.elements[el.name][0];
+        }
+
+        var id = el.getAttribute('data-lfv-message-id');
+        if (!id) {
+            // ID is not specified yet, let's create a new one
+            id = this.getMessageId(el);
+
+            // Remember this id for next use
+            el.setAttribute('data-lfv-message-id', id);
+        }
+
+        var messageEl = document.getElementById(id);
+        if (!messageEl) {
+            // Message element doesn't exist, lets create a new one
+            messageEl = document.createElement(this.options.messageTag);
+            messageEl.id = id;
+            if (el.style.display == 'none' && !this.hasClass(el, this.options.enableHiddenMessageClass)) {
+                messageEl.style.display = 'none';
+            }
+
+            var parentEl = this.getMessageParent(el);
+            if (parentEl === el.parentNode) {
+                parentEl.insertBefore(messageEl, el.nextSibling);
+            } else if (parentEl) {
+                typeof parentEl.append === 'function' ? parentEl.append(messageEl) : parentEl.appendChild(messageEl);
+            }
+        }
+
+        return messageEl;
+    };
+
+    LiveForm.getMessageParent = function (el) {
+        var parentEl = el.parentNode;
+        var parentFound = false;
+
+        if (this.options.messageParentClass !== false) {
+            parentFound = true;
+            while (!this.hasClass(parentEl, this.options.messageParentClass)) {
+                parentEl = parentEl.parentNode;
+
+                if (parentEl === null) {
+                    // We didn't found wanted parent, so use element's direct parent
+                    parentEl = el.parentNode;
+                    parentFound = false;
+                    break;
+                }
+            }
+        }
+
+        // Don't append error message to radio/checkbox input's label, but along label
+        if (el.type) {
+            var type = el.type.toLowerCase();
+            if ((type == 'checkbox' || type == 'radio') && parentEl.tagName == 'LABEL') {
+                parentEl = parentEl.parentNode;
+            }
+        }
+
+        // For multi elements (with same name) use parent's parent as parent (if wanted one is not found)
+        if (!parentFound && el.name && !el.form.elements[el.name].tagName) {
+            parentEl = parentEl.parentNode;
+        }
+
+        return parentEl;
+    }
+
+    LiveForm.addClass = function (el, className) {
+        if (!el.className) {
+            el.className = className;
+        } else if (!this.hasClass(el, className)) {
+            el.className += ' ' + className;
+        }
+    };
+
+    LiveForm.hasClass = function (el, className) {
+        if (el.className)
+            return el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+        return false;
+    };
+
+    LiveForm.removeClass = function (el, className) {
+        if (this.hasClass(el, className)) {
+            var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+            var m = el.className.match(reg);
+            el.className = el.className.replace(reg, (m[1] == ' ' && m[2] == ' ') ? ' ' : '');
+        }
+    };
+
+    LiveForm.getFormProperty = function (form, propertyName) {
+        if (form == null || this.forms[form.id] == null)
+            return false;
+
+        return this.forms[form.id][propertyName];
+    };
+
+    LiveForm.setFormProperty = function (form, propertyName, value) {
+        if (form == null)
+            return;
+
+        if (this.forms[form.id] == null)
+            this.forms[form.id] = {};
+
+        this.forms[form.id][propertyName] = value;
+    };
+
+    return LiveForm;
+
+////////////////////////////   modified netteForms.js   ///////////////////////////////////
+
+    /**
+     * NetteForms - simple form validation.
+     *
+     * This file is part of the Nette Framework (https://nette.org)
+     * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+     */
+    /*
+    (function(global, factory) {
+        if (!global.JSON) {
+            return;
+        }
+        if (typeof define === 'function' && define.amd) {
+            define(function() {
+                return factory(global);
+            });
+        } else if (typeof module === 'object' && typeof module.exports === 'object') {
+            module.exports = factory(global);
+        } else {
+            var init = !global.Nette || !global.Nette.noInit;
+            global.Nette = factory(global);
+            if (init) {
+                global.Nette.initOnLoad();
+            }
+        }
+    }(typeof window !== 'undefined' ? window : this, function(window) {
+    */
+
+}, function (window) {
     'use strict';
 
     var Nette = {};
@@ -449,7 +479,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
      * Function to execute when the DOM is fully loaded.
      * @private
      */
-    Nette.onDocumentReady = function(callback) {
+    Nette.onDocumentReady = function (callback) {
         if (document.readyState !== 'loading') {
             callback.call(this);
         } else {
@@ -459,9 +489,26 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
 
 
     /**
+     * Attaches a handler to an event for the element.
+     */
+    Nette.addEvent = function (element, on, callback) {
+        if (element.addEventListener) {
+            element.addEventListener(on, callback);
+        } else if (on === 'DOMContentLoaded') {
+            element.attachEvent('onreadystatechange', function () {
+                if (element.readyState === 'complete') {
+                    callback.call(this);
+                }
+            });
+        } else {
+            element.attachEvent('on' + on, getHandler(callback));
+        }
+    };
+
+    /**
      * Returns the value of form element.
      */
-    Nette.getValue = function(elem) {
+    Nette.getValue = function (elem) {
         var i;
         if (!elem) {
             return null;
@@ -531,7 +578,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Returns the effective value of form element.
      */
-    Nette.getEffectiveValue = function(elem, filter) {
+    Nette.getEffectiveValue = function (elem, filter) {
         var val = Nette.getValue(elem);
         if (elem.getAttribute) {
             if (val === elem.getAttribute('data-nette-empty-value')) {
@@ -552,7 +599,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Validates form element against given rules.
      */
-    Nette.validateControl = function(elem, rules, onlyCheck, value, emptyOptional) {
+    Nette.validateControl = function (elem, rules, onlyCheck, value, emptyOptional) {
         // LiveForm: addition
         // Fix for CheckboxList - validation rules are present always only on first input
         if (elem.name && elem.name.match(/\[\]$/) && elem.type.toLowerCase() == 'checkbox') {
@@ -598,7 +645,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
                 }
                 if (!onlyCheck) {
                     var arr = Array.isArray(rule.arg) ? rule.arg : [rule.arg],
-                        message = rule.msg.replace(/%(value|\d+)/g, function(foo, m) {
+                        message = rule.msg.replace(/%(value|\d+)/g, function (foo, m) {
                             return Nette.getValue(m === 'value' ? curElem : elem.form.elements.namedItem(arr[m].control));
                         });
                     Nette.addError(curElem, message);
@@ -626,7 +673,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Validates whole form.
      */
-    Nette.validateForm = function(sender) {
+    Nette.validateForm = function (sender, onlyCheck) {
         var form = sender.form || sender,
             scope = false;
 
@@ -692,7 +739,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Check if input is disabled.
      */
-    Nette.isDisabled = function(elem) {
+    Nette.isDisabled = function (elem) {
         if (elem.type === 'radio') {
             for (var i = 0, elements = elem.form.elements; i < elements.length; i++) {
                 if (elements[i].name === elem.name && !elements[i].disabled) {
@@ -709,7 +756,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Display error message.
      */
-    Nette.addError = function(elem, message) {
+    Nette.addError = function (elem, message) {
         // LiveForm: addition
         var noLiveValidation = LiveForm.hasClass(elem, LiveForm.options.disableLiveValidationClass);
         // User explicitly disabled live-validation so we want to show simple alerts
@@ -723,7 +770,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             if (!LiveForm.focusing) {
                 LiveForm.focusing = true;
                 elem.focus();
-                setTimeout(function() {
+                setTimeout(function () {
                     LiveForm.focusing = false;
 
                     // Scroll by defined offset (if enabled)
@@ -760,23 +807,18 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     Nette.showFormErrors = function(form, errors) {
         var messages = [],
             focusElem;
-
         for (var i = 0; i < errors.length; i++) {
             var elem = errors[i].element,
                 message = errors[i].message;
-
             if (messages.indexOf(message) < 0) {
                 messages.push(message);
-
                 if (!focusElem && elem.focus) {
                     focusElem = elem;
                 }
             }
         }
-
         if (messages.length) {
             alert(messages.join('\n'));
-
             if (focusElem) {
                 focusElem.focus();
             }
@@ -787,7 +829,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Validates single rule.
      */
-    Nette.validateRule = function(elem, op, arg, value) {
+    Nette.validateRule = function (elem, op, arg, value) {
         value = value === undefined ? {value: Nette.getEffectiveValue(elem, true)} : value;
 
         if (op.charAt(0) === ':') {
@@ -811,7 +853,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
 
 
     Nette.validators = {
-        filled: function(elem, arg, val) {
+        filled: function (elem, arg, val) {
             if (elem.type === 'number' && elem.validity.badInput) {
                 return true;
             }
@@ -820,15 +862,15 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
                 && (!window.FileList || !(val instanceof window.FileList) || val.length);
         },
 
-        blank: function(elem, arg, val) {
+        blank: function (elem, arg, val) {
             return !Nette.validators.filled(elem, arg, val);
         },
 
-        valid: function(elem) {
+        valid: function (elem) {
             return Nette.validateControl(elem, null, true);
         },
 
-        equal: function(elem, arg, val) {
+        equal: function (elem, arg, val) {
             if (arg === undefined) {
                 return null;
             }
@@ -855,11 +897,11 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             return true;
         },
 
-        notEqual: function(elem, arg, val) {
+        notEqual: function (elem, arg, val) {
             return arg === undefined ? null : !Nette.validators.equal(elem, arg, val);
         },
 
-        minLength: function(elem, arg, val) {
+        minLength: function (elem, arg, val) {
             if (elem.type === 'number') {
                 if (elem.validity.tooShort) {
                     return false;
@@ -870,7 +912,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             return val.length >= arg;
         },
 
-        maxLength: function(elem, arg, val) {
+        maxLength: function (elem, arg, val) {
             if (elem.type === 'number') {
                 if (elem.validity.tooLong) {
                     return false;
@@ -881,7 +923,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             return val.length <= arg;
         },
 
-        length: function(elem, arg, val) {
+        length: function (elem, arg, val) {
             if (elem.type === 'number') {
                 if (elem.validity.tooShort || elem.validity.tooLong) {
                     return false;
@@ -893,11 +935,11 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             return (arg[0] === null || val.length >= arg[0]) && (arg[1] === null || val.length <= arg[1]);
         },
 
-        email: function(elem, arg, val) {
+        email: function (elem, arg, val) {
             return (/^("([ !#-[\]-~]|\\[ -~])+"|[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*)@([0-9a-z\u00C0-\u02FF\u0370-\u1EFF]([-0-9a-z\u00C0-\u02FF\u0370-\u1EFF]{0,61}[0-9a-z\u00C0-\u02FF\u0370-\u1EFF])?\.)+[a-z\u00C0-\u02FF\u0370-\u1EFF]([-0-9a-z\u00C0-\u02FF\u0370-\u1EFF]{0,17}[a-z\u00C0-\u02FF\u0370-\u1EFF])?$/i).test(val);
         },
 
-        url: function(elem, arg, val, value) {
+        url: function (elem, arg, val, value) {
             if (!(/^[a-z\d+.-]+:/).test(val)) {
                 val = 'http://' + val;
             }
@@ -908,14 +950,15 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             return false;
         },
 
-        regexp: function(elem, arg, val) {
+        regexp: function (elem, arg, val) {
             var parts = typeof arg === 'string' ? arg.match(/^\/(.*)\/([imu]*)$/) : false;
             try {
                 return parts && (new RegExp(parts[1], parts[2].replace('u', ''))).test(val);
-            } catch (e) {} // eslint-disable-line no-empty
+            } catch (e) {
+            } // eslint-disable-line no-empty
         },
 
-        pattern: function(elem, arg, val, value, caseInsensitive) {
+        pattern: function (elem, arg, val, value, caseInsensitive) {
             if (typeof arg !== 'string') {
                 return null;
             }
@@ -938,28 +981,29 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
                 }
 
                 return regExp.test(val);
-            } catch (e) {} // eslint-disable-line no-empty
+            } catch (e) {
+            } // eslint-disable-line no-empty
         },
 
-        patternCaseInsensitive: function(elem, arg, val) {
+        patternCaseInsensitive: function (elem, arg, val) {
             return Nette.validators.pattern(elem, arg, val, null, true);
         },
 
-        numeric: function(elem, arg, val) {
+        numeric: function (elem, arg, val) {
             if (elem.type === 'number' && elem.validity.badInput) {
                 return false;
             }
             return (/^[0-9]+$/).test(val);
         },
 
-        integer: function(elem, arg, val) {
+        integer: function (elem, arg, val) {
             if (elem.type === 'number' && elem.validity.badInput) {
                 return false;
             }
             return (/^-?[0-9]+$/).test(val);
         },
 
-        'float': function(elem, arg, val, value) {
+        'float': function (elem, arg, val, value) {
             if (elem.type === 'number' && elem.validity.badInput) {
                 return false;
             }
@@ -971,7 +1015,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             return false;
         },
 
-        min: function(elem, arg, val) {
+        min: function (elem, arg, val) {
             if (elem.type === 'number') {
                 if (elem.validity.rangeUnderflow) {
                     return false;
@@ -982,7 +1026,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             return arg === null || parseFloat(val) >= arg;
         },
 
-        max: function(elem, arg, val) {
+        max: function (elem, arg, val) {
             if (elem.type === 'number') {
                 if (elem.validity.rangeOverflow) {
                     return false;
@@ -993,7 +1037,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             return arg === null || parseFloat(val) <= arg;
         },
 
-        range: function(elem, arg, val) {
+        range: function (elem, arg, val) {
             if (elem.type === 'number') {
                 if (elem.validity.rangeUnderflow || elem.validity.rangeOverflow) {
                     return false;
@@ -1005,11 +1049,11 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
                 ((arg[0] === null || parseFloat(val) >= arg[0]) && (arg[1] === null || parseFloat(val) <= arg[1])) : null;
         },
 
-        submitted: function(elem) {
+        submitted: function (elem) {
             return elem.form['nette-submittedBy'] === elem;
         },
 
-        fileSize: function(elem, arg, val) {
+        fileSize: function (elem, arg, val) {
             if (window.FileList) {
                 for (var i = 0; i < val.length; i++) {
                     if (val[i].size > arg) {
@@ -1041,7 +1085,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Process all toggles in form.
      */
-    Nette.toggleForm = function(form, elem) {
+    Nette.toggleForm = function (form, elem) {
         var i;
         formToggles = {};
         for (i = 0; i < form.elements.length; i++) {
@@ -1059,7 +1103,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Process toggles on form element.
      */
-    Nette.toggleControl = function(elem, rules, success, firsttime, value) {
+    Nette.toggleControl = function (elem, rules, success, firsttime, value) {
         rules = rules || JSON.parse(elem.getAttribute('data-nette-rules') || '[]');
         value = value === undefined ? {value: Nette.getEffectiveValue(elem)} : value;
 
@@ -1122,7 +1166,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Displays or hides HTML element.
      */
-    Nette.toggle = function(selector, visible, srcElement) { // eslint-disable-line no-unused-vars
+    Nette.toggle = function (selector, visible, srcElement) { // eslint-disable-line no-unused-vars
         if (/^\w[\w.:-]*$/.test(selector)) { // id
             selector = '#' + selector;
         }
@@ -1136,7 +1180,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
     /**
      * Setup handlers.
      */
-    Nette.initForm = function(form) {
+    Nette.initForm = function (form) {
         Nette.toggleForm(form);
 
         if (form.noValidate) {
@@ -1151,7 +1195,7 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
             onLoadValidation: false
         };
 
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             if (!Nette.validateForm(form)) {
                 e.stopPropagation();
                 e.preventDefault();
@@ -1165,49 +1209,97 @@ LiveForm.setFormProperty = function(form, propertyName, value) {
         }
     };
 
-
     /**
      * @private
      */
-    Nette.initOnLoad = function() {
-        Nette.onDocumentReady(function() {
-            for (var i = 0; i < document.forms.length; i++) {
-                var form = document.forms[i];
-                for (var j = 0; j < form.elements.length; j++) {
-                    if (form.elements[j].getAttribute('data-nette-rules')) {
-                        Nette.initForm(form);
-
-                        // LiveForm: addition
-                        if (LiveForm.hasClass(form, 'validate-on-load')) {
-                            // This is not so nice way, but I don't want to spoil validateForm, validateControl and other methods with another parameter
-                            LiveForm.setFormProperty(form, "onLoadValidation", true);
-                            Nette.validateForm(form);
-                            LiveForm.setFormProperty(form, "onLoadValidation", false);
+    Nette.initOnLoad = function () {
+        Nette.addEvent(document, 'DOMContentLoaded', function () {
+            // LiveForm: original netteForms.js code
+            /*
+                    for (var i = 0; i < document.forms.length; i++) {
+                        var form = document.forms[i];
+                        for (var j = 0; j < form.elements.length; j++) {
+                            if (form.elements[j].getAttribute('data-nette-rules')) {
+                                Nette.initForm(form);
+                                break;
+                            }
                         }
-
-                        break;
                     }
+                    Nette.addEvent(document.body, 'click', function(e) {
+                        var target = e.target || e.srcElement;
+                        if (target.form && target.type in {submit: 1, image: 1}) {
+                            target.form['nette-submittedBy'] = target;
+                        }
+                    });
+            */
+            // LiveForm: addition
+            Nette.init();
+        });
+    };
+
+    // LiveForm: addition
+    /**
+     * Init function to be called in case usage as module
+     *
+     * @public
+     */
+    Nette.init = function () {
+        for (var i = 0; i < document.forms.length; i++) {
+            var form = document.forms[i];
+            for (var j = 0; j < form.elements.length; j++) {
+                if (form.elements[j].getAttribute('data-nette-rules')) {
+                    Nette.initForm(form);
+
+                    if (LiveForm.hasClass(form, 'validate-on-load')) {
+                        // This is not so nice way, but I don't want to spoil validateForm, validateControl and other methods with another parameter
+                        LiveForm.setFormProperty(form, "onLoadValidation", true);
+                        Nette.validateForm(form);
+                        LiveForm.setFormProperty(form, "onLoadValidation", false);
+                    }
+
+                    break;
                 }
             }
+        }
 
-            document.body.addEventListener('click', function(e) {
-                var target = e.target;
-                while (target) {
-                    if (target.form && target.type in {submit: 1, image: 1}) {
-                        target.form['nette-submittedBy'] = target;
-                        break;
-                    }
-                    target = target.parentNode;
-                }
-            });
+        Nette.addEvent(document.body, 'click', function (e) {
+            var target = e.target || e.srcElement;
+            if (target.form && target.type in {submit: 1, image: 1}) {
+                target.form['nette-submittedBy'] = target;
+            }
         });
+    };
+
+
+    /**
+     * Determines whether the argument is an array.
+     */
+    Nette.isArray = function (arg) {
+        return Object.prototype.toString.call(arg) === '[object Array]';
+    };
+
+
+    /**
+     * Search for a specified value within an array.
+     */
+    Nette.inArray = function (arr, val) {
+        if ([].indexOf) {
+            return arr.indexOf(val) > -1;
+        } else {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] === val) {
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 
 
     /**
      * Converts string to web safe characters [a-z0-9-] text.
      */
-    Nette.webalize = function(s) {
+    Nette.webalize = function (s) {
         s = s.toLowerCase();
         var res = '', i, ch;
         for (i = 0; i < s.length; i++) {
