@@ -27,6 +27,7 @@
     "ublaboo-datagrid": "^6.2.6"
   },
   "resolutions": {
-    "minimist": "^1.2.3"
+    "minimist": "^1.2.3",
+    "websocket-extensions": "^0.1.4"
   }
 }
