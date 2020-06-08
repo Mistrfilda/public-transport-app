@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a50cd75f623d65082fca0239b1400d3",
+    "content-hash": "682d422d3fd4e7b499fb8db6fd564506",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -422,22 +422,22 @@
         },
         {
             "name": "contributte/rabbitmq",
-            "version": "v6.0.0",
+            "version": "v7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/rabbitmq.git",
-                "reference": "11c73b50e310d4b3555d2fb280cca4b20ae33f78"
+                "reference": "95258b2361e760c2f95395ba4bbde5e6ccd70927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/rabbitmq/zipball/11c73b50e310d4b3555d2fb280cca4b20ae33f78",
-                "reference": "11c73b50e310d4b3555d2fb280cca4b20ae33f78",
+                "url": "https://api.github.com/repos/contributte/rabbitmq/zipball/95258b2361e760c2f95395ba4bbde5e6ccd70927",
+                "reference": "95258b2361e760c2f95395ba4bbde5e6ccd70927",
                 "shasum": ""
             },
             "require": {
                 "bunny/bunny": "^0.2.4 || ^0.3 || ^0.4",
                 "nette/di": "^3.0",
-                "php": ">=7.3",
+                "php": ">=7.4",
                 "symfony/console": "~3.3 || ^4.0 || ^5.0"
             },
             "require-dev": {
@@ -461,6 +461,7 @@
                     "name": "Pavel Janda"
                 }
             ],
+            "description": "Nette extension for RabbitMQ (using BunnyPHP)",
             "homepage": "https://github.com/contributte/rabbitmq",
             "keywords": [
                 "bunny",
@@ -471,7 +472,7 @@
                 "rabbit",
                 "rabbitmq"
             ],
-            "time": "2020-05-03T11:37:27+00:00"
+            "time": "2020-05-28T12:21:46+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -3245,26 +3246,25 @@
         },
         {
             "name": "nettrine/annotations",
-            "version": "v0.6.0",
+            "version": "v0.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nettrine/annotations.git",
-                "reference": "b2efb797902de5bc1dcc3d858ee26cc50ed70fa8"
+                "reference": "2ed475c1871a36842dc44831d79087c9888b3c23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nettrine/annotations/zipball/b2efb797902de5bc1dcc3d858ee26cc50ed70fa8",
-                "reference": "b2efb797902de5bc1dcc3d858ee26cc50ed70fa8",
+                "url": "https://api.github.com/repos/nettrine/annotations/zipball/2ed475c1871a36842dc44831d79087c9888b3c23",
+                "reference": "2ed475c1871a36842dc44831d79087c9888b3c23",
                 "shasum": ""
             },
             "require": {
-                "contributte/di": "^0.4.0",
+                "contributte/di": "^0.4.2",
                 "doctrine/annotations": "^1.6.1",
-                "doctrine/cache": "^1.8.0",
+                "nettrine/cache": "^0.2.0",
                 "php": "^7.2"
             },
             "require-dev": {
-                "nettrine/cache": "^0.1.0",
                 "ninjify/qa": "^0.10.0",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan-deprecation-rules": "^0.11.0",
@@ -3276,7 +3276,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.6.x-dev"
+                    "dev-master": "0.7.x-dev"
                 }
             },
             "autoload": {
@@ -3306,7 +3306,7 @@
                 "nette",
                 "nettrine"
             ],
-            "time": "2019-11-26T17:18:26+00:00"
+            "time": "2020-04-27T09:07:32+00:00"
         },
         {
             "name": "nettrine/cache",
@@ -3369,27 +3369,27 @@
         },
         {
             "name": "nettrine/dbal",
-            "version": "v0.6.0",
+            "version": "v0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nettrine/dbal.git",
-                "reference": "d4e2ef35dacff55c05a99ac3b7b9dbd244181677"
+                "reference": "adcafd4e2cccd6f36f5c7b7263ea4056edf5b57e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nettrine/dbal/zipball/d4e2ef35dacff55c05a99ac3b7b9dbd244181677",
-                "reference": "d4e2ef35dacff55c05a99ac3b7b9dbd244181677",
+                "url": "https://api.github.com/repos/nettrine/dbal/zipball/adcafd4e2cccd6f36f5c7b7263ea4056edf5b57e",
+                "reference": "adcafd4e2cccd6f36f5c7b7263ea4056edf5b57e",
                 "shasum": ""
             },
             "require": {
-                "contributte/di": "^0.4.0",
+                "contributte/di": "^0.4.2",
                 "doctrine/dbal": "^2.9.2",
+                "nettrine/cache": "^0.2.0",
                 "php": "^7.2"
             },
             "require-dev": {
                 "contributte/console": "^0.5.0",
                 "mockery/mockery": "^1.2.2",
-                "nettrine/cache": "^0.1.0",
                 "ninjify/qa": "^0.9.0",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan-deprecation-rules": "^0.11.0",
@@ -3402,7 +3402,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.6.x-dev"
+                    "dev-master": "0.7.x-dev"
                 }
             },
             "autoload": {
@@ -3431,7 +3431,7 @@
                 "postgres",
                 "sqlite"
             ],
-            "time": "2019-12-04T18:29:19+00:00"
+            "time": "2020-04-27T08:51:08+00:00"
         },
         {
             "name": "nettrine/migrations",
@@ -6023,16 +6023,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.25",
+            "version": "0.12.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "9619551d68b2d4c0d681a8df73f3c847c798ee64"
+                "reference": "f108dabe757a584fafc3baabc0fabf4d45e040f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9619551d68b2d4c0d681a8df73f3c847c798ee64",
-                "reference": "9619551d68b2d4c0d681a8df73f3c847c798ee64",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f108dabe757a584fafc3baabc0fabf4d45e040f1",
+                "reference": "f108dabe757a584fafc3baabc0fabf4d45e040f1",
                 "shasum": ""
             },
             "require": {
@@ -6075,31 +6075,32 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-10T20:36:16+00:00"
+            "time": "2020-06-07T22:01:45+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "0.12.13",
+            "version": "0.12.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "5fab376975c2f2d99865837cfe693dc258ca9e61"
+                "reference": "b43fe3e682022eb9436a914657cf0c7b58ddf768"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/5fab376975c2f2d99865837cfe693dc258ca9e61",
-                "reference": "5fab376975c2f2d99865837cfe693dc258ca9e61",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/b43fe3e682022eb9436a914657cf0c7b58ddf768",
+                "reference": "b43fe3e682022eb9436a914657cf0c7b58ddf768",
                 "shasum": ""
             },
             "require": {
                 "php": "~7.1",
-                "phpstan/phpstan": "^0.12.3"
+                "phpstan/phpstan": "^0.12.26"
             },
             "conflict": {
                 "doctrine/collections": "<1.0",
                 "doctrine/common": "<2.7",
                 "doctrine/mongodb-odm": "<1.2",
-                "doctrine/orm": "<2.5"
+                "doctrine/orm": "<2.5",
+                "doctrine/persistence": "<1.3"
             },
             "require-dev": {
                 "consistence/coding-standard": "^3.0.1",
@@ -6139,7 +6140,7 @@
                 "MIT"
             ],
             "description": "Doctrine extensions for PHPStan",
-            "time": "2020-05-13T17:45:51+00:00"
+            "time": "2020-06-01T13:11:40+00:00"
         },
         {
             "name": "phpstan/phpstan-mockery",
