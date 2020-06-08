@@ -62,6 +62,24 @@ LiveForm.removeError = function (el) {
     }
 };
 
+LiveForm.setOptions({
+    showMessageClassOnParent: "form-control",
+    messageParentClass: false,
+    controlErrorClass: 'is-invalid',
+    controlValidClass: 'has-success',
+    messageErrorClass: 'invalid-feedback',
+    enableHiddenMessageClass: 'show-hidden-error',
+    disableLiveValidationClass: 'no-live-validation',
+    disableShowValidClass: 'no-show-valid',
+    messageTag: 'div',
+    messageIdPostfix: '_message',
+    messageErrorPrefix: '&nbsp;<i class="fas fa-exclamation-circle"></i>&nbsp;',
+    showAllErrors: true,
+    showValid: false,
+    wait: false,
+    focusScreenOffsetY: false
+});
+
 Nette.initOnLoad();
 window.Nette = Nette;
 window.LiveForm = LiveForm;
