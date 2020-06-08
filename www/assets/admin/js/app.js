@@ -4,7 +4,7 @@ import $ from 'jquery';
 import 'bootstrap';
 
 import naja from 'naja';
-import {LiveForm, Nette} from '../nette/live-form-validation';
+import './customLiveFormValidation';
 
 import '../sbadmin/js/sb-admin-2';
 
@@ -31,14 +31,6 @@ import chartRenderer from "./chartRenderer";
 let najaDepartureTableHandler = new departureTableRefresh(naja, $);
 let googleMapControl = new googleMap(naja, markerCluster);
 let chartRendererControl = new chartRenderer(naja, chart, $);
-
-LiveForm.setOptions({
-    messageErrorPrefix: "12312"
-});
-
-Nette.initOnLoad();
-window.Nette = Nette;
-window.LiveForm = LiveForm;
 
 naja.registerExtension(modalExtension, $);
 document.addEventListener('DOMContentLoaded', naja.initialize.bind(naja));
