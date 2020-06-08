@@ -2,7 +2,9 @@
 	"name": "mistrfilda/public-transport-app",
 	"description": "Nette: Standard Web Project",
 	"keywords": [
-		"nette"
+		"nette",
+		"PHP",
+		"public transport"
 	],
 	"type": "project",
 	"license": [
