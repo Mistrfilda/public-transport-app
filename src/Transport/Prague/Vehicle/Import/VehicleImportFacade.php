@@ -41,7 +41,7 @@ class VehicleImportFacade
 	public function import(): void
 	{
 		$this->logger->info('Sending vehicle position request');
-		$vehiclePositionResponse = $this->pidService->sendGetVehiclePositionRequest(5_000);
+		$vehiclePositionResponse = $this->pidService->sendGetVehiclePositionRequest(5000);
 
 		$this->entityManager->beginTransaction();
 		try {

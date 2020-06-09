@@ -2027,16 +2027,16 @@
         },
         {
             "name": "mistrfilda/pid-api",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mistrfilda/pid-api.git",
-                "reference": "08db7d70a937d9d34162ed94ace9cbe438a7fcf5"
+                "reference": "dad7bd5a8ae75f5a79710eeff6d6ab8431141769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mistrfilda/pid-api/zipball/08db7d70a937d9d34162ed94ace9cbe438a7fcf5",
-                "reference": "08db7d70a937d9d34162ed94ace9cbe438a7fcf5",
+                "url": "https://api.github.com/repos/Mistrfilda/pid-api/zipball/dad7bd5a8ae75f5a79710eeff6d6ab8431141769",
+                "reference": "dad7bd5a8ae75f5a79710eeff6d6ab8431141769",
                 "shasum": ""
             },
             "require": {
@@ -2049,15 +2049,16 @@
                 "psr/http-message": "^1.0"
             },
             "require-dev": {
-                "jakub-onderka/php-parallel-lint": "^1.0",
                 "mockery/mockery": "^1.2",
                 "nette/tester": "^2.2",
+                "php-parallel-lint/php-console-highlighter": "^0.5.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-mockery": "^0.12.3",
                 "phpstan/phpstan-strict-rules": "^0.12",
                 "roave/security-advisories": "dev-master",
-                "symplify/easy-coding-standard-prefixed": "^7.2",
+                "symplify/easy-coding-standard-prefixed": "~7.2.0",
                 "tracy/tracy": "^2.6"
             },
             "type": "library",
@@ -2071,7 +2072,7 @@
                 "MIT"
             ],
             "description": "PID api integration using guzzle/http client",
-            "time": "2020-03-29T01:24:57+00:00"
+            "time": "2020-06-09T12:34:18+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6023,16 +6024,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.26",
+            "version": "0.12.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "f108dabe757a584fafc3baabc0fabf4d45e040f1"
+                "reference": "2abbd3253e38a258137f647f4e5fdbcb13142c3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f108dabe757a584fafc3baabc0fabf4d45e040f1",
-                "reference": "f108dabe757a584fafc3baabc0fabf4d45e040f1",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2abbd3253e38a258137f647f4e5fdbcb13142c3e",
+                "reference": "2abbd3253e38a258137f647f4e5fdbcb13142c3e",
                 "shasum": ""
             },
             "require": {
@@ -6075,7 +6076,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-07T22:01:45+00:00"
+            "time": "2020-06-08T21:28:12+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
