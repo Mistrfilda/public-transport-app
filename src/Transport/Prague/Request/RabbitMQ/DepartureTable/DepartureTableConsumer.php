@@ -94,7 +94,7 @@ class DepartureTableConsumer implements IConsumer
 				$this->entityManager->flush();
 			}
 
-			$this->tracyLogger->log($e);
+			$this->tracyLogger->log($e, ILogger::CRITICAL);
 		}
 
 		return IConsumer::MESSAGE_ACK;
