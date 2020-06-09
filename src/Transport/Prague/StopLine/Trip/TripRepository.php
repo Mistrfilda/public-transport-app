@@ -12,6 +12,9 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @extends BaseRepository<Trip>
+ */
 class TripRepository extends BaseRepository
 {
 	public function findById(int $id): Trip

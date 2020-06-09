@@ -24,7 +24,7 @@ class AppAdminAuthenticator implements IAuthenticator
 	}
 
 	/**
-	 * @param string[] $credentials
+	 * @param array<mixed> $credentials
 	 * @throws AuthenticationException
 	 */
 	public function authenticate(array $credentials): IIdentity

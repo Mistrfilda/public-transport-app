@@ -14,6 +14,9 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @extends BaseRepository<StopTime>
+ */
 class StopTimeRepository extends BaseRepository
 {
 	public function findById(int $id): StopTime

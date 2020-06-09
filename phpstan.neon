@@ -1,9 +1,0 @@
-parameters:
-	excludes_analyse:
-		- src/Doctrine/BaseRepository.php
-		- tests/Integration/BaseTest.php
-
-	ignoreErrors:
-		-
-			message: '#Parameter \#1 \$credentials \(array\<string\>\) of method App\\Admin\\AppAdminAuthenticator\:\:authenticate\(\) [a-zA-Z0-9\\_]+#'
-			path: src/Admin/AppAdminAuthenticator.php

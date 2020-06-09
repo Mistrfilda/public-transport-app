@@ -10,6 +10,9 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * @extends BaseRepository<AppAdmin>
+ */
 class AppAdminRepository extends BaseRepository
 {
 	public function findById(UuidInterface $appAdminId): AppAdmin

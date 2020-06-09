@@ -10,6 +10,9 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @extends BaseRepository<TripStatisticData>
+ */
 class TripStatisticDataRepository extends BaseRepository
 {
 	/**

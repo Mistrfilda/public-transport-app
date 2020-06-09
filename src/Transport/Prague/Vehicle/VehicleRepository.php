@@ -7,6 +7,9 @@ namespace App\Transport\Prague\Vehicle;
 use App\Doctrine\BaseRepository;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @extends BaseRepository<Vehicle>
+ */
 class VehicleRepository extends BaseRepository
 {
 	/**

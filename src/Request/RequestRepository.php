@@ -11,6 +11,9 @@ use DateTimeImmutable;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @extends BaseRepository<Request>
+ */
 class RequestRepository extends BaseRepository
 {
 	public function findById(int $id): Request

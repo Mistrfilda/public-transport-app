@@ -9,6 +9,9 @@ use App\Doctrine\NoEntityFoundException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @extends BaseRepository<TripList>
+ */
 class TripListRepository extends BaseRepository
 {
 	public function findById(int $id): TripList

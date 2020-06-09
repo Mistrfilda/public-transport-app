@@ -11,6 +11,9 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * @extends BaseRepository<VehiclePosition>
+ */
 class VehiclePositionRepository extends BaseRepository
 {
 	public function findById(UuidInterface $id): VehiclePosition

@@ -9,12 +9,23 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @template TEntityClass of object
+ */
 abstract class BaseRepository
 {
 	protected EntityManagerInterface $entityManager;
 
+	/**
+	 * @var EntityRepository<TEntityClass>
+	 */
 	protected EntityRepository $doctrineRepository;
 
+	/**
+	 * @template TClass
+	 * @param class-string<TClass> $class
+	 * @throws DBALException
+	 */
 	public function __construct(string $class, EntityManagerInterface $entityManager)
 	{
 		$this->entityManager = $entityManager;

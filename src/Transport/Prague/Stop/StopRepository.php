@@ -9,6 +9,9 @@ use App\Doctrine\NoEntityFoundException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 
+/**
+ * @extends BaseRepository<Stop>
+ */
 class StopRepository extends BaseRepository
 {
 	public function findById(int $id): Stop
