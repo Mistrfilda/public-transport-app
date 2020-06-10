@@ -56,11 +56,18 @@ class VehicleImportFacade
 				]
 			);
 
+			$vehiclesCount = 0;
 			foreach ($vehiclePositionResponse->getVehiclePositions() as $currentVehiclePosition) {
 				$vehicle = $this->vehicleFactory->createFromPidLibrary($currentVehiclePosition, $vehiclePosition);
 				$this->entityManager->persist($vehicle);
+				$vehiclesCount++;
+
+				if ($vehiclesCount % 100 === 0) {
+					$this->entityManager->flush();
+				}
 			}
 
+			$vehiclePosition->updateVehiclesCount($vehiclesCount);
 			$this->entityManager->flush();
 			$this->entityManager->commit();
 			$this->entityManager->refresh($vehiclePosition);
