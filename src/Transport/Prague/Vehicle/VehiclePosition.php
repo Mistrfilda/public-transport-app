@@ -34,12 +34,22 @@ class VehiclePosition implements IEntity, IVehiclePosition
 	 */
 	private Collection $vehicles;
 
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	private int $vehiclesCount = 0;
+
 	public function __construct(
 		DateTimeImmutable $now
 	) {
 		$this->createdAt = $now;
 		$this->city = Cities::PRAGUE;
 		$this->vehicles = new ArrayCollection();
+	}
+
+	public function updateVehiclesCount(int $count): void
+	{
+		$this->vehiclesCount = $count;
 	}
 
 	public function getCity(): string
@@ -57,6 +67,6 @@ class VehiclePosition implements IEntity, IVehiclePosition
 
 	public function getVehiclesCount(): int
 	{
-		return $this->vehicles->count();
+		return $this->vehiclesCount;
 	}
 }
