@@ -108,6 +108,8 @@ services:
 	secondsformatFilter: App\UI\Filter\SecondsFormatFilter
 
 	datetimefactory: App\Utils\Datetime\DatetimeFactory
+	czechHolidayService: App\Utils\Datetime\CzechHolidayService
+
 	pidservice: Mistrfilda\Pid\Api\PidService(%pid.accessToken%)
 
 	#Forms
