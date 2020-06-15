@@ -214,6 +214,7 @@ services:
 	- App\Transport\Prague\Statistic\TripList\TripListFacade
 	- App\Transport\Prague\Statistic\Command\GenerateTripListCommand
 	- App\Transport\Prague\Statistic\TripList\TripListCacheService
+	- App\Transport\Prague\Statistic\Command\UpdateTripStatisticDataDatetimeCommand
 
 	#Map
 	map:

@@ -110,6 +110,14 @@ class TripStatisticDataRepository extends BaseRepository
 		return $qb->getQuery()->getResult();
 	}
 
+	/**
+	 * @return TripStatisticData[]
+	 */
+	public function findAll(int $limit = 100000, int $offset = 0): array
+	{
+		return $this->doctrineRepository->findBy([], [], $limit, $offset);
+	}
+
 	public function createQueryBuilder(): QueryBuilder
 	{
 		return $this->doctrineRepository->createQueryBuilder('tripStatistic');

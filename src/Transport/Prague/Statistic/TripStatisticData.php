@@ -90,6 +90,16 @@ class TripStatisticData implements IEntity
 	 */
 	private int $positionsCount;
 
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	private string $dayName;
+
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	private bool $isCzechHoliday;
+
 	public function __construct(
 		string $tripId,
 		string $routeId,
@@ -103,7 +113,8 @@ class TripStatisticData implements IEntity
 		?string $company,
 		?string $vehicleId,
 		int $vehicleType,
-		int $positionsCount
+		int $positionsCount,
+		bool $isCzechHoliday
 	) {
 		$this->tripId = $tripId;
 		$this->routeId = $routeId;
@@ -118,6 +129,14 @@ class TripStatisticData implements IEntity
 		$this->vehicleId = $vehicleId;
 		$this->vehicleType = $vehicleType;
 		$this->positionsCount = $positionsCount;
+		$this->isCzechHoliday = $isCzechHoliday;
+		$this->dayName = $date->format('D');
+	}
+
+	public function updateDate(bool $isCzechHoliday): void
+	{
+		$this->dayName = $this->date->format('D');
+		$this->isCzechHoliday = $isCzechHoliday;
 	}
 
 	public function getTripId(): string
@@ -183,5 +202,15 @@ class TripStatisticData implements IEntity
 	public function getPositionsCount(): int
 	{
 		return $this->positionsCount;
+	}
+
+	public function getDayName(): string
+	{
+		return $this->dayName;
+	}
+
+	public function isCzechHoliday(): bool
+	{
+		return $this->isCzechHoliday;
 	}
 }

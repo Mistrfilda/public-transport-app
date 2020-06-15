@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Transport\Prague\Statistic;
 
 use App\Transport\Prague\Statistic\TripList\TripListFacade;
+use App\Utils\Datetime\CzechHolidayService;
 use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,16 +23,20 @@ class TripStatisticFacade
 
 	private TripListFacade $tripListFacade;
 
+	private CzechHolidayService $czechHolidayService;
+
 	public function __construct(
 		EntityManagerInterface $entityManager,
 		LoggerInterface $logger,
 		DatetimeFactory $datetimeFactory,
-		TripListFacade $tripListFacade
+		TripListFacade $tripListFacade,
+		CzechHolidayService $czechHolidayService
 	) {
 		$this->entityManager = $entityManager;
 		$this->logger = $logger;
 		$this->datetimeFactory = $datetimeFactory;
 		$this->tripListFacade = $tripListFacade;
+		$this->czechHolidayService = $czechHolidayService;
 	}
 
 	public function processStatistics(int $numberOfDays = 1): void
@@ -70,6 +75,8 @@ class TripStatisticFacade
 			if ($count >= 1) {
 				$date = $dateFrom->modify('- ' . $count . ' days');
 			}
+
+			$isCzechHoliday = $this->czechHolidayService->isDateTimeHoliday($date);
 
 			$this->logger->info(
 				'Processing statistics for date',
@@ -125,6 +132,7 @@ having count(pv.id) > 5;
 							$result['registrationNumber'],
 							$result['vehicleType'],
 							$result['positionCount'],
+							$isCzechHoliday
 						)
 					);
 
