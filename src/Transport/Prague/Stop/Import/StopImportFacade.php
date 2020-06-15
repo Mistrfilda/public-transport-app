@@ -43,8 +43,8 @@ class StopImportFacade
 		$this->logger->info('Importing stops from pid api');
 
 		//Proccessing 5000 result because thats maxximum of results which api can send back
-		$step = 5_000;
-		$maxStep = 30_000;
+		$step = 5000;
+		$maxStep = 30000;
 		$currentStep = 0;
 		$noResult = false;
 
