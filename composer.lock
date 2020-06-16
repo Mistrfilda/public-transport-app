@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e5af1d4767e9455a585708dca9ecdf1",
+    "content-hash": "4ce9ab5b49efc6f6d7438ea6f46c0b8e",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -4240,16 +4240,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.1.1",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "0f0a271bc9b7d02a053d36fcdcb12662e2a8096e"
+                "reference": "34ac555a3627e324b660e318daa07572e1140123"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/0f0a271bc9b7d02a053d36fcdcb12662e2a8096e",
-                "reference": "0f0a271bc9b7d02a053d36fcdcb12662e2a8096e",
+                "url": "https://api.github.com/repos/symfony/console/zipball/34ac555a3627e324b660e318daa07572e1140123",
+                "reference": "34ac555a3627e324b660e318daa07572e1140123",
                 "shasum": ""
             },
             "require": {
@@ -4329,7 +4329,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-07T19:47:44+00:00"
+            "time": "2020-06-15T12:59:21+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -4393,7 +4393,7 @@
         },
         {
             "name": "symfony/inflector",
-            "version": "v5.1.1",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/inflector.git",
@@ -5055,7 +5055,7 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "v5.1.1",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
@@ -5138,16 +5138,16 @@
         },
         {
             "name": "symfony/property-info",
-            "version": "v5.1.1",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
-                "reference": "8bec4622480515449873913ab687bf0fc86374c2"
+                "reference": "75d79faca45092829b55eb83f73068e34c6567c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-info/zipball/8bec4622480515449873913ab687bf0fc86374c2",
-                "reference": "8bec4622480515449873913ab687bf0fc86374c2",
+                "url": "https://api.github.com/repos/symfony/property-info/zipball/75d79faca45092829b55eb83f73068e34c6567c5",
+                "reference": "75d79faca45092829b55eb83f73068e34c6567c5",
                 "shasum": ""
             },
             "require": {
@@ -5162,7 +5162,7 @@
             },
             "require-dev": {
                 "doctrine/annotations": "~1.7",
-                "phpdocumentor/reflection-docblock": "^3.0|^4.0",
+                "phpdocumentor/reflection-docblock": "^3.0|^4.0|^5.0",
                 "symfony/cache": "^4.4|^5.0",
                 "symfony/dependency-injection": "^4.4|^5.0",
                 "symfony/serializer": "^4.4|^5.0"
@@ -5225,7 +5225,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-04T09:56:18+00:00"
+            "time": "2020-06-15T11:50:15+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -5301,7 +5301,7 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v5.1.1",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
@@ -5365,7 +5365,7 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.1.1",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
@@ -5523,16 +5523,16 @@
         },
         {
             "name": "ublaboo/datagrid",
-            "version": "v6.2.21",
+            "version": "v6.2.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/datagrid.git",
-                "reference": "857cba95d6c6022d3d19b42500a7e335cd04fe82"
+                "reference": "852ed2d78df3f52f8f7e2beff19754640adf7c64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/datagrid/zipball/857cba95d6c6022d3d19b42500a7e335cd04fe82",
-                "reference": "857cba95d6c6022d3d19b42500a7e335cd04fe82",
+                "url": "https://api.github.com/repos/contributte/datagrid/zipball/852ed2d78df3f52f8f7e2beff19754640adf7c64",
+                "reference": "852ed2d78df3f52f8f7e2beff19754640adf7c64",
                 "shasum": ""
             },
             "require": {
@@ -5589,7 +5589,7 @@
                 "grid",
                 "nette"
             ],
-            "time": "2020-05-28T08:53:06+00:00"
+            "time": "2020-06-15T07:11:35+00:00"
         },
         {
             "name": "webimpress/safe-writer",
@@ -6366,16 +6366,16 @@
         },
         {
             "name": "rector/rector-prefixed",
-            "version": "v0.7.33",
+            "version": "v0.7.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector-prefixed.git",
-                "reference": "abb27e5bd113bc9017bbfb9c9369030bbd85fe74"
+                "reference": "065554174371ca3968f5373b14a6677742eb7a86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector-prefixed/zipball/abb27e5bd113bc9017bbfb9c9369030bbd85fe74",
-                "reference": "abb27e5bd113bc9017bbfb9c9369030bbd85fe74",
+                "url": "https://api.github.com/repos/rectorphp/rector-prefixed/zipball/065554174371ca3968f5373b14a6677742eb7a86",
+                "reference": "065554174371ca3968f5373b14a6677742eb7a86",
                 "shasum": ""
             },
             "require": {
@@ -6401,7 +6401,7 @@
                 "MIT"
             ],
             "description": "Prefixed version of Rector compiled in PHAR",
-            "time": "2020-06-09T23:27:53+00:00"
+            "time": "2020-06-16T17:59:32+00:00"
         },
         {
             "name": "roave/security-advisories",
