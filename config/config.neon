@@ -29,8 +29,8 @@ extensions:
 	dbal: Nettrine\DBAL\DI\DbalExtension
 	dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension
 	orm: Nettrine\ORM\DI\OrmExtension
-	orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
 	nettrine.annotations: Nettrine\Annotations\DI\AnnotationsExtension
+	orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
 	orm.console: Nettrine\ORM\DI\OrmConsoleExtension
 	migrations: Nettrine\Migrations\DI\MigrationsExtension
 	orm.cache: Nettrine\Cache\DI\CacheExtension
@@ -65,10 +65,8 @@ orm:
 			group_concat: DoctrineExtensions\Query\Mysql\GroupConcat
 
 orm.annotations:
-	namespaces:
-		- App
-	paths:
-		- %appDir%
+	mapping:
+		App: %appDir%
 
 migrations:
     table: doctrine_migrations
