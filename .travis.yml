@@ -12,7 +12,8 @@ services:
 matrix:
   fast_finish: true
 
-sudo: false
+after_failure:
+  - for i in $(find log -name \*.log); do echo "--- $i"; cat $i; echo; echo; done
 
 install:
   - cp tests/travis/test.local.neon config/config.local.neon
