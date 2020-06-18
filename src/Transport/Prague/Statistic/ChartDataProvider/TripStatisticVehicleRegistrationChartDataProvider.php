@@ -34,8 +34,13 @@ class TripStatisticVehicleRegistrationChartDataProvider implements IChartDataPro
 		$chartData = new ChartData('Vozidla na lince', true);
 
 		foreach ($this->tripStatisticDataRepository->getVehicleTypeCountByTripId($this->tripId) as $vehicleCount) {
+			$vehicleId = 'Neznámé';
+			if ($vehicleCount['vehicleId'] !== null) {
+				$vehicleId = $vehicleCount['vehicleId'];
+			}
+
 			$chartData->add(
-				$vehicleCount['vehicleId'],
+				$vehicleId,
 				(int) $vehicleCount['count']
 			);
 		}

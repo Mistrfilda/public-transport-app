@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Statistic\Datagrid\Trip;
 
+use App\Transport\Prague\Statistic\TripStatisticData;
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
 use App\UI\Front\Base\FrontDatagrid;
 use App\UI\Front\Base\FrontDatagridFactory;
@@ -34,7 +35,14 @@ class TripStatisticDataDatagridFactory
 		$grid->addColumnDate('date', 'Datum')->setSortable()->setFilterDate();
 		$grid->addColumnText('routeId', 'Route ID')->setFilterText();
 		$grid->addColumnText('company', 'Společnost')->setFilterText();
-		$grid->addColumnText('vehicleId', 'Vozidlo')->setFilterText();
+		$grid->addColumnText('vehicleId', 'Vozidlo')
+			->setRenderer(function (TripStatisticData $tripStatisticData): string {
+				if ($tripStatisticData->getVehicleId() !== null) {
+					return $tripStatisticData->getVehicleId();
+				}
+
+				return FrontDatagrid::NULLABLE_PLACEHOLDER;
+			})->setFilterText();
 		$grid->addColumnText('finalStation', 'Konečná stanice')->setFilterText();
 
 		$grid->addColumnText('averageDelay', 'Průměrné zpoždění')->setSortable();

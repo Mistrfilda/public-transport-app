@@ -194,6 +194,11 @@ class Vehicle implements IEntity, IVehicle
 
 	public function getMapLabel(): string
 	{
-		return sprintf('%s - %s - %s', $this->routeId, $this->getCompany(), $this->getRegistrationNumber());
+		return sprintf(
+			'%s - %s - %s',
+			$this->routeId,
+			$this->getCompany(),
+			$this->getRegistrationNumber() === null ? 'neznámé' : $this->getRegistrationNumber()
+		);
 	}
 }

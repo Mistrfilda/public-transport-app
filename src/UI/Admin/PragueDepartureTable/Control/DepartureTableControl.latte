@@ -56,7 +56,7 @@
                                     {if $stopLine->hasVehicle()}
                                         <td>{$stopLine->getVehicle()->getDelayInSeconds()|secondsFormat}</td>
                                         <td>{$stopLine->getVehicle()->getCompany()}</td>
-                                        <td> <i class="{$stopLine->getVehicle()->getVehicleType()|vehicleType}"></i> {$stopLine->getVehicle()->getRegistrationNumber()}</td>
+                                        <td> <i class="{$stopLine->getVehicle()->getVehicleType()|vehicleType}"></i> {$stopLine->getVehicle()->getRegistrationNumber()|nullablestring}</td>
                                         <td>{$stopLine->getVehicle()->getLastStopId()|pragueStopId}</td>
                                     {else}
                                         <td>----</td>

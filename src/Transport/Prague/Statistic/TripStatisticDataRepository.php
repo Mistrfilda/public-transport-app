@@ -80,7 +80,7 @@ class TripStatisticDataRepository extends BaseRepository
 	}
 
 	/**
-	 * @return array<array<string, string>>
+	 * @return array<int, array{vehicleId: string|null, count: string}>
 	 */
 	public function getVehicleTypeCountByTripId(string $tripId): array
 	{

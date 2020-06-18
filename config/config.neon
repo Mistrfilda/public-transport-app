@@ -96,14 +96,16 @@ services:
 
 	latte.latteFactory:
 		setup:
-			- addFilter(datetimeFormat, [@datetimeformatfilter, format])
-			- addFilter(secondsFormat, [@secondsformatFilter, format])
+			- addFilter(datetimeFormat, [@datetimeFormatFilter, format])
+			- addFilter(secondsFormat, [@secondsFormatFilter, format])
 			- addFilter(pragueStopId, [@praguestopidfilter, format])
 			- addFilter(vehicleType, [@vehicletypefilter, format])
+			- addFilter(nullablestring, [@nullableStringFilter, format])
 
 	#CUSTOM LATTE FILTERS
-	datetimeformatfilter: App\UI\Filter\DatetimeFormatFilter
-	secondsformatFilter: App\UI\Filter\SecondsFormatFilter
+	datetimeFormatFilter: App\UI\Filter\DatetimeFormatFilter
+	secondsFormatFilter: App\UI\Filter\SecondsFormatFilter
+	nullableStringFilter: App\UI\Filter\NullableStringFilter
 
 	datetimefactory: App\Utils\Datetime\DatetimeFactory
 	czechHolidayService: App\Utils\Datetime\CzechHolidayService

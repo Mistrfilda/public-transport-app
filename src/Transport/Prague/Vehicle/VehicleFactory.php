@@ -49,6 +49,11 @@ class VehicleFactory
 			$vehicleType = VehicleType::UNDEFINED;
 		}
 
+		$registrationNumber = null;
+		if ($pidVehiclePosition->getVehicleRegistrationNumber() !== null) {
+			$registrationNumber = (string) $pidVehiclePosition->getVehicleRegistrationNumber();
+		}
+
 		return $this->create(
 			$vehiclePosition,
 			$pidVehiclePosition->getRouteId(),
@@ -61,7 +66,7 @@ class VehicleFactory
 			$vehicleType,
 			$pidVehiclePosition->getLastStopId(),
 			$pidVehiclePosition->getNextStopId(),
-			(string) $pidVehiclePosition->getVehicleRegistrationNumber(),
+			$registrationNumber,
 			$pidVehiclePosition->getCompany()
 		);
 	}
