@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Transport\Prague\DepartureTable;
 
+use App\Request\IRequestFacade;
 use App\Request\RequestConditions;
-use App\Transport\Prague\Request\RequestFacade;
 use App\Transport\Prague\Stop\StopRepository;
 use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,22 +24,26 @@ class DepartureTableFacade
 
 	private DatetimeFactory $datetimeFactory;
 
-	private RequestFacade $requestFacade;
+	/** @var IRequestFacade[] */
+	private array $requestFacades;
 
+	/**
+	 * @param IRequestFacade[] $requestFacades
+	 */
 	public function __construct(
 		EntityManagerInterface $entityManager,
 		LoggerInterface $logger,
 		DepartureTableRepository $departureTableRepository,
 		StopRepository $stopRepository,
 		DatetimeFactory $datetimeFactory,
-		RequestFacade $requestFacade
+		array $requestFacades
 	) {
 		$this->entityManager = $entityManager;
 		$this->logger = $logger;
 		$this->departureTableRepository = $departureTableRepository;
 		$this->stopRepository = $stopRepository;
 		$this->datetimeFactory = $datetimeFactory;
-		$this->requestFacade = $requestFacade;
+		$this->requestFacades = $requestFacades;
 	}
 
 	public function createDepartureTable(int $stopId, int $numberOfFutureDays): DepartureTable
@@ -63,15 +67,17 @@ class DepartureTableFacade
 		$this->entityManager->flush();
 		$this->entityManager->refresh($departureTable);
 
-		$this->requestFacade->generateRequests(
-			new RequestConditions(
-				[
-					'generateDepartureTables' => true,
-					'generateVehiclePositions' => false,
-				],
-				['departureTableId' => $departureTable->getId()->toString()]
-			)
-		);
+		foreach ($this->requestFacades as $requestFacade) {
+			$requestFacade->generateRequests(
+				new RequestConditions(
+					[
+						'generateDepartureTables' => true,
+						'generateVehiclePositions' => false,
+					],
+					['departureTableId' => $departureTable->getId()->toString()]
+				)
+			);
+		}
 
 		return $departureTable;
 	}
