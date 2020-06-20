@@ -6366,16 +6366,16 @@
         },
         {
             "name": "rector/rector-prefixed",
-            "version": "v0.7.35",
+            "version": "v0.7.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector-prefixed.git",
-                "reference": "6d48ec5dd8c0b12fc73f911daf83d547da7433d3"
+                "reference": "d7a3a9508b611c3369d753bbce40234664dbbf6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector-prefixed/zipball/6d48ec5dd8c0b12fc73f911daf83d547da7433d3",
-                "reference": "6d48ec5dd8c0b12fc73f911daf83d547da7433d3",
+                "url": "https://api.github.com/repos/rectorphp/rector-prefixed/zipball/d7a3a9508b611c3369d753bbce40234664dbbf6b",
+                "reference": "d7a3a9508b611c3369d753bbce40234664dbbf6b",
                 "shasum": ""
             },
             "require": {
@@ -6401,7 +6401,7 @@
                 "MIT"
             ],
             "description": "Prefixed version of Rector compiled in PHAR",
-            "time": "2020-06-18T22:15:06+00:00"
+            "time": "2020-06-19T11:44:44+00:00"
         },
         {
             "name": "roave/security-advisories",
@@ -6409,12 +6409,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "499fb201e495ef0064da064f520c845d3638fe24"
+                "reference": "6d2e5ab854782830911ddd33b7d4649b9f18c10f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/499fb201e495ef0064da064f520c845d3638fe24",
-                "reference": "499fb201e495ef0064da064f520c845d3638fe24",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6d2e5ab854782830911ddd33b7d4649b9f18c10f",
+                "reference": "6d2e5ab854782830911ddd33b7d4649b9f18c10f",
                 "shasum": ""
             },
             "conflict": {
@@ -6458,8 +6458,8 @@
                 "doctrine/orm": ">=2,<2.4.8|>=2.5,<2.5.1",
                 "dolibarr/dolibarr": "<11.0.4",
                 "dompdf/dompdf": ">=0.6,<0.6.2",
-                "drupal/core": ">=7,<7.70|>=8,<8.7.14|>=8.8,<8.8.6",
-                "drupal/drupal": ">=7,<7.70|>=8,<8.7.14|>=8.8,<8.8.6",
+                "drupal/core": ">=7,<7.72|>=8,<8.8.8|>=8.9,<8.9.1|>=9,<9.0.1",
+                "drupal/drupal": ">=7,<7.72|>=8,<8.8.8|>=8.9,<8.9.1|>=9,<9.0.1",
                 "endroid/qr-code-bundle": "<3.4.2",
                 "enshrined/svg-sanitize": "<0.13.1",
                 "erusev/parsedown": "<1.7.2",
@@ -6686,7 +6686,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-17T06:37:54+00:00"
+            "time": "2020-06-19T13:23:43+00:00"
         },
         {
             "name": "symplify/easy-coding-standard-prefixed",
