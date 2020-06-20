@@ -47,7 +47,7 @@ class DepartureTableFormFactory
 			->setRequired()
 			->addRule(Form::RANGE, 'Please select value between %s and %s', [1, 15]);
 
-		$form->onSuccess[] = function (AdminForm $form, $values) use ($onSuccess, $id): void {
+		$form->onSuccess[] = function (AdminForm $form, DepartureTableFormDTO $values) use ($onSuccess, $id): void {
 			if ($id === null) {
 				$this->createDepartureTable($form, $values, $onSuccess);
 			} else {
