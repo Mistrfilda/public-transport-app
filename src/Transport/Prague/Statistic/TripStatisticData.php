@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  *        @ORM\Index(name="routeTripIndex", columns={"trip_id", "route_id", "final_station"})
  *	   },
  *     uniqueConstraints={
- *        @ORM\UniqueConstraint(name="trip_date_unique",columns={"trip_id", "date", "vehicle_id"})
+ *        @ORM\UniqueConstraint(name="trip_date_unique",columns={"trip_id", "date", "vehicle_id", "company", "wheelchair_accessible"})
  *     }
  * )
  */

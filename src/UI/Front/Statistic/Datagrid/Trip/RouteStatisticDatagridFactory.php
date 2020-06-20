@@ -27,8 +27,8 @@ class RouteStatisticDatagridFactory
 		$grid = $this->frontDatagridFactory->create();
 
 		$grid->setDataSource($this->tripListRepository->createQueryBuilder());
-		$grid->addColumnText('routeId', 'Route ID')->setFilterText();
-		$grid->addColumnText('tripId', 'Trip ID')->setFilterText();
+		$grid->addColumnText('routeId', 'Route ID')->setSortable()->setFilterText();
+		$grid->addColumnText('tripId', 'Trip ID')->setSortable()->setFilterText();
 		$grid->addColumnText('lastFinalStation', 'Poslední cílová stanice')->setFilterText();
 		$grid->addColumnDateTime('newestKnownPosition', 'Poslední známá poloha')->setSortable();
 		$grid->addColumnText('countOfStatistics', 'Počet statistik')->setSortable()->setFilterText();

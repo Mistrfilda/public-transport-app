@@ -67,25 +67,7 @@ class TripStatisticFacade
 		);
 		$resultSetMapping->addScalarResult('position_count', 'positionCount', Types::INTEGER);
 
-		$dateFrom = $this->datetimeFactory->createToday()->modify('- 1 day');
-
-		$count = 0;
-		while ($count < $numberOfDays) {
-			$date = $dateFrom;
-			if ($count >= 1) {
-				$date = $dateFrom->modify('- ' . $count . ' days');
-			}
-
-			$isCzechHoliday = $this->czechHolidayService->isDateTimeHoliday($date);
-
-			$this->logger->info(
-				'Processing statistics for date',
-				[
-					'date' => $date->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT),
-				]
-			);
-
-			$sql = "select 
+		$sql = "select 
 pv.trip_id as 'trip_id', 
 pv.route_id as 'route_id',  
 pv.final_station as 'final_station',
@@ -103,6 +85,24 @@ where date(pp.created_at) = :created_date
 group by pv.trip_id, pv.route_id, pv.final_station, pv.registration_number, pv.company, pv.wheelchair_accessible 
 having count(pv.id) > 5;
 ";
+
+		$dateFrom = $this->datetimeFactory->createToday()->modify('- 1 day');
+
+		$count = 0;
+		while ($count < $numberOfDays) {
+			$date = $dateFrom;
+			if ($count >= 1) {
+				$date = $dateFrom->modify('- ' . $count . ' days');
+			}
+
+			$isCzechHoliday = $this->czechHolidayService->isDateTimeHoliday($date);
+
+			$this->logger->info(
+				'Processing statistics for date',
+				[
+					'date' => $date->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT),
+				]
+			);
 
 			$query = $this->entityManager->createNativeQuery($sql, $resultSetMapping);
 			$query->setParameter('created_date', $date->format('Y-m-d'), Types::STRING);
@@ -163,6 +163,7 @@ where date(pp.created_at) = :created_date
 				$this->logger->info('Successfully deleted trip statistics');
 
 				$this->entityManager->commit();
+				$this->entityManager->clear();
 			} catch (Throwable $e) {
 				$this->entityManager->rollback();
 				$this->logger->emergency(
@@ -172,8 +173,7 @@ where date(pp.created_at) = :created_date
 						'date' => $date->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT),
 					]
 				);
-
-				throw $e;
+				$this->entityManager->clear();
 			}
 		}
 

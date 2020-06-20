@@ -82,6 +82,8 @@ class TripListFacade
 
 				if ($index > 100) {
 					$this->entityManager->flush();
+					$this->entityManager->clear();
+
 					$index = 0;
 
 					if ($progressBar !== null) {
