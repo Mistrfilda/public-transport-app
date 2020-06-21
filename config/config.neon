@@ -142,6 +142,7 @@ services:
 	- App\Transport\Prague\Stop\StopRepository(App\Transport\Prague\Stop\Stop)
 	- App\Transport\Prague\Stop\StopFactory
 	- App\Transport\Prague\Stop\StopCacheService
+	- App\Transport\Prague\Stop\StopMapObjectProvider
 
 	- App\UI\Admin\PragueStop\Datagrid\StopDatagridFactory
 	praguestopidfilter: App\Transport\Prague\Stop\Filter\StopIdFilter

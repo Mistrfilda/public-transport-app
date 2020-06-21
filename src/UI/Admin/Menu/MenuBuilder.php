@@ -18,7 +18,7 @@ class MenuBuilder
 			new MenuGroup('Prague', true, [
 				new MenuItem('', '', 'fas fa-ruler-vertical', 'Stops', [
 					new MenuItem('PragueStop', 'default', '', 'List'),
-					new MenuItem('PragueStop', 'map', '', 'Map'),
+					new MenuItem('PragueStopMap', 'default', '', 'Map'),
 				]),
 				new MenuItem('PragueDepartureTable', 'default', 'fas fa-table', 'Departure tables'),
 				new MenuItem('PragueVehiclePosition', 'default', 'fas fa-bus', 'Vehicles positions'),

@@ -48,6 +48,15 @@ class TripStatisticDataDatagridFactory
 		$grid->addColumnText('averageDelay', 'Průměrné zpoždění')->setSortable();
 		$grid->addColumnText('highestDelay', 'Nejvyšší zpoždění')->setSortable();
 
+		$grid->addColumnText('lastPositionDelay', 'Zpoždění v cílové zastávce')
+			->setRenderer(function (TripStatisticData $tripStatisticData): string {
+				if ($tripStatisticData->getLastPositionDelay() !== null) {
+					return (string) $tripStatisticData->getLastPositionDelay();
+				}
+
+				return FrontDatagrid::NULLABLE_PLACEHOLDER;
+			})->setSortable();
+
 		$grid->setDefaultSort(['date' => 'desc']);
 
 		return $grid;
