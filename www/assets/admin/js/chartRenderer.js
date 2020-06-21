@@ -65,6 +65,7 @@ export default class chartRenderer {
                         }]
                     },
                     options: {
+                        maintainAspectRatio: false,
                         scales: {
                             yAxes: [{
                                 ticks: {
