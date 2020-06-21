@@ -55,6 +55,8 @@ class TripStatisticFacade
 		);
 		$resultSetMapping->addScalarResult('highest_delay', 'highestDelay', Types::INTEGER);
 		$resultSetMapping->addScalarResult('average_delay', 'averageDelay', Types::FLOAT);
+		$resultSetMapping->addScalarResult('last_position_delay', 'lastPositionDelay', Types::INTEGER);
+
 		$resultSetMapping->addScalarResult(
 			'oldest_known_position',
 			'oldestKnownPosition',
@@ -79,8 +81,12 @@ max(pv.delay_in_seconds) as 'highest_delay',
 avg(pv.delay_in_seconds) as 'average_delay',
 max(pp.created_at) as 'oldest_known_position', 
 min(pp.created_at) as 'newest_known_position',
-count(pv.id) as 'position_count'
-from prague_vehicle pv inner join prague_vehicle_position pp on pv.vehicle_position_id = pp.id 
+count(pv.id) as 'position_count',
+any_value(lp.delay_in_seconds) as 'last_position_delay'
+from prague_vehicle pv 
+inner join prague_vehicle_position pp on pv.vehicle_position_id = pp.id
+left join (select trip_id, delay_in_seconds from prague_vehicle where id in (select max(id) from prague_vehicle pv group by pv.trip_id)) lp 
+	on lp.trip_id = pv.trip_id 
 where date(pp.created_at) = :created_date 
 group by pv.trip_id, pv.route_id, pv.final_station, pv.registration_number, pv.company, pv.wheelchair_accessible 
 having count(pv.id) > 5;
@@ -128,6 +134,7 @@ having count(pv.id) > 5;
 							$result['newestKnownPosition'],
 							$result['highestDelay'],
 							(int) $result['averageDelay'],
+							$result['lastPositionDelay'],
 							$result['company'],
 							$result['registrationNumber'],
 							$result['vehicleType'],

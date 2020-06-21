@@ -71,6 +71,11 @@ class TripStatisticData implements IEntity
 	private int $averageDelay;
 
 	/**
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	private ?int $lastPositionDelay;
+
+	/**
 	 * @ORM\Column(type="string", nullable=true)
 	 */
 	private ?string $company = null;
@@ -110,6 +115,7 @@ class TripStatisticData implements IEntity
 		DateTimeImmutable $newestKnownPosition,
 		int $highestDelay,
 		int $averageDelay,
+		?int $lastPositionDelay,
 		?string $company,
 		?string $vehicleId,
 		int $vehicleType,
@@ -131,6 +137,7 @@ class TripStatisticData implements IEntity
 		$this->positionsCount = $positionsCount;
 		$this->isCzechHoliday = $isCzechHoliday;
 		$this->dayName = $date->format('D');
+		$this->lastPositionDelay = $lastPositionDelay;
 	}
 
 	public function updateDate(bool $isCzechHoliday): void
@@ -212,5 +219,10 @@ class TripStatisticData implements IEntity
 	public function isCzechHoliday(): bool
 	{
 		return $this->isCzechHoliday;
+	}
+
+	public function getLastPositionDelay(): ?int
+	{
+		return $this->lastPositionDelay;
 	}
 }

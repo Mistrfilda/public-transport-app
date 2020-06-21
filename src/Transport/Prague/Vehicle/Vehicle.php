@@ -13,7 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="prague_vehicle")
+ * @ORM\Table(name="prague_vehicle",
+ *     indexes={
+ *        @ORM\Index(name="trip", columns={"trip_id"}),
+ *        @ORM\Index(name="routeTripIndex", columns={"trip_id", "route_id", "final_station"})
+ *	   },
+ * )
  */
 class Vehicle implements IEntity, IVehicle
 {
