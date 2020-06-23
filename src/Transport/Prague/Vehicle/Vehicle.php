@@ -94,6 +94,16 @@ class Vehicle implements IEntity, IVehicle
 	 */
 	private ?string $company = null;
 
+	/**
+	 * @ORM\Column(type="boolean", nullable=true)
+	 */
+	private ?bool $tracking;
+
+	/**
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	private ?int $speed;
+
 	public function __construct(
 		VehiclePosition $vehiclePosition,
 		string $routeId,
@@ -107,7 +117,9 @@ class Vehicle implements IEntity, IVehicle
 		?string $lastStopId,
 		?string $nextStopId,
 		?string $registrationNumber,
-		?string $company
+		?string $company,
+		?bool $tracking,
+		?int $speed
 	) {
 		$this->vehiclePosition = $vehiclePosition;
 		$this->routeId = $routeId;
@@ -122,6 +134,8 @@ class Vehicle implements IEntity, IVehicle
 		$this->vehicleType = $vehicleType;
 		$this->registrationNumber = $registrationNumber;
 		$this->company = $company;
+		$this->tracking = $tracking;
+		$this->speed = $speed;
 
 		$createdAt = $vehiclePosition->getCreatedAt()->setTime(0, 0, 0);
 		$this->dateTripId = $createdAt->getTimestamp() . '_' . $this->tripId;
@@ -195,6 +209,16 @@ class Vehicle implements IEntity, IVehicle
 	public function hasDelay(): bool
 	{
 		return $this->getDelayInSeconds() > 0;
+	}
+
+	public function getTracking(): ?bool
+	{
+		return $this->tracking;
+	}
+
+	public function getSpeed(): ?int
+	{
+		return $this->speed;
 	}
 
 	public function getMapLabel(): string

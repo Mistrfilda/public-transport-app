@@ -21,7 +21,9 @@ class VehicleFactory
 		?string $lastStopId,
 		?string $nextStopId,
 		?string $registrationNumber,
-		?string $company
+		?string $company,
+		?bool $tracking,
+		?int $speed
 	): Vehicle {
 		return new Vehicle(
 			$vehiclePosition,
@@ -36,7 +38,9 @@ class VehicleFactory
 			$lastStopId,
 			$nextStopId,
 			$registrationNumber,
-			$company
+			$company,
+			$tracking,
+			$speed
 		);
 	}
 
@@ -67,7 +71,9 @@ class VehicleFactory
 			$pidVehiclePosition->getLastStopId(),
 			$pidVehiclePosition->getNextStopId(),
 			$registrationNumber,
-			$pidVehiclePosition->getCompany()
+			$pidVehiclePosition->getCompany(),
+			$pidVehiclePosition->getTracking(),
+			$pidVehiclePosition->getSpeed()
 		);
 	}
 }
