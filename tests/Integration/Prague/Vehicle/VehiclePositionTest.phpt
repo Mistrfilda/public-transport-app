@@ -77,7 +77,9 @@ class VehiclePositionTest extends BaseTest
 				122,
 				'U12345',
 				'U54321',
-				'ZASTAVKA'
+				'ZASTAVKA',
+				50,
+				true
 			),
 			new PIDVehiclePosition(
 				50.001,
@@ -93,7 +95,8 @@ class VehiclePositionTest extends BaseTest
 				231,
 				'U12345',
 				'U54321',
-				'ZASTAVKA'
+				'ZASTAVKA', 50,
+				true
 			),
 			new PIDVehiclePosition(
 				50.001,
@@ -109,7 +112,9 @@ class VehiclePositionTest extends BaseTest
 				-26,
 				'U12345',
 				'U54321',
-				'ZASTAVKA'
+				'ZASTAVKA',
+				50,
+				true
 			),
 			new PIDVehiclePosition(
 				50.001,
@@ -125,7 +130,9 @@ class VehiclePositionTest extends BaseTest
 				0,
 				'U12345',
 				'U54321',
-				'ZASTAVKA'
+				'ZASTAVKA',
+				50,
+				true
 			),
 		]);
 
@@ -148,7 +155,9 @@ class VehiclePositionTest extends BaseTest
 				122,
 				'U12345',
 				'U54321',
-				'ZASTAVKA'
+				'ZASTAVKA',
+				50,
+				true
 			),
 			new PIDVehiclePosition(
 				50.001,
@@ -164,7 +173,9 @@ class VehiclePositionTest extends BaseTest
 				231,
 				'U12345',
 				'U54321',
-				'ZASTAVKA'
+				'ZASTAVKA',
+				50,
+				true
 			),
 		]);
 
