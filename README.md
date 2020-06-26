@@ -20,7 +20,7 @@ For deploy look at https://github.com/Mistrfilda/public-transport-app-deploy - d
  
 # Built with
 ### Backend  
-- PHP 7.3
+- PHP 7.4
 - Nette 3.0 components
 - Doctrine ORM
 - RabbitMQ, MariaDB
