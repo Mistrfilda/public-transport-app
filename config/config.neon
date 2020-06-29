@@ -5,11 +5,11 @@ parameters:
 		apiToken: ""
 
 application:
-	errorPresenter: Error
+	errorPresenter: Error:Error
 	mapping:
 		*: ['App', '*', '*\UI\*Presenter']
 		Front: ['App\UI\Front', '*', '*\*Presenter']
-		Error: ['App\UI\Error', '*', '*\*Presenter']
+		Error: App\UI\Error\*Presenter
 		Admin: ['App\UI\Admin', '*', '*\*Presenter']
 
 tracy:
