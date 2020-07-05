@@ -33,8 +33,13 @@ class TripStatisticDataDatagridFactory
 		$grid->setDataSource($qb);
 
 		$grid->addColumnDate('date', 'Datum')->setSortable()->setFilterDate();
+
+		$grid->addColumnDateTime('oldestKnownPosition', 'První známá poloha');
+		$grid->addColumnDateTime('newestKnownPosition', 'Poslední známá poloha');
+
 		$grid->addColumnText('routeId', 'Route ID')->setFilterText();
 		$grid->addColumnText('company', 'Společnost')->setFilterText();
+
 		$grid->addColumnText('vehicleId', 'Vozidlo')
 			->setRenderer(function (TripStatisticData $tripStatisticData): string {
 				if ($tripStatisticData->getVehicleId() !== null) {

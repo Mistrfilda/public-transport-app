@@ -6393,16 +6393,16 @@
         },
         {
             "name": "rector/rector-prefixed",
-            "version": "v0.7.41",
+            "version": "v0.7.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector-prefixed.git",
-                "reference": "76a193c754f130913d38f30b39ab82d528a72067"
+                "reference": "ade2b797aff4050deb50f4021b3d0230c9a14151"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector-prefixed/zipball/76a193c754f130913d38f30b39ab82d528a72067",
-                "reference": "76a193c754f130913d38f30b39ab82d528a72067",
+                "url": "https://api.github.com/repos/rectorphp/rector-prefixed/zipball/ade2b797aff4050deb50f4021b3d0230c9a14151",
+                "reference": "ade2b797aff4050deb50f4021b3d0230c9a14151",
                 "shasum": ""
             },
             "require": {
@@ -6428,7 +6428,7 @@
                 "MIT"
             ],
             "description": "Prefixed version of Rector compiled in PHAR",
-            "time": "2020-06-25T23:57:46+00:00"
+            "time": "2020-07-05T21:40:41+00:00"
         },
         {
             "name": "roave/security-advisories",
@@ -6436,12 +6436,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "6d2e5ab854782830911ddd33b7d4649b9f18c10f"
+                "reference": "57353ec1a34527a2dbbd3c0fb9418ffc008c6f60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6d2e5ab854782830911ddd33b7d4649b9f18c10f",
-                "reference": "6d2e5ab854782830911ddd33b7d4649b9f18c10f",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/57353ec1a34527a2dbbd3c0fb9418ffc008c6f60",
+                "reference": "57353ec1a34527a2dbbd3c0fb9418ffc008c6f60",
                 "shasum": ""
             },
             "conflict": {
@@ -6535,8 +6535,9 @@
                 "magento/product-community-edition": ">=2,<2.2.10|>=2.3,<2.3.2-p.2",
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
+                "nystudio107/craft-seomatic": "<3.3",
                 "nzo/url-encryptor-bundle": ">=4,<4.3.2|>=5,<5.0.1",
-                "october/october": ">=1.0.319,<1.0.466",
+                "october/october": ">=1.0.319,<1.0.467",
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "openid/php-openid": "<2.3",
@@ -6713,7 +6714,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-19T13:23:43+00:00"
+            "time": "2020-07-03T16:50:03+00:00"
         },
         {
             "name": "symplify/easy-coding-standard-prefixed",
