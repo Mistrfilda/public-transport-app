@@ -48,10 +48,29 @@ class TripListRepository extends BaseRepository
 	 */
 	public function findTripIdPairs(): array
 	{
-		$results = $this->findAll();
+		$qb = $this->createQueryBuilder();
+
+		$offset = 0;
+		$maxResults = 5000;
 		$pairs = [];
-		foreach ($results as $result) {
-			$pairs[$result->getTripId()] = $result->getId();
+
+		while (true) {
+			$qb->setMaxResults($maxResults);
+			$qb->setFirstResult($offset);
+
+			/** @var TripList[] $results */
+			$results = $qb->getQuery()->getResult();
+
+			if (count($results) === 0) {
+				break;
+			}
+
+			foreach ($results as $result) {
+				$pairs[$result->getTripId()] = $result->getId();
+			}
+			$this->entityManager->clear();
+
+			$offset += $maxResults;
 		}
 
 		return $pairs;
