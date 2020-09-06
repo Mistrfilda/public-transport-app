@@ -98,6 +98,7 @@
 		"webpack-dev-prod": "PROD_HOST=1 yarn encore dev",
 		"test-db-init": "php tests/Integration/DatabaseCreator.php",
 		"js-lint": "yarn eslint www/assets/**",
+		"cache-load": "bin/console app:cache:load",
 		"test": [
 			"@test-unit",
 			"@test-integration"
@@ -122,7 +123,8 @@
 			"@clear",
 			"@rabbit-declare",
 			"@migration-migrate",
-			"@webpack-prod"
+			"@webpack-prod",
+			"@cache-load"
 		]
 	},
 	"minimum-stability": "stable"
