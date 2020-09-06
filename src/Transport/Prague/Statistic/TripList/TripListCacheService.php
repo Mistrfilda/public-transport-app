@@ -21,6 +21,8 @@ class TripListCacheService
 
 	private LoggerInterface $logger;
 
+	private bool $cacheLoaded = false;
+
 	public function __construct(
 		IStorage $storage,
 		TripListRepository $tripListRepository,
@@ -29,11 +31,11 @@ class TripListCacheService
 		$this->cache = new Cache($storage, 'tripList');
 		$this->tripListRepository = $tripListRepository;
 		$this->logger = $logger;
-		$this->loadCache();
 	}
 
 	public function getTripListId(string $tripId): int
 	{
+		$this->loadCache();
 		if (array_key_exists($tripId, $this->tripListPairs)) {
 			return $this->tripListPairs[$tripId];
 		}
@@ -44,12 +46,18 @@ class TripListCacheService
 
 	public function hasTripList(string $tripId): bool
 	{
+		$this->loadCache();
 		return array_key_exists($tripId, $this->tripListPairs);
 	}
 
 	public function loadCache(bool $refresh = false): void
 	{
+		if ($this->cacheLoaded && $refresh === false) {
+			return;
+		}
+
 		$cachedTripList = $this->cache->load(self::TRIP_LIST_KEY);
+		$this->cacheLoaded = true;
 		if ($cachedTripList !== null && $refresh === false) {
 			$this->tripListPairs = $cachedTripList;
 			return;

@@ -23,6 +23,8 @@ class StopCacheService
 
 	private LoggerInterface $logger;
 
+	private bool $cacheLoaded = false;
+
 	public function __construct(
 		IStorage $storage,
 		StopRepository $stopRepository,
@@ -31,11 +33,11 @@ class StopCacheService
 		$this->cache = new Cache($storage, 'stops');
 		$this->stopRepository = $stopRepository;
 		$this->logger = $logger;
-		$this->loadCache();
 	}
 
 	public function getStop(string $stopId): string
 	{
+		$this->loadCache();
 		if (array_key_exists($stopId, $this->stopPairs)) {
 			return $this->stopPairs[$stopId];
 		}
@@ -53,7 +55,12 @@ class StopCacheService
 
 	public function loadCache(bool $refresh = false): void
 	{
+		if ($this->cacheLoaded && $refresh === false) {
+			return;
+		}
+
 		$cachedStops = $this->cache->load(self::STOP_PAIRS_KEY);
+		$this->cacheLoaded = true;
 		if ($cachedStops !== null && $refresh === false) {
 			$this->stopPairs = $cachedStops;
 			return;
