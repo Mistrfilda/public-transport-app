@@ -47,7 +47,7 @@ class TripListCacheService
 		return array_key_exists($tripId, $this->tripListPairs);
 	}
 
-	private function loadCache(bool $refresh = false): void
+	public function loadCache(bool $refresh = false): void
 	{
 		$cachedTripList = $this->cache->load(self::TRIP_LIST_KEY);
 		if ($cachedTripList !== null && $refresh === false) {

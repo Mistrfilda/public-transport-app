@@ -51,7 +51,7 @@ class StopCacheService
 		return self::UNDEFINED_STOP_PLACEHOLDER;
 	}
 
-	private function loadCache(bool $refresh = false): void
+	public function loadCache(bool $refresh = false): void
 	{
 		$cachedStops = $this->cache->load(self::STOP_PAIRS_KEY);
 		if ($cachedStops !== null && $refresh === false) {

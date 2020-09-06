@@ -107,6 +107,8 @@ services:
 	secondsFormatFilter: App\UI\Filter\SecondsFormatFilter
 	nullableStringFilter: App\UI\Filter\NullableStringFilter
 
+	#UTILS
+	- App\Utils\Command\WarmUpCacheCommand
 	datetimefactory: App\Utils\Datetime\DatetimeFactory
 	czechHolidayService: App\Utils\Datetime\CzechHolidayService
 
