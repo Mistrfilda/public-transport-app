@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Admin\Request\Datagrid;
 
+use App\Doctrine\OrderBy;
 use App\Request\Request;
 use App\Request\RequestRepository;
 use App\Request\RequestType;
@@ -60,12 +61,15 @@ class RequestDatagridFactory
 
 		$grid->addColumnDateTime('finishedAt', 'Finished at')
 			->setRenderer(
-				fn (Request $request): string => AdminDatagrid::formatNullableDatetimeColumn($request->getFinishedAt())
-			)
+				function (Request $request): string {
+					return AdminDatagrid::formatNullableDatetimeColumn($request->getFinishedAt());
+				})
 			->setFilterDate();
 
 		$grid->addColumnDateTime('failedAt', 'Failed at')
-			->setRenderer(fn (Request $request): string => AdminDatagrid::formatNullableDatetimeColumn($request->getFailedAt()))
+			->setRenderer(function (Request $request): string {
+				return AdminDatagrid::formatNullableDatetimeColumn($request->getFailedAt());
+			})
 			->setFilterDate();
 
 		$departureTable = $grid->addColumnText('departureTableName', 'Departure table')
@@ -93,7 +97,7 @@ class RequestDatagridFactory
 			}
 		});
 
-		$grid->setDefaultSort(['createdAt' => 'desc']);
+		$grid->setDefaultSort(['createdAt' => OrderBy::DESC]);
 
 		return $grid;
 	}

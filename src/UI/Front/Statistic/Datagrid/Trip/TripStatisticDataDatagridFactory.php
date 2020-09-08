@@ -33,6 +33,21 @@ class TripStatisticDataDatagridFactory
 		$grid->setDataSource($qb);
 
 		$grid->addColumnDate('date', 'Datum')->setSortable()->setFilterDate();
+		$grid->addColumnText('dayName', 'Nazev dne');
+		$czechHoliday = $grid->addColumnText('isCzechHoliday', 'Státní svátek')->setRenderer(
+			function (TripStatisticData $tripStatisticData) {
+				if ($tripStatisticData->isCzechHoliday()) {
+					return 'Ano';
+				}
+
+				return 'Ne';
+			}
+		);
+
+		$grid->setFilterSelect($czechHoliday, [
+			0 => 'Ne',
+			1 => 'Ano',
+		]);
 
 		$grid->addColumnDateTime('oldestKnownPosition', 'První známá poloha');
 		$grid->addColumnDateTime('newestKnownPosition', 'Poslední známá poloha');

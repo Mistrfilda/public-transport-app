@@ -156,7 +156,7 @@ class CzechHolidayService
 	{
 		$now = new DateTimeImmutable();
 
-		if (! array_key_exists($year, self::DATA)) {
+		if (array_key_exists($year, self::DATA) === false) {
 			return [];
 		}
 
@@ -174,6 +174,7 @@ class CzechHolidayService
 			$holidays[$czechHoliday->getTimestamp()] = $czechHoliday;
 		}
 
+		$this->proccessedHolidays[$year] = $holidays;
 		return $holidays;
 	}
 }
