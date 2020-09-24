@@ -8,7 +8,7 @@ use App\Transport\Prague\Vehicle\VehicleFactory;
 use App\Transport\Prague\Vehicle\VehiclePosition;
 use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -18,7 +18,7 @@ class VehicleImportFacade
 
 	private LoggerInterface $logger;
 
-	private PidService $pidService;
+	private GolemioService $pidService;
 
 	private VehicleFactory $vehicleFactory;
 
@@ -27,7 +27,7 @@ class VehicleImportFacade
 	public function __construct(
 		EntityManagerInterface $entityManager,
 		LoggerInterface $logger,
-		PidService $pidService,
+		GolemioService $pidService,
 		VehicleFactory $vehicleFactory,
 		DatetimeFactory $datetimeFactory
 	) {

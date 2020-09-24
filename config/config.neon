@@ -112,7 +112,8 @@ services:
 	datetimefactory: App\Utils\Datetime\DatetimeFactory
 	czechHolidayService: App\Utils\Datetime\CzechHolidayService
 
-	pidservice: Mistrfilda\Pid\Api\PidService(%pid.accessToken%)
+	pidservice: Mistrfilda\Pid\Api\GolemioService(%pid.accessToken%)
+	pidrssservice: Mistrfilda\Pid\Api\RssService
 
 	#Forms
 	- App\UI\Admin\Base\AdminFormFactory

@@ -10,13 +10,13 @@ use App\Transport\Prague\StopLine\Trip\TripFactory;
 use App\Transport\Prague\StopLine\Trip\TripRepository;
 use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
 class TripImportFacade
 {
-	private PidService $pidService;
+	private GolemioService $pidService;
 
 	private EntityManagerInterface $entityManager;
 
@@ -31,7 +31,7 @@ class TripImportFacade
 	private StopRepository $stopRepository;
 
 	public function __construct(
-		PidService $pidService,
+		GolemioService $pidService,
 		EntityManagerInterface $entityManager,
 		LoggerInterface $logger,
 		TripRepository $tripRepository,

@@ -8,13 +8,13 @@ use App\Doctrine\NoEntityFoundException;
 use App\Transport\Prague\Stop\StopFactory;
 use App\Transport\Prague\Stop\StopRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
 class StopImportFacade
 {
-	private PidService $pidApiService;
+	private GolemioService $pidApiService;
 
 	private EntityManagerInterface $entityManager;
 
@@ -25,7 +25,7 @@ class StopImportFacade
 	private LoggerInterface $logger;
 
 	public function __construct(
-		PidService $pidService,
+		GolemioService $pidService,
 		EntityManagerInterface $entityManager,
 		StopRepository $stopRepository,
 		StopFactory $stopFactory,

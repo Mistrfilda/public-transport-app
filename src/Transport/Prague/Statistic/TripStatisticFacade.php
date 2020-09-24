@@ -153,7 +153,7 @@ having count(pv.id) > 5;
 				$this->logger->info('Successfully saved trip statistics');
 
 				$this->entityManager->getConnection()
-					->executeUpdate(
+					->executeStatement(
 						'
 DELETE pv from prague_vehicle pv 
 inner join prague_vehicle_position pp on pv.vehicle_position_id = pp.id

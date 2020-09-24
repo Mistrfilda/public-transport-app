@@ -10,13 +10,13 @@ use App\Transport\Prague\StopLine\StopTime\StopTimeFactory;
 use App\Transport\Prague\StopLine\StopTime\StopTimeRepository;
 use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
 class StopTimeImportFacade
 {
-	private PidService $pidService;
+	private GolemioService $pidService;
 
 	private EntityManagerInterface $entityManager;
 
@@ -31,7 +31,7 @@ class StopTimeImportFacade
 	private StopRepository $stopRepository;
 
 	public function __construct(
-		PidService $pidService,
+		GolemioService $pidService,
 		EntityManagerInterface $entityManager,
 		LoggerInterface $logger,
 		StopTimeRepository $stopTimeRepository,

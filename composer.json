@@ -35,7 +35,7 @@
 		"nettrine/migrations": "^0.6",
 		"nettrine/cache": "^0.2",
 		"nettrine/annotations": "^0.6",
-		"mistrfilda/pid-api": "^0.2",
+		"mistrfilda/pid-api": "^0.3",
 		"ramsey/uuid-doctrine": "^1.6",
 		"contributte/monolog": "^0.4.1",
 		"ublaboo/datagrid": "^6.2",

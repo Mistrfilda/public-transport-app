@@ -14,7 +14,7 @@ use App\Transport\Prague\StopLine\StopLineFactory;
 use Bunny\Message;
 use Contributte\RabbitMQ\Consumer\IConsumer;
 use InvalidArgumentException;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Mistrfilda\Pid\Api\StopTime\StopTime as PIDStopTime;
 use Mistrfilda\Pid\Api\StopTime\StopTimeResponse;
 use Mistrfilda\Pid\Api\Trip\Trip as PIDTrip;
@@ -187,7 +187,7 @@ class DepartureTableConsumerTest extends BaseTest
 
 		]);
 
-		$mockedPidService = Mockery::mock(PidService::class);
+		$mockedPidService = Mockery::mock(GolemioService::class);
 		$mockedPidService
 			->shouldReceive('sendGetStopTimesRequest')
 			->once()
