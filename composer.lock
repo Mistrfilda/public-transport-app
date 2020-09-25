@@ -2045,16 +2045,16 @@
         },
         {
             "name": "mistrfilda/pid-api",
-            "version": "v0.3.0",
+            "version": "v0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mistrfilda/pid-api.git",
-                "reference": "28f414d7d71c75a73ca5be8063ec1a2372cf973e"
+                "reference": "17071ef9e6463afe11fcb5c03df6d6ff7affaad8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mistrfilda/pid-api/zipball/28f414d7d71c75a73ca5be8063ec1a2372cf973e",
-                "reference": "28f414d7d71c75a73ca5be8063ec1a2372cf973e",
+                "url": "https://api.github.com/repos/Mistrfilda/pid-api/zipball/17071ef9e6463afe11fcb5c03df6d6ff7affaad8",
+                "reference": "17071ef9e6463afe11fcb5c03df6d6ff7affaad8",
                 "shasum": ""
             },
             "require": {
@@ -2092,7 +2092,7 @@
                 "MIT"
             ],
             "description": "PID api integration using guzzle/http client",
-            "time": "2020-09-21T23:47:29+00:00"
+            "time": "2020-09-24T23:57:03+00:00"
         },
         {
             "name": "monolog/monolog",
