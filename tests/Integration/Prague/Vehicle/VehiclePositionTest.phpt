@@ -9,7 +9,7 @@ use App\Transport\Prague\Vehicle\VehiclePosition;
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
 use App\Transport\Prague\Vehicle\VehicleRepository;
 use App\Transport\Prague\Vehicle\VehicleType;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Mistrfilda\Pid\Api\VehiclePosition\VehiclePosition as PIDVehiclePosition;
 use Mistrfilda\Pid\Api\VehiclePosition\VehiclePositionResponse;
 use Mockery;
@@ -179,7 +179,7 @@ class VehiclePositionTest extends BaseTest
 			),
 		]);
 
-		$mockedPidService = Mockery::mock(PidService::class);
+		$mockedPidService = Mockery::mock(GolemioService::class);
 		$mockedPidService->shouldReceive('sendGetVehiclePositionRequest')
 			->andReturnValues([
 				$firstResponse,

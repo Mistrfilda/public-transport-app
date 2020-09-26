@@ -9,7 +9,7 @@ use App\Transport\Prague\StopLine\StopTime\Import\StopTimeImportFacade;
 use App\Transport\Prague\StopLine\StopTime\StopTime;
 use App\Transport\Prague\StopLine\StopTime\StopTimeRepository;
 use InvalidArgumentException;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Mistrfilda\Pid\Api\StopTime\StopTime as PIDStopTime;
 use Mistrfilda\Pid\Api\StopTime\StopTimeResponse;
 use Mockery;
@@ -251,7 +251,7 @@ class StopTimeRemovingTest extends BaseTest
 			new PIDStopTime('26:55:00', '26:55:00', '333_1104_200308', 4),
 		]);
 
-		$mockedPidService = Mockery::mock(PidService::class);
+		$mockedPidService = Mockery::mock(GolemioService::class);
 		$mockedPidService->shouldReceive('sendGetStopTimesRequest')
 			->andReturnValues([
 				$firstResponse,

@@ -11,7 +11,7 @@ use App\Transport\Prague\Stop\StopCacheService;
 use App\Transport\Prague\Stop\StopFactory;
 use App\Transport\Prague\Stop\StopRepository;
 use InvalidArgumentException;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Mistrfilda\Pid\Api\Stop\Stop as PIDStop;
 use Mistrfilda\Pid\Api\Stop\StopResponse;
 use Mockery;
@@ -143,7 +143,7 @@ class StopTest extends BaseTest
 		$emptyResponse->shouldReceive('getCount')->andReturn(0);
 		$emptyResponse->shouldReceive('getStops')->andReturn([]);
 
-		$mockedPidService = Mockery::mock(PidService::class);
+		$mockedPidService = Mockery::mock(GolemioService::class);
 		$mockedPidService->shouldReceive('sendGetStopsRequest')
 			->andReturnValues([
 				$firstResponse,

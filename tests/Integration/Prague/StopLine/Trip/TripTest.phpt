@@ -10,7 +10,7 @@ use App\Transport\Prague\StopLine\Trip\Trip;
 use App\Transport\Prague\StopLine\Trip\TripFactory;
 use App\Transport\Prague\StopLine\Trip\TripRepository;
 use InvalidArgumentException;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Mistrfilda\Pid\Api\Trip\Trip as PIDTrip;
 use Mistrfilda\Pid\Api\Trip\TripResponse;
 use Mockery;
@@ -145,7 +145,7 @@ class TripTest extends BaseTest
 
 		]);
 
-		$mockedPidService = Mockery::mock(PidService::class);
+		$mockedPidService = Mockery::mock(GolemioService::class);
 		$mockedPidService->shouldReceive('sendGetStopTripsRequest')
 			->andReturnValues([
 				$firstResponse,

@@ -14,7 +14,7 @@ use App\Transport\Prague\Vehicle\VehicleType;
 use Bunny\Message;
 use Contributte\RabbitMQ\Consumer\IConsumer;
 use InvalidArgumentException;
-use Mistrfilda\Pid\Api\PidService;
+use Mistrfilda\Pid\Api\GolemioService;
 use Mistrfilda\Pid\Api\VehiclePosition\VehiclePosition as PIDVehiclePosition;
 use Mistrfilda\Pid\Api\VehiclePosition\VehiclePositionResponse;
 use Mockery;
@@ -193,7 +193,7 @@ class VehiclePositionConsumerTest extends BaseTest
 			),
 		]);
 
-		$mockedPidService = Mockery::mock(PidService::class);
+		$mockedPidService = Mockery::mock(GolemioService::class);
 		$mockedPidService
 			->shouldReceive('sendGetVehiclePositionRequest')
 			->once()->andReturn($firstResponse);
