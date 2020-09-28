@@ -88,4 +88,19 @@ class TripListRepository extends BaseRepository
 	{
 		return $this->doctrineRepository->createQueryBuilder('tripList');
 	}
+
+	public function getTripListCount(): int
+	{
+		$qb = $this->createQueryBuilder();
+		$qb->select('count(tripList.id)');
+		return (int) $qb->getQuery()->getSingleScalarResult();
+	}
+
+	public function getTripListLineCount(): int
+	{
+		$qb = $this->createQueryBuilder();
+		$qb->select('count(tripList.id)');
+		$qb->groupBy('tripList.routeId');
+		return count($qb->getQuery()->getResult());
+	}
 }

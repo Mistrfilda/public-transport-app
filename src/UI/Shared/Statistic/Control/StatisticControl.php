@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Shared\Statistic\Control;
 
+use App\Transport\Prague\Statistic\TripList\TripListRepository;
 use App\Transport\Prague\Stop\StopRepository;
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
 use App\UI\Shared\Statistic\Statistic;
@@ -16,12 +17,16 @@ class StatisticControl extends Control
 
 	private StopRepository $stopRepository;
 
+	private TripListRepository $tripListRepository;
+
 	public function __construct(
 		VehiclePositionRepository $VehiclePositionRepository,
-		StopRepository $stopRepository
+		StopRepository $stopRepository,
+		TripListRepository $tripListRepository
 	) {
 		$this->vehiclePositionRepository = $VehiclePositionRepository;
 		$this->stopRepository = $stopRepository;
+		$this->tripListRepository = $tripListRepository;
 	}
 
 	public function render(): void
@@ -51,7 +56,7 @@ class StatisticControl extends Control
 
 			$statistics[] = new Statistic(
 				Statistic::CONTEXTUAL_SUCCESS,
-				'Počet poloh vozidel',
+				'Poslední počet poloh vozidel',
 				(string) $lastVehiclePosition->getVehiclesCount(),
 				'fas fa-bus fa-2x text-gray-300'
 			);
@@ -62,6 +67,24 @@ class StatisticControl extends Control
 			'Celkový počet zastávek',
 			(string) $this->stopRepository->getStopsCount(),
 			'fas fa-ruler-vertical fa-2x text-gray-300'
+		);
+
+		$statistics[] = new Statistic(
+			Statistic::CONTEXTUAL_PRIMARY,
+			'Počet linek se statistikami',
+			(string) $this->tripListRepository->getTripListLineCount(),
+			'fas fa-database fa-2x text-gray-300',
+			'border-left-',
+			'col-xl-12 col-md-12'
+		);
+
+		$statistics[] = new Statistic(
+			Statistic::CONTEXTUAL_PRIMARY,
+			'Celkový počet statistik pro jednotlivá pořadí linek',
+			(string) $this->tripListRepository->getTripListCount(),
+			'fas fa-database fa-2x text-gray-300',
+			'border-left-',
+			'col-xl-12 col-md-12'
 		);
 
 		return $statistics;
