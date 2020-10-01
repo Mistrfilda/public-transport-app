@@ -5,7 +5,7 @@ My hobby project :) I just like public transport :) Still under heavy developmen
 # Features
 
 Currently supported cities:
- - Prague - for more details about integration see my simple php wrapper for official PID api - https://github.com/Mistrfilda/ofce-pid-api
+ - Prague - for more details about integration see my simple php wrapper for official PID api - https://github.com/Mistrfilda/pid-api
  
  Components and features:
  - List of all stops
