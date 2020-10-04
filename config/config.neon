@@ -220,6 +220,13 @@ services:
 	- App\Transport\Prague\Statistic\TripList\TripListCacheService
 	- App\Transport\Prague\Statistic\Command\UpdateTripStatisticDataDatetimeCommand
 
+	#Parking lot
+	- App\Transport\Prague\Parking\ParkingLotRepository(App\Transport\Prague\Parking\ParkingLot)
+	- App\Transport\Prague\Parking\ParkingLotFactory
+	- App\Transport\Prague\Parking\ParkingLotOccupancyFactory
+	- App\Transport\Prague\Parking\Import\ParkingLotImportCommand
+	- App\Transport\Prague\Parking\Import\ParkingLotImportFacade
+
 	#Map
 	map:
 		implement: App\UI\Shared\Map\MapControlFactory
