@@ -8,12 +8,16 @@ use Nette\Configurator;
 
 class Bootstrap
 {
-	public static function boot(): Configurator
+	public static function boot(bool $consoleMode = false): Configurator
 	{
 		$configurator = new Configurator();
 
 		if (array_key_exists('pubtransport', $_COOKIE) && $_COOKIE['pubtransport'] === 'debug_on') {
 			$configurator->setDebugMode('192.168.1.13');
+		}
+
+		if ($consoleMode) {
+			$configurator->setDebugMode(true);
 		}
 
 		$configurator->enableTracy(__DIR__ . '/../log');
