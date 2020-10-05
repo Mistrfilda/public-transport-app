@@ -46,7 +46,7 @@ export default class googleMap {
                     fontSize: "10 px"
                 },
                 icon: {
-                    url: "https://maps.google.com/mapfiles/kml/shapes/bus.png",
+                    url: mapObject.mapIcon,
                     scaledSize: new google.maps.Size(30, 30),
                 }
             });

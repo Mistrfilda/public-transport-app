@@ -9,6 +9,8 @@ use App\UI\Shared\Map\MapObject;
 
 class StopMapObjectProvider implements IMapObjectProvider
 {
+	private const MAP_ICON = 'https://maps.google.com/mapfiles/kml/paddle/blu-circle.png';
+
 	private StopRepository $stopRepository;
 
 	public function __construct(StopRepository $stopRepository)
@@ -26,6 +28,7 @@ class StopMapObjectProvider implements IMapObjectProvider
 			$mapObjects[] = new MapObject(
 				$stop->getCoordinates(),
 				$stop->getFormattedName(),
+				self::MAP_ICON,
 				[
 					$stop->getFormattedName(),
 				]

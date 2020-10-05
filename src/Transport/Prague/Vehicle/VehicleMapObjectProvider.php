@@ -13,6 +13,8 @@ use Nette\Utils\Html;
 
 class VehicleMapObjectProvider implements IMapObjectProvider
 {
+	private const MAP_ICON = 'https://maps.google.com/mapfiles/kml/shapes/bus.png';
+
 	private VehiclePositionRepository $vehiclePositionRepository;
 
 	private StopCacheService $stopCacheService;
@@ -44,6 +46,7 @@ class VehicleMapObjectProvider implements IMapObjectProvider
 			$objects[] = new MapObject(
 				$vehicle->getCoordinates(),
 				$vehicle->getMapLabel(),
+				self::MAP_ICON,
 				$this->getVehicleInfoWindowLines($vehicle)
 			);
 		}
