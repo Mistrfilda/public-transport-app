@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Front\PragueDepartureTable;
+namespace App\UI\Front\Prague\PragueDepartureTable;
 
 use App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControl;
 use App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControlFactory;

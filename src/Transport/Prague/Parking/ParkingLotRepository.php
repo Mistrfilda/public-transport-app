@@ -65,6 +65,13 @@ class ParkingLotRepository extends BaseRepository
 		return $qb;
 	}
 
+	public function getParkingLotsCount(): int
+	{
+		$qb = $this->createQueryBuilder();
+		$qb->select('count(parkingLot.id)');
+		return (int) $qb->getQuery()->getSingleScalarResult();
+	}
+
 	public function createQueryBuilder(): QueryBuilder
 	{
 		return $this->doctrineRepository->createQueryBuilder('parkingLot');

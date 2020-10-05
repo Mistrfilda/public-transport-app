@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Shared\Statistic\Control;
 
+use App\Transport\Prague\Parking\ParkingLotOccupancyRepository;
+use App\Transport\Prague\Parking\ParkingLotRepository;
 use App\Transport\Prague\Statistic\TripList\TripListRepository;
 use App\Transport\Prague\Stop\StopRepository;
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
@@ -19,14 +21,22 @@ class StatisticControl extends Control
 
 	private TripListRepository $tripListRepository;
 
+	private ParkingLotRepository $parkingLotRepository;
+
+	private ParkingLotOccupancyRepository $parkingLotOccupancyRepository;
+
 	public function __construct(
 		VehiclePositionRepository $VehiclePositionRepository,
 		StopRepository $stopRepository,
-		TripListRepository $tripListRepository
+		TripListRepository $tripListRepository,
+		ParkingLotRepository $parkingLotRepository,
+		ParkingLotOccupancyRepository $parkingLotOccupancyRepository
 	) {
 		$this->vehiclePositionRepository = $VehiclePositionRepository;
 		$this->stopRepository = $stopRepository;
 		$this->tripListRepository = $tripListRepository;
+		$this->parkingLotRepository = $parkingLotRepository;
+		$this->parkingLotOccupancyRepository = $parkingLotOccupancyRepository;
 	}
 
 	public function render(): void
@@ -85,6 +95,22 @@ class StatisticControl extends Control
 			'fas fa-database fa-2x text-gray-300',
 			'border-left-',
 			'col-xl-12 col-md-12'
+		);
+
+		$statistics[] = new Statistic(
+			Statistic::CONTEXTUAL_WARNING,
+			'Počet dostupných parkovišť',
+			(string) $this->parkingLotRepository->getParkingLotsCount(),
+			'fas fa-parking fa-2x text-gray-300',
+			'border-left-'
+		);
+
+		$statistics[] = new Statistic(
+			Statistic::CONTEXTUAL_WARNING,
+			'Data o parkovištích dostupná z',
+			$this->parkingLotOccupancyRepository->getLastParkingDate(),
+			'fas fa-parking fa-2x text-gray-300',
+			'border-left-'
 		);
 
 		return $statistics;
