@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueStatistic\Datagrid;
+namespace App\UI\Admin\Prague\PragueStatistic\Datagrid;
 
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
 use App\UI\Admin\Base\AdminDatagrid;

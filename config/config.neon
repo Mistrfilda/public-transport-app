@@ -43,6 +43,14 @@ extensions:
 webpackassets:
 	buildedAssetsDir: %wwwDir%/build
 
+custompresenterfactory:
+	presenterDir: %appDir%
+	customMapping:
+		Admin:PragueDepartureTable: App\UI\Admin\Prague\PragueDepartureTable\PragueDepartureTablePresenter
+		Admin:PragueStatistic: App\UI\Admin\Prague\PragueStatistic\PragueStatisticPresenter
+		Admin:PragueStop: App\UI\Admin\Prague\PragueStop\PragueStopPresenter
+		Admin:PragueStopMap: App\UI\Admin\Prague\PragueStopMap\PragueStopMapPresenter
+		Admin:PragueVehiclePosition: App\UI\Admin\Prague\PragueVehiclePosition\PragueVehiclePositionPresenter
 
 dbal:
 	debug:
@@ -147,7 +155,7 @@ services:
 	- App\Transport\Prague\Stop\StopCacheService
 	- App\Transport\Prague\Stop\StopMapObjectProvider
 
-	- App\UI\Admin\PragueStop\Datagrid\StopDatagridFactory
+	- App\UI\Admin\Prague\PragueStop\Datagrid\StopDatagridFactory
 	praguestopidfilter: App\Transport\Prague\Stop\Filter\StopIdFilter
 
 	#TRIP
@@ -175,8 +183,8 @@ services:
 	- App\Transport\Prague\Vehicle\VehicleRepository(App\Transport\Prague\Vehicle\Vehicle)
 	- App\Transport\Prague\Vehicle\VehicleMapObjectProvider
 
-	- App\UI\Admin\PragueVehiclePosition\Datagrid\VehicleDatagridFactory
-	- App\UI\Admin\PragueVehiclePosition\Datagrid\VehiclePositionDatagridFactory
+	- App\UI\Admin\Prague\PragueVehiclePosition\Datagrid\VehicleDatagridFactory
+	- App\UI\Admin\Prague\PragueVehiclePosition\Datagrid\VehiclePositionDatagridFactory
 
 	vehicletypefilter: App\Transport\Prague\Vehicle\Filter\VehicleTypeFilter
 
@@ -185,9 +193,9 @@ services:
 	- App\Transport\Prague\DepartureTable\DepartureTableRepository(App\Transport\Prague\DepartureTable\DepartureTable)
 	- App\Transport\Prague\DepartureTable\DepartureTableStopLinesFactory
 
-	- App\UI\Admin\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory
-	- App\UI\Admin\PragueDepartureTable\Form\DepartureTableFormFactory
-	- App\UI\Admin\PragueDepartureTable\Control\DepartureTableControlFactory
+	- App\UI\Admin\Prague\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory
+	- App\UI\Admin\Prague\PragueDepartureTable\Form\DepartureTableFormFactory
+	- App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControlFactory
 
 	- App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListControlFactory
 	- App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListDataFactory
@@ -205,7 +213,7 @@ services:
 	- App\Transport\Prague\Statistic\TripStatisticFacade
 	- App\Transport\Prague\Statistic\Command\GenerateTripStatisticCommand
 	- App\Transport\Prague\Statistic\TripStatisticDataRepository(App\Transport\Prague\Statistic\TripStatisticData)
-	- App\UI\Admin\PragueStatistic\Datagrid\StatisticDatagridFactory
+	- App\UI\Admin\Prague\PragueStatistic\Datagrid\StatisticDatagridFactory
 	- App\UI\Shared\Statistic\Modal\TripStatisticModalRendererControlFactory
 	- App\UI\Front\Statistic\Control\Trip\TripStatisticControlFactory
 	- App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory

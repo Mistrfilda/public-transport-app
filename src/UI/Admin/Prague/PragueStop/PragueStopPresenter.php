@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueStop;
+namespace App\UI\Admin\Prague\PragueStop;
 
 use App\UI\Admin\AdminPresenter;
 use App\UI\Admin\Base\AdminDatagrid;
-use App\UI\Admin\PragueStop\Datagrid\StopDatagridFactory;
+use App\UI\Admin\Prague\PragueStop\Datagrid\StopDatagridFactory;
 
 class PragueStopPresenter extends AdminPresenter
 {

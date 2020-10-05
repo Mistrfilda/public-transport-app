@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueDepartureTable\Exception;
+namespace App\UI\Admin\Prague\PragueDepartureTable\Exception;
 
 use Exception;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueStopMap;
+namespace App\UI\Admin\Prague\PragueStopMap;
 
 use App\Transport\Prague\Stop\StopMapObjectProvider;
 use App\UI\Admin\AdminPresenter;

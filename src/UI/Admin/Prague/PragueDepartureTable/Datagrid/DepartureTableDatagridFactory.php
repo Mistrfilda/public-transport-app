@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueDepartureTable\Datagrid;
+namespace App\UI\Admin\Prague\PragueDepartureTable\Datagrid;
 
 use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\Stop\StopRepository;
