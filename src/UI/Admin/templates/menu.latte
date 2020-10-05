@@ -42,7 +42,6 @@
             {else}
                 <!-- Nav Item - Dashboard -->
                 {var $isMenuLinkActive = $presenter->isMenuLinkActive($menuItem->getActiveLinks())}
-                {dump $menuItem->getActiveLinks()}
                 <li n:class="nav-item, $isMenuLinkActive ? active">
                     <a class="nav-link" n:href="{$menuItem->getLink()}">
                         <i class="{$menuItem->getIcon()}"></i>
