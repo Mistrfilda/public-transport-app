@@ -17,17 +17,28 @@ class MenuItem
 	/** @var MenuItem[] */
 	private array $childrens;
 
+	/** @var string[] */
+	private array $additionalActivePresenters;
+
 	/**
 	 * MenuItem constructor.
 	 * @param MenuItem[] $childrens
+	 * @param string[] $additionalActivePresenters
 	 */
-	public function __construct(string $presenter, string $action, string $icon, string $label, array $childrens = [])
-	{
+	public function __construct(
+		string $presenter,
+		string $action,
+		string $icon,
+		string $label,
+		array $childrens = [],
+		array $additionalActivePresenters = []
+	) {
 		$this->presenter = $presenter;
 		$this->action = $action;
 		$this->icon = $icon;
 		$this->label = $label;
 		$this->childrens = $childrens;
+		$this->additionalActivePresenters = $additionalActivePresenters;
 	}
 
 	public function getPresenter(): string
@@ -73,7 +84,9 @@ class MenuItem
 	 */
 	public function getActiveLinks(): array
 	{
-		$condition = [];
+		$condition = array_map(function (string $presenter): string {
+			return $presenter . ':*';
+		}, $this->additionalActivePresenters);
 		return $this->getChildrenLinks($condition);
 	}
 

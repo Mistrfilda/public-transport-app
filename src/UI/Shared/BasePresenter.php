@@ -6,6 +6,7 @@ namespace App\UI\Shared;
 
 use App\UI\Shared\Modal\ModalRendererControl;
 use App\UI\Shared\Modal\ModalRendererControlFactory;
+use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
 use Nette\Utils\IHtmlString;
 
@@ -53,5 +54,25 @@ abstract class BasePresenter extends Presenter
 	protected function createComponentModalRendererControl(): ModalRendererControl
 	{
 		return $this->modalRendererControlFactory->create();
+	}
+
+	protected function processParameterIntId(): int
+	{
+		$id = $this->getParameter('id');
+		if ($id === null || (int) $id === 0) {
+			throw new BadRequestException('Missing parameter ID');
+		}
+
+		return (int) $id;
+	}
+
+	protected function processParameterStringId(): string
+	{
+		$id = $this->getParameter('id');
+		if ($id === null || (string) $id === '') {
+			throw new BadRequestException('Missing parameter ID');
+		}
+
+		return (string) $id;
 	}
 }

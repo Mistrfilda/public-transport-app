@@ -58,6 +58,13 @@ class ParkingLotRepository extends BaseRepository
 		return $qb->getQuery()->getResult();
 	}
 
+	public function createQueryBuilderForDatagrid(): QueryBuilder
+	{
+		$qb = $this->doctrineRepository->createQueryBuilder('parkingLot');
+		$qb->innerJoin('parkingLot.lastParkingLotOccupancy', 'lastParkingLotOccupancy');
+		return $qb;
+	}
+
 	public function createQueryBuilder(): QueryBuilder
 	{
 		return $this->doctrineRepository->createQueryBuilder('parkingLot');

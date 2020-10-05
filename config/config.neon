@@ -51,6 +51,9 @@ custompresenterfactory:
 		Admin:PragueStop: App\UI\Admin\Prague\PragueStop\PragueStopPresenter
 		Admin:PragueStopMap: App\UI\Admin\Prague\PragueStopMap\PragueStopMapPresenter
 		Admin:PragueVehiclePosition: App\UI\Admin\Prague\PragueVehiclePosition\PragueVehiclePositionPresenter
+		Admin:PragueDepartureTableEditForm: App\UI\Admin\Prague\PragueDepartureTable\PragueDepartureTableEditFormPresenter
+		Admin:PragueParkingLot: App\UI\Admin\Prague\PragueParkingLot\PragueParkingLotPresenter
+		Admin:PragueParkingLotOccupancy: App\UI\Admin\Prague\PragueParkingLot\PragueParkingLotOccupancyPresenter
 
 dbal:
 	debug:
@@ -230,10 +233,13 @@ services:
 
 	#Parking lot
 	- App\Transport\Prague\Parking\ParkingLotRepository(App\Transport\Prague\Parking\ParkingLot)
+	- App\Transport\Prague\Parking\ParkingLotOccupancyRepository(App\Transport\Prague\Parking\ParkingLotOccupancy)
 	- App\Transport\Prague\Parking\ParkingLotFactory
 	- App\Transport\Prague\Parking\ParkingLotOccupancyFactory
 	- App\Transport\Prague\Parking\Import\ParkingLotImportCommand
 	- App\Transport\Prague\Parking\Import\ParkingLotImportFacade
+	- App\UI\Admin\Prague\PragueParkingLot\Datagrid\ParkingLotDatagridFactory
+	- App\UI\Admin\Prague\PragueParkingLot\Datagrid\ParkingLotOccupancyDatagridFactory
 
 	#Map
 	map:

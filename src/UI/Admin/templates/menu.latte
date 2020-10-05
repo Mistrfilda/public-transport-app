@@ -41,7 +41,9 @@
                 </li>
             {else}
                 <!-- Nav Item - Dashboard -->
-                <li n:class="nav-item, $presenter->isLinkCurrent($menuItem->getLink()) ? active">
+                {var $isMenuLinkActive = $presenter->isMenuLinkActive($menuItem->getActiveLinks())}
+                {dump $menuItem->getActiveLinks()}
+                <li n:class="nav-item, $isMenuLinkActive ? active">
                     <a class="nav-link" n:href="{$menuItem->getLink()}">
                         <i class="{$menuItem->getIcon()}"></i>
                         <span>{$menuItem->getLabel()}</span></a>

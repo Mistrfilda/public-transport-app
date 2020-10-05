@@ -49,6 +49,11 @@ class ParkingLot implements IEntity, IParkingLot
 	private Collection $parkingLotOccupancies;
 
 	/**
+	 * @ORM\OneToOne(targetEntity="App\Transport\Prague\Parking\ParkingLotOccupancy")
+	 */
+	private ?IParkingLotOccupancy $lastParkingLotOccupancy;
+
+	/**
 	 * @ORM\Column(type="string")
 	 */
 	private string $address;
@@ -106,6 +111,11 @@ class ParkingLot implements IEntity, IParkingLot
 		$this->paymentUrl = $paymentUrl;
 	}
 
+	public function setLastParkingLotOccupancy(IParkingLotOccupancy $parkingLotOccupancy): void
+	{
+		$this->lastParkingLotOccupancy = $parkingLotOccupancy;
+	}
+
 	public function getCoordinates(): Coordinates
 	{
 		return new Coordinates($this->latitude, $this->longitude);
@@ -146,12 +156,11 @@ class ParkingLot implements IEntity, IParkingLot
 
 	public function getLastParkingLotOccupancy(): IParkingLotOccupancy
 	{
-		$occupancy = $this->parkingLotOccupancies->last();
-		if ($occupancy === false) {
+		if ($this->lastParkingLotOccupancy === null) {
 			throw new ParkingLotException('No parking lot occupancy is available');
 		}
 
-		return $occupancy;
+		return $this->lastParkingLotOccupancy;
 	}
 
 	public function getPaymentUrl(): ?string
