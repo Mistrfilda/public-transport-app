@@ -8,6 +8,7 @@ use App\Doctrine\IEntity;
 use App\Doctrine\SimpleUuid;
 use App\Transport\ParkingLot\IParkingLot;
 use App\Transport\ParkingLot\IParkingLotOccupancy;
+use App\UI\Shared\Statistic\Statistic;
 use App\Utils\Coordinates;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -166,5 +167,24 @@ class ParkingLot implements IEntity, IParkingLot
 	public function getPaymentUrl(): ?string
 	{
 		return $this->paymentUrl;
+	}
+
+	/**
+	 * Calculates which contextual class should be used depend on current occupancy
+	 */
+	public function calculateContextualClass(): string
+	{
+		$lastParkingOccupancy = $this->getLastParkingLotOccupancy();
+		$currentOccupancyPercentage = 100 * $lastParkingOccupancy->getFreeSpaces() / $lastParkingOccupancy->getTotalSpaces();
+
+		if ($currentOccupancyPercentage > 50) {
+			return Statistic::CONTEXTUAL_SUCCESS;
+		}
+
+		if ($currentOccupancyPercentage > 10) {
+			return Statistic::CONTEXTUAL_WARNING;
+		}
+
+		return Statistic::CONTEXTUAL_DANGER;
 	}
 }

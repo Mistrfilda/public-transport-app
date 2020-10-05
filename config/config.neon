@@ -244,6 +244,7 @@ services:
 	- App\UI\Admin\Prague\PragueParkingLot\Datagrid\ParkingLotDatagridFactory
 	- App\UI\Admin\Prague\PragueParkingLot\Datagrid\ParkingLotOccupancyDatagridFactory
 	- App\Transport\Prague\Parking\ParkingLotMapObjectProvider
+	- App\UI\Front\Prague\PragueParkingLot\Control\ParkingLotCardControlFactory
 
 	#Map
 	map:
