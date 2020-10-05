@@ -4,24 +4,17 @@ declare(strict_types=1);
 
 namespace App\UI\Admin\Prague\PragueDepartureTable;
 
-use App\Transport\Prague\DepartureTable\DepartureTable;
 use App\Transport\Prague\DepartureTable\DepartureTableFacade;
 use App\UI\Admin\AdminPresenter;
 use App\UI\Admin\Base\AdminDatagrid;
-use App\UI\Admin\Base\AdminForm;
 use App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControl;
 use App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControlFactory;
 use App\UI\Admin\Prague\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory;
 use App\UI\Admin\Prague\PragueDepartureTable\Exception\InvalidArgumentException;
-use App\UI\Admin\Prague\PragueDepartureTable\Form\DepartureTableFormFactory;
-use App\Utils\FlashMessageType;
-use Ramsey\Uuid\Uuid;
 
 class PragueDepartureTablePresenter extends AdminPresenter
 {
 	private DepartureTableDatagridFactory $departureTableDatagridFactory;
-
-	private DepartureTableFormFactory $departureTableFormFactory;
 
 	private DepartureTableFacade $departureTableFacade;
 
@@ -29,13 +22,11 @@ class PragueDepartureTablePresenter extends AdminPresenter
 
 	public function __construct(
 		DepartureTableDatagridFactory $departureTableDatagridFactory,
-		DepartureTableFormFactory $departureTableFormFactory,
 		DepartureTableFacade $departureTableFacade,
 		DepartureTableControlFactory $departureTableControlFactory
 	) {
 		parent::__construct();
 		$this->departureTableDatagridFactory = $departureTableDatagridFactory;
-		$this->departureTableFormFactory = $departureTableFormFactory;
 		$this->departureTableFacade = $departureTableFacade;
 		$this->departureTableControlFactory = $departureTableControlFactory;
 	}
@@ -57,25 +48,6 @@ class PragueDepartureTablePresenter extends AdminPresenter
 	protected function createComponentDepartureTableGrid(): AdminDatagrid
 	{
 		return $this->departureTableDatagridFactory->create();
-	}
-
-	protected function createComponentDepartureTableForm(): AdminForm
-	{
-		$id = $this->getParameter('id');
-
-		if ($id !== null) {
-			$id = Uuid::fromString($id);
-		}
-
-		$onSuccess = function (DepartureTable $departureTable): void {
-			$this->flashMessage(
-				sprintf('Departure table %s successfuly saved', $departureTable->getId()->toString()),
-				FlashMessageType::INFO
-			);
-			$this->redirect('default');
-		};
-
-		return $this->departureTableFormFactory->create($onSuccess, $id);
 	}
 
 	protected function createComponentDepartureTableControl(): DepartureTableControl

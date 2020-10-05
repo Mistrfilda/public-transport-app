@@ -78,6 +78,8 @@ class ParkingLotImportFacade
 					$parking->getTakenPlaces()
 				);
 
+				$parkingLot->setLastParkingLotOccupancy($parkingLotOccupancy);
+
 				$this->entityManager->persist($parkingLotOccupancy);
 				$this->entityManager->flush();
 			}

@@ -42,7 +42,7 @@ class DepartureTableDatagridFactory
 		$grid->addColumnText('stop', 'Stop', 'stop.name')->setFilterText();
 		$grid->addColumnText('numberOfFutureDays', 'Number of future days');
 
-		$grid->addAction('edit', 'Edit', 'edit')
+		$grid->addAction('edit', 'Edit', 'PragueDepartureTableEditForm:edit')
 			->setIcon('cog')
 			->setClass('btn btn-sm btn-primary');
 
