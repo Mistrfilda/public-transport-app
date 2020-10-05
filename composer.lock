@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
-            "version": "v1.2.7",
+            "version": "v1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/DoctrineExtensions.git",
-                "reference": "5f16b305dda06eda0d2d293c9d2bbd299249a996"
+                "reference": "814183667f1d0d67ed8b9d81c1ee04e557e6a24d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/5f16b305dda06eda0d2d293c9d2bbd299249a996",
-                "reference": "5f16b305dda06eda0d2d293c9d2bbd299249a996",
+                "url": "https://api.github.com/repos/beberlei/DoctrineExtensions/zipball/814183667f1d0d67ed8b9d81c1ee04e557e6a24d",
+                "reference": "814183667f1d0d67ed8b9d81c1ee04e557e6a24d",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 },
                 {
                     "name": "Steve Lacey",
-                    "email": "steve@stevelacey.net"
+                    "email": "steve@steve.ly"
                 }
             ],
             "description": "A set of extensions to Doctrine 2 that add support for additional query functions available in MySQL and Oracle.",
@@ -58,7 +58,7 @@
                 "doctrine",
                 "orm"
             ],
-            "time": "2020-06-30T03:28:02+00:00"
+            "time": "2020-10-01T05:10:47+00:00"
         },
         {
             "name": "brick/math",
@@ -422,16 +422,16 @@
         },
         {
             "name": "contributte/rabbitmq",
-            "version": "v7.0.0",
+            "version": "v7.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/rabbitmq.git",
-                "reference": "95258b2361e760c2f95395ba4bbde5e6ccd70927"
+                "reference": "6d1a97125df90b5e3389ad387523f3a8b104b01a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/rabbitmq/zipball/95258b2361e760c2f95395ba4bbde5e6ccd70927",
-                "reference": "95258b2361e760c2f95395ba4bbde5e6ccd70927",
+                "url": "https://api.github.com/repos/contributte/rabbitmq/zipball/6d1a97125df90b5e3389ad387523f3a8b104b01a",
+                "reference": "6d1a97125df90b5e3389ad387523f3a8b104b01a",
                 "shasum": ""
             },
             "require": {
@@ -472,7 +472,7 @@
                 "rabbit",
                 "rabbitmq"
             ],
-            "time": "2020-05-28T12:21:46+00:00"
+            "time": "2020-10-05T09:14:58+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1667,23 +1667,23 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "v1.3.1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
+                "reference": "60d379c243457e073cff02bc323a2a86cb355631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/60d379c243457e073cff02bc323a2a86cb355631",
+                "reference": "60d379c243457e073cff02bc323a2a86cb355631",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "php": ">=5.5"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.0"
+                "symfony/phpunit-bridge": "^4.4 || ^5.1"
             },
             "type": "library",
             "extra": {
@@ -1714,20 +1714,20 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20T10:07:11+00:00"
+            "time": "2020-09-30T07:37:28+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "239400de7a173fe9901b9ac7c06497751f00727a"
+                "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/239400de7a173fe9901b9ac7c06497751f00727a",
-                "reference": "239400de7a173fe9901b9ac7c06497751f00727a",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/53330f47520498c0ae1f61f7e2c90f55690c06a3",
+                "reference": "53330f47520498c0ae1f61f7e2c90f55690c06a3",
                 "shasum": ""
             },
             "require": {
@@ -1740,15 +1740,15 @@
             },
             "require-dev": {
                 "ext-zlib": "*",
-                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.8"
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
             },
             "suggest": {
-                "zendframework/zend-httphandlerrunner": "Emit PSR-7 responses"
+                "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -1785,7 +1785,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-07-01T23:21:34+00:00"
+            "time": "2020-09-30T07:37:11+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -1968,16 +1968,16 @@
         },
         {
             "name": "latte/latte",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/latte.git",
-                "reference": "fc94bd63fe995b40cb219109026e76f281c709c2"
+                "reference": "a3fbffc89f85b2745bc058278c882f745b6ad89b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/fc94bd63fe995b40cb219109026e76f281c709c2",
-                "reference": "fc94bd63fe995b40cb219109026e76f281c709c2",
+                "url": "https://api.github.com/repos/nette/latte/zipball/a3fbffc89f85b2745bc058278c882f745b6ad89b",
+                "reference": "a3fbffc89f85b2745bc058278c882f745b6ad89b",
                 "shasum": ""
             },
             "require": {
@@ -2041,20 +2041,20 @@
                 "template",
                 "twig"
             ],
-            "time": "2020-05-12T11:07:07+00:00"
+            "time": "2020-09-29T13:32:37+00:00"
         },
         {
             "name": "mistrfilda/pid-api",
-            "version": "v0.3.1",
+            "version": "v0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mistrfilda/pid-api.git",
-                "reference": "17071ef9e6463afe11fcb5c03df6d6ff7affaad8"
+                "reference": "1f147bf53f94bda674299b3c14dc06614a6283fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mistrfilda/pid-api/zipball/17071ef9e6463afe11fcb5c03df6d6ff7affaad8",
-                "reference": "17071ef9e6463afe11fcb5c03df6d6ff7affaad8",
+                "url": "https://api.github.com/repos/Mistrfilda/pid-api/zipball/1f147bf53f94bda674299b3c14dc06614a6283fc",
+                "reference": "1f147bf53f94bda674299b3c14dc06614a6283fc",
                 "shasum": ""
             },
             "require": {
@@ -2092,7 +2092,7 @@
                 "MIT"
             ],
             "description": "PID api integration using guzzle/http client",
-            "time": "2020-09-24T23:57:03+00:00"
+            "time": "2020-10-05T23:26:46+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4312,7 +4312,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.1.6",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -5108,7 +5108,7 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "v5.1.6",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
@@ -5190,7 +5190,7 @@
         },
         {
             "name": "symfony/property-info",
-            "version": "v5.1.6",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
@@ -5357,7 +5357,7 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v5.1.6",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
@@ -5421,7 +5421,7 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.1.6",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
@@ -5579,16 +5579,16 @@
         },
         {
             "name": "ublaboo/datagrid",
-            "version": "v6.2.28",
+            "version": "v6.2.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/datagrid.git",
-                "reference": "20bef77b3d00cc72b78ea4ef4ff04a1bc2f5ed2d"
+                "reference": "038cd34cf8daee8e8f8f6fc69d07392d417fa1f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/datagrid/zipball/20bef77b3d00cc72b78ea4ef4ff04a1bc2f5ed2d",
-                "reference": "20bef77b3d00cc72b78ea4ef4ff04a1bc2f5ed2d",
+                "url": "https://api.github.com/repos/contributte/datagrid/zipball/038cd34cf8daee8e8f8f6fc69d07392d417fa1f0",
+                "reference": "038cd34cf8daee8e8f8f6fc69d07392d417fa1f0",
                 "shasum": ""
             },
             "require": {
@@ -5645,7 +5645,7 @@
                 "grid",
                 "nette"
             ],
-            "time": "2020-09-08T12:24:20+00:00"
+            "time": "2020-09-29T12:08:24+00:00"
         },
         {
             "name": "webimpress/safe-writer",
@@ -6080,16 +6080,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.46",
+            "version": "0.12.48",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "9419738e20f0c49757be05d22969c1c44c1dff3b"
+                "reference": "d364cfbac9ffd869570cdfea7eaa6541c3dac666"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9419738e20f0c49757be05d22969c1c44c1dff3b",
-                "reference": "9419738e20f0c49757be05d22969c1c44c1dff3b",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d364cfbac9ffd869570cdfea7eaa6541c3dac666",
+                "reference": "d364cfbac9ffd869570cdfea7eaa6541c3dac666",
                 "shasum": ""
             },
             "require": {
@@ -6132,7 +6132,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-28T09:48:55+00:00"
+            "time": "2020-10-01T13:20:16+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -6465,12 +6465,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "0749ceaf15c136d085b722a5bb88141398a54142"
+                "reference": "107aa9daab3521a0d28f868ff8dc75db546f7ee3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0749ceaf15c136d085b722a5bb88141398a54142",
-                "reference": "0749ceaf15c136d085b722a5bb88141398a54142",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/107aa9daab3521a0d28f868ff8dc75db546f7ee3",
+                "reference": "107aa9daab3521a0d28f868ff8dc75db546f7ee3",
                 "shasum": ""
             },
             "conflict": {
@@ -6530,7 +6530,7 @@
                 "ezsystems/ezplatform-kernel": ">=1,<1.0.2.1",
                 "ezsystems/ezplatform-user": ">=1,<1.0.1",
                 "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.14.2|>=6,<6.7.9.1|>=6.8,<6.13.6.3|>=7,<7.2.4.1|>=7.3,<7.3.2.1|>=7.5,<7.5.7.1",
-                "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.14.1|>=2011,<2017.12.7.2|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3|>=2019.3,<2019.3.4.2",
+                "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.14.2|>=2011,<2017.12.7.3|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3|>=2019.3,<2019.3.5.1",
                 "ezsystems/platform-ui-assets-bundle": ">=4.2,<4.2.3",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
                 "ezyang/htmlpurifier": "<4.1.1",
@@ -6573,6 +6573,8 @@
                 "mittwald/typo3_forum": "<1.2.1",
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
+                "nette/application": ">=2,<2.0.19|>=2.1,<2.1.13|>=2.2,<2.2.10|>=2.3,<2.3.14|>=2.4,<2.4.16|>=3,<3.0.6",
+                "nette/nette": ">=2,<2.0.19|>=2.1,<2.1.13",
                 "nystudio107/craft-seomatic": "<3.3",
                 "nzo/url-encryptor-bundle": ">=4,<4.3.2|>=5,<5.0.1",
                 "october/backend": ">=1.0.319,<1.0.467",
@@ -6762,7 +6764,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-24T17:02:11+00:00"
+            "time": "2020-10-05T16:02:42+00:00"
         },
         {
             "name": "symplify/easy-coding-standard-prefixed",
