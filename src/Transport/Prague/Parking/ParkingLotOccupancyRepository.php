@@ -21,6 +21,13 @@ class ParkingLotOccupancyRepository extends BaseRepository
 		return $qb;
 	}
 
+	public function getLastParkingDate(): string
+	{
+		$qb = $this->createQueryBuilder();
+		$qb->select('max(parkingLotOccupancy.createdAt)');
+		return $qb->getQuery()->getSingleScalarResult();
+	}
+
 	public function createQueryBuilder(): QueryBuilder
 	{
 		return $this->doctrineRepository->createQueryBuilder('parkingLotOccupancy');

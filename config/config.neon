@@ -55,6 +55,9 @@ custompresenterfactory:
 		Admin:PragueParkingLot: App\UI\Admin\Prague\PragueParkingLot\PragueParkingLotPresenter
 		Admin:PragueParkingLotOccupancy: App\UI\Admin\Prague\PragueParkingLot\PragueParkingLotOccupancyPresenter
 
+		Front:PragueDepartureTable: App\UI\Front\Prague\PragueDepartureTable\PragueDepartureTablePresenter
+		Front:PragueParkingLot: App\UI\Front\Prague\PragueParkingLot\PragueParkingLotPresenter
+
 dbal:
 	debug:
 		panel: %debugMode%
@@ -240,6 +243,7 @@ services:
 	- App\Transport\Prague\Parking\Import\ParkingLotImportFacade
 	- App\UI\Admin\Prague\PragueParkingLot\Datagrid\ParkingLotDatagridFactory
 	- App\UI\Admin\Prague\PragueParkingLot\Datagrid\ParkingLotOccupancyDatagridFactory
+	- App\Transport\Prague\Parking\ParkingLotMapObjectProvider
 
 	#Map
 	map:
