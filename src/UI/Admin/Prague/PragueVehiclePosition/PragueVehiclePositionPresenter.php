@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueVehiclePosition;
+namespace App\UI\Admin\Prague\PragueVehiclePosition;
 
 use App\UI\Admin\AdminPresenter;
 use App\UI\Admin\Base\AdminDatagrid;
-use App\UI\Admin\PragueVehiclePosition\Datagrid\VehicleDatagridFactory;
-use App\UI\Admin\PragueVehiclePosition\Datagrid\VehiclePositionDatagridFactory;
+use App\UI\Admin\Prague\PragueVehiclePosition\Datagrid\VehicleDatagridFactory;
+use App\UI\Admin\Prague\PragueVehiclePosition\Datagrid\VehiclePositionDatagridFactory;
 use Nette\Application\BadRequestException;
 use Ramsey\Uuid\Uuid;
 

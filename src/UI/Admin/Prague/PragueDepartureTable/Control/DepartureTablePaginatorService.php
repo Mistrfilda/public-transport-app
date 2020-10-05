@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueDepartureTable\Control;
+namespace App\UI\Admin\Prague\PragueDepartureTable\Control;
 
 use Nette\Http\Session;
 use Nette\Http\SessionSection;

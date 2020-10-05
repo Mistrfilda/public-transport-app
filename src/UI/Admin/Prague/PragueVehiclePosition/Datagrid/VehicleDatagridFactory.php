@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueVehiclePosition\Datagrid;
+namespace App\UI\Admin\Prague\PragueVehiclePosition\Datagrid;
 
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
 use App\Transport\Prague\Vehicle\VehicleRepository;

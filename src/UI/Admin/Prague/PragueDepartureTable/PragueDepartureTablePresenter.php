@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueDepartureTable;
+namespace App\UI\Admin\Prague\PragueDepartureTable;
 
 use App\Transport\Prague\DepartureTable\DepartureTable;
 use App\Transport\Prague\DepartureTable\DepartureTableFacade;
 use App\UI\Admin\AdminPresenter;
 use App\UI\Admin\Base\AdminDatagrid;
 use App\UI\Admin\Base\AdminForm;
-use App\UI\Admin\PragueDepartureTable\Control\DepartureTableControl;
-use App\UI\Admin\PragueDepartureTable\Control\DepartureTableControlFactory;
-use App\UI\Admin\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory;
-use App\UI\Admin\PragueDepartureTable\Exception\InvalidArgumentException;
-use App\UI\Admin\PragueDepartureTable\Form\DepartureTableFormFactory;
+use App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControl;
+use App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControlFactory;
+use App\UI\Admin\Prague\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory;
+use App\UI\Admin\Prague\PragueDepartureTable\Exception\InvalidArgumentException;
+use App\UI\Admin\Prague\PragueDepartureTable\Form\DepartureTableFormFactory;
 use App\Utils\FlashMessageType;
 use Ramsey\Uuid\Uuid;
 

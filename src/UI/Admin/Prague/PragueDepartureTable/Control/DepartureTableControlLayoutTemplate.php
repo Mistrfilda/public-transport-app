@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueDepartureTable\Control;
+namespace App\UI\Admin\Prague\PragueDepartureTable\Control;
 
 use App\Transport\Prague\DepartureTable\DepartureTable;
 use App\Transport\Prague\StopLine\StopLine;
-use App\UI\Admin\PragueDepartureTable\PragueDepartureTablePresenter;
+use App\UI\Admin\Prague\PragueDepartureTable\PragueDepartureTablePresenter;
 use Nette\Security\User;
 use stdClass;
 

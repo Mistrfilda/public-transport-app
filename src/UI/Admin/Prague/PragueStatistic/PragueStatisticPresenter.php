@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\PragueStatistic;
+namespace App\UI\Admin\Prague\PragueStatistic;
 
 use App\UI\Admin\AdminPresenter;
 use App\UI\Admin\Base\AdminDatagrid;
-use App\UI\Admin\PragueStatistic\Datagrid\StatisticDatagridFactory;
+use App\UI\Admin\Prague\PragueStatistic\Datagrid\StatisticDatagridFactory;
 
 class PragueStatisticPresenter extends AdminPresenter
 {
