@@ -1,3 +1,39 @@
+{*<div class="card shadow mb-12 w-100">*}
+{*    <div class="card-header py-3">*}
+{*        <div class="row">*}
+{*            <div class="col-md-12 text-center">*}
+{*                <h6 class="m-0 font-weight-bold text-lg pt-1">Odjezdové tabule</h6>*}
+{*            </div>*}
+{*        </div>*}
+{*    </div>*}
+{*    <div class="card-body p-0">*}
+{*        <table class="table table-striped table-dark table-responsive">*}
+{*            <thead>*}
+{*            <tr>*}
+{*                <th scope="col">ID</th>*}
+{*                <th scope="col">Zastávka</th>*}
+{*                <th scope="col">Směr linek</th>*}
+{*                <th scope="col">Linky</th>*}
+{*                <th scope="col">Odjezdová tabule</th>*}
+{*            </tr>*}
+{*            </thead>*}
+{*            <tbody>*}
+{*            {varType App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListData $departureTable}*}
+{*            {foreach $departureTableData as $departureTable}*}
+{*                <tr>*}
+{*                    <th scope="row">{$departureTable->getDepartureTable()->getId()->toString()}</th>*}
+{*                    <td>{$departureTable->getDepartureTable()->getPragueStop()->getFormattedName()}</td>*}
+{*                    <td>{$departureTable->getDestinations()}</td>*}
+{*                    <td>{$departureTable->getLines()}</td>*}
+{*                    <td><a href="{plink PragueDepartureTable:detail, id => $departureTable->getDepartureTable()->getId()->toString()}"*}
+{*                                class="btn btn-primary"><i class="fas fa-arrow-right"></i></a></td>*}
+{*                </tr>*}
+{*            {/foreach}*}
+{*            </tbody>*}
+{*        </table>*}
+{*    </div>*}
+{*</div>*}
+
 <div class="card shadow mb-12 w-100">
     <div class="card-header py-3">
         <div class="row">
@@ -7,27 +43,46 @@
         </div>
     </div>
     <div class="card-body p-0">
-        <table class="table table-striped table-dark table-responsive">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Zastávka</th>
-                <th scope="col">Směr linek</th>
-                <th scope="col">Odjezdová tabule</th>
-            </tr>
-            </thead>
-            <tbody>
-            {varType App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListData $departureTable}
-            {foreach $departureTableData as $departureTable}
-                <tr>
-                    <th scope="row">{$departureTable->getDepartureTable()->getId()->toString()}</th>
-                    <td>{$departureTable->getDepartureTable()->getPragueStop()->getFormattedName()}</td>
-                    <td>{$departureTable->getDestinations()}</td>
-                    <td><a href="{plink PragueDepartureTable:detail, id => $departureTable->getDepartureTable()->getId()->toString()}"
-                                class="btn btn-primary"><i class="fas fa-arrow-right"></i></a></td>
-                </tr>
-            {/foreach}
-            </tbody>
-        </table>
+        {varType App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListData[] $departureTableData}
+        {foreach $departureTableData as $departureTable}
+            <div class="col-md-12 my-3">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters">
+                            <div class="col-md-12 d-flex justify-content-between align-content-center">
+                                <div class="font-weight-bold text-gray-800 text-uppercase text-lg">
+                                    {$departureTable->getDepartureTable()->getPragueStop()->getFormattedName()}
+                                </div>
+                                <div>
+                                    <i class="fa fa-bus fa-2x text-primary"></i>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                {foreach $departureTable->getLines() as $line}
+                                    <span class="badge badge-dark">{$line}</span>
+                                {/foreach}
+                            </div>
+
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+
+                            <div class="col-md-12 d-flex justify-content-between">
+                                <div>
+                                    {$departureTable->getDestinations()}
+                                </div>
+                                <div>
+                                    <a href="{plink PragueDepartureTable:detail, id => $departureTable->getDepartureTable()->getId()->toString()}"
+                                       class="btn btn-primary"><i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {/foreach}
     </div>
 </div>

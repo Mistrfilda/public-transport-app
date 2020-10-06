@@ -36,21 +36,32 @@ class PragueDepartureTableListDataFactory
 		$departureTables = $this->departureTableRepository->findAll();
 		$allDestinations = $this->stopTimeRepository->findDepartureTablesDestinations(
 			$now,
-			$now->modify('+ 1 day')
+			$now->modify('+ 3 day')
+		);
+
+		$allLines = $this->stopTimeRepository->findDepartureTablesLines(
+			$now,
+			$now->modify('+ 3 day')
 		);
 
 		$data = [];
 
 		foreach ($departureTables as $departureTable) {
 			$departureTableDestinations = null;
+			$lines = null;
 
 			if (array_key_exists($departureTable->getPragueStop()->getId(), $allDestinations)) {
 				$departureTableDestinations = $allDestinations[$departureTable->getPragueStop()->getId()];
 			}
 
+			if (array_key_exists($departureTable->getPragueStop()->getId(), $allLines)) {
+				$lines = $allLines[$departureTable->getPragueStop()->getId()];
+			}
+
 			$data[] = new PragueDepartureTableListData(
 				$departureTable,
-				$departureTableDestinations
+				$departureTableDestinations,
+				$lines
 			);
 		}
 

@@ -171,6 +171,11 @@ class StopTimeRepository extends BaseRepository
 		$qb->innerJoin(Trip::class, 'trip', Join::WITH, 'trip.dateTripId = stopTime.dateTripId');
 
 		$qb->groupBy('stop.id');
+		$qb->andWhere($qb->expr()->gte('stopTime.departureTime', ':from'));
+		$qb->setParameter('from', $from);
+
+		$qb->andWhere($qb->expr()->lt('stopTime.departureTime', ':to'));
+		$qb->setParameter('to', $to);
 
 		$data = [];
 
@@ -179,6 +184,41 @@ class StopTimeRepository extends BaseRepository
 
 		foreach ($queryResult as $result) {
 			$data[$result['id']] = $result['tripHeadsign'];
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Return array of lines, divided by '~'
+	 * @return array<int, string>
+	 */
+	public function findDepartureTablesLines(
+		?DateTimeImmutable $from = null,
+		?DateTimeImmutable $to = null
+	): array {
+		$qb = $this->doctrineRepository->createQueryBuilder('stopTime', 'stopTime.id');
+
+		$qb->select('stop.id, GROUP_CONCAT(DISTINCT trip.lineNumber SEPARATOR \'~\') as lineNumber');
+
+		$qb->innerJoin('stopTime.stop', 'stop');
+		$qb->innerJoin(Trip::class, 'trip', Join::WITH, 'trip.dateTripId = stopTime.dateTripId');
+
+		$qb->andWhere($qb->expr()->gte('stopTime.departureTime', ':from'));
+		$qb->setParameter('from', $from);
+
+		$qb->andWhere($qb->expr()->lt('stopTime.departureTime', ':to'));
+		$qb->setParameter('to', $to);
+
+		$qb->groupBy('stop.id');
+
+		$data = [];
+
+		/** @var array<int, array{id: int, lineNumber: string}> $queryResult */
+		$queryResult = $qb->getQuery()->getResult();
+
+		foreach ($queryResult as $result) {
+			$data[$result['id']] = $result['lineNumber'];
 		}
 
 		return $data;
