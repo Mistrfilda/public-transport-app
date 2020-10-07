@@ -37,7 +37,9 @@
 
                     <div class="col-md-12 d-flex justify-content-between align-items-center">
                         <div class="text-lg">
+                            {if $departureTable->getLastUpdateTime() !== null}
                             <span class="badge badge-primary">Aktualizace jízdního řádu v {$departureTable->getLastUpdateTime()}</span>
+                            {/if}
                         </div>
 
                         <div>
