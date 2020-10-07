@@ -88,6 +88,15 @@ class RequestRepository extends BaseRepository
 		}
 	}
 
+	public function getLastDepartureTableDownloadTime(): string
+	{
+		$qb = $this->createQueryBuilder();
+		$qb->select('max(request.finishedAt)');
+		$qb->andWhere($qb->expr()->eq('request.type', ':type'));
+		$qb->setParameter('type', RequestType::PRAGUE_DEPARTURE_TABLE);
+		return $qb->getQuery()->getSingleScalarResult();
+	}
+
 	public function createQueryBuilder(): QueryBuilder
 	{
 		return $this->doctrineRepository->createQueryBuilder('request');
