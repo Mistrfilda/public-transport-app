@@ -34,7 +34,7 @@ abstract class AdminPresenter extends BasePresenter
 	 */
 	public function formatLayoutTemplateFiles(): array
 	{
-		return [...[__DIR__ . '/templates/@layout.latte'], ...parent::formatLayoutTemplateFiles()];
+		return array_merge([__DIR__ . '/templates/@layout.latte'], parent::formatLayoutTemplateFiles());
 	}
 
 	public function handleLogout(): void

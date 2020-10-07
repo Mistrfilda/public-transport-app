@@ -57,6 +57,7 @@ custompresenterfactory:
 
 		Front:PragueDepartureTable: App\UI\Front\Prague\PragueDepartureTable\PragueDepartureTablePresenter
 		Front:PragueParkingLot: App\UI\Front\Prague\PragueParkingLot\PragueParkingLotPresenter
+		Front:PragueDepartureTableList: App\UI\Front\Prague\PragueDepartureTable\PragueDepartureTableListPresenter
 
 dbal:
 	debug:

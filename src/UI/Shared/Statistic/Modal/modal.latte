@@ -29,8 +29,8 @@
                             <td>{$tripStatistic->getDate()|date:'d. m. Y'}</td>
                             <td>{$tripStatistic->getRouteId()}</td>
                             <td>{$tripStatistic->getCompany()}</td>
-                            <td>{$tripStatistic->getAverageDelay()|secondsFormat}</td>
-                            <td>{$tripStatistic->getHighestDelay()|secondsFormat}</td>
+                            <td>{$tripStatistic->getAverageDelay()|secondsFormat} min.</td>
+                            <td>{$tripStatistic->getHighestDelay()|secondsFormat} min.</td>
                             <td>
                                 <i class="{$tripStatistic->getVehicleType()|vehicleType}"></i>{$tripStatistic->getVehicleId()}
                             </td>

@@ -29,7 +29,7 @@ class PragueDepartureTableListDataFactory
 	/**
 	 * @return PragueDepartureTableListData[]
 	 */
-	public function getAllDepartureTables(): array
+	public function getAllDepartureTables(?int $count = null): array
 	{
 		$now = $this->datetimeFactory->createNow();
 
@@ -45,10 +45,15 @@ class PragueDepartureTableListDataFactory
 		);
 
 		$data = [];
+		$iterator = 0;
 
 		foreach ($departureTables as $departureTable) {
 			$departureTableDestinations = null;
 			$lines = null;
+
+			if ($count !== null && $iterator >= $count) {
+				break;
+			}
 
 			if (array_key_exists($departureTable->getPragueStop()->getId(), $allDestinations)) {
 				$departureTableDestinations = $allDestinations[$departureTable->getPragueStop()->getId()];
@@ -63,6 +68,8 @@ class PragueDepartureTableListDataFactory
 				$departureTableDestinations,
 				$lines
 			);
+
+			$iterator++;
 		}
 
 		return $data;

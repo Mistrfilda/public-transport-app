@@ -1,9 +1,23 @@
 {block content}
     <div class="row px-1 py-3">
         <div class="col-md-6 d-flex">
-            {control pragueDepartureTableListControl}
+            <div class="card shadow mb-12 w-100">
+                <div class="card-header py-3">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h6 class="m-0 font-weight-bold text-lg pt-1">Vybrané odjezdové tabule</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    {control pragueDepartureTableListControl}
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{plink PragueDepartureTableList:default}" class="btn btn-primary">Všechny odjezdové tabule</a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6 d-flex mt-2 mt-md-0">
+        <div class="col-md-6 d-flex">
             {control statisticControl}
         </div>
     </div>

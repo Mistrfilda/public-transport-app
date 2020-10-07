@@ -58,6 +58,8 @@ class HomepagePresenter extends FrontPresenter
 
 	protected function createComponentPragueDepartureTableListControl(): PragueDepartureTableListControl
 	{
-		return $this->pragueDepartureTableListControlFactory->create();
+		$control = $this->pragueDepartureTableListControlFactory->create();
+		$control->setAdditionalParameters('Vybrané odjezdové tabule', 3);
+		return $control;
 	}
 }
