@@ -10,6 +10,7 @@ use App\Transport\Prague\DepartureTable\DepartureTable;
 use DateTimeImmutable;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @extends BaseRepository<Request>
@@ -88,13 +89,33 @@ class RequestRepository extends BaseRepository
 		}
 	}
 
-	public function getLastDepartureTableDownloadTime(): string
+	public function getLastRandomDepartureTableDownloadTime(): ?string
 	{
 		$qb = $this->createQueryBuilder();
 		$qb->select('max(request.finishedAt)');
 		$qb->andWhere($qb->expr()->eq('request.type', ':type'));
 		$qb->setParameter('type', RequestType::PRAGUE_DEPARTURE_TABLE);
-		return $qb->getQuery()->getSingleScalarResult();
+		try {
+			return $qb->getQuery()->getSingleScalarResult();
+		} catch (NoResultException $e) {
+			return null;
+		}
+	}
+
+	public function getLastDepartureTableDownloadTime(UuidInterface $departureTableId): ?string
+	{
+		$qb = $this->createQueryBuilder();
+		$qb->select('max(request.finishedAt)');
+		$qb->andWhere($qb->expr()->eq('request.type', ':type'));
+		$qb->setParameter('type', RequestType::PRAGUE_DEPARTURE_TABLE);
+
+		$qb->andWhere($qb->expr()->eq('request.pragueDepartureTable', ':departureTableId'));
+		$qb->setParameter('departureTableId', $departureTableId);
+		try {
+			return $qb->getQuery()->getSingleScalarResult();
+		} catch (NoResultException $e) {
+			return null;
+		}
 	}
 
 	public function createQueryBuilder(): QueryBuilder

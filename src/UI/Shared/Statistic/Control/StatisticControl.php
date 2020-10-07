@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Shared\Statistic\Control;
 
+use App\Request\RequestRepository;
 use App\Transport\Prague\Parking\ParkingLotOccupancyRepository;
 use App\Transport\Prague\Parking\ParkingLotRepository;
 use App\Transport\Prague\Statistic\TripList\TripListRepository;
@@ -25,18 +26,22 @@ class StatisticControl extends Control
 
 	private ParkingLotOccupancyRepository $parkingLotOccupancyRepository;
 
+	private RequestRepository $requestRepository;
+
 	public function __construct(
 		VehiclePositionRepository $VehiclePositionRepository,
 		StopRepository $stopRepository,
 		TripListRepository $tripListRepository,
 		ParkingLotRepository $parkingLotRepository,
-		ParkingLotOccupancyRepository $parkingLotOccupancyRepository
+		ParkingLotOccupancyRepository $parkingLotOccupancyRepository,
+		RequestRepository $requestRepository
 	) {
 		$this->vehiclePositionRepository = $VehiclePositionRepository;
 		$this->stopRepository = $stopRepository;
 		$this->tripListRepository = $tripListRepository;
 		$this->parkingLotRepository = $parkingLotRepository;
 		$this->parkingLotOccupancyRepository = $parkingLotOccupancyRepository;
+		$this->requestRepository = $requestRepository;
 	}
 
 	public function render(): void
@@ -53,6 +58,15 @@ class StatisticControl extends Control
 	{
 		$statistics = [];
 		$lastVehiclePosition = $this->vehiclePositionRepository->findLast();
+
+		$statistics[] = new Statistic(
+			Statistic::CONTEXTUAL_INFO,
+			'Poslední aktualizace jízdních řádů',
+			(string) $this->requestRepository->getLastRandomDepartureTableDownloadTime(),
+			'fas fa-clock fa-2x text-gray-300',
+			'border-left-',
+			'col-xl-12 col-md-12'
+		);
 
 		if ($lastVehiclePosition !== null) {
 			$statistics[] = new Statistic(

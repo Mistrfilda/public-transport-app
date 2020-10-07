@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Shared\PragueDepartureTable\Control;
 
+use App\Request\RequestRepository;
 use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\StopLine\StopTime\StopTimeRepository;
 use App\Utils\Datetime\DatetimeFactory;
@@ -16,14 +17,18 @@ class PragueDepartureTableListDataFactory
 
 	private DatetimeFactory $datetimeFactory;
 
+	private RequestRepository $requestRepository;
+
 	public function __construct(
 		DepartureTableRepository $departureTableRepository,
 		StopTimeRepository $stopTimeRepository,
-		DatetimeFactory $datetimeFactory
+		DatetimeFactory $datetimeFactory,
+		RequestRepository $requestRepository
 	) {
 		$this->departureTableRepository = $departureTableRepository;
 		$this->stopTimeRepository = $stopTimeRepository;
 		$this->datetimeFactory = $datetimeFactory;
+		$this->requestRepository = $requestRepository;
 	}
 
 	/**
@@ -66,7 +71,8 @@ class PragueDepartureTableListDataFactory
 			$data[] = new PragueDepartureTableListData(
 				$departureTable,
 				$departureTableDestinations,
-				$lines
+				$lines,
+				$this->requestRepository->getLastDepartureTableDownloadTime($departureTable->getId())
 			);
 
 			$iterator++;

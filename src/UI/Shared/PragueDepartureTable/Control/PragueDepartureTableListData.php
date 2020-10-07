@@ -17,11 +17,18 @@ class PragueDepartureTableListData
 	/** @var string[] */
 	private array $lines;
 
-	public function __construct(DepartureTable $departureTable, ?string $destinations, ?string $lines)
-	{
+	private ?string $lastUpdateTime;
+
+	public function __construct(
+		DepartureTable $departureTable,
+		?string $destinations,
+		?string $lines,
+		?string $lastUpdateTime
+	) {
 		$this->departureTable = $departureTable;
 		$this->destinations = $destinations !== null ? str_replace('~', ' - ', $destinations) : null;
 		$this->lines = $lines !== null ? explode('~', $lines) : [];
+		$this->lastUpdateTime = $lastUpdateTime;
 	}
 
 	public function getDepartureTable(): DepartureTable
@@ -36,6 +43,11 @@ class PragueDepartureTableListData
 		}
 
 		return $this->destinations;
+	}
+
+	public function getLastUpdateTime(): ?string
+	{
+		return $this->lastUpdateTime;
 	}
 
 	/**
