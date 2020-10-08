@@ -15,9 +15,9 @@
 
                     <div class="col-md-12 d-flex justify-content-between align-content-center">
                         <div>
-                        {foreach $departureTable->getLines() as $line}
-                            <span class="badge badge-dark">{$line}</span>
-                        {/foreach}
+                            {foreach $departureTable->getLines() as $line}
+                                <span class="badge badge-dark">{$line}</span>
+                            {/foreach}
                         </div>
                     </div>
 
@@ -35,10 +35,10 @@
                         <hr>
                     </div>
 
-                    <div class="col-md-12 d-flex justify-content-between align-items-center">
+                    <div class="col-md-12 d-flex justify-content-between align-items-center ">
                         <div class="text-lg">
                             {if $departureTable->getLastUpdateTime() !== null}
-                            <span class="badge badge-primary">Aktualizace jízdního řádu v {$departureTable->getLastUpdateTime()}</span>
+                                <span class="d-none d-sm-block badge badge-primary">Aktualizace jízdního řádu v {$departureTable->getLastUpdateTime()}</span>
                             {/if}
                         </div>
 
