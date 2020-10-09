@@ -13,6 +13,9 @@ Currently supported cities:
  - Get available vehicles position
  - Departure table to stop
  - Current position of vehicles (map)
+ - Statistic for vehicle lines
+ - Parkings lots (capacity, location, current occupancy)
+ - Current transport restrictions (view  them directly or in departure table if that affect any line)
  
 # Deploy
 
