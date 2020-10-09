@@ -1,0 +1,23 @@
+{templateType App\UI\Shared\Statistic\Control\StatisticControlTemplate}
+{varType App\UI\Shared\Statistic\Statistic $statistic}
+{foreach $statistics as $statistic}
+    <div class="{$statistic->getSize()} mb-3 px-2 py-1">
+        <div class="card {$statistic->getBorder()} shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-6">
+                        <div class="text-xs font-weight-bold text-{$statistic->getContextualClass()} text-uppercase mb-1">
+                            {$statistic->getHeading()}
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {$statistic->getValue()}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="{$statistic->getIcon()}"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/foreach}

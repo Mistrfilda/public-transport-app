@@ -48,7 +48,9 @@ class HomepagePresenter extends FrontPresenter
 
 	protected function createComponentStatisticControl(): StatisticControl
 	{
-		return $this->statisticControlFactory->create();
+		$control = $this->statisticControlFactory->create();
+		$control->setFrontTemplate();
+		return $control;
 	}
 
 	protected function createComponentMapControl(): MapControl

@@ -9,11 +9,23 @@
 }
 
 @keyframes leaving-departure-table {
-  0%   {background-color: #343a40;}
-  25%  {background-color: #ffeeba; color: #000000}
-  50%  {background-color: #ffeeba; color: #000000}
-  75%  {background-color: #343a40;}
-  100% {background-color: #343a40;}
+  0% {
+    background-color: #343a40;
+  }
+  25% {
+    background-color: #ffeeba;
+    color: #000000
+  }
+  50% {
+    background-color: #ffeeba;
+    color: #000000
+  }
+  75% {
+    background-color: #343a40;
+  }
+  100% {
+    background-color: #343a40;
+  }
 }
 
 .text-black {
@@ -32,4 +44,10 @@
 
 .map-info-window {
   background-color: $blue;
+}
+
+.app-heading {
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 1.75rem;
 }

@@ -1,41 +1,63 @@
 {block content}
     <div class="row px-1 py-3">
-        <div class="col-lg-6 col-md-12 col-sm-12 d-flex">
-            <div class="card shadow mb-12 w-100">
-                <div class="card-header py-3">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h6 class="m-0 font-weight-bold text-lg pt-1">Vybrané odjezdové tabule</h6>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="col-sm-12 d-flex justify-content-center mb-2">
+                <div class="bg-white text-center rounded border-primary border text-gray-800">
+                    <div class="rounded font-weight-bold app-heading px-3">
+                        Vybrané odjezdové tabule
+                    </div>
+                </div>
+            </div>
+            {control pragueDepartureTableListControl}
+            <div class="col-md-12 mb-3 mt-1 px-2 py-1">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters">
+                            <div class="col text-center">
+                                <a href="{plink PragueDepartureTableList:default}" class="btn btn-primary">Všechny
+                                    odjezdové
+                                    tabule</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body p-0">
-                    {control pragueDepartureTableListControl}
-                </div>
-                <div class="card-footer text-center">
-                    <a href="{plink PragueDepartureTableList:default}" class="btn btn-primary">Všechny odjezdové
-                        tabule</a>
-                </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-12 col-sm-12 d-flex">
-            {control statisticControl}
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="col-sm-12 d-flex justify-content-center mb-2">
+                <div class="bg-white text-center rounded border-primary border text-gray-800">
+                    <div class="rounded font-weight-bold app-heading px-3">
+                        Statistiky
+                    </div>
+                </div>
+            </div>
+            <div class="row mx-0 px-0">
+                {control statisticControl}
+            </div>
+        </div>
+    </div>
+
+    <div class="row py-3 d-none d-lg-block">
+        <div class="col-md-12">
+            <div class="bg-white rounded px-4 mx-2 border border-primary">
+                <div class="p-1">
+                    <hr>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="row px-1 py-3">
-        <div class="col-md-12">
-            <div class="card shadow mb-12">
-                <div class="card-header py-3">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h6 class="m-0 font-weight-bold text-lg pt-1">Mapa vozidel</h6>
-                        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-sm-12 d-flex justify-content-center mb-2">
+                <div class="bg-white text-center rounded border-primary border text-gray-800">
+                    <div class="rounded font-weight-bold app-heading px-3">
+                        Mapa vozidel
                     </div>
                 </div>
-                <div class="card-body p-0">
-                    {control mapControl}
-                </div>
+            </div>
+            <div class="p-2">
+                {control mapControl}
             </div>
         </div>
     </div>

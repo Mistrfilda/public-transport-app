@@ -28,6 +28,8 @@ class StatisticControl extends Control
 
 	private RequestRepository $requestRepository;
 
+	private string $template = __DIR__ . '/StatisticControl.latte';
+
 	public function __construct(
 		VehiclePositionRepository $VehiclePositionRepository,
 		StopRepository $stopRepository,
@@ -44,10 +46,15 @@ class StatisticControl extends Control
 		$this->requestRepository = $requestRepository;
 	}
 
+	public function setFrontTemplate(): void
+	{
+		$this->template = __DIR__ . '/StatisticControlFront.latte';
+	}
+
 	public function render(): void
 	{
 		$this->getTemplate()->statistics = $this->buildStatistics();
-		$this->getTemplate()->setFile(str_replace('.php', '.latte', __FILE__));
+		$this->getTemplate()->setFile($this->template);
 		$this->getTemplate()->render();
 	}
 
@@ -63,7 +70,7 @@ class StatisticControl extends Control
 			Statistic::CONTEXTUAL_INFO,
 			'Poslední aktualizace jízdních řádů',
 			(string) $this->requestRepository->getLastRandomDepartureTableDownloadTime(),
-			'fas fa-clock fa-2x text-gray-300',
+			'fas fa-clock fa-2x text-info',
 			'border-left-',
 			'col-xl-12 col-md-12'
 		);
@@ -73,7 +80,7 @@ class StatisticControl extends Control
 				Statistic::CONTEXTUAL_SUCCESS,
 				'Poslední známa poloha vozidel',
 				$lastVehiclePosition->getCreatedAt()->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT),
-				'fas fa-clock fa-2x text-gray-300',
+				'fas fa-clock fa-2x text-success',
 				'border-left-',
 				'col-xl-12 col-md-12'
 			);
@@ -82,7 +89,7 @@ class StatisticControl extends Control
 				Statistic::CONTEXTUAL_SUCCESS,
 				'Poslední počet poloh vozidel',
 				(string) $lastVehiclePosition->getVehiclesCount(),
-				'fas fa-bus fa-2x text-gray-300'
+				'fas fa-bus fa-2x text-success'
 			);
 		}
 
@@ -90,14 +97,14 @@ class StatisticControl extends Control
 			Statistic::CONTEXTUAL_PRIMARY,
 			'Celkový počet zastávek',
 			(string) $this->stopRepository->getStopsCount(),
-			'fas fa-ruler-vertical fa-2x text-gray-300'
+			'fas fa-ruler-vertical fa-2x text-primary'
 		);
 
 		$statistics[] = new Statistic(
 			Statistic::CONTEXTUAL_PRIMARY,
 			'Počet linek se statistikami',
 			(string) $this->tripListRepository->getTripListLineCount(),
-			'fas fa-database fa-2x text-gray-300',
+			'fas fa-database fa-2x text-primary',
 			'border-left-',
 			'col-xl-12 col-md-12'
 		);
@@ -106,7 +113,7 @@ class StatisticControl extends Control
 			Statistic::CONTEXTUAL_PRIMARY,
 			'Celkový počet statistik pro jednotlivá pořadí linek',
 			(string) $this->tripListRepository->getTripListCount(),
-			'fas fa-database fa-2x text-gray-300',
+			'fas fa-database fa-2x text-primary',
 			'border-left-',
 			'col-xl-12 col-md-12'
 		);
@@ -115,7 +122,7 @@ class StatisticControl extends Control
 			Statistic::CONTEXTUAL_WARNING,
 			'Počet dostupných parkovišť',
 			(string) $this->parkingLotRepository->getParkingLotsCount(),
-			'fas fa-parking fa-2x text-gray-300',
+			'fas fa-parking fa-2x text-warning',
 			'border-left-'
 		);
 
@@ -123,7 +130,7 @@ class StatisticControl extends Control
 			Statistic::CONTEXTUAL_WARNING,
 			'Data o parkovištích dostupná z',
 			$this->parkingLotOccupancyRepository->getLastParkingDate(),
-			'fas fa-parking fa-2x text-gray-300',
+			'fas fa-parking fa-2x text-warning',
 			'border-left-'
 		);
 
