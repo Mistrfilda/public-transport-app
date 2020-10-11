@@ -31,7 +31,7 @@ class Bootstrap
 
 		$configurator->addConfig(__DIR__ . '/../config/config.neon');
 
-		$rabbitEnvVariable = getenv('TRAVIS_RABBIT_MQ_QUEUE');
+		$rabbitEnvVariable = getenv('CI_RABBIT_MQ_QUEUE');
 		if (
 			($rabbitEnvVariable === false || $rabbitEnvVariable === 'FALSE')
 			&& is_file(__DIR__ . '/../config/config.rabbitmq.neon')

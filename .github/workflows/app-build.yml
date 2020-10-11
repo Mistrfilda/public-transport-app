@@ -47,10 +47,10 @@ jobs:
                     cp tests/travis/test.local.neon config/config.local.neon
                     composer migration-migrate
                 env:
-                    TRAVIS_RABBIT_MQ_QUEUE: TRUE
-                    TRAVIS_TESTS_ENV: TRUE
+                    CI_RABBIT_MQ_QUEUE: TRUE
+                    CI_TESTS_ENV: TRUE
             -   name: Run checks
                 run: composer build-all
                 env:
-                    TRAVIS_RABBIT_MQ_QUEUE: TRUE
-                    TRAVIS_TESTS_ENV: TRUE
+                    CI_RABBIT_MQ_QUEUE: TRUE
+                    CI_TESTS_ENV: TRUE

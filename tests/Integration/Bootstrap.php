@@ -32,8 +32,8 @@ class Bootstrap
 			$configurator->addConfig(__DIR__ . '/config/tests.local.neon');
 		}
 
-		$travisEnv = getenv('TRAVIS_TESTS_ENV');
-		if ($travisEnv === 'TRUE') {
+		$ciEnv = getenv('CI_ENV');
+		if ($ciEnv !== false) {
 			$configurator->addConfig(__DIR__ . '/../travis/test.local.neon');
 		}
 
