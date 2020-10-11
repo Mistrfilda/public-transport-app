@@ -36,8 +36,8 @@ jobs:
                   composer install --no-interaction -o --ansi
                   composer migration-migrate
               env:
-                  TRAVIS_RABBIT_MQ_QUEUE: TRUE
-                  TRAVIS_TESTS_ENV: TRUE
+                  TRAVIS_RABBIT_MQ_QUEUE: 'TRUE'
+                  TRAVIS_TESTS_ENV: 'TRUE'
             - name: Run checks
               run: composer build-all
               env:
