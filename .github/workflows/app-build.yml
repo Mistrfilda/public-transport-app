@@ -33,7 +33,6 @@ jobs:
             - name: Prepare config and database
               run: |
                   cp tests/travis/test.local.neon config/config.local.neon
-                  composer install --no-interaction -o --ansi
                   composer migration-migrate
               env:
                   TRAVIS_RABBIT_MQ_QUEUE: TRUE
