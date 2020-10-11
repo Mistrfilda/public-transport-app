@@ -32,7 +32,7 @@ class Bootstrap
 			$configurator->addConfig(__DIR__ . '/config/tests.local.neon');
 		}
 
-		$ciEnv = getenv('CI_ENV');
+		$ciEnv = getenv('CI_TESTS_ENV');
 		if ($ciEnv !== false) {
 			$configurator->addConfig(__DIR__ . '/../travis/test.local.neon');
 		}
