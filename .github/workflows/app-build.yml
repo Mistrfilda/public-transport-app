@@ -28,33 +28,29 @@ jobs:
                     coverage: pcov
             -   name: Start mysql service
                 run: sudo /etc/init.d/mysql start
-#            -   name: Get composer cache directory
-#                id: composercache
-#                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-#            -   name: Cache composer dependencies
-#                uses: actions/cache@v2
-#                with:
-#                    path: ${{ steps.composercache.outputs.dir }}
-#                    # Use composer.json for key, if composer.lock is not committed.
-#                    # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-#                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-#                    restore-keys: ${{ runner.os }}-composer-
-#            -   name: Install Composer dependencies
-#                run: |
-#                    composer install --no-progress --prefer-dist --optimize-autoloader --ansi
+            -   name: Get composer cache directory
+                id: composercache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+            -   name: Cache composer dependencies
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composercache.outputs.dir }}
+                    # Use composer.json for key, if composer.lock is not committed.
+                    # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: ${{ runner.os }}-composer-
+            -   name: Install Composer dependencies
+                run: |
+                    composer install --no-progress --prefer-dist --optimize-autoloader --ansi
             -   name: Prepare config and database
                 run: |
                     cp tests/travis/test.local.neon config/config.local.neon
-                    echo ${{ job.services.mysql.ports[3306] }}
-                    mysql -h 127.0.0.1 --port 32574 -u root -e 'CREATE DATABASE IF NOT EXISTS test;'
-#                    composer migration-migrate
+                    composer migration-migrate
                 env:
                     TRAVIS_RABBIT_MQ_QUEUE: TRUE
                     TRAVIS_TESTS_ENV: TRUE
-                    DB_PORT: ${{ job.services.mysql.ports[3306] }}
-#            -   name: Run checks
-#                run: composer build-all
-#                env:
-#                    TRAVIS_RABBIT_MQ_QUEUE: TRUE
-#                    TRAVIS_TESTS_ENV: TRUE
-#                    DB_PORT: ${{ job.services.mysql.ports[3306] }}
+            -   name: Run checks
+                run: composer build-all
+                env:
+                    TRAVIS_RABBIT_MQ_QUEUE: TRUE
+                    TRAVIS_TESTS_ENV: TRUE
