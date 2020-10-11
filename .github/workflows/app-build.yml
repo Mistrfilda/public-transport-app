@@ -8,8 +8,9 @@ jobs:
             mysql:
                 image: mysql:5.7
                 env:
-                    MYSQL_ALLOW_EMPTY_PASSWORD: true
-                    MYSQL_DATABASE: 'publictransportapptest'
+                    MYSQL_ALLOW_EMPTY_PASSWORD: false
+                    MYSQL_DATABASE: 'public-transport-app-test'
+                    MYSQL_PASSWORD: 'password'
                 options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
                 ports:
                     - 3306
@@ -48,8 +49,10 @@ jobs:
                 env:
                     TRAVIS_RABBIT_MQ_QUEUE: TRUE
                     TRAVIS_TESTS_ENV: TRUE
+                    DB_PORT: ${{ job.services.mysql.ports[3306] }}
             -   name: Run checks
                 run: composer build-all
                 env:
                     TRAVIS_RABBIT_MQ_QUEUE: TRUE
                     TRAVIS_TESTS_ENV: TRUE
+                    DB_PORT: ${{ job.services.mysql.ports[3306] }}

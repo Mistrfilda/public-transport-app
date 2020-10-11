@@ -2,5 +2,6 @@ parameters:
 	database:
 		host: 127.0.0.1
 		user: 'root'
-		password: ''
-		dbname: 'publictransportapptest'
+		password: 'password'
+		dbname: 'public-transport-app-test'
+		port: ::getenv('DB_PORT')
