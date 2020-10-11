@@ -8,9 +8,8 @@ jobs:
             mysql:
                 image: mysql:5.7
                 env:
-                    MYSQL_ALLOW_EMPTY_PASSWORD: false
+                    MYSQL_ALLOW_EMPTY_PASSWORD: true
                     MYSQL_DATABASE: public-transport-app-test
-                    MYSQL_PASSWORD: password
                 options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
                 ports:
                     - 3306/tcp
@@ -47,7 +46,7 @@ jobs:
                 run: |
                     cp tests/travis/test.local.neon config/config.local.neon
                     echo ${{ job.services.mysql.ports[3306] }}
-                    mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS test;'
+                    mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -e 'CREATE DATABASE IF NOT EXISTS test;'
 #                    composer migration-migrate
                 env:
                     TRAVIS_RABBIT_MQ_QUEUE: TRUE
