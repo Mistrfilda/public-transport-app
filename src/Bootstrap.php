@@ -39,14 +39,6 @@ class Bootstrap
 			$configurator->addConfig(__DIR__ . '/../config/config.rabbitmq.neon');
 		}
 
-		$databasePort = getenv('DB_PORT');
-		if ($databasePort !== false) {
-			$configurator->addDynamicParameters([
-				'database.port' => (int) $databasePort,
-				'database.host' => '127.0.0.1'
-			]);
-		}
-
 		if (is_file(__DIR__ . '/../config/config.local.neon')) {
 			$configurator->addConfig(__DIR__ . '/../config/config.local.neon');
 		}
