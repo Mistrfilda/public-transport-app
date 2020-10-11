@@ -63,8 +63,8 @@ dbal:
 	debug:
 		panel: %debugMode%
 	connection:
-		host: 127.0.0.1
-		port: 3306
+		host: %database.host%
+		port: %database.port%
 		user: %database.user%
 		password: %database.password%
 		dbname: %database.dbname%
