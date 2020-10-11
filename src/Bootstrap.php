@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Setup;
 use Nette\Configurator;
 
 class Bootstrap
@@ -11,6 +14,25 @@ class Bootstrap
 	public static function boot(bool $consoleMode = false): Configurator
 	{
 		$configurator = new Configurator();
+
+		$paths = array(__DIR__);
+		$isDevMode = false;
+
+		// the connection configuration
+		$dbParams = array(
+			'driver'   => 'pdo_mysql',
+			'user'     => 'root',
+			'password' => 'password',
+			'dbname'   => 'public-transport-app-test',
+			'host' => '127.0.0.1',
+			'port' => (int) getenv('DB_PORT')
+		);
+
+		$config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+		$entityManager = EntityManager::create($dbParams, $config);
+
+		echo $entityManager->isOpen();
+		exit(55);
 
 		if (array_key_exists('pubtransport', $_COOKIE) && $_COOKIE['pubtransport'] === 'debug_on') {
 			$configurator->setDebugMode('192.168.1.13');
