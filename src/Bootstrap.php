@@ -41,8 +41,10 @@ class Bootstrap
 
 		$databasePort = getenv('DB_PORT');
 		if ($databasePort !== false) {
-			echo $databasePort;
-			echo (int) $databasePort;
+			$configurator->addDynamicParameters([
+				'database.port' => (int) $databasePort,
+				'database.host' => '127.0.0.1'
+			]);
 		}
 
 		if (is_file(__DIR__ . '/../config/config.local.neon')) {
