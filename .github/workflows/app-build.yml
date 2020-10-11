@@ -12,7 +12,7 @@ jobs:
                     MYSQL_DATABASE: public-transport-app-test
                 options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
                 ports:
-                    - 3306/tcp
+                    - 32574:3306
         strategy:
             fail-fast: false
             matrix:
@@ -46,7 +46,7 @@ jobs:
                 run: |
                     cp tests/travis/test.local.neon config/config.local.neon
                     echo ${{ job.services.mysql.ports[3306] }}
-                    mysql -h 127.0.0.1 --port ${{ job.services.mysql.ports[3306] }} -u root -e 'CREATE DATABASE IF NOT EXISTS test;'
+                    mysql -h 127.0.0.1 --port 32574 -u root -e 'CREATE DATABASE IF NOT EXISTS test;'
 #                    composer migration-migrate
                 env:
                     TRAVIS_RABBIT_MQ_QUEUE: TRUE
