@@ -4,4 +4,4 @@ parameters:
 		user: 'root'
 		password: 'password'
 		dbname: 'public-transport-app-test'
-		port: 32768
+		port: 3306
