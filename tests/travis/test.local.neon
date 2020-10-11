@@ -1,6 +1,7 @@
 parameters:
 	database:
-		host: 127.0.0.1
-		user: root
-		password: ""
+		host: '127.0.0.1'
+		user: 'root'
+		password: ''
 		dbname: 'public-transport-app-test'
+		port: 32574

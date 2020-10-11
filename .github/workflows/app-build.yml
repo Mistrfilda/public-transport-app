@@ -1,0 +1,56 @@
+name: Testing public transport app
+on: [ push, pull_request ]
+jobs:
+    app_build:
+        name: Public transport app build
+        runs-on: ubuntu-latest
+        services:
+            mysql:
+                image: mysql:5.7
+                env:
+                    MYSQL_ALLOW_EMPTY_PASSWORD: true
+                    MYSQL_DATABASE: public-transport-app-test
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+                ports:
+                    - 32574:3306
+        strategy:
+            fail-fast: false
+            matrix:
+                php-versions: [ '7.4' ]
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+            -   name: Setup PHP, with composer and extensions
+                uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+                with:
+                    php-version: ${{ matrix.php-versions }}
+                    extensions: mbstring, xml, ctype, iconv, intl, mysql, pdo_mysql
+                    coverage: pcov
+            -   name: Start mysql service
+                run: sudo /etc/init.d/mysql start
+            -   name: Get composer cache directory
+                id: composercache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+            -   name: Cache composer dependencies
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composercache.outputs.dir }}
+                    # Use composer.json for key, if composer.lock is not committed.
+                    # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                    key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: ${{ runner.os }}-composer-
+            -   name: Install Composer dependencies
+                run: |
+                    composer install --no-progress --prefer-dist --optimize-autoloader --ansi
+            -   name: Prepare config and database
+                run: |
+                    cp tests/travis/test.local.neon config/config.local.neon
+                    composer migration-migrate
+                env:
+                    CI_RABBIT_MQ_QUEUE: TRUE
+                    CI_TESTS_ENV: TRUE
+            -   name: Run checks
+                run: composer build-all
+                env:
+                    CI_RABBIT_MQ_QUEUE: TRUE
+                    CI_TESTS_ENV: TRUE
