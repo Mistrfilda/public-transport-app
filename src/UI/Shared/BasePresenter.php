@@ -24,10 +24,16 @@ abstract class BasePresenter extends Presenter
 		$this->modalRendererControlFactory = $modalRendererControlFactory;
 	}
 
+	/**
+	 * @param mixed[] $additionalParameters
+	 * @throws LogicException
+	 */
 	public function showModal(
 		string $componentName = self::DEFAULT_MODAL_COMPONENT_NAME,
 		?string $heading = null,
-		?IHtmlString $content = null
+		?IHtmlString $content = null,
+		array $additionalParameters = [],
+		?string $templateFile = null
 	): void {
 		$modalComponent = $this->getComponent($componentName);
 		if (! $modalComponent instanceof ModalRendererControl) {
@@ -38,7 +44,12 @@ abstract class BasePresenter extends Presenter
 			));
 		}
 
-		$modalComponent->setParameters($heading, $content);
+		$modalComponent->setParameters($heading, $content, $additionalParameters);
+
+		if ($templateFile !== null) {
+			$modalComponent->setTemplateFile($templateFile);
+		}
+
 		$this->modalComponentName = $componentName;
 
 		$this->payload->showModal = true;

@@ -18,15 +18,25 @@ class ModalRendererControl extends Control
 
 	private ?IHtmlString $content = null;
 
+	/** @var mixed[] */
+	private array $additionalParameters;
+
 	public function __construct()
 	{
 		$this->modalId = 'modal-' . Random::generate(4, '0-9');
 	}
 
-	public function setParameters(?string $heading, ?IHtmlString $content): void
-	{
+	/**
+	 * @param mixed[] $additionalParameneters
+	 */
+	public function setParameters(
+		?string $heading,
+		?IHtmlString $content,
+		array $additionalParameneters = []
+	): void {
 		$this->heading = $heading;
 		$this->content = $content;
+		$this->additionalParameters = $additionalParameneters;
 	}
 
 	public function render(): void
@@ -34,6 +44,7 @@ class ModalRendererControl extends Control
 		$this->getTemplate()->modalId = $this->modalId;
 		$this->getTemplate()->heading = $this->heading;
 		$this->getTemplate()->content = $this->content;
+		$this->getTemplate()->additionalParameters = $this->additionalParameters;
 		$this->getTemplate()->originalTemplateFile = $this->getOriginalTemplateFile();
 
 		$this->getTemplate()->setFile($this->getTemplateFile());
@@ -43,6 +54,11 @@ class ModalRendererControl extends Control
 	public function getModalId(): string
 	{
 		return $this->modalId;
+	}
+
+	public function setTemplateFile(string $templateFile): void
+	{
+		$this->templateFile = $templateFile;
 	}
 
 	protected function getOriginalTemplateFile(): string
