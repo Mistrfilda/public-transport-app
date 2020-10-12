@@ -12,6 +12,10 @@ class Bootstrap
 	{
 		$configurator = new Configurator();
 
+//		set_error_handler(function ($severity, $message, $file, $line) {
+//			throw new \ErrorException($message, $severity, $severity, $file, $line);
+//		});
+
 		if (array_key_exists('pubtransport', $_COOKIE) && $_COOKIE['pubtransport'] === 'debug_on') {
 			$configurator->setDebugMode('192.168.1.13');
 		}

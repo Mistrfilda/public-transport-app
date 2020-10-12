@@ -28,6 +28,11 @@ class DatetimeFactory
 		return (new DateTimeImmutable())->setTime(0, 0, 0);
 	}
 
+	public function createFromTimestamp(int $timestamp): DateTimeImmutable
+	{
+		return new DateTimeImmutable('@' . $timestamp);
+	}
+
 	public function createDatetimeFromMysqlFormat(
 		string $datetime,
 		string $mysqlDatetimeFormat = self::DEFAULT_MYSQL_DATETIME_FORMAT
