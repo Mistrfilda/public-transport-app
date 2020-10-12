@@ -17,6 +17,12 @@ class AdminDatagrid extends DataGrid
 {
 	public const NULLABLE_PLACEHOLDER = '----';
 
+	public const BOOL_OPTIONS = [
+		null => 'Select',
+		1 => 'Yes',
+		0 => 'No',
+	];
+
 	public static function formatNullableDatetimeColumn(?DateTimeImmutable $time): string
 	{
 		if ($time === null) {

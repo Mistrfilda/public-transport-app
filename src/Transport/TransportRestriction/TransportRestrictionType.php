@@ -15,6 +15,11 @@ class TransportRestrictionType
 		self::LONG_TERM,
 	];
 
+	public const OPTIONS = [
+		self::SHORT_TERM => 'Short term',
+		self::LONG_TERM => 'Long term',
+	];
+
 	public static function exists(string $type): void
 	{
 		if (in_array($type, self::ALL, true) === false) {

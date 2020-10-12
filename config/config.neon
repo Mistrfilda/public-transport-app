@@ -54,6 +54,7 @@ custompresenterfactory:
 		Admin:PragueDepartureTableEditForm: App\UI\Admin\Prague\PragueDepartureTable\PragueDepartureTableEditFormPresenter
 		Admin:PragueParkingLot: App\UI\Admin\Prague\PragueParkingLot\PragueParkingLotPresenter
 		Admin:PragueParkingLotOccupancy: App\UI\Admin\Prague\PragueParkingLot\PragueParkingLotOccupancyPresenter
+		Admin:PragueTransportRestriction: App\UI\Admin\Prague\PragueTransportRestriction\PragueTransportRestrictionPresenter
 
 		Front:PragueDepartureTable: App\UI\Front\Prague\PragueDepartureTable\PragueDepartureTablePresenter
 		Front:PragueParkingLot: App\UI\Front\Prague\PragueParkingLot\PragueParkingLotPresenter
@@ -253,6 +254,7 @@ services:
 	- App\Transport\Prague\TransportRestriction\Import\TransportRestrictionImportCommand
 	- App\Transport\Prague\TransportRestriction\Import\TransportRestrictionImportFacade
 	- App\Transport\Prague\TransportRestriction\TransportRestrictionFactory
+	- App\UI\Admin\Prague\PragueTransportRestriction\Datagrid\PragueTransportRestrictionDatagridFactory
 
 	#Map
 	map:
