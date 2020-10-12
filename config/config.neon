@@ -248,6 +248,12 @@ services:
 	- App\Transport\Prague\Parking\ParkingLotMapObjectProvider
 	- App\UI\Front\Prague\PragueParkingLot\Control\ParkingLotCardControlFactory
 
+	#Transport restriction
+	- App\Transport\Prague\TransportRestriction\TransportRestrictionRepository(App\Transport\Prague\TransportRestriction\TransportRestriction)
+	- App\Transport\Prague\TransportRestriction\Import\TransportRestrictionImportCommand
+	- App\Transport\Prague\TransportRestriction\Import\TransportRestrictionImportFacade
+	- App\Transport\Prague\TransportRestriction\TransportRestrictionFactory
+
 	#Map
 	map:
 		implement: App\UI\Shared\Map\MapControlFactory
