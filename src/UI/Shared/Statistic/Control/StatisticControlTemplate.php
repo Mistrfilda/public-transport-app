@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Shared\Statistic\Control;
 
 use App\UI\Front\Homepage\HomepagePresenter;
+use App\UI\Shared\Statistic\Statistic;
 use Nette\Security\User;
 use stdClass;
 
@@ -15,7 +16,7 @@ use stdClass;
  * @property array $flashes
  * @property StatisticControl $control
  * @property HomepagePresenter $presenter
- * @property array $statistics
+ * @property Statistic[] $statistics
  * @property stdClass $_l
  * @property stdClass $_g
  * @property stdClass $_b

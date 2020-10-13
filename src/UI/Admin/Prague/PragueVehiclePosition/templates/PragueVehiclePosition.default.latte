@@ -1,14 +1,9 @@
 {block content}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card shadow mb-12">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-lg text-primary">Last known vehicle positions</h6>
-                </div>
-                <div class="card-body p-0">
-                    {control vehiclePositionDatagrid}
-                </div>
-            </div>
+    <div class="d-flex justify-content-between">
+        <div>
+            <h1 class="h3 mb-2 text-gray-800">Last known vehicle positions</h1>
+            <p class="mb-4">List of times, when last vehicle positions were downloaded</p>
         </div>
     </div>
+    {control vehiclePositionDatagrid}
 {/block}
