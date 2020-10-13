@@ -3,8 +3,13 @@
 <div class="modal fade" id="{$modalId}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header d-flex align-items-center">
                 <h5 class="modal-title">{$transportRestriction->getTitle()}</h5>
+                {if $transportRestriction->isActive()}
+                    <span class="badge badge-warning ml-1">Active</span>
+                {else}
+                    <span class="badge badge-secondary ml-1">Non active</span>
+                {/if}
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,11 +18,20 @@
                 {$transportRestriction->getDescription()|noescape}
                 <hr>
                 <div class="d-flex align-items-center justify-content-between">
-                    <div>Dotčené linky</div>
+                    <div>Affected lines</div>
                     <div>
-                    {foreach $transportRestriction->getAffectedLines() as $line}
-                        <span class="badge badge-secondary">{$line}</span>
-                    {/foreach}
+                        {foreach $transportRestriction->getAffectedLines() as $line}
+                            <span class="badge badge-secondary">{$line}</span>
+                        {/foreach}
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        Last updated at:
+                    </div>
+                    <div>
+                        {$transportRestriction->getUpdatedAt()|datetimeFormat}
                     </div>
                 </div>
             </div>
