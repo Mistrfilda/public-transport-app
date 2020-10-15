@@ -76,7 +76,7 @@ class HomepagePresenter extends FrontPresenter
 	{
 		$control = $this->pragueTransportRestrictionControlFactory->create();
 		$control->setRestrictionType(TransportRestrictionType::SHORT_TERM);
-		$control->setCardGridColumn('col');
+		$control->setCardGridColumn('col-md-12');
 		return $control;
 	}
 }
