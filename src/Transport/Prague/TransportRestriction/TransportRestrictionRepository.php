@@ -95,6 +95,23 @@ class TransportRestrictionRepository extends BaseRepository
 		return $qb->getQuery()->getResult();
 	}
 
+	/**
+	 * @return array<string, TransportRestriction>
+	 */
+	public function findAllByType(string $type): array
+	{
+		TransportRestrictionType::exists($type);
+		$qb = $this->doctrineRepository->createQueryBuilder(
+			'transportRestriction',
+			'transportRestriction.transportRestrictionId'
+		);
+
+		$qb->andWhere($qb->expr()->eq('transportRestriction.type', ':type'));
+		$qb->setParameter('type', $type);
+
+		return $qb->getQuery()->getResult();
+	}
+
 	public function createQueryBuilder(): QueryBuilder
 	{
 		return $this->doctrineRepository->createQueryBuilder('transportRestriction');

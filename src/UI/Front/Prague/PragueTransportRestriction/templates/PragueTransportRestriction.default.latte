@@ -3,24 +3,25 @@
         <div class="col-sm-12 d-flex justify-content-center mb-2">
             <div class="bg-white text-center rounded border-primary border text-gray-800">
                 <div class="rounded font-weight-bold app-heading px-3">
-                    Systémové statistiky
-                </div>
-            </div>
-        </div>
-        <div class="row mx-1 px-0">
-            {control statisticControl}
-        </div>
-    </div>
-    <div class="row py-2">
-        <div class="col-sm-12 d-flex justify-content-center mb-2">
-            <div class="bg-white text-center rounded border-primary border text-gray-800">
-                <div class="rounded font-weight-bold app-heading px-3">
-                    Statistiky jednotlivých linek
+                    Krátkodobé neplánované mimořádnosti
                 </div>
             </div>
         </div>
         <div class="col-md-12">
-            {control mainStatisticControl}
+            {control shortTermRestrictionControl}
+        </div>
+    </div>
+
+    <div class="row py-2">
+        <div class="col-sm-12 d-flex justify-content-center mb-2">
+            <div class="bg-white text-center rounded border-primary border text-gray-800">
+                <div class="rounded font-weight-bold app-heading px-3">
+                  Plánované mimořádnosti
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            {control longTermRestrictionControl}
         </div>
     </div>
 {/block}

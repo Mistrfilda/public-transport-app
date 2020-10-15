@@ -6,7 +6,10 @@ namespace App\UI\Front\Homepage;
 
 use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\Vehicle\VehicleMapObjectProvider;
+use App\Transport\TransportRestriction\TransportRestrictionType;
 use App\UI\Front\FrontPresenter;
+use App\UI\Front\Prague\PragueTransportRestriction\Control\PragueTransportRestrictionControl;
+use App\UI\Front\Prague\PragueTransportRestriction\Control\PragueTransportRestrictionControlFactory;
 use App\UI\Shared\Map\MapControl;
 use App\UI\Shared\Map\MapControlFactory;
 use App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListControl;
@@ -26,12 +29,15 @@ class HomepagePresenter extends FrontPresenter
 
 	private PragueDepartureTableListControlFactory $pragueDepartureTableListControlFactory;
 
+	private PragueTransportRestrictionControlFactory $pragueTransportRestrictionControlFactory;
+
 	public function __construct(
 		DepartureTableRepository $departureTableRepository,
 		StatisticControlFactory $statisticControlFactory,
 		MapControlFactory $mapControlFactory,
 		VehicleMapObjectProvider $vehicleMapObjectProvider,
-		PragueDepartureTableListControlFactory $pragueDepartureTableListControlFactory
+		PragueDepartureTableListControlFactory $pragueDepartureTableListControlFactory,
+		PragueTransportRestrictionControlFactory $pragueTransportRestrictionControlFactory
 	) {
 		parent::__construct();
 		$this->departureTableRepository = $departureTableRepository;
@@ -39,6 +45,7 @@ class HomepagePresenter extends FrontPresenter
 		$this->mapControlFactory = $mapControlFactory;
 		$this->vehicleMapObjectProvider = $vehicleMapObjectProvider;
 		$this->pragueDepartureTableListControlFactory = $pragueDepartureTableListControlFactory;
+		$this->pragueTransportRestrictionControlFactory = $pragueTransportRestrictionControlFactory;
 	}
 
 	public function renderDefault(): void
@@ -62,6 +69,14 @@ class HomepagePresenter extends FrontPresenter
 	{
 		$control = $this->pragueDepartureTableListControlFactory->create();
 		$control->setAdditionalParameters('Vybrané odjezdové tabule', 3);
+		return $control;
+	}
+
+	protected function createComponentShortTermRestrictionControl(): PragueTransportRestrictionControl
+	{
+		$control = $this->pragueTransportRestrictionControlFactory->create();
+		$control->setRestrictionType(TransportRestrictionType::SHORT_TERM);
+		$control->setCardGridColumn('col');
 		return $control;
 	}
 }
