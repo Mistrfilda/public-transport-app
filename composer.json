@@ -75,7 +75,7 @@
 	},
 	"scripts": {
 		"comload": "composer dump-autoload -o",
-		"stan": "vendor/bin/phpstan analyse -l max -c phpstan.neon src tests --ansi",
+		"stan": "vendor/bin/phpstan analyse --memory-limit 4G -l max -c phpstan.neon src tests --ansi",
 		"clear-stan-cache": "vendor/bin/phpstan clear-result-cache",
 		"clear-stan": [
 			"@clear-stan-cache",
