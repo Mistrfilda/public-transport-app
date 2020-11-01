@@ -114,6 +114,7 @@ services:
 
 	latte.latteFactory:
 		setup:
+			- setStrictTypes(true)
 			- addFilter(datetimeFormat, [@datetimeFormatFilter, format])
 			- addFilter(secondsFormat, [@secondsFormatFilter, format])
 			- addFilter(pragueStopId, [@praguestopidfilter, format])
