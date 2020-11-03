@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Transport\Prague\Request\RabbitMQ\VehiclePosition;
+namespace App\Transport\Prague\Request\RabbitMQ\ParkingLot;
 
 use App\Request\Request;
 use App\Request\RequestRepository;
-use App\Transport\Prague\Vehicle\Import\VehicleImportFacade;
+use App\Transport\Prague\Parking\Import\ParkingLotImportFacade;
 use App\Utils\Datetime\DatetimeFactory;
 use App\Utils\MonologHelper;
 use Bunny\Message;
@@ -18,13 +18,13 @@ use Nette\Utils\Json;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-class VehiclePositionConsumer implements IConsumer
+class ParkingLotConsumer implements IConsumer
 {
 	private LoggerInterface $logger;
 
 	private DatetimeFactory $datetimeFactory;
 
-	private VehicleImportFacade $vehicleImportFacade;
+	private ParkingLotImportFacade $parkingLotImportFacade;
 
 	private EntityManagerInterface $entityManager;
 
@@ -33,13 +33,13 @@ class VehiclePositionConsumer implements IConsumer
 	public function __construct(
 		LoggerInterface $logger,
 		DatetimeFactory $datetimeFactory,
-		VehicleImportFacade $vehicleImportFacade,
 		EntityManagerInterface $entityManager,
-		RequestRepository $requestRepository
+		RequestRepository $requestRepository,
+		ParkingLotImportFacade $parkingLotImportFacade
 	) {
 		$this->logger = $logger;
 		$this->datetimeFactory = $datetimeFactory;
-		$this->vehicleImportFacade = $vehicleImportFacade;
+		$this->parkingLotImportFacade = $parkingLotImportFacade;
 		$this->entityManager = $entityManager;
 		$this->requestRepository = $requestRepository;
 	}
@@ -50,14 +50,14 @@ class VehiclePositionConsumer implements IConsumer
 		$request = null;
 		try {
 			$messageContents = Json::decode($message->content, Json::FORCE_ARRAY);
-			$this->logger->info('Proccesing vehicle position request', $messageContents);
+			$this->logger->info('Proccesing parking lot request', $messageContents);
 			$this->validateMessageContents($messageContents);
 
 			$request = $this->requestRepository->findById($messageContents['requestId']);
 
-			$this->vehicleImportFacade->import();
+			$this->parkingLotImportFacade->import();
 
-			$this->logger->info('vehicle position request successfully finished', $messageContents);
+			$this->logger->info('Parking lot request request successfully finished', $messageContents);
 
 			$request->finished($this->datetimeFactory->createNow());
 			$this->entityManager->flush();

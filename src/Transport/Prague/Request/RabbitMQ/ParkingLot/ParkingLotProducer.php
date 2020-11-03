@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Transport\Prague\Request\RabbitMQ\VehiclePosition;
+namespace App\Transport\Prague\Request\RabbitMQ\ParkingLot;
 
 use App\Request\RabbitMQ\BaseProducer;
 use App\Request\Request;
 use Contributte\RabbitMQ\Producer\Producer;
 
-class VehiclePositionProducer extends BaseProducer
+class ParkingLotProducer extends BaseProducer
 {
-	public const FILTER_KEY = 'generateVehiclePositions';
+	public const FILTER_KEY = 'generateParkingLots';
 
 	private Producer $producer;
 

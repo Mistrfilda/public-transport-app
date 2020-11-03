@@ -20,6 +20,8 @@ class MessageFactory
 					'departureTableId' => $request->getPragueDepartureTable()->getId(),
 					'dateTimestamp' => $request->getCreatedAt()->getTimestamp(),
 				]);
+			case RequestType::PRAGUE_PARKING_LOT:
+			case RequestType::PRAGUE_TRANSPORT_RESTRICTION:
 			case RequestType::PRAGUE_VEHICLE_POSITION:
 				return Json::encode(
 					[

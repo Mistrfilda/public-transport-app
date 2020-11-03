@@ -213,8 +213,9 @@ services:
 
 	#REQUEST
 	- App\Request\RequestRepository(App\Request\Request)
-	- App\Request\GenerateRequestsCommand
+	- App\Request\Command\GenerateRequestsCommand
 	- App\UI\Admin\Request\Datagrid\RequestDatagridFactory
+	- App\Transport\Prague\Request\RabbitMQ\Command\GenerateHalfHourRequestsCommand
 
 	#RABITMQ
 	- App\Request\RabbitMQ\MessageFactory

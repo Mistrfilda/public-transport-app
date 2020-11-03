@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Request;
+namespace App\Request\Command;
 
+use App\Request\IRequestFacade;
+use App\Request\RequestConditions;
 use InvalidArgumentException;
 use Nette\Utils\Json;
 use Psr\Log\LoggerInterface;

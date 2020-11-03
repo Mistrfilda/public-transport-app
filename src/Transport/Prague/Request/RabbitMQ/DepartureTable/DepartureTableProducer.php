@@ -10,6 +10,8 @@ use Contributte\RabbitMQ\Producer\Producer;
 
 class DepartureTableProducer extends BaseProducer
 {
+	public const FILTER_KEY = 'generateDepartureTables';
+
 	private Producer $producer;
 
 	public function __construct(Producer $producer)

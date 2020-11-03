@@ -11,16 +11,28 @@ rabbitmq:
 			connection: default
 		pragueVehiclePositionQueue:
 			connection: default
+		pragueTransportRestrictionQueue:
+			connection: default
+		pragueParkingLotQueue:
+			connection: default
 
 	producers:
 		pragueDepartureTableProducer:
 			queue: pragueDepartureTableQueue
 			contentType: application/json
-			deliveryMode: 2 # Producer::DELIVERY_MODE_PERSISTENT
+			deliveryMode: 2
 		pragueVehiclePositionProducer:
 			queue: pragueVehiclePositionQueue
 			contentType: application/json
-			deliveryMode: 2 # Producer::DELIVERY_MODE_PERSISTENT
+			deliveryMode: 2
+		pragueParkingLotProducer:
+			queue: pragueParkingLotQueue
+			contentType: application/json
+			deliveryMode: 2
+		pragueTransportRestrictionProducer:
+			queue: pragueTransportRestrictionQueue
+			contentType: application/json
+			deliveryMode: 2
 
 	consumers:
 		pragueDepartureTableConsumer:
@@ -35,6 +47,18 @@ rabbitmq:
 			qos:
 				prefetchSize: 0
 				prefetchCount: 5
+		pragueTransportRestrictionConsumer:
+			queue: pragueTransportRestrictionQueue
+			callback: [@pragueTransportRestrictionConsumer, consume]
+			qos:
+				prefetchSize: 0
+				prefetchCount: 5
+		pragueParkingLotConsumer:
+			queue: pragueParkingLotQueue
+			callback: [@pragueParkingLotConsumer, consume]
+			qos:
+				prefetchSize: 0
+				prefetchCount: 5
 
 services:
 	pragueDepartureTableConsumer: App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableConsumer
@@ -42,5 +66,11 @@ services:
 
 	pragueVehiclePositionConsumer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionConsumer
 	pragueVehiclePositionProducer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer(@Contributte\RabbitMQ\Client::getProducer(pragueVehiclePositionProducer))
+
+	pragueTransportRestrictionConsumer: App\Transport\Prague\Request\RabbitMQ\TransportRestriction\TransportRestrictionConsumer
+	pragueTransportRestrictionProducer: App\Transport\Prague\Request\RabbitMQ\TransportRestriction\TransportRestrictionProducer(@Contributte\RabbitMQ\Client::getProducer(pragueTransportRestrictionProducer))
+
+	pragueParkingLotConsumer: App\Transport\Prague\Request\RabbitMQ\ParkingLot\ParkingLotConsumer
+	pragueParkingLotProducer: App\Transport\Prague\Request\RabbitMQ\ParkingLot\ParkingLotProducer(@Contributte\RabbitMQ\Client::getProducer(pragueParkingLotProducer))
 
 	- App\Transport\Prague\Request\RequestFacade

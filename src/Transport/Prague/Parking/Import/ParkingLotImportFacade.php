@@ -47,10 +47,10 @@ class ParkingLotImportFacade
 	{
 		$this->logger->info('Importing parking lot from pid library');
 
+		$parkings = $this->golemioService->sendGetParkingLotRequest();
+
 		$this->entityManager->beginTransaction();
 		try {
-			$parkings = $this->golemioService->sendGetParkingLotRequest();
-
 			$this->logger->info('Successfully fetched parkings', [
 				'count' => $parkings->getCount(),
 			]);

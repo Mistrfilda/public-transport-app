@@ -97,5 +97,5 @@ bin/console rabbitmq:consumer pragueVehiclePositionConsumer 300
 5 0 * * * bin/console requests:generate '{"generateDepartureTables":true,"generateVehiclePositions":false}' '{}'
 50 0 * * * bin/console prague:statistic:generate 2
 10 1 * * * bin/console prague:import:stop
-*/30 * * * * bin/console prague:import:parkingLots  
+*/30 * * * * bin/console prague:requests:halfHour
 ```

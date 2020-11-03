@@ -10,6 +10,7 @@ use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\StopLine\StopTime\Import\StopTimeImportFacade;
 use App\Transport\Prague\StopLine\Trip\Import\TripImportFacade;
 use App\Utils\Datetime\DatetimeFactory;
+use App\Utils\MonologHelper;
 use Bunny\Message;
 use Contributte\RabbitMQ\Consumer\IConsumer;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,13 +20,10 @@ use Nette\Utils\Json;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
 use Throwable;
-use Tracy\ILogger;
 
 class DepartureTableConsumer implements IConsumer
 {
 	private LoggerInterface $logger;
-
-	private ILogger $tracyLogger;
 
 	private StopTimeImportFacade $stopTimeImportFacade;
 
@@ -41,7 +39,6 @@ class DepartureTableConsumer implements IConsumer
 
 	public function __construct(
 		LoggerInterface $logger,
-		ILogger $tracyLogger,
 		StopTimeImportFacade $stopTimeImportFacade,
 		TripImportFacade $tripImportFacade,
 		DepartureTableRepository $departureTableRepository,
@@ -56,7 +53,6 @@ class DepartureTableConsumer implements IConsumer
 		$this->requestRepository = $requestRepository;
 		$this->entityManager = $entityManager;
 		$this->datetimeFactory = $datetimeFactory;
-		$this->tracyLogger = $tracyLogger;
 	}
 
 	public function consume(Message $message): int
@@ -94,7 +90,7 @@ class DepartureTableConsumer implements IConsumer
 				$this->entityManager->flush();
 			}
 
-			$this->tracyLogger->log($e, ILogger::CRITICAL);
+			$this->logger->critical(MonologHelper::formatMessageFromException($e));
 		}
 
 		return IConsumer::MESSAGE_ACK;

@@ -78,12 +78,12 @@ class RequestTest extends BaseTest
 	{
 		$this->requestFacade->generateRequests(new RequestConditions());
 		$requests = $this->requestRepository->findAll();
-		Assert::count(1, $requests);
+		Assert::count(3, $requests);
 
 		//Test if request is not created second time
 		$this->requestFacade->generateRequests(new RequestConditions());
 		$requests = $this->requestRepository->findAll();
-		Assert::count(1, $requests);
+		Assert::count(3, $requests);
 
 		$testDepartureTable = new DepartureTable(
 			$this->testStop,
@@ -96,7 +96,7 @@ class RequestTest extends BaseTest
 
 		$this->requestFacade->generateRequests(new RequestConditions());
 		$requests = $this->requestRepository->findAll();
-		Assert::count(2, $requests);
+		Assert::count(4, $requests);
 	}
 
 	protected function setUp(): void

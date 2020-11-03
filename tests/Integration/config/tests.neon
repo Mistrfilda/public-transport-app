@@ -7,11 +7,17 @@ services:
 	pragueVehiclePositionConsumer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionConsumer
 	pragueVehiclePositionProducer: App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer(@dummyProducer)
 
+	pragueTransportRestrictionConsumer: App\Transport\Prague\Request\RabbitMQ\TransportRestriction\TransportRestrictionConsumer
+	pragueTransportRestrictionProducer: App\Transport\Prague\Request\RabbitMQ\TransportRestriction\TransportRestrictionProducer(@dummyProducer)
+
+	pragueParkingLotConsumer: App\Transport\Prague\Request\RabbitMQ\ParkingLot\ParkingLotConsumer
+	pragueParkingLotProducer: App\Transport\Prague\Request\RabbitMQ\ParkingLot\ParkingLotProducer(@dummyProducer)
+
 	- App\Transport\Prague\Request\RequestFacade
 
 
 monolog:
 	channel:
 		default:
-			handlers!:
-				- Monolog\Handler\NullHandler
+#			handlers!:
+#				- Monolog\Handler\NullHandler
