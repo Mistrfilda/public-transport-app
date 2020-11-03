@@ -88,6 +88,10 @@ bin/console prague:statistic:generate 2
 bin/console rabbitmq:consumer pragueDepartureTableConsumer 300
 
 bin/console rabbitmq:consumer pragueVehiclePositionConsumer 300
+
+bin/console rabbitmq:consumer pragueTransportRestrictionConsumer 300
+
+bin/console rabbitmq:consumer pragueParkingLotConsumer 300
 ```
 
 # Crons
