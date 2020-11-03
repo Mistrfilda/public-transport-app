@@ -74,3 +74,4 @@ services:
 	pragueParkingLotProducer: App\Transport\Prague\Request\RabbitMQ\ParkingLot\ParkingLotProducer(@Contributte\RabbitMQ\Client::getProducer(pragueParkingLotProducer))
 
 	- App\Transport\Prague\Request\RequestFacade
+	- App\Transport\Prague\Request\RabbitMQ\Command\GenerateHalfHourRequestsCommand
