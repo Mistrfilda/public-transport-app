@@ -102,6 +102,11 @@ monolog:
 		default:
 			handlers:
 				- Monolog\Handler\RotatingFileHandler(%appDir%/../log/app-log.log, 30)
+				-
+					factory: Monolog\Handler\RotatingFileHandler(%appDir%/../log/json-log.log, 30)
+					setup:
+						- setFormatter( Monolog\Formatter\JsonFormatter() )
+
 				- Monolog\Handler\StreamHandler("php://stdout")
 			processors:
 				- Monolog\Processor\MemoryPeakUsageProcessor()
