@@ -104,7 +104,7 @@ monolog:
 				- Monolog\Handler\RotatingFileHandler(%appDir%/../log/app-log.log, 30)
 				- Monolog\Handler\StreamHandler("php://stdout")
 				-
-					factory: Monolog\Handler\RotatingFileHandler(%appDir%/../log/json-log.log, 30)
+					factory: Monolog\Handler\RotatingFileHandler(%appDir%/../log/json/json-log.log, 30)
 					setup:
 						- setFormatter( Monolog\Formatter\JsonFormatter() )
 			processors:
