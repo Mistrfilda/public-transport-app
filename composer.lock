@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94aadfa9fc20057e04edaad095a21902",
+    "content-hash": "2ae8a71c8836479cc22235576443f795",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -5612,22 +5612,22 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.7.6",
+            "version": "v2.8.0-RC",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "7e7e73d52c7e9ff0fd29dbd5b1cfdc03f3947942"
+                "reference": "9dbaf51f48362114f3dc1cdfbb834dee2b618f09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/7e7e73d52c7e9ff0fd29dbd5b1cfdc03f3947942",
-                "reference": "7e7e73d52c7e9ff0fd29dbd5b1cfdc03f3947942",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/9dbaf51f48362114f3dc1cdfbb834dee2b618f09",
+                "reference": "9dbaf51f48362114f3dc1cdfbb834dee2b618f09",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-session": "*",
-                "php": ">=7.1"
+                "php": ">=7.2 <8.1"
             },
             "conflict": {
                 "nette/di": "<3.0"
@@ -5641,13 +5641,10 @@
                 "phpstan/phpstan": "^0.12",
                 "psr/log": "^1.0"
             },
-            "suggest": {
-                "https://nette.org/donate": "Please support Tracy via a donation"
-            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -5655,7 +5652,7 @@
                     "src"
                 ],
                 "files": [
-                    "src/Tracy/shortcuts.php"
+                    "src/Tracy/functions.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5672,7 +5669,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "😎 Tracy: the addictive tool to ease debugging PHP code for cool developers. Friendly design, logging, profiler, advanced features like debugging AJAX calls or CLI support. You will love it.",
+            "description": "😎  Tracy: the addictive tool to ease debugging PHP code for cool developers. Friendly design, logging, profiler, advanced features like debugging AJAX calls or CLI support. You will love it.",
             "homepage": "https://tracy.nette.org",
             "keywords": [
                 "Xdebug",
@@ -5683,22 +5680,22 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/tracy/issues",
-                "source": "https://github.com/nette/tracy/tree/v2.7.6"
+                "source": "https://github.com/nette/tracy/tree/v2.8.0-RC"
             },
-            "time": "2020-11-02T17:06:27+00:00"
+            "time": "2020-12-10T03:26:02+00:00"
         },
         {
             "name": "ublaboo/datagrid",
-            "version": "v6.5.0",
+            "version": "v6.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/datagrid.git",
-                "reference": "e16a0aa067a6134f8345447d6378fee7afe19f9f"
+                "reference": "28f30abc45372d934b5d8acd7d9b9088e2363d85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/datagrid/zipball/e16a0aa067a6134f8345447d6378fee7afe19f9f",
-                "reference": "e16a0aa067a6134f8345447d6378fee7afe19f9f",
+                "url": "https://api.github.com/repos/contributte/datagrid/zipball/28f30abc45372d934b5d8acd7d9b9088e2363d85",
+                "reference": "28f30abc45372d934b5d8acd7d9b9088e2363d85",
                 "shasum": ""
             },
             "require": {
@@ -5758,9 +5755,9 @@
             ],
             "support": {
                 "issues": "https://github.com/contributte/datagrid/issues",
-                "source": "https://github.com/contributte/datagrid/tree/v6.5.0"
+                "source": "https://github.com/contributte/datagrid/tree/v6.5.1"
             },
-            "time": "2020-12-02T19:08:04+00:00"
+            "time": "2020-12-10T21:10:29+00:00"
         },
         {
             "name": "webimpress/safe-writer",
@@ -5825,16 +5822,16 @@
     "packages-dev": [
         {
             "name": "fakerphp/faker",
-            "version": "v1.12.0",
+            "version": "v1.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "9aa6c9e289860951e6b4d010c7a841802d015cd8"
+                "reference": "841e8bdde345cc1ea9f98e776959e7531cadea0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/9aa6c9e289860951e6b4d010c7a841802d015cd8",
-                "reference": "9aa6c9e289860951e6b4d010c7a841802d015cd8",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/841e8bdde345cc1ea9f98e776959e7531cadea0e",
+                "reference": "841e8bdde345cc1ea9f98e776959e7531cadea0e",
                 "shasum": ""
             },
             "require": {
@@ -5871,9 +5868,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.12.0"
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.12.1"
             },
-            "time": "2020-11-23T09:33:08+00:00"
+            "time": "2020-12-11T10:39:41+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -6230,16 +6227,16 @@
         },
         {
             "name": "phpstan/extension-installer",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/extension-installer.git",
-                "reference": "5c2da3846819f951385cb6a25d3277051481c48a"
+                "reference": "5de413b3113304d81b4d895caa443fda2da25b54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/5c2da3846819f951385cb6a25d3277051481c48a",
-                "reference": "5c2da3846819f951385cb6a25d3277051481c48a",
+                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/5de413b3113304d81b4d895caa443fda2da25b54",
+                "reference": "5de413b3113304d81b4d895caa443fda2da25b54",
                 "shasum": ""
             },
             "require": {
@@ -6249,13 +6246,9 @@
             },
             "require-dev": {
                 "composer/composer": "^1.8",
-                "consistence/coding-standard": "^3.8",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-                "ergebnis/composer-normalize": "^2.0.2",
-                "phing/phing": "^2.16",
+                "phing/phing": "^2.16.3",
                 "php-parallel-lint/php-parallel-lint": "^1.2.0",
-                "phpstan/phpstan-strict-rules": "^0.11",
-                "slevomat/coding-standard": "^5.0.4"
+                "phpstan/phpstan-strict-rules": "^0.11 || ^0.12"
             },
             "type": "composer-plugin",
             "extra": {
@@ -6273,22 +6266,22 @@
             "description": "Composer plugin for automatic installation of PHPStan extensions",
             "support": {
                 "issues": "https://github.com/phpstan/extension-installer/issues",
-                "source": "https://github.com/phpstan/extension-installer/tree/1.0.5"
+                "source": "https://github.com/phpstan/extension-installer/tree/1.0.6"
             },
-            "time": "2020-08-30T12:06:42+00:00"
+            "time": "2020-12-12T15:17:16+00:00"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.59",
+            "version": "0.12.60",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "cf4107257c8ca2ad967efdd6a00f12b21acbb779"
+                "reference": "d4577922c296d28746e28a5f046e787562143157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/cf4107257c8ca2ad967efdd6a00f12b21acbb779",
-                "reference": "cf4107257c8ca2ad967efdd6a00f12b21acbb779",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d4577922c296d28746e28a5f046e787562143157",
+                "reference": "d4577922c296d28746e28a5f046e787562143157",
                 "shasum": ""
             },
             "require": {
@@ -6319,7 +6312,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.59"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.60"
             },
             "funding": [
                 {
@@ -6335,7 +6328,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-07T14:46:03+00:00"
+            "time": "2020-12-12T13:07:07+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -6463,34 +6456,29 @@
         },
         {
             "name": "phpstan/phpstan-mockery",
-            "version": "0.12.7",
+            "version": "0.12.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-mockery.git",
-                "reference": "afe0af2cab68836360121b4e12b74b9d765d386c"
+                "reference": "ca4fff344aafa04cc5a2e0e7db2782cfe90e0d0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-mockery/zipball/afe0af2cab68836360121b4e12b74b9d765d386c",
-                "reference": "afe0af2cab68836360121b4e12b74b9d765d386c",
+                "url": "https://api.github.com/repos/phpstan/phpstan-mockery/zipball/ca4fff344aafa04cc5a2e0e7db2782cfe90e0d0a",
+                "reference": "ca4fff344aafa04cc5a2e0e7db2782cfe90e0d0a",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0",
-                "phpstan/phpstan": "^0.12"
+                "phpstan/phpstan": "^0.12.60"
             },
             "require-dev": {
-                "consistence/coding-standard": "^3.5",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-                "ergebnis/composer-normalize": "^2.0.2",
-                "jakub-onderka/php-parallel-lint": "^1.0",
                 "mockery/mockery": "^1.2.4",
-                "phing/phing": "^2.16.0",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/phpunit": "^7.2",
-                "slevomat/coding-standard": "^4.7.2",
-                "squizlabs/php_codesniffer": "^3.3.2"
+                "phing/phing": "^2.16.3",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan-phpunit": "^0.12.16",
+                "phpstan/phpstan-strict-rules": "^0.12.5",
+                "phpunit/phpunit": "^7.5.20"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -6515,9 +6503,9 @@
             "description": "PHPStan Mockery extension",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-mockery/issues",
-                "source": "https://github.com/phpstan/phpstan-mockery/tree/0.12.7"
+                "source": "https://github.com/phpstan/phpstan-mockery/tree/0.12.10"
             },
-            "time": "2020-07-21T14:43:24+00:00"
+            "time": "2020-12-12T14:36:11+00:00"
         },
         {
             "name": "phpstan/phpstan-nette",
@@ -6590,31 +6578,27 @@
         },
         {
             "name": "phpstan/phpstan-strict-rules",
-            "version": "0.12.5",
+            "version": "0.12.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-strict-rules.git",
-                "reference": "334898a32217e4605e0f9cfa3d3fc3101bda26be"
+                "reference": "80a77d3c2965b10fd7158b6c94aef1fd8abafbb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/334898a32217e4605e0f9cfa3d3fc3101bda26be",
-                "reference": "334898a32217e4605e0f9cfa3d3fc3101bda26be",
+                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/80a77d3c2965b10fd7158b6c94aef1fd8abafbb0",
+                "reference": "80a77d3c2965b10fd7158b6c94aef1fd8abafbb0",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0",
-                "phpstan/phpstan": "^0.12.33"
+                "phpstan/phpstan": "^0.12.60"
             },
             "require-dev": {
-                "consistence/coding-standard": "^3.0.1",
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-                "ergebnis/composer-normalize": "^2.0.2",
-                "jakub-onderka/php-parallel-lint": "^1.0",
-                "phing/phing": "^2.16.0",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpunit/phpunit": "^7.0",
-                "slevomat/coding-standard": "^4.5.2"
+                "phing/phing": "^2.16.3",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan-phpunit": "^0.12.16",
+                "phpunit/phpunit": "^7.5.20"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -6639,9 +6623,9 @@
             "description": "Extra strict and opinionated rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-strict-rules/issues",
-                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/master"
+                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/0.12.6"
             },
-            "time": "2020-08-30T15:42:06+00:00"
+            "time": "2020-12-12T16:28:23+00:00"
         },
         {
             "name": "rector/rector-prefixed",
@@ -7053,6 +7037,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "tracy/tracy": 5,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,

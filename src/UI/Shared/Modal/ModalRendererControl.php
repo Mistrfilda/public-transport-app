@@ -19,7 +19,7 @@ class ModalRendererControl extends Control
 	private ?IHtmlString $content = null;
 
 	/** @var mixed[] */
-	private array $additionalParameters;
+	private array $additionalParameters = [];
 
 	public function __construct()
 	{
