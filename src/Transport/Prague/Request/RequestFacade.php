@@ -14,8 +14,8 @@ use App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableProducer;
 use App\Transport\Prague\Request\RabbitMQ\ParkingLot\ParkingLotProducer;
 use App\Transport\Prague\Request\RabbitMQ\TransportRestriction\TransportRestrictionProducer;
 use App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer;
-use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
+use Mistrfilda\Datetime\DatetimeFactory;
 use Psr\Log\LoggerInterface;
 
 class RequestFacade implements IRequestFacade

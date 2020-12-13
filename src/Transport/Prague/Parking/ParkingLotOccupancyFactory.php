@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Transport\Prague\Parking;
 
-use App\Utils\Datetime\DatetimeFactory;
+use Mistrfilda\Datetime\DatetimeFactory;
 
 class ParkingLotOccupancyFactory
 {

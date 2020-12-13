@@ -6,8 +6,8 @@ namespace App\Transport\Prague\TransportRestriction;
 
 use App\Transport\TransportRestriction\TransportRestrictionPriority;
 use App\Transport\TransportRestriction\TransportRestrictionType;
-use App\Utils\Datetime\DatetimeFactory;
 use DateTimeImmutable;
+use Mistrfilda\Datetime\DatetimeFactory;
 use Mistrfilda\Pid\Api\Rss\TransportRestriction\LongTerm\LongTermTransportRestriction;
 use Mistrfilda\Pid\Api\Rss\TransportRestriction\ShortTerm\ShortTermTransportRestriction;
 

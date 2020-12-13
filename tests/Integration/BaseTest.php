@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Test\Integration;
 
-use App\Utils\Datetime\DatetimeFactory;
-use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
+use Mistrfilda\Datetime\DatetimeFactory;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Mockery;
 use Nette\DI\Container;
 use Tester\Environment;
@@ -57,8 +57,8 @@ abstract class BaseTest extends TestCase
 
 	protected function mockDatetimeFactory(int $secondsToAdd = 0): void
 	{
-		$this->now = (new DateTimeImmutable())->modify('+ ' . $secondsToAdd . ' seconds');
-		$dateTimeFactory = Mockery::mock(DatetimeFactory::class);
+		$this->now = (new DatetimeImmutable())->modify('+ ' . $secondsToAdd . ' seconds');
+		$dateTimeFactory = Mockery::mock(DatetimeFactory::class)->makePartial();
 		$dateTimeFactory->shouldReceive('createNow')->andReturn($this->now);
 
 		$this->today = $this->now->setTime(0, 0, 0);

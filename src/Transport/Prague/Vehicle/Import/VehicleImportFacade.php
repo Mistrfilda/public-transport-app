@@ -6,8 +6,8 @@ namespace App\Transport\Prague\Vehicle\Import;
 
 use App\Transport\Prague\Vehicle\VehicleFactory;
 use App\Transport\Prague\Vehicle\VehiclePosition;
-use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
+use Mistrfilda\Datetime\DatetimeFactory;
 use Mistrfilda\Pid\Api\GolemioService;
 use Psr\Log\LoggerInterface;
 use Throwable;

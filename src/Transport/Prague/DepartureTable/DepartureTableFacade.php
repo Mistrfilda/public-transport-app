@@ -7,8 +7,8 @@ namespace App\Transport\Prague\DepartureTable;
 use App\Request\IRequestFacade;
 use App\Request\RequestConditions;
 use App\Transport\Prague\Stop\StopRepository;
-use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
+use Mistrfilda\Datetime\DatetimeFactory;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\Uuid;
 
