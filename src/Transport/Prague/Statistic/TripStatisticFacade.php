@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Transport\Prague\Statistic;
 
 use App\Transport\Prague\Statistic\TripList\TripListFacade;
-use App\Utils\Datetime\CzechHolidayService;
 use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Mistrfilda\Datetime\Holiday\CzechHolidayService;
 use Psr\Log\LoggerInterface;
 use Throwable;
 

@@ -135,7 +135,7 @@ services:
 	#UTILS
 	- App\Utils\Command\WarmUpCacheCommand
 	datetimefactory: App\Utils\Datetime\DatetimeFactory
-	czechHolidayService: App\Utils\Datetime\CzechHolidayService
+	czechHolidayService: Mistrfilda\Datetime\Holiday\CzechHolidayService
 
 	pidservice: Mistrfilda\Pid\Api\GolemioService(%pid.accessToken%)
 	pidrssservice: Mistrfilda\Pid\Api\RssService
