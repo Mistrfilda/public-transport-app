@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Filter;
 
-use App\Utils\Datetime\DatetimeFactory;
+use App\Utils\Datetime\DatetimeConst;
 use DateTimeImmutable;
 
 class DatetimeFormatFilter
@@ -12,9 +12,9 @@ class DatetimeFormatFilter
 	public function format(?DateTimeImmutable $datetime): string
 	{
 		if ($datetime === null) {
-			return DatetimeFactory::DEFAULT_NULL_DATETIME_PLACEHOLDER;
+			return DatetimeConst::DEFAULT_NULL_DATETIME_PLACEHOLDER;
 		}
 
-		return $datetime->format(DatetimeFactory::DEPARTURE_TABLE_DATETIME_FORMAT);
+		return $datetime->format(DatetimeConst::DEPARTURE_TABLE_DATETIME_FORMAT);
 	}
 }
