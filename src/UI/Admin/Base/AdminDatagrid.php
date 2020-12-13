@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\UI\Admin\Base;
 
-use App\Utils\Datetime\DatetimeFactory;
 use App\Utils\SelectPicker;
 use DateTimeImmutable;
+use Mistrfilda\Datetime\DatetimeFactory;
 use Nette\Utils\Strings;
 use Ublaboo\DataGrid\Column\ColumnDateTime;
 use Ublaboo\DataGrid\Column\FilterableColumn;

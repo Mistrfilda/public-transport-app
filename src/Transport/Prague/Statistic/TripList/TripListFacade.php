@@ -6,8 +6,8 @@ namespace App\Transport\Prague\Statistic\TripList;
 
 use App\Doctrine\NoEntityFoundException;
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
-use App\Utils\Datetime\DatetimeFactory;
 use Doctrine\ORM\EntityManagerInterface;
+use Mistrfilda\Datetime\DatetimeFactory;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;

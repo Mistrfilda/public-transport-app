@@ -9,7 +9,7 @@ use App\Transport\Prague\Stop\Stop;
 use App\Transport\Prague\StopLine\StopTime\StopTimeRepository;
 use App\Transport\Prague\StopLine\Trip\TripRepository;
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
-use App\Utils\Datetime\DatetimeFactory;
+use Mistrfilda\Datetime\DatetimeFactory;
 
 class StopLineFactory
 {

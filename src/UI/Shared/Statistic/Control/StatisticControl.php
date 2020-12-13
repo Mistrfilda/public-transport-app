@@ -11,7 +11,7 @@ use App\Transport\Prague\Statistic\TripList\TripListRepository;
 use App\Transport\Prague\Stop\StopRepository;
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
 use App\UI\Shared\Statistic\Statistic;
-use App\Utils\Datetime\DatetimeFactory;
+use Mistrfilda\Datetime\DatetimeFactory;
 use Nette\Application\UI\Control;
 
 class StatisticControl extends Control
