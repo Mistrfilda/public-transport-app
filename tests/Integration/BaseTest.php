@@ -57,7 +57,7 @@ abstract class BaseTest extends TestCase
 
 	protected function mockDatetimeFactory(int $secondsToAdd = 0): void
 	{
-		$this->now = (new DatetimeImmutable())->modify('+ ' . $secondsToAdd . ' seconds');
+		$this->now = (new DatetimeImmutable())->addSecondsToDatetime($secondsToAdd);
 		$dateTimeFactory = Mockery::mock(DatetimeFactory::class)->makePartial();
 		$dateTimeFactory->shouldReceive('createNow')->andReturn($this->now);
 

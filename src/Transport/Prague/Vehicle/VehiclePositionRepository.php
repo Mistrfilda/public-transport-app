@@ -30,6 +30,14 @@ class VehiclePositionRepository extends BaseRepository
 		}
 	}
 
+	/**
+	 * @return VehiclePosition[]
+	 */
+	public function findAll(): array
+	{
+		return $this->doctrineRepository->findAll();
+	}
+
 	public function findLast(): ?VehiclePosition
 	{
 		$qb = $this->createQueryBuilder();
