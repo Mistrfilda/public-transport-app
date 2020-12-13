@@ -41,12 +41,12 @@ class PragueDepartureTableListDataFactory
 		$departureTables = $this->departureTableRepository->findAll();
 		$allDestinations = $this->stopTimeRepository->findDepartureTablesDestinations(
 			$now,
-			$now->modify('+ 3 day')
+			$now->addDaysToDatetime(3)
 		);
 
 		$allLines = $this->stopTimeRepository->findDepartureTablesLines(
 			$now,
-			$now->modify('+ 3 day')
+			$now->addDaysToDatetime(3)
 		);
 
 		$data = [];

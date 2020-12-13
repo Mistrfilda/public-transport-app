@@ -97,14 +97,14 @@ having count(pv.id) >= :minimal_number_of_positions;
 ";
 
 		if ($dateFrom === null) {
-			$dateFrom = $this->datetimeFactory->createToday()->modify('- 1 day');
+			$dateFrom = $this->datetimeFactory->createToday()->deductDaysFromDatetime(1);
 		}
 
 		$count = 0;
 		while ($count < $numberOfDays) {
 			$date = $dateFrom;
 			if ($count >= 1) {
-				$date = $dateFrom->modify('- ' . $count . ' days');
+				$date = $dateFrom->deductDaysFromDatetime($count);
 			}
 
 			$isCzechHoliday = $this->czechHolidayService->isDateTimeHoliday($date);

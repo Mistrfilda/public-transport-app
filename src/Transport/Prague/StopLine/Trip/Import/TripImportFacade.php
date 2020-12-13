@@ -57,7 +57,7 @@ class TripImportFacade
 		while ($count < $numberOfDays) {
 			$date = $today;
 			if ($count >= 1) {
-				$date = $today->modify('+ ' . $count . ' days');
+				$date = $today->addDaysToDatetime($count);
 			}
 
 			$this->logger->info(

@@ -64,9 +64,9 @@ class StopTimeTest extends BaseTest
 		$this->assertStopTime(
 			new StopTime(
 				$this->testStop,
-				$this->today->modify('+ 1 day')->setTime(12, 55, 0),
-				$this->today->modify('+ 1 day')->setTime(12, 55, 0),
-				$this->today->modify('+ 1 day'),
+				$this->today->addDaysToDatetime(1)->setTime(12, 55, 0),
+				$this->today->addDaysToDatetime(1)->setTime(12, 55, 0),
+				$this->today->addDaysToDatetime(1),
 				'333_1104_200302',
 				4
 			),
@@ -76,9 +76,9 @@ class StopTimeTest extends BaseTest
 		$this->assertStopTime(
 			new StopTime(
 				$this->testStop,
-				$this->today->modify('+ 1 day')->setTime(13, 55, 0),
-				$this->today->modify('+ 1 day')->setTime(13, 55, 0),
-				$this->today->modify('+ 1 day'),
+				$this->today->addDaysToDatetime(1)->setTime(13, 55, 0),
+				$this->today->addDaysToDatetime(1)->setTime(13, 55, 0),
+				$this->today->addDaysToDatetime(1),
 				'333_1104_200303',
 				4
 			),
@@ -88,9 +88,9 @@ class StopTimeTest extends BaseTest
 		$this->assertStopTime(
 			new StopTime(
 				$this->testStop,
-				$this->today->modify('+ 1 day')->setTime(18, 55, 0),
-				$this->today->modify('+ 1 day')->setTime(18, 55, 0),
-				$this->today->modify('+ 1 day'),
+				$this->today->addDaysToDatetime(1)->setTime(18, 55, 0),
+				$this->today->addDaysToDatetime(1)->setTime(18, 55, 0),
+				$this->today->addDaysToDatetime(1),
 				'333_1104_200304',
 				4
 			),
@@ -100,9 +100,9 @@ class StopTimeTest extends BaseTest
 		$this->assertStopTime(
 			new StopTime(
 				$this->testStop,
-				$this->today->modify('+ 1 day')->setTime(2, 55, 0),
-				$this->today->modify('+ 1 day')->setTime(2, 55, 0),
-				$this->today->modify('+ 1 day'),
+				$this->today->addDaysToDatetime(1)->setTime(2, 55, 0),
+				$this->today->addDaysToDatetime(1)->setTime(2, 55, 0),
+				$this->today->addDaysToDatetime(1),
 				'333_1104_200305',
 				4
 			),

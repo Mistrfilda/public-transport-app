@@ -29,7 +29,7 @@ class StopLineTest extends BaseTest
 
 	public function testStopLine(): void
 	{
-		$date = $this->today->modify('+ 2 days');
+		$date = $this->today->addDaysToDatetime(2);
 
 		$trips = [
 			new Trip(
