@@ -6,6 +6,10 @@ namespace App\Transport\Prague\DepartureTable;
 
 use App\Request\IRequestFacade;
 use App\Request\RequestConditions;
+use App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableProducer;
+use App\Transport\Prague\Request\RabbitMQ\ParkingLot\ParkingLotProducer;
+use App\Transport\Prague\Request\RabbitMQ\TransportRestriction\TransportRestrictionProducer;
+use App\Transport\Prague\Request\RabbitMQ\VehiclePosition\VehiclePositionProducer;
 use App\Transport\Prague\Stop\StopRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Mistrfilda\Datetime\DatetimeFactory;
@@ -71,8 +75,10 @@ class DepartureTableFacade
 			$requestFacade->generateRequests(
 				new RequestConditions(
 					[
-						'generateDepartureTables' => true,
-						'generateVehiclePositions' => false,
+						DepartureTableProducer::FILTER_KEY => true,
+						VehiclePositionProducer::FILTER_KEY => false,
+						TransportRestrictionProducer::FILTER_KEY => false,
+						ParkingLotProducer::FILTER_KEY => false,
 					],
 					['departureTableId' => $departureTable->getId()->toString()]
 				)
