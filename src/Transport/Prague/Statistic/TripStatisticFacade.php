@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Mistrfilda\Datetime\DatetimeFactory;
 use Mistrfilda\Datetime\Holiday\CzechHolidayService;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -39,8 +40,11 @@ class TripStatisticFacade
 		$this->czechHolidayService = $czechHolidayService;
 	}
 
-	public function processStatistics(int $numberOfDays = 1): void
-	{
+	public function processStatistics(
+		int $numberOfDays = 1,
+		int $minimalNumberOfPositions = 5,
+		?DatetimeImmutable $dateFrom = null
+	): void {
 		$resultSetMapping = new ResultSetMapping();
 		$resultSetMapping->addScalarResult('trip_id', 'tripId');
 		$resultSetMapping->addScalarResult('route_id', 'routeId');
@@ -89,10 +93,12 @@ left join (select trip_id, delay_in_seconds from prague_vehicle where id in (sel
 	on lp.trip_id = pv.trip_id 
 where date(pp.created_at) = :created_date 
 group by pv.trip_id, pv.route_id, pv.final_station, pv.registration_number, pv.company, pv.wheelchair_accessible 
-having count(pv.id) > 5;
+having count(pv.id) >= :minimal_number_of_positions;
 ";
 
-		$dateFrom = $this->datetimeFactory->createToday()->modify('- 1 day');
+		if ($dateFrom === null) {
+			$dateFrom = $this->datetimeFactory->createToday()->modify('- 1 day');
+		}
 
 		$count = 0;
 		while ($count < $numberOfDays) {
@@ -112,6 +118,7 @@ having count(pv.id) > 5;
 
 			$query = $this->entityManager->createNativeQuery($sql, $resultSetMapping);
 			$query->setParameter('created_date', $date->format('Y-m-d'), Types::STRING);
+			$query->setParameter('minimal_number_of_positions', $minimalNumberOfPositions);
 
 			$data = $query->getResult();
 			$this->logger->info('Successfully fetched results', [
@@ -169,6 +176,7 @@ where date(pp.created_at) = :created_date
 
 				$this->logger->info('Successfully deleted trip statistics');
 
+				$this->entityManager->flush();
 				$this->entityManager->commit();
 				$this->entityManager->clear();
 			} catch (Throwable $e) {
