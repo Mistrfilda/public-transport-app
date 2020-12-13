@@ -8,7 +8,7 @@ use App\Doctrine\BaseRepository;
 use App\Doctrine\NoEntityFoundException;
 use App\Doctrine\OrderBy;
 use App\Transport\Prague\StopLine\Trip\Trip;
-use DateTimeImmutable;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
