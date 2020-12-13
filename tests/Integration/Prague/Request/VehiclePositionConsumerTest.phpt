@@ -58,7 +58,7 @@ class VehiclePositionConsumerTest extends BaseTest
 		Assert::null($this->vehiclePositionRepository->findLast());
 		$rabbitCode = $this->vehiclePositionConsumer->consume($mockedMessage);
 
-		Assert::equal(IConsumer::MESSAGE_ACK, $rabbitCode);
+		Assert::same(IConsumer::MESSAGE_ACK, $rabbitCode);
 
 		/** @var VehiclePosition $vehiclePosition */
 		$vehiclePosition = $this->vehiclePositionRepository->findLast();
@@ -96,7 +96,7 @@ class VehiclePositionConsumerTest extends BaseTest
 
 		$rabbitCode = $this->vehiclePositionConsumer->consume($mockedMessage);
 
-		Assert::equal(IConsumer::MESSAGE_ACK, $rabbitCode);
+		Assert::same(IConsumer::MESSAGE_ACK, $rabbitCode);
 		$this->entityManager->refresh($request);
 		Assert::null($request->getFinishedAt());
 		Assert::notNull($request->getFailedAt());

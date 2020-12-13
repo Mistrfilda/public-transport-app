@@ -159,12 +159,12 @@ class TripTest extends BaseTest
 
 	private function assertTrips(Trip $expected, Trip $actual): void
 	{
-		Assert::equal($expected->getTripId(), $actual->getTripId());
-		Assert::equal($expected->getDateTripId(), $actual->getDateTripId());
-		Assert::equal($expected->getDate()->getTimestamp(), $actual->getDate()->getTimestamp());
-		Assert::equal($expected->getLineNumber(), $actual->getLineNumber());
-		Assert::equal($expected->getTripHeadsign(), $actual->getTripHeadsign());
-		Assert::equal($expected->getServiceId(), $actual->getServiceId());
+		Assert::same($expected->getTripId(), $actual->getTripId());
+		Assert::same($expected->getDateTripId(), $actual->getDateTripId());
+		Assert::same($expected->getDate()->getTimestamp(), $actual->getDate()->getTimestamp());
+		Assert::same($expected->getLineNumber(), $actual->getLineNumber());
+		Assert::same($expected->getTripHeadsign(), $actual->getTripHeadsign());
+		Assert::same($expected->getServiceId(), $actual->getServiceId());
 	}
 }
 

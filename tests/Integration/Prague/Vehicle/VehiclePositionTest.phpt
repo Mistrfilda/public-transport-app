@@ -39,7 +39,7 @@ class VehiclePositionTest extends BaseTest
 		Assert::notNull($vehiclePosition);
 
 		Assert::count(4, $vehiclePosition->getVehicles());
-		Assert::equal(4, $vehiclePosition->getVehiclesCount());
+		Assert::same(4, $vehiclePosition->getVehiclesCount());
 
 		Assert::noError(function (): void {
 			$this->vehicleImportFacade->import();
