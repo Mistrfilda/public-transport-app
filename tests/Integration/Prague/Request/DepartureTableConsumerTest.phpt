@@ -84,7 +84,7 @@ class DepartureTableConsumerTest extends BaseTest
 		Assert::count(0, $this->stopLineFactory->getStopLinesForStop($stop));
 		$rabbitCode = $this->departureTableConsumer->consume($mockedMessage);
 
-		Assert::equal(IConsumer::MESSAGE_ACK, $rabbitCode);
+		Assert::same(IConsumer::MESSAGE_ACK, $rabbitCode);
 		Assert::count(6, $this->stopLineFactory->getStopLinesForStop($stop));
 
 		$this->entityManager->refresh($request);
@@ -115,7 +115,7 @@ class DepartureTableConsumerTest extends BaseTest
 
 		$rabbitCode = $this->departureTableConsumer->consume($mockedMessage);
 
-		Assert::equal(IConsumer::MESSAGE_ACK, $rabbitCode);
+		Assert::same(IConsumer::MESSAGE_ACK, $rabbitCode);
 		$this->entityManager->refresh($request);
 		Assert::null($request->getFinishedAt());
 		Assert::notNull($request->getFailedAt());

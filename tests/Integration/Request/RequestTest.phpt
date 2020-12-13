@@ -45,8 +45,8 @@ class RequestTest extends BaseTest
 			$this->now
 		);
 
-		Assert::equal($this->now, $request->getCreatedAt());
-		Assert::equal(RequestType::PRAGUE_VEHICLE_POSITION, $request->getType());
+		Assert::same($this->now, $request->getCreatedAt());
+		Assert::same(RequestType::PRAGUE_VEHICLE_POSITION, $request->getType());
 
 		Assert::exception(function (): void {
 			new Request('aaa', $this->now);
@@ -70,8 +70,8 @@ class RequestTest extends BaseTest
 
 		$decodedMessage = Json::decode($message, Json::FORCE_ARRAY);
 		Assert::count(2, $decodedMessage);
-		Assert::equal($request->getId(), $decodedMessage['requestId']);
-		Assert::equal($request->getCreatedAt()->getTimestamp(), $decodedMessage['dateTimestamp']);
+		Assert::same($request->getId(), $decodedMessage['requestId']);
+		Assert::same($request->getCreatedAt()->getTimestamp(), $decodedMessage['dateTimestamp']);
 	}
 
 	public function testRequestCreate(): void

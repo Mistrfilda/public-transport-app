@@ -266,12 +266,12 @@ class StopTimeRemovingTest extends BaseTest
 
 	private function assertStopTime(StopTime $expected, StopTime $actual): void
 	{
-		Assert::equal($expected->getStop()->getId(), $actual->getStop()->getId());
-		Assert::equal($expected->getArrivalTime()->getTimestamp(), $actual->getArrivalTime()->getTimestamp());
-		Assert::equal($expected->getDepartureTime()->getTimestamp(), $actual->getDepartureTime()->getTimestamp());
-		Assert::equal($expected->getTripId(), $actual->getTripId());
-		Assert::equal($expected->getStopSequence(), $actual->getStopSequence());
-		Assert::equal($expected->getDateTripId(), $actual->getDateTripId());
+		Assert::same($expected->getStop()->getId(), $actual->getStop()->getId());
+		Assert::same($expected->getArrivalTime()->getTimestamp(), $actual->getArrivalTime()->getTimestamp());
+		Assert::same($expected->getDepartureTime()->getTimestamp(), $actual->getDepartureTime()->getTimestamp());
+		Assert::same($expected->getTripId(), $actual->getTripId());
+		Assert::same($expected->getStopSequence(), $actual->getStopSequence());
+		Assert::same($expected->getDateTripId(), $actual->getDateTripId());
 	}
 }
 

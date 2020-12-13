@@ -92,17 +92,17 @@ class StopTest extends BaseTest
 
 	public function testStopCacheService(): void
 	{
-		Assert::equal('Testovací zastávka 4 (U56789)', $this->stopCacheService->getStop('U56789'));
-		Assert::equal('Testovací zastávka 2 (U54321)', $this->stopCacheService->getStop('U54321'));
-		Assert::equal(StopCacheService::UNDEFINED_STOP_PLACEHOLDER, $this->stopCacheService->getStop('U123333'));
+		Assert::same('Testovací zastávka 4 (U56789)', $this->stopCacheService->getStop('U56789'));
+		Assert::same('Testovací zastávka 2 (U54321)', $this->stopCacheService->getStop('U54321'));
+		Assert::same(StopCacheService::UNDEFINED_STOP_PLACEHOLDER, $this->stopCacheService->getStop('U123333'));
 	}
 
 	public function testStopIdFilter(): void
 	{
 		$filter = new StopIdFilter($this->stopCacheService);
-		Assert::equal('Testovací zastávka 4 (U56789)', $filter->format('U56789'));
-		Assert::equal('Testovací zastávka 2 (U54321)', $filter->format('U54321'));
-		Assert::equal(StopCacheService::UNDEFINED_STOP_PLACEHOLDER, $filter->format(null));
+		Assert::same('Testovací zastávka 4 (U56789)', $filter->format('U56789'));
+		Assert::same('Testovací zastávka 2 (U54321)', $filter->format('U54321'));
+		Assert::same(StopCacheService::UNDEFINED_STOP_PLACEHOLDER, $filter->format(null));
 	}
 
 	protected function setUp(): void
@@ -159,11 +159,11 @@ class StopTest extends BaseTest
 
 	private function assertStops(Stop $expected, Stop $actual): void
 	{
-		Assert::equal($expected->getStopId(), $actual->getStopId());
-		Assert::equal($expected->getName(), $actual->getName());
-		Assert::equal($expected->getFormattedName(), $actual->getFormattedName());
-		Assert::equal($expected->getCoordinates()->getLatitude(), $actual->getCoordinates()->getLatitude());
-		Assert::equal($expected->getCoordinates()->getLongitude(), $expected->getCoordinates()->getLongitude());
+		Assert::same($expected->getStopId(), $actual->getStopId());
+		Assert::same($expected->getName(), $actual->getName());
+		Assert::same($expected->getFormattedName(), $actual->getFormattedName());
+		Assert::same($expected->getCoordinates()->getLatitude(), $actual->getCoordinates()->getLatitude());
+		Assert::same($expected->getCoordinates()->getLongitude(), $expected->getCoordinates()->getLongitude());
 	}
 }
 

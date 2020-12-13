@@ -63,7 +63,7 @@ class ParkingLotConsumerTest extends BaseTest
 		Assert::true($request->hasFinished());
 		Assert::false($request->hasFailed());
 
-		Assert::equal(IConsumer::MESSAGE_ACK, $rabbitCode);
+		Assert::same(IConsumer::MESSAGE_ACK, $rabbitCode);
 
 		$parkingLots = $this->parkingLotRepository->findAll();
 		Assert::count(4, $parkingLots);
@@ -72,9 +72,9 @@ class ParkingLotConsumerTest extends BaseTest
 		Assert::count(1, $parkingLots[0]->getParkingLotOccupancies());
 		Assert::count(1, $parkingLots[1]->getParkingLotOccupancies());
 
-		Assert::equal(100, $parkingLots[0]->getLastParkingLotOccupancy()->getTotalSpaces());
-		Assert::equal(30, $parkingLots[0]->getLastParkingLotOccupancy()->getFreeSpaces());
-		Assert::equal(50, $parkingLots[0]->getLastParkingLotOccupancy()->getOccupiedSpaces());
+		Assert::same(100, $parkingLots[0]->getLastParkingLotOccupancy()->getTotalSpaces());
+		Assert::same(30, $parkingLots[0]->getLastParkingLotOccupancy()->getFreeSpaces());
+		Assert::same(50, $parkingLots[0]->getLastParkingLotOccupancy()->getOccupiedSpaces());
 
 		//Failed
 		$request = new Request(
@@ -100,7 +100,7 @@ class ParkingLotConsumerTest extends BaseTest
 
 		$rabbitCode = $this->parkingLotConsumer->consume($mockedMessage);
 
-		Assert::equal(IConsumer::MESSAGE_ACK, $rabbitCode);
+		Assert::same(IConsumer::MESSAGE_ACK, $rabbitCode);
 		$this->entityManager->refresh($request);
 		Assert::null($request->getFinishedAt());
 		Assert::notNull($request->getFailedAt());
