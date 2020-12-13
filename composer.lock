@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ae8a71c8836479cc22235576443f795",
+    "content-hash": "1e7abb99b164b5c8f5be3d82f2f812eb",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2262,6 +2262,56 @@
                 "source": "https://github.com/nette/latte/tree/v2.9.1"
             },
             "time": "2020-11-24T00:57:37+00:00"
+        },
+        {
+            "name": "mistrfilda/datetime",
+            "version": "v0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mistrfilda/datetime-utils.git",
+                "reference": "f212221e257369505fef996c1c4a7373474745c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mistrfilda/datetime-utils/zipball/f212221e257369505fef996c1c4a7373474745c7",
+                "reference": "f212221e257369505fef996c1c4a7373474745c7",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2",
+                "php-parallel-lint/php-console-highlighter": "^0.5.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "^0.12.5",
+                "phpstan/phpstan-mockery": "^0.12.3",
+                "phpstan/phpstan-phpunit": "^0.12.16",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/phpunit": "^9.5",
+                "roave/security-advisories": "dev-master",
+                "symplify/easy-coding-standard-prefixed": "~7.2.0",
+                "tracy/tracy": "^2.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mistrfilda\\Datetime\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple datetime utils",
+            "support": {
+                "issues": "https://github.com/Mistrfilda/datetime-utils/issues",
+                "source": "https://github.com/Mistrfilda/datetime-utils/tree/v0.0.1"
+            },
+            "time": "2020-12-13T00:50:08+00:00"
         },
         {
             "name": "mistrfilda/pid-api",
