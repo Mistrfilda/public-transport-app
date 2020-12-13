@@ -8,11 +8,11 @@ use App\Doctrine\BaseRepository;
 use App\Doctrine\NoEntityFoundException;
 use App\Doctrine\OrderBy;
 use App\Transport\Prague\StopLine\Trip\Trip;
-use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @extends BaseRepository<StopTime>
