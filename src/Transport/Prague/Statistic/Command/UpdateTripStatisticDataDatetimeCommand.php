@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Transport\Prague\Statistic\Command;
 
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
-use App\Utils\Datetime\CzechHolidayService;
+use Mistrfilda\Datetime\Holiday\CzechHolidayService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
