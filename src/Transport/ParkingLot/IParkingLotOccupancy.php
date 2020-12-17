@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Transport\ParkingLot;
 
-use DateTimeImmutable;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 interface IParkingLotOccupancy
 {

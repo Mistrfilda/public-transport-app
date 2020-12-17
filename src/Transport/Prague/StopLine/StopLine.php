@@ -9,13 +9,13 @@ use App\Transport\Prague\Vehicle\Vehicle;
 use App\Transport\Stop\IStop;
 use App\Transport\StopLine\IStopLine;
 use App\Transport\Vehicle\IVehicle;
-use DateTimeImmutable;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 class StopLine implements IStopLine
 {
 	private IStop $stop;
 
-	private DateTimeImmutable $arrivalTime;
+	private DatetimeImmutable $arrivalTime;
 
 	private DateTimeImmutable $departureTime;
 

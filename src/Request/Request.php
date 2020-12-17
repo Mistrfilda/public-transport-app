@@ -8,8 +8,8 @@ use App\Doctrine\CreatedAt;
 use App\Doctrine\Identifier;
 use App\Doctrine\IEntity;
 use App\Transport\Prague\DepartureTable\DepartureTable;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @ORM\Entity

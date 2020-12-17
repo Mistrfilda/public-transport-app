@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Transport\Prague\Stop\Stop;
 use App\Transport\Prague\StopLine\StopTime\StopTimeFactory;
 use App\Transport\Prague\StopLine\StopTime\StopTimeTimeFactory;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Mistrfilda\Pid\Api\StopTime\StopTime as PIDStopTime;
 use Tester\Assert;
 

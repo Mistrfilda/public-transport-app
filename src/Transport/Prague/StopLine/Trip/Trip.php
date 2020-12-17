@@ -7,8 +7,8 @@ namespace App\Transport\Prague\StopLine\Trip;
 use App\Doctrine\Identifier;
 use App\Doctrine\IEntity;
 use App\Transport\Prague\Stop\Stop;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @ORM\Entity()

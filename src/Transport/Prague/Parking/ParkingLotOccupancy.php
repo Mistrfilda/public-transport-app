@@ -9,8 +9,8 @@ use App\Doctrine\IEntity;
 use App\Doctrine\SimpleUuid;
 use App\Transport\ParkingLot\IParkingLot;
 use App\Transport\ParkingLot\IParkingLotOccupancy;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Ramsey\Uuid\Uuid;
 
 /**

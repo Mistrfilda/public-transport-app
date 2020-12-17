@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Transport\Prague\Stop\Stop;
 use App\Transport\Prague\StopLine\Trip\TripFactory;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Mistrfilda\Pid\Api\Trip\Trip as PIDTrip;
 use Tester\Assert;
 
@@ -22,7 +23,7 @@ $testStop = new Stop(
 $serviceId = '11112-0';
 $tripId = '113-123-11';
 $tripHeadsign = 'Testovací stanice';
-$date = new DateTimeImmutable();
+$date = new DatetimeImmutable();
 $lineNumber = '113';
 
 $trip = $tripFactory->create(
@@ -31,7 +32,7 @@ $trip = $tripFactory->create(
 	$tripId,
 	$tripHeadsign,
 	true,
-	new DateTimeImmutable(),
+	new DatetimeImmutable(),
 	$lineNumber
 );
 

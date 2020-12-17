@@ -6,7 +6,7 @@ namespace App\Transport\StopLine;
 
 use App\Transport\Stop\IStop;
 use App\Transport\Vehicle\IVehicle;
-use DateTimeImmutable;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 interface IStopLine
 {

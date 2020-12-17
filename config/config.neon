@@ -78,6 +78,9 @@ dbal:
 			uuid:
 				class: Ramsey\Uuid\Doctrine\UuidType
 				commented: false
+			datetime_immutable:
+				class: Mistrfilda\Datetime\Doctrine\DatetimeImmutableType
+				commented: false
 
 orm:
 	configuration:

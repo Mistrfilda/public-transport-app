@@ -6,8 +6,8 @@ namespace App\Transport\Prague\Statistic;
 
 use App\Doctrine\Identifier;
 use App\Doctrine\IEntity;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @ORM\Entity

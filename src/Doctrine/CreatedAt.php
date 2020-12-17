@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Doctrine;
 
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 trait CreatedAt
 {

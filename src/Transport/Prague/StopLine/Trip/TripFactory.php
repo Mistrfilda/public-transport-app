@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Transport\Prague\StopLine\Trip;
 
 use App\Transport\Prague\Stop\Stop;
-use DateTimeImmutable;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Mistrfilda\Pid\Api\Trip\Trip as PIDTrip;
 
 class TripFactory

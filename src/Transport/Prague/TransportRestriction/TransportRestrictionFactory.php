@@ -6,8 +6,8 @@ namespace App\Transport\Prague\TransportRestriction;
 
 use App\Transport\TransportRestriction\TransportRestrictionPriority;
 use App\Transport\TransportRestriction\TransportRestrictionType;
-use DateTimeImmutable;
 use Mistrfilda\Datetime\DatetimeFactory;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Mistrfilda\Pid\Api\Rss\TransportRestriction\LongTerm\LongTermTransportRestriction;
 use Mistrfilda\Pid\Api\Rss\TransportRestriction\ShortTerm\ShortTermTransportRestriction;
 
@@ -55,6 +55,13 @@ class TransportRestrictionFactory
 	public function createFromShortTermPidLibrary(
 		ShortTermTransportRestriction $shortTermTransportRestriction
 	): TransportRestriction {
+		$publishDate = null;
+		if ($shortTermTransportRestriction->getPublishedDate() !== null) {
+			$publishDate = $this->datetimeFactory->createFromTimestamp(
+				$shortTermTransportRestriction->getPublishedDate()->getTimestamp()
+			);
+		}
+
 		return $this->create(
 			$shortTermTransportRestriction->getGuid(),
 			TransportRestrictionType::SHORT_TERM,
@@ -62,7 +69,7 @@ class TransportRestrictionFactory
 			$shortTermTransportRestriction->getTitle(),
 			$shortTermTransportRestriction->getDescription(),
 			$shortTermTransportRestriction->getLink(),
-			$shortTermTransportRestriction->getPublishedDate(),
+			$publishDate,
 			null,
 			null,
 			TransportRestrictionPriority::LEVEL_1,
@@ -85,7 +92,9 @@ class TransportRestrictionFactory
 			$longTermTransportRestriction->getTitle(),
 			$longTermTransportRestriction->getDescription(),
 			$longTermTransportRestriction->getLink(),
-			$longTermTransportRestriction->getPublishedDate(),
+			$this->datetimeFactory->createFromTimestamp(
+				$longTermTransportRestriction->getPublishedDate()->getTimestamp()
+			),
 			$this->datetimeFactory->createFromTimestamp($longTermTransportRestriction->getDateFromTimestamp()),
 			$dateTo,
 			$longTermTransportRestriction->getPriority(),

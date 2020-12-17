@@ -11,9 +11,9 @@ use App\Doctrine\Uuid;
 use App\Transport\DepartureTable\IDepartureTable;
 use App\Transport\Prague\Stop\Stop;
 use App\Transport\Stop\IStop;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @ORM\Entity

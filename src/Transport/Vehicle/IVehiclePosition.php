@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Transport\Vehicle;
 
-use DateTimeImmutable;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 interface IVehiclePosition

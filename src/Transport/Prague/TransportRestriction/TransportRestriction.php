@@ -9,9 +9,9 @@ use App\Doctrine\IEntity;
 use App\Doctrine\SimpleUuid;
 use App\Doctrine\UpdatedAt;
 use App\Transport\TransportRestriction\ITransportRestriction;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use JsonException;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Nette\Utils\Json;
 use Ramsey\Uuid\Uuid;
 

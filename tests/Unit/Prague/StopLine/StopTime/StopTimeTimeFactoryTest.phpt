@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Transport\Prague\StopLine\StopTime\InvalidTimeException;
 use App\Transport\Prague\StopLine\StopTime\StopTimeTimeFactory;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Tester\Assert;
 
 require __DIR__ . '/../../../Bootstrap.php';
@@ -11,7 +12,7 @@ require __DIR__ . '/../../../Bootstrap.php';
 
 $stopTimeTimeFactory = new StopTimeTimeFactory();
 
-$date = new DateTimeImmutable();
+$date = new DatetimeImmutable();
 
 Assert::equal(
 	$date->setTime(14, 55, 0)->getTimestamp(),

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Transport\Prague\StopLine\StopTime;
 
 use App\Transport\Prague\Stop\Stop;
-use DateTimeImmutable;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Mistrfilda\Pid\Api\StopTime\StopTime as PIDStopTime;
 
 class StopTimeFactory
@@ -21,7 +21,7 @@ class StopTimeFactory
 		Stop $stop,
 		string $arrivalTime,
 		string $departureTime,
-		DateTimeImmutable $date,
+		DatetimeImmutable $date,
 		string $tripId,
 		int $stopSequence
 	): StopTime {

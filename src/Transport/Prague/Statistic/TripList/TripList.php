@@ -7,8 +7,8 @@ namespace App\Transport\Prague\Statistic\TripList;
 use App\Doctrine\Identifier;
 use App\Doctrine\IEntity;
 use App\Doctrine\UpdatedAt;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @ORM\Entity

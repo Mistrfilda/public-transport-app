@@ -6,11 +6,11 @@ namespace App\Transport\Prague\StopLine\Trip;
 
 use App\Doctrine\BaseRepository;
 use App\Doctrine\NoEntityFoundException;
-use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @extends BaseRepository<Trip>

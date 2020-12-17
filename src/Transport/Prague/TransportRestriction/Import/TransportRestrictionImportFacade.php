@@ -73,12 +73,20 @@ class TransportRestrictionImportFacade
 					$transportRestriction = $this->transportRestrictionRepository->getTransportRestrictionId(
 						$shortTermTransportRestriction->getGuid()
 					);
+
+					$publishDate = null;
+					if ($shortTermTransportRestriction->getPublishedDate() !== null) {
+						$publishDate = $this->datetimeFactory->createFromTimestamp(
+							$shortTermTransportRestriction->getPublishedDate()->getTimestamp()
+						);
+					}
+
 					$transportRestriction->update(
 						true,
 						$shortTermTransportRestriction->getTitle(),
 						$shortTermTransportRestriction->getDescription(),
 						$shortTermTransportRestriction->getLink(),
-						$shortTermTransportRestriction->getPublishedDate(),
+						$publishDate,
 						null,
 						null,
 						TransportRestrictionPriority::LEVEL_1,
@@ -144,7 +152,9 @@ class TransportRestrictionImportFacade
 						$longTermRestriction->getTitle(),
 						$longTermRestriction->getDescription(),
 						$longTermRestriction->getLink(),
-						$longTermRestriction->getPublishedDate(),
+						$this->datetimeFactory->createFromTimestamp(
+							$longTermRestriction->getPublishedDate()->getTimestamp()
+						),
 						$this->datetimeFactory->createFromTimestamp($longTermRestriction->getDateFromTimestamp()),
 						$dateTo,
 						$longTermRestriction->getPriority(),

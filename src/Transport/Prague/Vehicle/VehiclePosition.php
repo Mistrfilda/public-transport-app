@@ -9,10 +9,10 @@ use App\Doctrine\IEntity;
 use App\Doctrine\Uuid;
 use App\Transport\Cities;
 use App\Transport\Vehicle\IVehiclePosition;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @ORM\Entity

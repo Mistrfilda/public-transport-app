@@ -7,9 +7,9 @@ namespace App\Request;
 use App\Doctrine\BaseRepository;
 use App\Doctrine\NoEntityFoundException;
 use App\Transport\Prague\DepartureTable\DepartureTable;
-use DateTimeImmutable;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 
 /**
