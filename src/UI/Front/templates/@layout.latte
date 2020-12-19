@@ -44,6 +44,12 @@
     {include noContainerContent}
 {/ifset}
 
+{snippet modalComponentSnippet}
+    {if $presenter->getModalComponentName() !== null}
+        {control $presenter->getModalComponentName()}
+    {/if}
+{/snippet}
+
 {webpackJs 'admin'}
 </body>
 </html>

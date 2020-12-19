@@ -19,7 +19,7 @@ export default class googleMap {
         });
 
         let mapControl = this;
-        naja.makeRequest(
+        this.naja.makeRequest(
             'GET',
             this.mapElement.dataset.mapObjectsMethod,
             null,
@@ -33,7 +33,7 @@ export default class googleMap {
         }).catch(function (error) {
             console.log(error);
             console.log('Map objects request failed');
-        }).send();
+        });
     }
 
     initMarkers(response, map) {

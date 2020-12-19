@@ -9,8 +9,7 @@ import './customLiveFormValidation';
 import '../sbadmin/js/sb-admin-2';
 
 //Datagrid
-import 'ublaboo-datagrid'
-import 'ublaboo-datagrid/assets/datagrid-instant-url-refresh';
+import {initDatagrid, instantUrlRefresh} from './updatedDatagrid';
 import 'bootstrap-datepicker';
 import 'bootstrap-select';
 
@@ -24,7 +23,7 @@ import chart from 'chart.js';
 //Custom js
 import clock from "./clock";
 import departureTableRefresh from './departureTableRefresh';
-import modalExtension from "./modalExtension";
+import ModalExtension from "./modalExtension";
 import googleMap from './googleMapControl';
 import chartRenderer from "./chartRenderer";
 
@@ -32,8 +31,12 @@ let najaDepartureTableHandler = new departureTableRefresh(naja, $);
 let googleMapControl = new googleMap(naja, markerCluster);
 let chartRendererControl = new chartRenderer(naja, chart, $);
 
-naja.registerExtension(modalExtension, $);
-document.addEventListener('DOMContentLoaded', naja.initialize.bind(naja));
+naja.registerExtension(new ModalExtension());
+initDatagrid(naja);
+instantUrlRefresh(naja);
+document.addEventListener('DOMContentLoaded', () => {
+    naja.initialize()
+});
 
 $(document).ready(function () {
     initCustomJs();
