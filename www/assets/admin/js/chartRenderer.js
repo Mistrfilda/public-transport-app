@@ -157,7 +157,7 @@ export default class chartRenderer {
     }
 
     fetchData(element) {
-        return naja.makeRequest(
+        return this.naja.makeRequest(
             'GET',
             element.attr('data-chart-method'),
             null,
