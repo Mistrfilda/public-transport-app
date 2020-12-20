@@ -89,7 +89,7 @@
 		"test-unit": "vendor/bin/tester tests/Unit -C",
 		"test-integration": "vendor/bin/tester tests/Integration -C",
 		"orm-validate": "bin/console orm:validate-schema --ansi",
-		"clear": "rm -rf temp/cache/*",
+		"clear": "rm -rf temp/proxies/* temp/cache/*",
 		"migration-migrate": "bin/console migrations:migrate --no-interaction",
 		"rabbit-declare": "bin/console rabbitmq:declareQueuesAndExchanges",
 		"webpack": "yarn encore prod",
