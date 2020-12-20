@@ -6,9 +6,7 @@ namespace App\Transport\Prague\Request\RabbitMQ\DepartureTable;
 
 use App\Request\Request;
 use App\Request\RequestRepository;
-use App\Transport\Prague\DepartureTable\DepartureTableRepository;
-use App\Transport\Prague\StopLine\StopTime\Import\StopTimeImportFacade;
-use App\Transport\Prague\StopLine\Trip\Import\TripImportFacade;
+use App\Transport\Prague\DepartureTable\DepartureTableStopLineFacade;
 use App\Utils\MonologHelper;
 use Bunny\Message;
 use Contributte\RabbitMQ\Consumer\IConsumer;
@@ -25,34 +23,26 @@ class DepartureTableConsumer implements IConsumer
 {
 	private LoggerInterface $logger;
 
-	private StopTimeImportFacade $stopTimeImportFacade;
-
-	private TripImportFacade $tripImportFacade;
-
-	private DepartureTableRepository $departureTableRepository;
-
 	private RequestRepository $requestRepository;
 
 	private EntityManagerInterface $entityManager;
 
 	private DatetimeFactory $datetimeFactory;
 
+	private DepartureTableStopLineFacade $departureTableStopLineFacade;
+
 	public function __construct(
 		LoggerInterface $logger,
-		StopTimeImportFacade $stopTimeImportFacade,
-		TripImportFacade $tripImportFacade,
-		DepartureTableRepository $departureTableRepository,
 		RequestRepository $requestRepository,
 		EntityManagerInterface $entityManager,
-		DatetimeFactory $datetimeFactory
+		DatetimeFactory $datetimeFactory,
+		DepartureTableStopLineFacade $departureTableStopLineFacade
 	) {
 		$this->logger = $logger;
-		$this->stopTimeImportFacade = $stopTimeImportFacade;
-		$this->tripImportFacade = $tripImportFacade;
-		$this->departureTableRepository = $departureTableRepository;
 		$this->requestRepository = $requestRepository;
 		$this->entityManager = $entityManager;
 		$this->datetimeFactory = $datetimeFactory;
+		$this->departureTableStopLineFacade = $departureTableStopLineFacade;
 	}
 
 	public function consume(Message $message): int
@@ -66,18 +56,8 @@ class DepartureTableConsumer implements IConsumer
 
 			$request = $this->requestRepository->findById($messageContents['requestId']);
 
-			$departureTable = $this->departureTableRepository->findById(
+			$this->departureTableStopLineFacade->downloadStoplinesForDepartureTable(
 				Uuid::fromString($messageContents['departureTableId'])
-			);
-
-			$this->stopTimeImportFacade->import(
-				$departureTable->getPragueStop()->getId(),
-				$departureTable->getNumberOfFutureDays()
-			);
-
-			$this->tripImportFacade->import(
-				$departureTable->getPragueStop()->getId(),
-				$departureTable->getNumberOfFutureDays()
 			);
 
 			$this->logger->info('Departure table request successfully finished', $messageContents);

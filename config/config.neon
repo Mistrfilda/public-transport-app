@@ -81,6 +81,9 @@ dbal:
 			datetime_immutable:
 				class: Mistrfilda\Datetime\Doctrine\DatetimeImmutableType
 				commented: false
+			date_immutable:
+				class: Mistrfilda\Datetime\Doctrine\DateImmutableType
+				commented: false
 
 orm:
 	configuration:
@@ -212,6 +215,8 @@ services:
 	- App\Transport\Prague\DepartureTable\DepartureTableFacade
 	- App\Transport\Prague\DepartureTable\DepartureTableRepository(App\Transport\Prague\DepartureTable\DepartureTable)
 	- App\Transport\Prague\DepartureTable\DepartureTableStopLinesFactory
+	- App\Transport\Prague\DepartureTable\Command\ImportDepartureTableStopLinesCommand
+	- App\Transport\Prague\DepartureTable\DepartureTableStopLineFacade
 
 	- App\UI\Admin\Prague\PragueDepartureTable\Datagrid\DepartureTableDatagridFactory
 	- App\UI\Admin\Prague\PragueDepartureTable\Form\DepartureTableFormFactory
@@ -219,6 +224,7 @@ services:
 
 	- App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListControlFactory
 	- App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListDataFactory
+
 
 	#REQUEST
 	- App\Request\RequestRepository(App\Request\Request)

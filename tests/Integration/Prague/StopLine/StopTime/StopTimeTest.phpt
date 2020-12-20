@@ -97,6 +97,11 @@ class StopTimeTest extends BaseTest
 			$stopTimes[4]
 		);
 
+		Assert::same(
+			$this->today->addDaysToDatetime(1)->getTimestamp(),
+			$stopTimes[4]->getDate()->getTimestamp()
+		);
+
 		$this->assertStopTime(
 			new StopTime(
 				$this->testStop,
@@ -108,6 +113,17 @@ class StopTimeTest extends BaseTest
 			),
 			$stopTimes[5]
 		);
+
+		Assert::same(
+			$this->today->addDaysToDatetime(1)->getTimestamp(),
+			$stopTimes[5]->getDate()->getTimestamp()
+		);
+
+		$departureTableValues = $this->stopTimeRepository->findForDepartureTable(
+			$this->testStop->getId(), $this->now
+		);
+
+		Assert::count(4, $departureTableValues);
 	}
 
 	protected function setUp(): void
