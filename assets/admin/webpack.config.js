@@ -9,11 +9,11 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 var publicPath = '/public-transport-app/www/build';
 var prodHost = process.env.PROD_HOST;
 if (prodHost !== undefined) {
-    publicPath = '/build';
+    publicPath = 'www/build';
 }
 
 Encore
-    .setOutputPath('www/build/')
+    .setOutputPath('../../www/build/')
     .setPublicPath(publicPath)
 
     // .enableEslintLoader()
@@ -26,7 +26,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('admin', './www/assets/admin/js/app.js')
+    .addEntry('admin', './js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
