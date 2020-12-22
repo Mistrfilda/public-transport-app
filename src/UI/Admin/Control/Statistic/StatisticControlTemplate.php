@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Shared\Statistic\Control;
+namespace App\UI\Admin\Control\Statistic;
 
 use App\UI\Front\Homepage\HomepagePresenter;
 use App\UI\Shared\Statistic\Statistic;

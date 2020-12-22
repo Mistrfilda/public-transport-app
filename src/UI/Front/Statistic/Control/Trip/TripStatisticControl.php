@@ -9,12 +9,12 @@ use App\Transport\Prague\Statistic\ChartDataProvider\TripStatisticDelayChartData
 use App\Transport\Prague\Statistic\ChartDataProvider\TripStatisticVehicleRegistrationChartDataProvider;
 use App\Transport\Prague\Statistic\TripStatisticData;
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
+use App\UI\Admin\Control\Statistic\Chart\ChartControl;
+use App\UI\Admin\Control\Statistic\Chart\ChartControlFactory;
 use App\UI\Front\Base\BaseControl;
 use App\UI\Front\Base\FrontDatagrid;
 use App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory;
 use App\UI\Shared\Statistic\Chart\ChartType;
-use App\UI\Shared\Statistic\Chart\Control\ChartControl;
-use App\UI\Shared\Statistic\Chart\Control\ChartControlFactory;
 use App\UI\Shared\Statistic\Statistic;
 use Doctrine\ORM\NoResultException;
 use Mistrfilda\Datetime\DatetimeFactory;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Shared\Statistic\Chart\Control;
+namespace App\UI\Admin\Control\Statistic\Chart;
 
 use App\UI\Shared\Statistic\Chart\IChartDataProvider;
 

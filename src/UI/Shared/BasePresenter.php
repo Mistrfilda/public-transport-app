@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Shared;
 
-use App\UI\Shared\Modal\ModalRendererControl;
-use App\UI\Shared\Modal\ModalRendererControlFactory;
+use App\UI\Admin\Control\Modal\ModalRendererControl;
+use App\UI\Admin\Control\Modal\ModalRendererControlFactory;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
 use Nette\Utils\IHtmlString;
