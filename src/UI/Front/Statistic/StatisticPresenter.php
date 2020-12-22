@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Statistic;
 
+use App\UI\Admin\Control\Statistic\StatisticControl;
+use App\UI\Admin\Control\Statistic\StatisticControlFactory;
 use App\UI\Front\Base\InvalidArgumentException;
 use App\UI\Front\FrontPresenter;
 use App\UI\Front\Statistic\Control\Main\MainStatisticControl;
 use App\UI\Front\Statistic\Control\Main\MainStatisticControlFactory;
 use App\UI\Front\Statistic\Control\Trip\TripStatisticControl;
 use App\UI\Front\Statistic\Control\Trip\TripStatisticControlFactory;
-use App\UI\Shared\Statistic\Control\StatisticControl;
-use App\UI\Shared\Statistic\Control\StatisticControlFactory;
 
 class StatisticPresenter extends FrontPresenter
 {

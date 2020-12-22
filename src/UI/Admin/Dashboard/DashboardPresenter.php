@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\UI\Admin\Dashboard;
 
 use App\UI\Admin\AdminPresenter;
-use App\UI\Shared\Statistic\Control\StatisticControl;
-use App\UI\Shared\Statistic\Control\StatisticControlFactory;
+use App\UI\Admin\Control\Statistic\StatisticControl;
+use App\UI\Admin\Control\Statistic\StatisticControlFactory;
 
 class DashboardPresenter extends AdminPresenter
 {

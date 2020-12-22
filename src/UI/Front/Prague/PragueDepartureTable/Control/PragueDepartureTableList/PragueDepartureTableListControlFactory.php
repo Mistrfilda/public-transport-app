@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Shared\PragueDepartureTable\Control;
+namespace App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList;
 
 interface PragueDepartureTableListControlFactory
 {

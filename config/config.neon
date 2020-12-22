@@ -155,7 +155,7 @@ services:
 	- App\UI\Admin\Base\AdminDatagridFactory
 
 	#Modal
-	- App\UI\Shared\Modal\ModalRendererControlFactory
+	- App\UI\Admin\Control\Modal\ModalRendererControlFactory
 
 	#AppAdmin
 	- App\Admin\AppAdminRepository(App\Admin\AppAdmin)
@@ -224,8 +224,8 @@ services:
 	- App\UI\Admin\Prague\PragueDepartureTable\Form\DepartureTableFormFactory
 	- App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControlFactory
 
-	- App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListControlFactory
-	- App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListDataFactory
+	- App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList\PragueDepartureTableListControlFactory
+	- App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList\PragueDepartureTableListDataFactory
 
 
 	#REQUEST
@@ -237,18 +237,18 @@ services:
 	- App\Request\RabbitMQ\MessageFactory
 
 	#Statistic
-	- App\UI\Shared\Statistic\Control\StatisticControlFactory
+	- App\UI\Admin\Control\Statistic\StatisticControlFactory
 	- App\Transport\Prague\Statistic\TripStatisticFacade
 	- App\Transport\Prague\Statistic\Command\GenerateTripStatisticCommand
 	- App\Transport\Prague\Statistic\TripStatisticDataRepository(App\Transport\Prague\Statistic\TripStatisticData)
 	- App\UI\Admin\Prague\PragueStatistic\Datagrid\StatisticDatagridFactory
-	- App\UI\Shared\Statistic\Modal\TripStatisticModalRendererControlFactory
+	- App\UI\Admin\Control\Statistic\Modal\TripStatisticModalRendererControlFactory
 	- App\UI\Front\Statistic\Control\Trip\TripStatisticControlFactory
 	- App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory
 	- App\UI\Front\Statistic\Control\Main\MainStatisticControlFactory
 	- App\UI\Front\Statistic\Datagrid\Trip\RouteStatisticDatagridFactory
 
-	- App\UI\Shared\Statistic\Chart\Control\ChartControlFactory
+	- App\UI\Admin\Control\Statistic\Chart\ChartControlFactory
 
 	- App\Transport\Prague\Statistic\TripList\TripListRepository(App\Transport\Prague\Statistic\TripList\TripList)
 	- App\Transport\Prague\Statistic\TripList\TripListFacade

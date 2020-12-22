@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Shared\Modal;
+namespace App\UI\Admin\Control\Modal;
 
 interface ModalRendererControlFactory
 {

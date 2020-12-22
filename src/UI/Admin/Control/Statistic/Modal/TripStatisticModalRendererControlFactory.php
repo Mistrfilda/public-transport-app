@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Shared\Statistic\Modal;
+namespace App\UI\Admin\Control\Statistic\Modal;
 
 interface TripStatisticModalRendererControlFactory
 {

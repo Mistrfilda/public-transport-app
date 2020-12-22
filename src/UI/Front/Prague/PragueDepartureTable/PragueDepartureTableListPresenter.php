@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\UI\Front\Prague\PragueDepartureTable;
 
 use App\UI\Front\FrontPresenter;
-use App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListControl;
-use App\UI\Shared\PragueDepartureTable\Control\PragueDepartureTableListControlFactory;
+use App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList\PragueDepartureTableListControl;
+use App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList\PragueDepartureTableListControlFactory;
 
 class PragueDepartureTableListPresenter extends FrontPresenter
 {

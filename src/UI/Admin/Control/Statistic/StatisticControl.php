@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Shared\Statistic\Control;
+namespace App\UI\Admin\Control\Statistic;
 
 use App\Request\RequestRepository;
 use App\Transport\Prague\Parking\ParkingLotOccupancyRepository;

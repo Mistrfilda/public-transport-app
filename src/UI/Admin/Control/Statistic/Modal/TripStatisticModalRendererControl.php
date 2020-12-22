@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Shared\Statistic\Modal;
+namespace App\UI\Admin\Control\Statistic\Modal;
 
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
-use App\UI\Shared\Modal\ModalRendererControl;
+use App\UI\Admin\Control\Modal\ModalRendererControl;
 
 class TripStatisticModalRendererControl extends ModalRendererControl
 {
