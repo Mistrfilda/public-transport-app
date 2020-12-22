@@ -43,7 +43,9 @@ extensions:
 	custompresenterfactory: App\UI\PresenterFactory\DI\CustomPresenterFactoryExtension
 
 webpackassets:
-	buildedAssetsDir: %wwwDir%/build
+	assetsDirs:
+		- %wwwDir%/build/admin
+		- %wwwDir%/build/front
 
 custompresenterfactory:
 	presenterDir: %appDir%

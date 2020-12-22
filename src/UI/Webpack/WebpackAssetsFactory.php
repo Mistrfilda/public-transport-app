@@ -12,21 +12,27 @@ class WebpackAssetsFactory
 {
 	private const ENTRYPOINT_NAME = 'entrypoints.json';
 
-	private string $buildedAssetsDir;
+	/** @var string[] */
+	private array $assetsDirs;
 
 	/** @var string[] */
-	private ?array $loadedAssets = null;
+	private array $loadedAssets = [];
 
-	public function __construct(string $buildedAssetsDir)
+	/**
+	 * @param string[] $assetsDirs
+	 */
+	public function __construct(array $assetsDirs)
 	{
-		$this->buildedAssetsDir = $buildedAssetsDir;
+		$this->assetsDirs = $assetsDirs;
 	}
 
 	public function getCssAssets(string $entryName): string
 	{
 		$assets = $this->loadAssets();
-		if (! array_key_exists($entryName, $assets)) {
-			throw new WebpackException('Unknown entry name "' . $entryName . '"');
+		if (array_key_exists($entryName, $assets) === false) {
+			throw new WebpackException(
+				sprintf('Unknown entry name %s', $entryName)
+			);
 		}
 
 		$cssAssets = [];
@@ -47,8 +53,10 @@ class WebpackAssetsFactory
 	public function getJsAssets(string $entryName): string
 	{
 		$assets = $this->loadAssets();
-		if (! array_key_exists($entryName, $assets)) {
-			throw new WebpackException('Unknown entry name "' . $entryName . '"');
+		if (array_key_exists($entryName, $assets) === false) {
+			throw new WebpackException(
+				sprintf('Unknown entry name %s', $entryName)
+			);
 		}
 
 		$jsAssets = [];
@@ -71,12 +79,25 @@ class WebpackAssetsFactory
 	 */
 	private function loadAssets(): array
 	{
-		if ($this->loadedAssets !== null) {
+		if (count($this->loadedAssets) > 0) {
 			return $this->loadedAssets;
 		}
 
-		$entryPointContets = FileSystem::read($this->buildedAssetsDir . '/' . self::ENTRYPOINT_NAME);
-		$this->loadedAssets = Json::decode($entryPointContets, Json::FORCE_ARRAY)['entrypoints'];
+		foreach ($this->assetsDirs as $assetDir) {
+			$entryPointContents = FileSystem::read($assetDir . '/' . self::ENTRYPOINT_NAME);
+			$decodedContents = Json::decode($entryPointContents, Json::FORCE_ARRAY)['entrypoints'];
+
+			foreach ($decodedContents as $entryPointName => $contents) {
+				if (array_key_exists($entryPointName, $this->loadedAssets)) {
+					throw new WebpackException(
+						sprintf('Duplicate entry name %s', $entryPointName)
+					);
+				}
+
+				$this->loadedAssets[$entryPointName] = $contents;
+			}
+		}
+
 		return $this->loadedAssets;
 	}
 }

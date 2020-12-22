@@ -16,24 +16,20 @@ class WebpackAssetExtension extends CompilerExtension
 	public function getConfigSchema(): Schema
 	{
 		return Expect::structure([
-			'buildedAssetsDir' => Expect::string(),
+			'assetsDirs' => Expect::arrayOf(Expect::string()),
 		])->castTo('array');
 	}
 
 	public function loadConfiguration(): void
 	{
+		/** @var array<string, string> $config */
 		$config = $this->getConfig();
-
-		if (! is_array($config)) {
-			$config = (array) $config;
-		}
-
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('webpackAssetFactory'))
 			->setType(WebpackAssetsFactory::class)
 			->setArguments([
-				'buildedAssetsDir' => $config['buildedAssetsDir'],
+				'assetsDirs' => $config['assetsDirs'],
 			]);
 	}
 
