@@ -2,8 +2,13 @@ vendor/*
 config/config.local.neon
 .idea/
 
-www/build/*
+
+www/build/admin/*
+www/build/front/*
 yarn-error.log
+
+!www/build/admin/.gitkeep
+!www/build/front/.gitkeep
 
 node_modules/*
 
