@@ -120,10 +120,10 @@ class StopTimeTest extends BaseTest
 		);
 
 		$departureTableValues = $this->stopTimeRepository->findForDepartureTable(
-			$this->testStop->getId(), $this->now
+			$this->testStop->getId(), $this->now->deductDaysFromDatetime(3)
 		);
 
-		Assert::count(4, $departureTableValues);
+		Assert::count(6, $departureTableValues);
 	}
 
 	protected function setUp(): void
