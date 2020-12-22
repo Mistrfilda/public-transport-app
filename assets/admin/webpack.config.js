@@ -1,19 +1,18 @@
 var Encore = require('@symfony/webpack-encore');
-const path = require('path');
 require('dotenv').config();
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
 
-var publicPath = '/public-transport-app/www/build';
+var publicPath = '/public-transport-app/www/build/admin';
 var prodHost = process.env.PROD_HOST;
 if (prodHost !== undefined) {
-    publicPath = 'www/build';
+    publicPath = 'www/build/admin';
 }
 
 Encore
-    .setOutputPath('../../www/build/')
+    .setOutputPath('../../www/build/admin')
     .setPublicPath(publicPath)
 
     // .enableEslintLoader()
