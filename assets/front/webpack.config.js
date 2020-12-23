@@ -17,7 +17,7 @@ Encore
     .addEntry('front', './ts/app.ts')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
-    .cleanupOutputBeforeBuild()
+    .cleanupOutputBeforeBuild(['**/*', '!.gitkeep'])
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
