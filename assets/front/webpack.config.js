@@ -8,7 +8,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 var publicPath = '/public-transport-app/www/build/front';
 var prodHost = process.env.PROD_HOST;
 if (prodHost !== undefined) {
-    publicPath = 'www/build/front';
+    publicPath = '/build/front';
 }
 
 Encore
