@@ -35,6 +35,12 @@ class WebpackAssetsFactory
 			);
 		}
 
+		if (array_key_exists('css', $assets[$entryName]) === false) {
+			throw new WebpackException(
+				sprintf('Missing css assets for entry %s', $entryName)
+			);
+		}
+
 		$cssAssets = [];
 		foreach ($assets[$entryName]['css'] as $cssAsset) {
 			$link = Html::el('link')->addAttributes(
@@ -56,6 +62,12 @@ class WebpackAssetsFactory
 		if (array_key_exists($entryName, $assets) === false) {
 			throw new WebpackException(
 				sprintf('Unknown entry name %s', $entryName)
+			);
+		}
+
+		if (array_key_exists('js', $assets[$entryName]) === false) {
+			throw new WebpackException(
+				sprintf('Missing js assets for entry %s', $entryName)
 			);
 		}
 
