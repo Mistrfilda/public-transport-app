@@ -17,3 +17,9 @@ assets/front/node_modules/*
 
 tests/Integration/config/tests.local.neon
 tests/log/*
+
+#phpstorm tailwindcss support
+tailwind.config.js
+package.json
+postcss.config.js
+yarn.lock
