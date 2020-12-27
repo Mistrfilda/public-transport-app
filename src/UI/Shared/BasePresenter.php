@@ -7,6 +7,7 @@ namespace App\UI\Shared;
 use App\UI\Admin\Control\Modal\ModalRendererControl;
 use App\UI\Admin\Control\Modal\ModalRendererControlFactory;
 use Nette\Application\BadRequestException;
+use Nette\Application\UI\InvalidLinkException;
 use Nette\Application\UI\Presenter;
 use Nette\Utils\IHtmlString;
 
@@ -85,5 +86,20 @@ abstract class BasePresenter extends Presenter
 		}
 
 		return (string) $id;
+	}
+
+	/**
+	 * @param string[] $links
+	 * @throws InvalidLinkException
+	 */
+	public function isMenuLinkActive(array $links): bool
+	{
+		foreach ($links as $link) {
+			if ($this->isLinkCurrent($link)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

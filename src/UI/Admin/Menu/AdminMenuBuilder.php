@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\UI\Admin\Menu;
 
-class MenuBuilder
+use App\UI\Shared\Menu\MenuGroup;
+use App\UI\Shared\Menu\MenuItem;
+
+
+class AdminMenuBuilder
 {
 	/**
 	 * @return MenuGroup[]

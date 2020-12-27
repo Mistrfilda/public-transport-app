@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\UI\Admin;
 
 use App\Admin\CurrentAppAdminGetter;
-use App\UI\Admin\Menu\MenuBuilder;
+use App\UI\Admin\Menu\AdminMenuBuilder;
 use App\UI\Shared\BasePresenter;
-use Nette\Application\UI\InvalidLinkException;
 
 abstract class AdminPresenter extends BasePresenter
 {
@@ -26,7 +25,7 @@ abstract class AdminPresenter extends BasePresenter
 		}
 
 		$this->template->appAdmin = $this->currentAppAdminGetter->getAppAdmin();
-		$this->template->menuItems = (new MenuBuilder())->buildMenu();
+		$this->template->menuItems = (new AdminMenuBuilder())->buildMenu();
 	}
 
 	/**
@@ -41,20 +40,5 @@ abstract class AdminPresenter extends BasePresenter
 	{
 		$this->currentAppAdminGetter->logout();
 		$this->redirect('this');
-	}
-
-	/**
-	 * @param string[] $links
-	 * @throws InvalidLinkException
-	 */
-	public function isMenuLinkActive(array $links): bool
-	{
-		foreach ($links as $link) {
-			if ($this->isLinkCurrent($link)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 }

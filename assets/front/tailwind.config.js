@@ -1,4 +1,5 @@
 const colors = require("tailwindcss/colors");
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   future: {
@@ -46,7 +47,10 @@ module.exports = {
         "light-blue": colors.lightBlue,
         emerald: colors.emerald,
         teal: colors.teal
-      }
+      },
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
     }
   },
   variants: {
