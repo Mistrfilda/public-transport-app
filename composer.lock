@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77e80b0039dd80e43a5ce068ecfeb72e",
+    "content-hash": "e17cc998d5651bce7d812bc07ea97835",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -383,16 +383,16 @@
         },
         {
             "name": "contributte/di",
-            "version": "v0.5.0",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/contributte/di.git",
-                "reference": "09956b9a43d01b6204ed6b339d79c6c0bb44a28a"
+                "reference": "534fdb5e85b4ae01f8f848fc4b752deb8458ed7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/contributte/di/zipball/09956b9a43d01b6204ed6b339d79c6c0bb44a28a",
-                "reference": "09956b9a43d01b6204ed6b339d79c6c0bb44a28a",
+                "url": "https://api.github.com/repos/contributte/di/zipball/534fdb5e85b4ae01f8f848fc4b752deb8458ed7c",
+                "reference": "534fdb5e85b4ae01f8f848fc4b752deb8458ed7c",
                 "shasum": ""
             },
             "require": {
@@ -401,14 +401,14 @@
                 "php": ">=7.2"
             },
             "conflict": {
-                "nette/di": "<3.0.0"
+                "nette/di": "<3.0.0",
+                "nette/schema": "<1.1.0"
             },
             "require-dev": {
                 "nette/bootstrap": "~3.0.0",
                 "nette/robot-loader": "^3.0.4",
-                "ninjify/nunjuck": "^0.4.0",
-                "ninjify/qa": "^0.12.0",
-                "phpstan/extension-installer": "^1.0",
+                "ninjify/nunjuck": "^0.4",
+                "ninjify/qa": "^0.12",
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-deprecation-rules": "^0.12",
                 "phpstan/phpstan-nette": "^0.12",
@@ -448,9 +448,9 @@
             ],
             "support": {
                 "issues": "https://github.com/contributte/di/issues",
-                "source": "https://github.com/contributte/di/tree/v0.5.0"
+                "source": "https://github.com/contributte/di/tree/v0.5.1"
             },
-            "time": "2020-12-06T15:10:07+00:00"
+            "time": "2020-12-26T17:02:42+00:00"
         },
         {
             "name": "contributte/monolog",
@@ -5717,16 +5717,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.8.0-RC",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "9dbaf51f48362114f3dc1cdfbb834dee2b618f09"
+                "reference": "24af254df194635b4a80980ad885da7e8f0b90f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/9dbaf51f48362114f3dc1cdfbb834dee2b618f09",
-                "reference": "9dbaf51f48362114f3dc1cdfbb834dee2b618f09",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/24af254df194635b4a80980ad885da7e8f0b90f0",
+                "reference": "24af254df194635b4a80980ad885da7e8f0b90f0",
                 "shasum": ""
             },
             "require": {
@@ -5785,9 +5785,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/tracy/issues",
-                "source": "https://github.com/nette/tracy/tree/v2.8.0-RC"
+                "source": "https://github.com/nette/tracy/tree/v2.8.0"
             },
-            "time": "2020-12-10T03:26:02+00:00"
+            "time": "2020-12-16T23:28:40+00:00"
         },
         {
             "name": "ublaboo/datagrid",
@@ -7030,7 +7030,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "tracy/tracy": 5,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,

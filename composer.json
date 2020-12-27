@@ -28,7 +28,7 @@
 		"nette/security": "^3.0",
 		"nette/utils": "^3.0",
 		"latte/latte": "^2.7",
-		"tracy/tracy": "v2.8.0-RC",
+		"tracy/tracy": "^2.8",
 		"contributte/console": "^0.9.0",
 		"nettrine/orm": "^0.8.0",
 		"nettrine/dbal": "^0.7.0",
