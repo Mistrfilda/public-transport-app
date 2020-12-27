@@ -45,7 +45,7 @@ extensions:
 webpackassets:
 	assetsDirs:
 		- %wwwDir%/build/admin
-#		- %wwwDir%/build/front
+		- %wwwDir%/build/front
 
 custompresenterfactory:
 	presenterDir: %appDir%

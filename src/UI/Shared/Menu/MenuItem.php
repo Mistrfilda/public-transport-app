@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\Menu;
+namespace App\UI\Shared\Menu;
 
 class MenuItem
 {

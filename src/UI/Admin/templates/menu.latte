@@ -12,9 +12,9 @@
 
     <hr class="sidebar-divider my-0">
 
-    {varType App\UI\Admin\Menu\MenuGroup $menuGroup}
-    {varType App\UI\Admin\Menu\MenuItem $menuItem}
-    {varType App\UI\Admin\Menu\MenuItem $menuItemChildren}
+    {varType App\UI\Shared\Menu\MenuGroup $menuGroup}
+    {varType App\UI\Shared\Menu\MenuItem $menuItem}
+    {varType App\UI\Shared\Menu\MenuItem $menuItemChildren}
     {foreach $menuItems as $menuGroup}
         {if $menuGroup->shouldShowLabel()}
             <!-- Heading -->
@@ -23,7 +23,7 @@
             </div>
         {/if}
 
-        {foreach $menuGroup->getMenuItems() as $menuItem}
+        {foreach $menuGroup->g§etMenuItems() as $menuItem}
             {if $menuItem->isNested()}
                 {var $isMenuLinkActive = $presenter->isMenuLinkActive($menuItem->getActiveLinks())}
                 <li n:class="nav-item, $isMenuLinkActive ? active">

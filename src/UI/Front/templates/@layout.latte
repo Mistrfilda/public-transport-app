@@ -1,3 +1,4 @@
+{templateType App\UI\Front\templates\FrontLayoutTemplate}
 <!DOCTYPE html>
 <html>
 
@@ -7,38 +8,137 @@
 
     {include '@favicon.latte'}
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
     <title>Public transport app</title>
-    {webpackCss 'admin'}
+    {webpackCss 'front'}
 </head>
 
 <body>
-<nav class="navbar sticky-top navbar-dark bg-primary navbar-expand-md">
-    <a class="navbar-brand" n:href="Homepage:default"><i class="fas fa-bus rotate-n-15 pr-2"></i> Public transport</a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#app--navbar" aria-controls="app--navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div>
+    <div class="bg-gray-800 pb-32">
+        <nav
+                class="bg-gray-800"
+                x-data="frontMenu()"
+        >
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="border-b border-gray-700">
+                    <div class="flex items-center justify-between h-16 px-4 sm:px-0">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 text-white">
+                                <i class="fas fa-bus fa-2x"></i>
+                            </div>
+                            <div class="hidden md:block">
+                                <div class="ml-10 flex items-baseline space-x-4">
+                                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                                    {foreach $menuItems as $menuItem}
+                                        {if $presenter->isMenuLinkActive($menuItem->getActiveLinks())}
+                                            <a n:href="$menuItem->getLink()"
+                                                    class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">{$menuItem->getLabel()}</a>
+                                        {else}
+                                            <a n:href="$menuItem->getLink()"
+                                                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{$menuItem->getLabel()}</a>
+                                        {/if}
+                                    {/foreach}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="-mr-2 flex md:hidden">
+                            <!-- Mobile menu button -->
+                            <button
+                                    x-on:click="click"
+                                    class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                            >
+                                <span class="sr-only">Open main menu</span>
+                                <svg
+                                        x-bind:class="{'hidden': show, 'block': !show}"
+                                        class="h-6 w-6 block"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M4 6h16M4 12h16M4 18h16"/>
+                                </svg>
+                                <svg
+                                        x-bind:class="{'block': show, 'hidden': !show}"
+                                        class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="collapse navbar-collapse justify-content-end" id="app--navbar">
-        <div class="navbar-nav">
-            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('Homepage:*') ? active" n:href="Homepage:default">Hlavní stránka</a>
-            <a n:class="nav-item, nav-link,
-            ($presenter->isLinkCurrent('PragueDepartureTableList:*') || $presenter->isLinkCurrent('PragueDepartureTable:*')) ? active" n:href="PragueDepartureTableList:default">Odjezdové tabule</a>
-            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('Map:*') ? active" n:href="Map:default">Mapa vozidel</a>
-            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('PragueTransportRestriction:*') ? active" n:href="PragueTransportRestriction:default">Mimořádnosti</a>
-            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('PragueParkingLot:*') ? active" n:href="PragueParkingLot:default">Parkoviště</a>
-            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('Statistic:*') ? active" n:href="Statistic:default">Statistiky</a>
+            <!--
+              Mobile menu, toggle classes based on menu state.
+
+              Open: "block", closed: "hidden"
+            -->
+            <div
+                    x-bind:class="{'block': show, 'hidden': !show}"
+                    class="border-b border-gray-700 md:hidden hidden"
+            >
+                <div class="px-2 py-3 space-y-1 sm:px-3">
+                    {foreach $menuItems as $menuItem}
+                        {if $presenter->isMenuLinkActive($menuItem->getActiveLinks())}
+                            <a n:href="$menuItem->getLink()"
+                                    class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">{$menuItem->getLabel()}</a>
+                        {else}
+                            <a n:href="$menuItem->getLink()"
+                                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">{$menuItem->getLabel()}</a>
+                        {/if}
+                    {/foreach}
+                </div>
+            </div>
+        </nav>
+        {ifset header}
+            {include header}
+        {/ifset}
+    </div>
+
+    <main class="-mt-32">
+        <div class="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-lg shadow px-5 py-6 sm:px-6">
+                {ifset content}
+                    {include content}
+                {/ifset}
+            </div>
         </div>
-    </div>
-</nav>
+    </main>
+</div>
 
-{ifset content}
-    <div class="container-fluid px-2 overflow-hidden bg-gray-300">
-        {include content}
-    </div>
-{/ifset}
+
+{*<nav class="navbar sticky-top navbar-dark bg-primary navbar-expand-md">*}
+{*    <a class="navbar-brand" n:href="Homepage:default"><i class="fas fa-bus rotate-n-15 pr-2"></i> Public transport</a>*}
+
+{*    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#app--navbar" aria-controls="app--navbar" aria-expanded="false" aria-label="Toggle navigation">*}
+{*        <span class="navbar-toggler-icon"></span>*}
+{*    </button>*}
+
+{*    <div class="collapse navbar-collapse justify-content-end" id="app--navbar">*}
+{*        <div class="navbar-nav">*}
+{*            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('Homepage:*') ? active" n:href="Homepage:default">Hlavní stránka</a>*}
+{*            <a n:class="nav-item, nav-link,*}
+{*            ($presenter->isLinkCurrent('PragueDepartureTableList:*') || $presenter->isLinkCurrent('PragueDepartureTable:*')) ? active" n:href="PragueDepartureTableList:default">Odjezdové tabule</a>*}
+{*            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('Map:*') ? active" n:href="Map:default">Mapa vozidel</a>*}
+{*            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('PragueTransportRestriction:*') ? active" n:href="PragueTransportRestriction:default">Mimořádnosti</a>*}
+{*            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('PragueParkingLot:*') ? active" n:href="PragueParkingLot:default">Parkoviště</a>*}
+{*            <a n:class="nav-item, nav-link, $presenter->isLinkCurrent('Statistic:*') ? active" n:href="Statistic:default">Statistiky</a>*}
+{*        </div>*}
+{*    </div>*}
+{*</nav>*}
+
+{*{ifset content}*}
+{*    <div class="container-fluid px-2 overflow-hidden bg-gray-300">*}
+{*        {include content}*}
+{*    </div>*}
+{*{/ifset}*}
 
 {ifset noContainerContent}
     {include noContainerContent}
@@ -50,6 +150,6 @@
     {/if}
 {/snippet}
 
-{webpackJs 'admin'}
+{webpackJs 'front'}
 </body>
 </html>
