@@ -7,14 +7,12 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": ".",
+    "baseUrl": "./types",
+    "typeRoots": ["./types", "./node_modules/@types"],
     "paths": {
       "*": [
         "node_modules/*"
       ]
     }
-  },
-  "include": [
-    "ts/*"
-  ]
+  }
 }
