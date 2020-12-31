@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App\UI\Front\Homepage;
 
@@ -68,7 +68,7 @@ class HomepagePresenter extends FrontPresenter
 	protected function createComponentPragueDepartureTableListControl(): PragueDepartureTableListControl
 	{
 		$control = $this->pragueDepartureTableListControlFactory->create();
-		$control->setAdditionalParameters('Vybrané odjezdové tabule', 3);
+		$control->setAdditionalParameters('Vybrané odjezdové tabule', 2);
 		return $control;
 	}
 
