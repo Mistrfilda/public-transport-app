@@ -1,56 +1,46 @@
 {varType App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList\PragueDepartureTableListData[] $departureTableData}
 {foreach $departureTableData as $departureTable}
-    <div class="col-md-12 mb-3 mt-1 px-2 py-1">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters">
-                    <div class="col-md-12 d-flex justify-content-between align-items-center">
-                        <div class="font-weight-bold text-gray-800 text-uppercase text-lg">
-                            {$departureTable->getDepartureTable()->getPragueStop()->getFormattedName()}
-                        </div>
-                        <div>
-                            <i class="fa fa-bus fa-2x text-primary"></i>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 d-flex justify-content-between align-content-center">
-                        <div>
-                            {foreach $departureTable->getLines() as $line}
-                                <span class="badge badge-dark">{$line}</span>
-                            {/foreach}
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <hr>
-                    </div>
-
-                    <div class="col-md-12 d-flex justify-content-between">
-                        <div>
-                            {$departureTable->getDestinations()}
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <hr>
-                    </div>
-
-                    <div class="col-md-12 d-flex justify-content-between align-items-center ">
-                        <div class="text-lg">
-                            {if $departureTable->getLastUpdateTime() !== null}
-                                <span class="d-none d-sm-block badge badge-primary">Aktualizace jízdního řádu v {$departureTable->getLastUpdateTime()}</span>
-                            {/if}
-                        </div>
-
-                        <div>
-                            <a href="{plink PragueDepartureTable:detail, id => $departureTable->getDepartureTable()->getId()->toString()}"
-                               class="btn btn-primary"><i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
+    <li class="col-span-1 bg-white rounded-lg shadow">
+        <div class="w-full flex items-center justify-between px-4 py-4 space-x-6 border-b border-gray-200">
+            <div class="flex-1">
+                <div class="flex items-center space-x-3">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        {$departureTable->getDepartureTable()->getPragueStop()->getFormattedName()}
+                    </h3>
                 </div>
-
+                <p class="mt-1 text-sm">
+                    {foreach $departureTable->getLines() as $line}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
+                            {$line}
+                        </span>
+                    {/foreach}
+                </p>
+            </div>
+            <div class="text-blue-600">
+                <i class="fas fa-bus fa-3x"></i>
             </div>
         </div>
-    </div>
+        <div class="w-full flex items-center justify-between px-4 py-4 space-x-6 border-b border-gray-200">
+            <div class="flex-1">
+                {$departureTable->getDestinations()}
+            </div>
+        </div>
+        <div class="w-full flex items-center justify-between px-4 py-4 space-x-6">
+            <div>
+                {if $departureTable->getLastUpdateTime() !== null}
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                       <svg class="mr-1.5 h-2 w-2 text-blue-400" fill="currentColor" viewBox="0 0 8 8">
+                           <circle cx="4" cy="4" r="3"/>
+                       </svg>
+                       Poslední aktulizace jízdního řádu v {$departureTable->getLastUpdateTime()}
+                   </span>
+                {/if}
+            </div>
+            <div>
+                <a href="{plink PragueDepartureTable:detail, id => $departureTable->getDepartureTable()->getId()->toString()}" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </li>
 {/foreach}
