@@ -4,11 +4,59 @@ declare(strict_types=1);
 
 namespace App\UI\Front;
 
+use App\UI\Admin\Control\Modal\ModalRendererControl;
+use App\UI\Front\Control\Modal\FrontModalControl;
+use App\UI\Front\Control\Modal\FrontModalControlFactory;
 use App\UI\Front\Menu\FrontMenuBuilder;
 use App\UI\Shared\BasePresenter;
+use App\UI\Shared\LogicException;
+use Nette\Utils\IHtmlString;
 
 abstract class FrontPresenter extends BasePresenter
 {
+	protected FrontModalControlFactory $frontModalControlFactory;
+
+	private ?string $modalComponentName = self::DEFAULT_MODAL_COMPONENT_NAME;
+
+	public function injectModalRendererControlFactory(
+		FrontModalControlFactory $frontModalControlFactory
+	): void {
+		$this->frontModalControlFactory = $frontModalControlFactory;
+	}
+
+	/**
+	 * @param mixed[] $additionalParameters
+	 * @throws LogicException
+	 */
+	public function showModal(
+		string $componentName = self::DEFAULT_MODAL_COMPONENT_NAME,
+		?string $heading = null,
+		?IHtmlString $content = null,
+		array $additionalParameters = [],
+		?string $templateFile = null
+	): void {
+		$modalComponent = $this->getComponent($componentName);
+		if (! $modalComponent instanceof ModalRendererControl) {
+			throw new LogicException(sprintf(
+				'Component %s is not instance of %s',
+				$componentName,
+				ModalRendererControl::class
+			));
+		}
+
+		$modalComponent->setParameters($heading, $content, $additionalParameters);
+
+		if ($templateFile !== null) {
+			$modalComponent->setTemplateFile($templateFile);
+		}
+
+		$this->modalComponentName = $componentName;
+
+		$this->payload->showModal = true;
+		$this->payload->modalId = $modalComponent->getModalId();
+		$this->redrawControl('modalComponentSnippet');
+	}
+
 	/**
 	 * @return string[]
 	 */
@@ -21,5 +69,15 @@ abstract class FrontPresenter extends BasePresenter
 	{
 		$this->template->menuItems = (new FrontMenuBuilder())->buildMenu();
 		parent::beforeRender();
+	}
+
+	public function getModalComponentName(): ?string
+	{
+		return $this->modalComponentName;
+	}
+
+	protected function createComponentModalRendererControl(): FrontModalControl
+	{
+		return $this->frontModalControlFactory->create();
 	}
 }
