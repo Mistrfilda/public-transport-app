@@ -7,7 +7,6 @@ namespace App\UI\Admin\Menu;
 use App\UI\Shared\Menu\MenuGroup;
 use App\UI\Shared\Menu\MenuItem;
 
-
 class AdminMenuBuilder
 {
 	/**

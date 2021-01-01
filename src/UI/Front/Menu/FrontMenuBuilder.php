@@ -1,13 +1,10 @@
 <?php
 
-declare(strict_types = 1);
-
+declare(strict_types=1);
 
 namespace App\UI\Front\Menu;
 
-
 use App\UI\Shared\Menu\MenuItem;
-
 
 class FrontMenuBuilder
 {
