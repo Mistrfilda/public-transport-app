@@ -4,68 +4,25 @@ declare(strict_types=1);
 
 namespace App\UI\Shared;
 
-use App\UI\Admin\Control\Modal\ModalRendererControl;
-use App\UI\Admin\Control\Modal\ModalRendererControlFactory;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\InvalidLinkException;
 use Nette\Application\UI\Presenter;
-use Nette\Utils\IHtmlString;
 
 abstract class BasePresenter extends Presenter
 {
-	/** @var string */
-	public const DEFAULT_MODAL_COMPONENT_NAME = 'modalRendererControl';
-
-	protected ModalRendererControlFactory $modalRendererControlFactory;
-
-	private ?string $modalComponentName = null;
-
-	public function injectModalRendererControlFactory(ModalRendererControlFactory $modalRendererControlFactory): void
-	{
-		$this->modalRendererControlFactory = $modalRendererControlFactory;
-	}
-
 	/**
-	 * @param mixed[] $additionalParameters
-	 * @throws LogicException
+	 * @param string[] $links
+	 * @throws InvalidLinkException
 	 */
-	public function showModal(
-		string $componentName = self::DEFAULT_MODAL_COMPONENT_NAME,
-		?string $heading = null,
-		?IHtmlString $content = null,
-		array $additionalParameters = [],
-		?string $templateFile = null
-	): void {
-		$modalComponent = $this->getComponent($componentName);
-		if (! $modalComponent instanceof ModalRendererControl) {
-			throw new LogicException(sprintf(
-				'Component %s is not instance of %s',
-				$componentName,
-				ModalRendererControl::class
-			));
+	public function isMenuLinkActive(array $links): bool
+	{
+		foreach ($links as $link) {
+			if ($this->isLinkCurrent($link)) {
+				return true;
+			}
 		}
 
-		$modalComponent->setParameters($heading, $content, $additionalParameters);
-
-		if ($templateFile !== null) {
-			$modalComponent->setTemplateFile($templateFile);
-		}
-
-		$this->modalComponentName = $componentName;
-
-		$this->payload->showModal = true;
-		$this->payload->modalId = $modalComponent->getModalId();
-		$this->redrawControl('modalComponentSnippet');
-	}
-
-	public function getModalComponentName(): ?string
-	{
-		return $this->modalComponentName;
-	}
-
-	protected function createComponentModalRendererControl(): ModalRendererControl
-	{
-		return $this->modalRendererControlFactory->create();
+		return false;
 	}
 
 	protected function processParameterIntId(): int
@@ -86,20 +43,5 @@ abstract class BasePresenter extends Presenter
 		}
 
 		return (string) $id;
-	}
-
-	/**
-	 * @param string[] $links
-	 * @throws InvalidLinkException
-	 */
-	public function isMenuLinkActive(array $links): bool
-	{
-		foreach ($links as $link) {
-			if ($this->isLinkCurrent($link)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 }
