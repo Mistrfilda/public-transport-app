@@ -17,7 +17,7 @@ abstract class FrontPresenter extends BasePresenter
 		return array_merge([__DIR__ . '/templates/@layout.latte'], parent::formatLayoutTemplateFiles());
 	}
 
-	public function beforeRender()
+	public function beforeRender(): void
 	{
 		$this->template->menuItems = (new FrontMenuBuilder())->buildMenu();
 		parent::beforeRender();

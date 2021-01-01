@@ -10,6 +10,7 @@
 
 
 
+
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
     <title>Public transport app</title>
@@ -145,9 +146,15 @@
 {/ifset}
 
 {snippet modalComponentSnippet}
-    {if $presenter->getModalComponentName() !== null}
-        {control $presenter->getModalComponentName()}
-    {/if}
+    <div x-data="handleModal()">
+        <button
+                x-on:click="click()">
+            dasdsa
+        </button>
+        {if $presenter->getModalComponentName() !== null}
+            {control $presenter->getModalComponentName()}
+        {/if}
+    </div>
 {/snippet}
 
 {webpackJs 'front'}

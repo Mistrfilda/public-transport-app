@@ -3,6 +3,7 @@ declare global {
         frontMenu: any;
         loadMap: any;
         googleMapControl: any;
+        handleModal: any;
     }
 }
 

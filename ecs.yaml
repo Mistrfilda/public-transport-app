@@ -84,4 +84,4 @@ parameters:
             -  'src/UI/Admin/Base/BootstrapFormRenderer.php'
 
         Symplify\CodingStandard\Sniffs\CleanCode\ForbiddenReferenceSniff:
-            - 'src/UI/Admin/Menu/MenuItem.php'
+            - 'src/UI/Shared/Menu/MenuItem.php'
