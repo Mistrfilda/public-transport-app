@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\UI\Front;
 
-use App\UI\Admin\Control\Modal\ModalRendererControl;
 use App\UI\Front\Control\Modal\FrontModalControl;
 use App\UI\Front\Control\Modal\FrontModalControlFactory;
 use App\UI\Front\Menu\FrontMenuBuilder;
@@ -14,9 +13,12 @@ use Nette\Utils\IHtmlString;
 
 abstract class FrontPresenter extends BasePresenter
 {
+	/** @var string */
+	public const DEFAULT_MODAL_COMPONENT_NAME = 'modalRendererControl';
+
 	protected FrontModalControlFactory $frontModalControlFactory;
 
-	private ?string $modalComponentName = self::DEFAULT_MODAL_COMPONENT_NAME;
+	private ?string $modalComponentName = null;
 
 	public function injectModalRendererControlFactory(
 		FrontModalControlFactory $frontModalControlFactory
@@ -36,15 +38,19 @@ abstract class FrontPresenter extends BasePresenter
 		?string $templateFile = null
 	): void {
 		$modalComponent = $this->getComponent($componentName);
-		if (! $modalComponent instanceof ModalRendererControl) {
+		if (! $modalComponent instanceof FrontModalControl) {
 			throw new LogicException(sprintf(
 				'Component %s is not instance of %s',
 				$componentName,
-				ModalRendererControl::class
+				FrontModalControl::class
 			));
 		}
 
-		$modalComponent->setParameters($heading, $content, $additionalParameters);
+		$modalComponent->setParameters(
+			$heading,
+			$content,
+			$additionalParameters
+		);
 
 		if ($templateFile !== null) {
 			$modalComponent->setTemplateFile($templateFile);
