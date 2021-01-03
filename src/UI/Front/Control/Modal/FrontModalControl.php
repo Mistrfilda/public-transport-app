@@ -10,6 +10,8 @@ use Nette\Utils\Random;
 
 class FrontModalControl extends BaseControl
 {
+	private const BASE_TEMPLATE = __DIR__ . '/frontModal.latte';
+
 	protected string $modalId;
 
 	protected ?string $templateFile = null;
@@ -63,7 +65,7 @@ class FrontModalControl extends BaseControl
 
 	protected function getOriginalTemplateFile(): string
 	{
-		return __DIR__ . '/frontModal.latte';
+		return self::BASE_TEMPLATE;
 	}
 
 	protected function getTemplateFile(): string

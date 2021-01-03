@@ -276,6 +276,7 @@ services:
 	- App\Transport\Prague\TransportRestriction\TransportRestrictionFactory
 	- App\UI\Admin\Prague\PragueTransportRestriction\Datagrid\PragueTransportRestrictionDatagridFactory
 	- App\UI\Front\Prague\PragueTransportRestriction\Control\PragueTransportRestrictionControlFactory
+	- App\UI\Front\Prague\PragueTransportRestriction\Control\Modal\PragueRestrictionModalControlFactory
 
 	#Map
 	map:
