@@ -12,7 +12,6 @@ use App\UI\Front\Prague\PragueTransportRestriction\Control\PragueTransportRestri
 use App\UI\Front\Prague\PragueTransportRestriction\Control\PragueTransportRestrictionControlFactory;
 use Ramsey\Uuid\Uuid;
 
-
 class PragueTransportRestrictionPresenter extends FrontPresenter
 {
 	private PragueTransportRestrictionControlFactory $pragueTransportRestrictionControlFactory;

@@ -4,7 +4,8 @@
     <ul class="divide-y divide-gray-200 border border-gray-200">
         {foreach $transportRestrictions as $transportRestriction}
             <li>
-                <a href="{plink showTransportRestrictionModal!, 'transportRestrictionId' => $transportRestriction->getId()->toString()}" class="ajax block hover:bg-gray-50">
+                <a href="{plink showTransportRestrictionModal!, 'transportRestrictionId' => $transportRestriction->getId()->toString()}"
+                   class="ajax block hover:bg-gray-50">
                     <div class="px-4 py-4 sm:px-6">
                         <div class="flex items-center justify-between">
                             <p class="text-sm font-medium text-red-600 truncate">
@@ -18,9 +19,9 @@
                                 <div class="grid grid-cols-3 gap-1 md:flex md:items-center md:justify-between">
                                     {foreach $transportRestriction->getAffectedLines() as $line}
                                         <div>
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800 mx-0.5">
-                                            {$line}
-                                        </span>
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800 mx-0.5">
+                                                {$line}
+                                            </span>
                                         </div>
                                     {/foreach}
                                 </div>
@@ -28,22 +29,26 @@
                         </div>
                         <div class="mt-2 md:flex md:justify-between">
                             <div class="sm:flex">
-                                <p class="flex items-center text-sm text-gray-500">
-                                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none"
-                                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    Aktivní od: {$transportRestriction->getUpdatedAt()|datetimeFormat}
-                                </p>
-                                <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none"
-                                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    Aktivní do: {$transportRestriction->getUpdatedAt()|datetimeFormat}
-                                </p>
+                                {if $transportRestriction->getRestrictionValidFrom() !== null || $transportRestriction->getRestrictionValidTo() !== null}
+                                    <p class="flex items-center text-sm text-gray-500">
+                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none"
+                                             stroke="currentColor" viewBox="0 0 24 24"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Aktivní od: {$transportRestriction->getRestrictionValidFrom()|datetimeformat}
+                                    </p>
+                                    <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none"
+                                             stroke="currentColor" viewBox="0 0 24 24"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Aktivní do: {$transportRestriction->getRestrictionValidTo()|datetimeformat}
+                                    </p>
+                                {/if}
                             </div>
                             <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                                 <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none"
@@ -62,48 +67,3 @@
         {/foreach}
     </ul>
 </div>
-
-
-{*<div class="row">*}
-{*    {foreach $transportRestrictions as $transportRestriction}*}
-{*        <div class="{$cardGridColumn}">*}
-{*            <div class="card shadow mb-4 border-left-danger">*}
-{*                {var $uniqueId = uniqid()}*}
-{*                <a href="#transport-restriction-{$iterator->getCounter()}-{$uniqueId}"*}
-{*                   class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button"*}
-{*                   aria-expanded="false" aria-controls="collapseCardExample">*}
-{*                    <h6 class="m-0 font-weight-bold text-danger">{$transportRestriction->getTitle()}</h6>*}
-{*                    <div>*}
-{*                        <span class="text-gray-600">Poslední aktualizace: {$transportRestriction->getUpdatedAt()|datetimeFormat}</span>*}
-{*                    </div>*}
-{*                    <div>*}
-{*                        {foreach $transportRestriction->getAffectedLines() as $line}*}
-{*                            <span class="badge badge-secondary">{$line}</span>*}
-{*                        {/foreach}*}
-{*                    </div>*}
-
-{*                    {if $transportRestriction->getRestrictionValidFrom() !== null}*}
-{*                        <div class="text-gray-600">*}
-{*                            Mimořádnost aktivní od: {$transportRestriction->getRestrictionValidFrom()|datetimeFormat}*}
-{*                        </div>*}
-{*                    {/if}*}
-
-{*                    {if $transportRestriction->getRestrictionValidTo() !== null}*}
-{*                        <div class="text-gray-600">*}
-{*                            Mimořádnost aktivní do: {$transportRestriction->getRestrictionValidTo()|datetimeFormat}*}
-{*                        </div>*}
-{*                    {/if}*}
-{*                </a>*}
-{*                <div class="collapse" id="transport-restriction-{$iterator->getCounter()}-{$uniqueId}">*}
-{*                    <div class="card-body">*}
-{*                        {$transportRestriction->getDescription()|noescape}*}
-{*                    </div>*}
-{*                    <div class="card-footer text-center">*}
-{*                        <a href="{$transportRestriction->getLink()|nocheck}" class="btn btn-danger">Odkaz na*}
-{*                            mimořádnost</a>*}
-{*                    </div>*}
-{*                </div>*}
-{*            </div>*}
-{*        </div>*}
-{*    {/foreach}*}
-{*</div>*}

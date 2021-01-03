@@ -1,15 +1,12 @@
 <?php
 
-declare(strict_types = 1);
-
+declare(strict_types=1);
 
 namespace App\UI\Front\Prague\PragueTransportRestriction\Control\Modal;
-
 
 use App\Transport\Prague\TransportRestriction\TransportRestrictionRepository;
 use App\UI\Front\Control\Modal\FrontModalControl;
 use Ramsey\Uuid\UuidInterface;
-
 
 class PragueRestrictionModalControl extends FrontModalControl
 {
@@ -31,7 +28,9 @@ class PragueRestrictionModalControl extends FrontModalControl
 
 	public function render(): void
 	{
-		$this->getTemplate()->transportRestriction = $this->transportRestrictionRepository->getById($this->transportRestrictionId);
+		$this->getTemplate()->transportRestriction = $this->transportRestrictionRepository->getById(
+			$this->transportRestrictionId
+		);
 		$this->setTemplateFile(str_replace('.php', '.latte', __FILE__));
 		parent::render();
 	}

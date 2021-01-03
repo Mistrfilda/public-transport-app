@@ -89,13 +89,9 @@ export class MapControl {
     }
 
     async load() {
-        console.log('start');
         if (this.mapElement === null || this.mapElement.dataset.mapObjectsMethod === undefined || this.mapElement.dataset.mapApikey === undefined) {
-            console.log('return?');
             return;
         }
-
-        console.log('fadssa');
 
         const script = document.createElement('script');
         script.src = 'https://maps.googleapis.com/maps/api/js?key='+ this.mapElement.dataset.mapApikey +'&callback='  + this.callback;
