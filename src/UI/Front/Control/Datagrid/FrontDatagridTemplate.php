@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\UI\Front\Control\Datagrid;
 
 use App\Doctrine\IEntity;
+use App\UI\Front\Base\BaseControlTemplate;
 use App\UI\Front\Control\Datagrid\Column\IColumn;
 use App\UI\Front\Control\Datagrid\Datasource\IDataSource;
 use App\UI\Front\Control\Datagrid\Filter\IFilter;
 use Doctrine\Common\Collections\ArrayCollection;
-use Nette\Bridges\ApplicationLatte\Template;
 
-class FrontDatagridTemplate extends Template
+class FrontDatagridTemplate extends BaseControlTemplate
 {
 	/**
 	 * @var ArrayCollection<int, IColumn>

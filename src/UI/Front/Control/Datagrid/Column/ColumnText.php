@@ -9,19 +9,22 @@ use App\UI\Front\Control\Datagrid\FrontDatagrid;
 
 class ColumnText implements IColumn
 {
+	public const TEMPLATE_FILE = __DIR__ . '/templates/columnText.latte';
+
 	protected FrontDatagrid $datagrid;
 
 	protected string $label;
 
 	protected string $column;
 
-	protected ?string $getterMethod;
+	/** @var callable|null */
+	protected $getterMethod;
 
 	public function __construct(
 		FrontDatagrid $datagrid,
 		string $label,
 		string $column,
-		?string $getterMethod = null
+		?callable $getterMethod = null
 	) {
 		$this->datagrid = $datagrid;
 		$this->label = $label;
@@ -46,14 +49,16 @@ class ColumnText implements IColumn
 
 	public function setFilterText(): FilterText
 	{
+		return $this->datagrid->setFilterText($this);
 	}
 
-	public function getGetterMethod(): string
+	public function getGetterMethod(): ?callable
 	{
-		if ($this->getterMethod === null) {
-			return $this->column;
-		}
-
 		return $this->getterMethod;
+	}
+
+	public function getTemplate(): string
+	{
+		return self::TEMPLATE_FILE;
 	}
 }
