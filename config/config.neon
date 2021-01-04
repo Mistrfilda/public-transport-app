@@ -167,6 +167,7 @@ services:
 	#Front
 	- App\UI\Front\Base\FrontDatagridFactory
 	- App\UI\Front\Control\Modal\FrontModalControlFactory
+	- App\UI\Front\Control\Datagrid\FrontDatagridFactory
 
 	#Login
 	- App\UI\Admin\Login\Form\LoginFormFactory
