@@ -172,10 +172,18 @@ class ParkingLot implements IEntity, IParkingLot
 	/**
 	 * Calculates which contextual class should be used depend on current occupancy
 	 */
-	public function calculateContextualClass(): string
+	public function calculateOccupancyPercentage(): float
 	{
 		$lastParkingOccupancy = $this->getLastParkingLotOccupancy();
-		$currentOccupancyPercentage = 100 * $lastParkingOccupancy->getFreeSpaces() / $lastParkingOccupancy->getTotalSpaces();
+		return 100 * $lastParkingOccupancy->getFreeSpaces() / $lastParkingOccupancy->getTotalSpaces();
+	}
+
+	/**
+	 * Calculates which contextual class should be used depend on current occupancy
+	 */
+	public function calculateContextualClass(): string
+	{
+		$currentOccupancyPercentage = $this->calculateOccupancyPercentage();
 
 		if ($currentOccupancyPercentage > 50) {
 			return Statistic::CONTEXTUAL_SUCCESS;

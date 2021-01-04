@@ -6,13 +6,14 @@ namespace App\UI\Front\Prague\PragueTransportRestriction\Control\Modal;
 
 use App\Transport\Prague\TransportRestriction\TransportRestriction;
 use App\UI\Front\Prague\PragueTransportRestriction\PragueTransportRestrictionPresenter;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\IHtmlString;
 
 /**
  * @method bool isLinkCurrent(string $destination = null, $args = [])
  * @method bool isModuleCurrent(string $module)
  */
-class PragueRestrictionModalTemplate
+class PragueRestrictionModalTemplate extends Template
 {
 	public PragueRestrictionModalControl $control;
 

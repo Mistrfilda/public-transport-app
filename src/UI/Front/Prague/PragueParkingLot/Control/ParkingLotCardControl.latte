@@ -1,37 +1,125 @@
 {templateType App\UI\Front\Prague\PragueParkingLot\Control\ParkingLotCardControlTemplate}
 
-<div class="col-md-12">
-    <div class="text-lg h3 text-center">
-        <span class="badge badge-primary">Poslední aktualizace dat {$lastUpdateTime}</span>
-    </div>
+<div class="bg-white py-5 border-b border-gray-200 mb-3">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+        Poslední aktualizace dat {$lastUpdateTime}
+    </h3>
+    <p class="mt-1 text-sm text-gray-500">
+    </p>
 </div>
 
-{foreach $parkingLots as $parkingLot}
-    <div class="col-md-3 my-2">
-        <div class="card border-left-{$parkingLot->calculateContextualClass()} shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="font-weight-bold text-{$parkingLot->calculateContextualClass()} text-uppercase mb-1">
-                            {$parkingLot->getName()}
-                        </div>
-                        <div class="text-xs font-weight-lighter">
-                            {$parkingLot->getAddress()}
-                        </div>
-                        <div>
-                            <span class="badge badge-primary">Celkový počet míst <span
-                                        class="badge badge-light">{$parkingLot->getLastParkingLotOccupancy()->getTotalSpaces()}</span></span>
-                            <span class="badge badge-success">Volná místa <span
-                                        class="badge badge-light">{$parkingLot->getLastParkingLotOccupancy()->getFreeSpaces()}</span></span>
-                            <span class="badge badge-danger">Obsazená místa <span
-                                        class="badge badge-light">{$parkingLot->getLastParkingLotOccupancy()->getOccupiedSpaces()}</span></span>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fa fa-parking fa-2x text-primary"></i>
-                    </div>
-                </div>
+<div class="flex flex-col">
+    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Jméno
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Adresa
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Celkový počet míst
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Volná místa
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Obsazená místa
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Volná místa
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {foreach $parkingLots as $parkingLot}
+                        <tr
+                                n:class="$iterator->getCounter() % 2 === 0 ? 'bg-gray-50' : 'bg-white'"
+                        >
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                {$parkingLot->getName()}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {$parkingLot->getAddress()}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                    {$parkingLot->getLastParkingLotOccupancy()->getTotalSpaces()}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    {$parkingLot->getLastParkingLotOccupancy()->getFreeSpaces()}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    {$parkingLot->getLastParkingLotOccupancy()->getOccupiedSpaces()}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                {var $contextualClass = $parkingLot->calculateOccupancyPercentage() > 50 ? 'bg-green-100 text-green-800' : ($parkingLot->calculateOccupancyPercentage() > 10 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800')}
+                                <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {$contextualClass}"
+                                >
+                                    {(int) $parkingLot->calculateOccupancyPercentage()} %
+                                </span>
+                            </td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-{/foreach}
+</div>
+
+
+{*{control parkingLotTable}*}
+
+{*<div class="col-md-12">*}
+{*    <div class="text-lg h3 text-center">*}
+{*        <span class="badge badge-primary">Poslední aktualizace dat {$lastUpdateTime}</span>*}
+{*    </div>*}
+{*</div>*}
+
+{*{foreach $parkingLots as $parkingLot}*}
+{*    <div class="col-md-3 my-2">*}
+{*        <div class="card border-left-{$parkingLot->calculateContextualClass()} shadow h-100 py-2">*}
+{*            <div class="card-body">*}
+{*                <div class="row no-gutters align-items-center">*}
+{*                    <div class="col mr-2">*}
+{*                        <div class="font-weight-bold text-{$parkingLot->calculateContextualClass()} text-uppercase mb-1">*}
+{*                            {$parkingLot->getName()}*}
+{*                        </div>*}
+{*                        <div class="text-xs font-weight-lighter">*}
+{*                            {$parkingLot->getAddress()}*}
+{*                        </div>*}
+{*                        <div>*}
+{*                            <span class="badge badge-primary">Celkový počet míst <span*}
+{*                                        class="badge badge-light">{$parkingLot->getLastParkingLotOccupancy()->getTotalSpaces()}</span></span>*}
+{*                            <span class="badge badge-success">Volná místa <span*}
+{*                                        class="badge badge-light">{$parkingLot->getLastParkingLotOccupancy()->getFreeSpaces()}</span></span>*}
+{*                            <span class="badge badge-danger">Obsazená místa <span*}
+{*                                        class="badge badge-light">{$parkingLot->getLastParkingLotOccupancy()->getOccupiedSpaces()}</span></span>*}
+{*                        </div>*}
+{*                    </div>*}
+{*                    <div class="col-auto">*}
+{*                        <i class="fa fa-parking fa-2x text-primary"></i>*}
+{*                    </div>*}
+{*                </div>*}
+{*            </div>*}
+{*        </div>*}
+{*    </div>*}
+{*{/foreach}*}
