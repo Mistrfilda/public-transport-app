@@ -14,5 +14,7 @@ interface IColumn
 
 	public function getColumn(): string;
 
-	public function getGetterMethod(): string;
+	public function getTemplate(): string;
+
+	public function getGetterMethod(): ?callable;
 }

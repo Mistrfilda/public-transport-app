@@ -26,6 +26,10 @@ class DoctrineDataSource implements IDataSource
 
 	public function getValueForColumn(IColumn $column, IEntity $row): string
 	{
+		if ($column->getGetterMethod() !== null) {
+			return $column->getGetterMethod()($row);
+		}
+
 		$getterMethod = 'get' . Strings::firstUpper($column->getColumn());
 		if (method_exists($row, $getterMethod) === false) {
 			throw new DoctrineDataSourceException(
@@ -37,6 +41,6 @@ class DoctrineDataSource implements IDataSource
 			);
 		}
 
-		return (string) $row->{$getterMethod};
+		return (string) $row->{$getterMethod}();
 	}
 }

@@ -1,7 +1,4 @@
 services:
-    Symplify\CodingStandard\Sniffs\CleanCode\CognitiveComplexitySniff:
-        maxCognitiveComplexity: 12
-
     Symplify\CodingStandard\Sniffs\Commenting\AnnotationTypeExistsSniff: ~
 
     Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer: ~

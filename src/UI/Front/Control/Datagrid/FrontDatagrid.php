@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Control\Datagrid;
 
+use App\UI\Front\Control\Datagrid\Column\ColumnBadge;
 use App\UI\Front\Control\Datagrid\Column\ColumnText;
 use App\UI\Front\Control\Datagrid\Column\IColumn;
 use App\UI\Front\Control\Datagrid\Datasource\IDataSource;
@@ -33,9 +34,36 @@ class FrontDatagrid extends Control
 		$this->filters = new ArrayCollection();
 	}
 
-	public function addColumnText(string $label, string $column): ColumnText
-	{
-		$column = new ColumnText($this, $label, $column);
+	public function addColumnText(
+		string $label,
+		string $column,
+		?callable $getterMethod = null
+	): ColumnText {
+		$column = new ColumnText(
+			$this,
+			$label,
+			$column,
+			$getterMethod
+		);
+		$this->columns->add($column);
+		return $column;
+	}
+
+	public function addColumnBadge(
+		string $label,
+		string $column,
+		string $color,
+		?callable $getterMethod = null,
+		?callable $colorCallback = null
+	): ColumnText {
+		$column = new ColumnBadge(
+			$this,
+			$label,
+			$column,
+			$color,
+			$getterMethod,
+			$colorCallback
+		);
 		$this->columns->add($column);
 		return $column;
 	}
@@ -43,7 +71,7 @@ class FrontDatagrid extends Control
 	public function setFilterText(ColumnText $column): FilterText
 	{
 		$filter = new FilterText($column);
-		$this->filters->add($column);
+		$this->filters->add($filter);
 		return $filter;
 	}
 

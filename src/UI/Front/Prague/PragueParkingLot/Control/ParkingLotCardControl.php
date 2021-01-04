@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Prague\PragueParkingLot\Control;
 
+use App\Transport\Prague\Parking\ParkingLot;
 use App\Transport\Prague\Parking\ParkingLotOccupancyRepository;
 use App\Transport\Prague\Parking\ParkingLotRepository;
 use App\UI\Front\Base\BaseControl;
 use App\UI\Front\Control\Datagrid\Datasource\DoctrineDataSource;
 use App\UI\Front\Control\Datagrid\FrontDatagrid;
 use App\UI\Front\Control\Datagrid\FrontDatagridFactory;
+use App\UI\Front\TailwindConstant;
 
 class ParkingLotCardControl extends BaseControl
 {
@@ -44,6 +46,54 @@ class ParkingLotCardControl extends BaseControl
 
 		$grid->addColumnText('Jméno', 'name');
 		$grid->addColumnText('Adresa', 'address');
+
+		$grid->addColumnBadge(
+			'Celkový počet míst',
+			'totalSpaces',
+			TailwindConstant::BLUE,
+			function (ParkingLot $parkingLot) {
+				return (string) $parkingLot->getLastParkingLotOccupancy()->getTotalSpaces();
+			}
+		);
+
+		$grid->addColumnBadge(
+			'Počet volných míst',
+			'freeSpaces',
+			TailwindConstant::GREEN,
+			function (ParkingLot $parkingLot) {
+				return (string) $parkingLot->getLastParkingLotOccupancy()->getFreeSpaces();
+			}
+		);
+
+		$grid->addColumnBadge(
+			'Počet obsazených míst',
+			'occupiedSpaces',
+			TailwindConstant::RED,
+			function (ParkingLot $parkingLot) {
+				return (string) $parkingLot->getLastParkingLotOccupancy()->getOccupiedSpaces();
+			}
+		);
+
+		$grid->addColumnBadge(
+			'Obsazenost',
+			'occupancy',
+			TailwindConstant::RED,
+			function (ParkingLot $parkingLot) {
+				return number_format(100 - $parkingLot->calculateOccupancyPercentage()) . ' %';
+			},
+			function (ParkingLot $parkingLot) {
+				$currentOccupancy = $parkingLot->calculateOccupancyPercentage();
+				if ($currentOccupancy < 80) {
+					return TailwindConstant::RED;
+				}
+
+				if ($currentOccupancy < 50) {
+					return TailwindConstant::YELLOW;
+				}
+
+				return TailwindConstant::GREEN;
+			}
+		);
 
 		return $grid;
 	}
