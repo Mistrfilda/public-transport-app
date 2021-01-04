@@ -1,2 +1,5 @@
 parameters:
 	phpVersion: 80000
+
+	ignoreErrors:
+		- '#Access to an undefined property Nette\\Application\\UI\\Template+#'

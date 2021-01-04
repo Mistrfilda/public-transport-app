@@ -1,0 +1,28 @@
+{templateType App\UI\Front\Statistic\Control\System\SystemStatisticControlTemplate}
+{foreach $statistics as $statistic}
+<div class="bg-white overflow-hidden shadow rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+        <div class="flex items-center">
+            <div class="flex-shrink-0 rounded-md p-3 {$statistic->getColor()}">
+                <i class="text-white fas fa-2x text-white {$statistic->getIcon()}"></i>
+            </div>
+            <div class="ml-5 w-0 flex-1">
+                <dl>
+                    <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
+                        {$statistic->getHeading()}
+                    </dt>
+                    <dd class="flex items-baseline">
+                        <div class="text-2xl leading-8 font-semibold text-gray-900">
+                            {$statistic->getValue()}
+                        </div>
+                        <div
+                                class="ml-2 flex items-baseline text-sm leading-5 font-semibold text-green-600"
+                        >
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+{/foreach}

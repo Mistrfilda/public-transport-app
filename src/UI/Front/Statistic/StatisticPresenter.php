@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Statistic;
 
-use App\UI\Admin\Control\Statistic\StatisticControl;
-use App\UI\Admin\Control\Statistic\StatisticControlFactory;
 use App\UI\Front\Base\InvalidArgumentException;
 use App\UI\Front\FrontPresenter;
 use App\UI\Front\Statistic\Control\Main\MainStatisticControl;
 use App\UI\Front\Statistic\Control\Main\MainStatisticControlFactory;
+use App\UI\Front\Statistic\Control\System\SystemStatisticControl;
+use App\UI\Front\Statistic\Control\System\SystemStatisticControlFactory;
 use App\UI\Front\Statistic\Control\Trip\TripStatisticControl;
 use App\UI\Front\Statistic\Control\Trip\TripStatisticControlFactory;
 
@@ -19,17 +19,17 @@ class StatisticPresenter extends FrontPresenter
 
 	private TripStatisticControlFactory $tripStatisticControlFactory;
 
-	private StatisticControlFactory $statisticControlFactory;
+	private SystemStatisticControlFactory $systemStatisticControlFactory;
 
 	public function __construct(
 		MainStatisticControlFactory $mainStatisticControlFactory,
 		TripStatisticControlFactory $tripStatisticControlFactory,
-		StatisticControlFactory $statisticControlFactory
+		SystemStatisticControlFactory $systemStatisticControlFactory
 	) {
 		parent::__construct();
 		$this->mainStatisticControlFactory = $mainStatisticControlFactory;
 		$this->tripStatisticControlFactory = $tripStatisticControlFactory;
-		$this->statisticControlFactory = $statisticControlFactory;
+		$this->systemStatisticControlFactory = $systemStatisticControlFactory;
 	}
 
 	public function renderTrip(string $tripId): void
@@ -51,10 +51,8 @@ class StatisticPresenter extends FrontPresenter
 		return $this->tripStatisticControlFactory->create($tripId);
 	}
 
-	protected function createComponentStatisticControl(): StatisticControl
+	protected function createComponentStatisticControl(): SystemStatisticControl
 	{
-		$control = $this->statisticControlFactory->create();
-		$control->setFrontTemplate();
-		return $control;
+		return $this->systemStatisticControlFactory->create();
 	}
 }
