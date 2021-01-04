@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Admin\Control\Statistic;
+namespace App\UI\Front\Statistic\Control\System;
 
 use App\Request\RequestRepository;
 use App\Transport\Prague\Parking\ParkingLotOccupancyRepository;
@@ -10,11 +10,11 @@ use App\Transport\Prague\Parking\ParkingLotRepository;
 use App\Transport\Prague\Statistic\TripList\TripListRepository;
 use App\Transport\Prague\Stop\StopRepository;
 use App\Transport\Prague\Vehicle\VehiclePositionRepository;
-use App\UI\Shared\Statistic\Statistic;
+use App\UI\Front\Base\BaseControl;
+use App\UI\Front\Statistic\FrontStatistic;
 use Mistrfilda\Datetime\DatetimeFactory;
-use Nette\Application\UI\Control;
 
-class StatisticControl extends Control
+class SystemStatisticControl extends BaseControl
 {
 	private VehiclePositionRepository $vehiclePositionRepository;
 
@@ -28,17 +28,15 @@ class StatisticControl extends Control
 
 	private RequestRepository $requestRepository;
 
-	private string $template = __DIR__ . '/StatisticControl.latte';
-
 	public function __construct(
-		VehiclePositionRepository $VehiclePositionRepository,
+		VehiclePositionRepository $vehiclePositionRepository,
 		StopRepository $stopRepository,
 		TripListRepository $tripListRepository,
 		ParkingLotRepository $parkingLotRepository,
 		ParkingLotOccupancyRepository $parkingLotOccupancyRepository,
 		RequestRepository $requestRepository
 	) {
-		$this->vehiclePositionRepository = $VehiclePositionRepository;
+		$this->vehiclePositionRepository = $vehiclePositionRepository;
 		$this->stopRepository = $stopRepository;
 		$this->tripListRepository = $tripListRepository;
 		$this->parkingLotRepository = $parkingLotRepository;
@@ -46,92 +44,78 @@ class StatisticControl extends Control
 		$this->requestRepository = $requestRepository;
 	}
 
-	public function setFrontTemplate(): void
-	{
-		$this->template = __DIR__ . '/StatisticControlFront.latte';
-	}
-
 	public function render(): void
 	{
-		$this->getTemplate()->statistics = $this->buildStatistics();
-		$this->getTemplate()->setFile($this->template);
-		$this->getTemplate()->render();
+		$template = $this->createTemplate(SystemStatisticControlTemplate::class);
+		$template->statistics = $this->buildStatistics();
+		$template->setFile(str_replace('.php', '.latte', __FILE__));
+		$template->render();
 	}
 
 	/**
-	 * @return Statistic[]
+	 * @return FrontStatistic[]
 	 */
-	private function buildStatistics(): array
+	protected function buildStatistics(): array
 	{
 		$statistics = [];
 		$lastVehiclePosition = $this->vehiclePositionRepository->findLast();
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_INFO,
+		$statistics[] = new FrontStatistic(
 			'Poslední aktualizace jízdních řádů',
 			(string) $this->requestRepository->getLastRandomDepartureTableDownloadTime(),
 			'fas fa-clock fa-2x',
-			'border-left-',
-			'col-xl-12 col-md-12'
+			FrontStatistic::GREEN
 		);
 
 		if ($lastVehiclePosition !== null) {
-			$statistics[] = new Statistic(
-				Statistic::CONTEXTUAL_SUCCESS,
+			$statistics[] = new FrontStatistic(
 				'Poslední známa poloha vozidel',
 				$lastVehiclePosition->getCreatedAt()->format(DatetimeFactory::DEFAULT_DATETIME_FORMAT),
 				'fas fa-clock fa-2x',
-				'border-left-',
-				'col-xl-12 col-md-12'
+				FrontStatistic::GREEN
 			);
 
-			$statistics[] = new Statistic(
-				Statistic::CONTEXTUAL_SUCCESS,
+			$statistics[] = new FrontStatistic(
 				'Poslední počet poloh vozidel',
 				(string) $lastVehiclePosition->getVehiclesCount(),
-				'fas fa-bus fa-2x'
+				'fas fa-bus fa-2x',
+				FrontStatistic::INDIGO
 			);
 		}
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_PRIMARY,
+		$statistics[] = new FrontStatistic(
 			'Celkový počet zastávek',
 			(string) $this->stopRepository->getStopsCount(),
-			'fas fa-ruler-vertical fa-2x text-primary'
+			'fas fa-ruler-vertical fa-2x text-primary',
+			FrontStatistic::INDIGO
 		);
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_PRIMARY,
+		$statistics[] = new FrontStatistic(
 			'Počet linek se statistikami',
 			(string) $this->tripListRepository->getTripListLineCount(),
 			'fas fa-database fa-2x',
-			'border-left-',
-			'col-xl-12 col-md-12'
+			FrontStatistic::BLUE
 		);
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_PRIMARY,
+		$statistics[] = new FrontStatistic(
 			'Celkový počet statistik pro jednotlivá pořadí linek',
 			(string) $this->tripListRepository->getTripListCount(),
 			'fas fa-database fa-2x',
-			'border-left-',
-			'col-xl-12 col-md-12'
+			FrontStatistic::BLUE
 		);
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_WARNING,
+		$statistics[] = new FrontStatistic(
 			'Počet dostupných parkovišť',
 			(string) $this->parkingLotRepository->getParkingLotsCount(),
 			'fas fa-parking fa-2x',
-			'border-left-'
+			FrontStatistic::LIGHT_BLUE
 		);
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_WARNING,
+		$statistics[] = new FrontStatistic(
 			'Data o parkovištích dostupná z',
 			$this->parkingLotOccupancyRepository->getLastParkingDate(),
 			'fas fa-parking fa-2x',
-			'border-left-'
+			FrontStatistic::LIGHT_BLUE
 		);
 
 		return $statistics;

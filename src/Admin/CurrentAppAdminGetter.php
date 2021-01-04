@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin;
 
 use Nette\Security\User;
+use Ramsey\Uuid\Uuid;
 
 class CurrentAppAdminGetter
 {
@@ -29,7 +30,9 @@ class CurrentAppAdminGetter
 			throw new AppAdminNotLoggedInException();
 		}
 
-		return $this->appAdminRepository->findById($this->user->getIdentity()->getId());
+		return $this->appAdminRepository->findById(
+			Uuid::fromString($this->user->getIdentity()->getId())
+		);
 	}
 
 	public function login(string $username, string $password): void

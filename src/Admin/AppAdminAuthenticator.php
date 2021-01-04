@@ -6,12 +6,12 @@ namespace App\Admin;
 
 use App\Doctrine\NoEntityFoundException;
 use Nette\Security\AuthenticationException;
-use Nette\Security\IAuthenticator;
-use Nette\Security\Identity;
+use Nette\Security\Authenticator;
 use Nette\Security\IIdentity;
 use Nette\Security\Passwords;
+use Nette\Security\SimpleIdentity;
 
-class AppAdminAuthenticator implements IAuthenticator
+class AppAdminAuthenticator implements Authenticator
 {
 	private AppAdminRepository $appAdminRepository;
 
@@ -24,15 +24,12 @@ class AppAdminAuthenticator implements IAuthenticator
 	}
 
 	/**
-	 * @param array<mixed> $credentials
 	 * @throws AuthenticationException
 	 */
-	public function authenticate(array $credentials): IIdentity
+	public function authenticate(string $user, string $password): IIdentity
 	{
-		[$username, $password] = $credentials;
-
 		try {
-			$user = $this->appAdminRepository->findByUsername($username);
+			$user = $this->appAdminRepository->findByUsername($user);
 		} catch (NoEntityFoundException $e) {
 			throw new AuthenticationException('User not found');
 		}
@@ -41,6 +38,6 @@ class AppAdminAuthenticator implements IAuthenticator
 			throw new AuthenticationException('Invalid password');
 		}
 
-		return new Identity($user->getId());
+		return new SimpleIdentity($user->getId()->toString());
 	}
 }

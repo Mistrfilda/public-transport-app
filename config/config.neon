@@ -249,6 +249,7 @@ services:
 	- App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory
 	- App\UI\Front\Statistic\Control\Main\MainStatisticControlFactory
 	- App\UI\Front\Statistic\Datagrid\Trip\RouteStatisticDatagridFactory
+	- App\UI\Front\Statistic\Control\System\SystemStatisticControlFactory
 
 	- App\UI\Admin\Control\Statistic\Chart\ChartControlFactory
 
