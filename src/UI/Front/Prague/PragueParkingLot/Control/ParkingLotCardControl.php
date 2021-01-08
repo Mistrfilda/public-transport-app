@@ -78,10 +78,10 @@ class ParkingLotCardControl extends BaseControl
 			'Obsazenost',
 			'occupancy',
 			TailwindConstant::RED,
-			function (ParkingLot $parkingLot) {
+			function (ParkingLot $parkingLot): string {
 				return number_format(100 - $parkingLot->calculateOccupancyPercentage()) . ' %';
 			},
-			function (ParkingLot $parkingLot) {
+			function (ParkingLot $parkingLot): string {
 				$currentOccupancy = $parkingLot->calculateOccupancyPercentage();
 				if ($currentOccupancy < 80) {
 					return TailwindConstant::RED;

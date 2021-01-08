@@ -19,9 +19,24 @@ class DoctrineDataSource implements IDataSource
 	}
 
 	/** @return array<string|int, IEntity> */
-	public function fetch(): array
+	public function getData(int $offset, int $limit): array
 	{
-		return $this->qb->getQuery()->getResult();
+		return $this->qb
+			->setFirstResult($offset)
+			->setMaxResults($limit)
+			->getQuery()
+			->getResult();
+	}
+
+	public function getCount(): int
+	{
+		$countQb = clone $this->qb;
+
+		return (int) $countQb
+			->select('count(:rootAlias)')
+			->setParameter('rootAlias', sprintf('%s.*', $this->getRootAlias()))
+			->getQuery()
+			->getSingleScalarResult();
 	}
 
 	public function getValueForColumn(IColumn $column, IEntity $row): string
@@ -41,6 +56,17 @@ class DoctrineDataSource implements IDataSource
 			);
 		}
 
+		//@phpstan-ignore-next-line
 		return (string) $row->{$getterMethod}();
+	}
+
+	private function getRootAlias(): string
+	{
+		$rootAliases = $this->qb->getRootAliases();
+		if (array_key_exists(0, $rootAliases)) {
+			return $rootAliases[0];
+		}
+
+		throw new DoctrineDataSourceException('Root alias not found');
 	}
 }

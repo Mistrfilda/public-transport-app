@@ -52,6 +52,8 @@ class PaginationService
 					$offset === $limit * ($i - 1)
 				);
 			}
+
+			return $items;
 		}
 
 		if ($currentActive !== 1 && $currentActive !== $lastItemNumber) {
@@ -104,7 +106,7 @@ class PaginationService
 		//LAST ELEMENT
 		$items[] = new PaginationItem(
 			$lastItemNumber,
-			(string) $leftValue,
+			(string) $lastItemNumber,
 			$limit * ($lastItemNumber - 1),
 			false,
 			true,
