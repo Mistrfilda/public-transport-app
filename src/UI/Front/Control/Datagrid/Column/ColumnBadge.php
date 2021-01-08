@@ -8,7 +8,6 @@ use App\Doctrine\IEntity;
 use App\UI\Front\Control\Datagrid\FrontDatagrid;
 use Nette\Utils\Callback;
 
-
 class ColumnBadge extends ColumnText
 {
 	public const TEMPLATE_FILE = __DIR__ . '/templates/columnBadge.latte';

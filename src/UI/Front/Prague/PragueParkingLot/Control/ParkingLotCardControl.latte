@@ -87,39 +87,3 @@
 
 
 {control parkingLotTable}
-
-{*<div class="col-md-12">*}
-{*    <div class="text-lg h3 text-center">*}
-{*        <span class="badge badge-primary">Poslední aktualizace dat {$lastUpdateTime}</span>*}
-{*    </div>*}
-{*</div>*}
-
-{*{foreach $parkingLots as $parkingLot}*}
-{*    <div class="col-md-3 my-2">*}
-{*        <div class="card border-left-{$parkingLot->calculateContextualClass()} shadow h-100 py-2">*}
-{*            <div class="card-body">*}
-{*                <div class="row no-gutters align-items-center">*}
-{*                    <div class="col mr-2">*}
-{*                        <div class="font-weight-bold text-{$parkingLot->calculateContextualClass()} text-uppercase mb-1">*}
-{*                            {$parkingLot->getName()}*}
-{*                        </div>*}
-{*                        <div class="text-xs font-weight-lighter">*}
-{*                            {$parkingLot->getAddress()}*}
-{*                        </div>*}
-{*                        <div>*}
-{*                            <span class="badge badge-primary">Celkový počet míst <span*}
-{*                                        class="badge badge-light">{$parkingLot->getLastParkingLotOccupancy()->getTotalSpaces()}</span></span>*}
-{*                            <span class="badge badge-success">Volná místa <span*}
-{*                                        class="badge badge-light">{$parkingLot->getLastParkingLotOccupancy()->getFreeSpaces()}</span></span>*}
-{*                            <span class="badge badge-danger">Obsazená místa <span*}
-{*                                        class="badge badge-light">{$parkingLot->getLastParkingLotOccupancy()->getOccupiedSpaces()}</span></span>*}
-{*                        </div>*}
-{*                    </div>*}
-{*                    <div class="col-auto">*}
-{*                        <i class="fa fa-parking fa-2x text-primary"></i>*}
-{*                    </div>*}
-{*                </div>*}
-{*            </div>*}
-{*        </div>*}
-{*    </div>*}
-{*{/foreach}*}
