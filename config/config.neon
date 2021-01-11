@@ -64,6 +64,7 @@ custompresenterfactory:
 		Front:PragueParkingLot: App\UI\Front\Prague\PragueParkingLot\PragueParkingLotPresenter
 		Front:PragueDepartureTableList: App\UI\Front\Prague\PragueDepartureTable\PragueDepartureTableListPresenter
 		Front:PragueTransportRestriction: App\UI\Front\Prague\PragueTransportRestriction\PragueTransportRestrictionPresenter
+		Front:StatisticDetail: App\UI\Front\Statistic\StatisticDetailPresenter
 
 dbal:
 	debug:
@@ -247,8 +248,7 @@ services:
 	- App\UI\Admin\Control\Statistic\Modal\TripStatisticModalRendererControlFactory
 	- App\UI\Front\Statistic\Control\Trip\TripStatisticControlFactory
 	- App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory
-	- App\UI\Front\Statistic\Control\Main\MainStatisticControlFactory
-	- App\UI\Front\Statistic\Datagrid\Trip\RouteStatisticDatagridFactory
+	- App\UI\Front\Statistic\Datagrid\Trip\TripListDatagridFactory
 	- App\UI\Front\Statistic\Control\System\SystemStatisticControlFactory
 
 	- App\UI\Admin\Control\Statistic\Chart\ChartControlFactory

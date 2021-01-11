@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Front\Control\Datagrid;
 
 use App\Doctrine\IEntity;
+use App\UI\Front\Control\Datagrid\Action\IDatagridAction;
 use App\UI\Front\Control\Datagrid\Column\IColumn;
 use App\UI\Front\Control\Datagrid\Datasource\IDataSource;
 use App\UI\Front\Control\Datagrid\Filter\IFilter;
@@ -33,6 +34,11 @@ class FrontDatagridTemplate extends Template
 	 * @var array<int|string, IEntity>
 	 */
 	public array $items;
+
+	/**
+	 * @var ArrayCollection<int, IDatagridAction>
+	 */
+	public ArrayCollection $actions;
 
 	public IDataSource $datasource;
 

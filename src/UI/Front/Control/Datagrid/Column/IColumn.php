@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\UI\Front\Control\Datagrid\Column;
 
 use App\UI\Front\Control\Datagrid\FrontDatagrid;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
+use Ramsey\Uuid\UuidInterface;
 
 interface IColumn
 {
@@ -17,4 +19,9 @@ interface IColumn
 	public function getTemplate(): string;
 
 	public function getGetterMethod(): ?callable;
+
+	/**
+	 * @param string|int|float|DatetimeImmutable|UuidInterface $value
+	 */
+	public function processValue($value): string;
 }

@@ -6,6 +6,8 @@ namespace App\UI\Front\Control\Datagrid\Column;
 
 use App\UI\Front\Control\Datagrid\Filter\FilterText;
 use App\UI\Front\Control\Datagrid\FrontDatagrid;
+use Mistrfilda\Datetime\Types\DatetimeImmutable;
+use Ramsey\Uuid\UuidInterface;
 
 class ColumnText implements IColumn
 {
@@ -60,5 +62,22 @@ class ColumnText implements IColumn
 	public function getTemplate(): string
 	{
 		return self::TEMPLATE_FILE;
+	}
+
+	/**
+	 * @param string|int|float|DatetimeImmutable|UuidInterface $value
+	 */
+	public function processValue($value): string
+	{
+		if ($value instanceof DatetimeImmutable) {
+			throw new DatagridColumnException(
+				sprintf('Datetime object passed to column %s, use addColumnDatetime instead', $this->column));
+		}
+
+		if ($value instanceof UuidInterface) {
+			return $value->toString();
+		}
+
+		return (string) $value;
 	}
 }

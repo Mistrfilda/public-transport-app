@@ -6,6 +6,7 @@ namespace App\UI\Front\Control\Datagrid\Datasource;
 
 use App\Doctrine\IEntity;
 use App\UI\Front\Control\Datagrid\Column\IColumn;
+use Ramsey\Uuid\UuidInterface;
 
 interface IDataSource
 {
@@ -15,4 +16,7 @@ interface IDataSource
 	public function getCount(): int;
 
 	public function getValueForColumn(IColumn $column, IEntity $row): string;
+
+	/** @return string|int|float|UuidInterface */
+	public function getValueForKey(string $key, IEntity $row);
 }

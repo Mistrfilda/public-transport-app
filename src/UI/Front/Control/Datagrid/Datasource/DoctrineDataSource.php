@@ -8,6 +8,7 @@ use App\Doctrine\IEntity;
 use App\UI\Front\Control\Datagrid\Column\IColumn;
 use Doctrine\ORM\QueryBuilder;
 use Nette\Utils\Strings;
+use Ramsey\Uuid\UuidInterface;
 
 class DoctrineDataSource implements IDataSource
 {
@@ -57,7 +58,27 @@ class DoctrineDataSource implements IDataSource
 		}
 
 		//@phpstan-ignore-next-line
-		return (string) $row->{$getterMethod}();
+		return $column->processValue($row->{$getterMethod}());
+	}
+
+	/**
+	 * @return string|int|float|UuidInterface
+	 */
+	public function getValueForKey(string $key, IEntity $row)
+	{
+		$getterMethod = 'get' . Strings::firstUpper($key);
+		if (method_exists($row, $getterMethod) === false) {
+			throw new DoctrineDataSourceException(
+				sprintf(
+					'Missing getter %s in entity %s',
+					$getterMethod,
+					get_class($row)
+				)
+			);
+		}
+
+		//@phpstan-ignore-next-line
+		return $row->{$getterMethod}();
 	}
 
 	private function getRootAlias(): string

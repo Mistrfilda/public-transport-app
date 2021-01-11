@@ -35,9 +35,9 @@ abstract class BasePresenter extends Presenter
 		return (int) $id;
 	}
 
-	protected function processParameterStringId(): string
+	protected function processParameterStringId(string $parameterName = 'id'): string
 	{
-		$id = $this->getParameter('id');
+		$id = $this->getParameter($parameterName);
 		if ($id === null || (string) $id === '') {
 			throw new BadRequestException('Missing parameter ID');
 		}
