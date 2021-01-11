@@ -8,6 +8,7 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                         {varType App\UI\Front\Control\Datagrid\Column\IColumn $column}
+                        {varType App\UI\Front\Control\Datagrid\Action\IDatagridAction $action}
                         <tr>
                             {foreach $columns->toArray() as $column}
                                 <th scope="col"
@@ -15,18 +16,30 @@
                                     {$column->getLabel()}
                                 </th>
                             {/foreach}
+                            {if $actions->count() > 0}
+                                <th scope="col" class="relative px-6 py-3">
+                                    <span class="sr-only">Action</span>
+                                </th>
+                            {/if}
                         </tr>
                         </thead>
                         <tbody>
                         <!-- Odd row -->
                         {foreach $items as $item}
-                            {dump $iterator->getCounter() % 2 === 0}
                             <tr n:class="$iterator->getCounter() % 2 === 0 ? 'bg-white' : 'bg-gray-100'">
                                 {foreach $columns->toArray() as $column}
                                     {include
                                         $column->getTemplate(),
                                         value: $datasource->getValueForColumn($column, $item),
                                         column: $column,
+                                        item: $item
+                                    }
+                                {/foreach}
+
+                                {foreach $actions->toArray() as $action}
+                                    {include
+                                        $action->getTemplateFile(),
+                                        action: $action,
                                         item: $item
                                     }
                                 {/foreach}

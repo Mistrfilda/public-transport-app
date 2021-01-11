@@ -1,0 +1,15 @@
+{varType App\UI\Front\Control\Datagrid\Action\DatagridAction $action}
+{varType App\Doctrine\IEntity $item}
+
+{parameters
+    App\UI\Front\Control\Datagrid\Action\DatagridAction $action,
+    App\Doctrine\IEntity $item
+}
+
+{dump $action}
+{dump $item}
+
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+    {dump $action->formatParametersForAction($item)}
+    <a href="{plink $action->getDestination(), (expand) $action->formatParametersForAction($item)}" class="text-{$action->getColor()}-600 hover:text-{$action->getColor()}-900">{$action->getLabel()}</a>
+</td>

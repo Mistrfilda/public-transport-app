@@ -44,12 +44,12 @@ class ParkingLotCardControl extends BaseControl
 		$source = new DoctrineDataSource($this->parkingLotRepository->createQueryBuilderForDatagrid());
 		$grid = $this->frontDatagridFactory->create($source);
 
-		$grid->addColumnText('Jméno', 'name');
-		$grid->addColumnText('Adresa', 'address');
+		$grid->addColumnText('name', 'Jméno');
+		$grid->addColumnText('address', 'Adresa');
 
 		$grid->addColumnBadge(
-			'Celkový počet míst',
 			'totalSpaces',
+			'Celkový počet míst',
 			TailwindConstant::BLUE,
 			function (ParkingLot $parkingLot) {
 				return (string) $parkingLot->getLastParkingLotOccupancy()->getTotalSpaces();
@@ -57,8 +57,8 @@ class ParkingLotCardControl extends BaseControl
 		);
 
 		$grid->addColumnBadge(
-			'Počet volných míst',
 			'freeSpaces',
+			'Počet volných míst',
 			TailwindConstant::GREEN,
 			function (ParkingLot $parkingLot) {
 				return (string) $parkingLot->getLastParkingLotOccupancy()->getFreeSpaces();
@@ -66,8 +66,8 @@ class ParkingLotCardControl extends BaseControl
 		);
 
 		$grid->addColumnBadge(
-			'Počet obsazených míst',
 			'occupiedSpaces',
+			'Počet obsazených míst',
 			TailwindConstant::RED,
 			function (ParkingLot $parkingLot) {
 				return (string) $parkingLot->getLastParkingLotOccupancy()->getOccupiedSpaces();
@@ -75,8 +75,8 @@ class ParkingLotCardControl extends BaseControl
 		);
 
 		$grid->addColumnBadge(
-			'Obsazenost',
 			'occupancy',
+			'Obsazenost',
 			TailwindConstant::RED,
 			function (ParkingLot $parkingLot): string {
 				return number_format(100 - $parkingLot->calculateOccupancyPercentage()) . ' %';
