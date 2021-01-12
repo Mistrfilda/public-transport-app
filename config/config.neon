@@ -250,8 +250,10 @@ services:
 	- App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory
 	- App\UI\Front\Statistic\Datagrid\Trip\TripListDatagridFactory
 	- App\UI\Front\Statistic\Control\System\SystemStatisticControlFactory
+	- App\UI\Front\Control\Chart\FrontChartControlFactory
 
 	- App\UI\Admin\Control\Statistic\Chart\ChartControlFactory
+
 
 	- App\Transport\Prague\Statistic\TripList\TripListRepository(App\Transport\Prague\Statistic\TripList\TripList)
 	- App\Transport\Prague\Statistic\TripList\TripListFacade

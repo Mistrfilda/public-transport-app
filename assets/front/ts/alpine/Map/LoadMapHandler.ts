@@ -1,4 +1,4 @@
-import {Naja, Payload} from "naja/dist/Naja";
+import {Naja} from "naja/dist/Naja";
 import {MapControl} from "../../map/MapControl";
 
 export class LoadMapHandler {
