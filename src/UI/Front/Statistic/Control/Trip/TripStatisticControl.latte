@@ -1,28 +1,50 @@
-<div class="row px-1 pt-3">
-    {varType App\UI\Shared\Statistic\Statistic $statistic}
-    {varType App\UI\Shared\Statistic\Statistic[] $statisticBoxes}
-    {foreach $statisticBoxes as $statistic}
-        <div class="{$statistic->getSize()} mb-4">
-            <div class="card {$statistic->getBorder()} shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-{$statistic->getContextualClass()} text-uppercase mb-1">
+{templateType App\UI\Front\Statistic\Control\Trip\TripStatisticControlTemplate}
+<div class="py-5 border-b border-gray-200 mb-3">
+    <h3 class="text-2xl leading-6 font-medium text-gray-900">
+        Linka {$tripId}
+    </h3>
+    <p class="mt-1 text-sm text-gray-500">
+    </p>
+</div>
+
+<ul class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    {foreach $statistics as $statistic}
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="px-4 py-5 sm:p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 rounded-md p-3 {$statistic->getColor()}">
+                        <i class="text-white fas fa-2x text-white {$statistic->getIcon()}"></i>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm leading-5 font-medium text-gray-500 truncate">
                                 {$statistic->getHeading()}
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                {$statistic->getValue()}
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="{$statistic->getIcon()} text-{$statistic->getContextualClass()}"></i>
-                        </div>
+                            </dt>
+                            <dd class="flex items-baseline">
+                                <div class="text-lg font-semibold text-gray-900">
+                                    {$statistic->getValue()}
+                                </div>
+                                <div
+                                        class="ml-2 flex items-baseline text-sm leading-5 font-semibold text-green-600"
+                                >
+                                </div>
+                            </dd>
+                        </dl>
                     </div>
                 </div>
             </div>
         </div>
     {/foreach}
+</ul>
+
+<div class="py-5 border-b border-gray-200 mb-3">
+    <h3 class="text-2xl leading-6 font-medium text-gray-900">
+        Grafy
+    </h3>
+    <p class="mt-1 text-sm text-gray-500">
+    </p>
 </div>
+
 
 <div class="row">
     <div class="col-md-6">
@@ -39,21 +61,15 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card shadow mb-12">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h6 class="m-0 font-weight-bold text-lg pt-1">Jednotlivé statistiky</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body p-0">
-                {control tripStatisticDataDatagrid}
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
+
+<div class="py-5 border-b border-gray-200 mb-3">
+    <h3 class="text-2xl leading-6 font-medium text-gray-900">
+        Jednotlivé statistiky
+    </h3>
+    <p class="mt-1 text-sm text-gray-500">
+    </p>
+</div>
+
+<div class="overflow-hidden">
+{control tripStatisticDataDatagrid}
 </div>

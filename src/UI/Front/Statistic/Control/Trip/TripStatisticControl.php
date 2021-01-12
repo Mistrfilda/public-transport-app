@@ -12,10 +12,10 @@ use App\Transport\Prague\Statistic\TripStatisticDataRepository;
 use App\UI\Admin\Control\Statistic\Chart\ChartControl;
 use App\UI\Admin\Control\Statistic\Chart\ChartControlFactory;
 use App\UI\Front\Base\BaseControl;
-use App\UI\Front\Base\FrontDatagrid;
+use App\UI\Front\Control\Datagrid\FrontDatagrid;
 use App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory;
+use App\UI\Front\Statistic\FrontStatistic;
 use App\UI\Shared\Statistic\Chart\ChartType;
-use App\UI\Shared\Statistic\Statistic;
 use Doctrine\ORM\NoResultException;
 use Mistrfilda\Datetime\DatetimeFactory;
 
@@ -57,19 +57,21 @@ class TripStatisticControl extends BaseControl
 
 	public function render(): void
 	{
+		$template = $this->createTemplate(TripStatisticControlTemplate::class);
 		try {
 			$tripStatistic = $this->tripStatisticDataRepository->findByTripIdSingle($this->tripId);
 		} catch (NoResultException $e) {
-			$this->getTemplate()->setFile(__DIR__ . '/TripStatisticNotFound.latte');
-			$this->getTemplate()->render();
+			$template->setFile(__DIR__ . '/TripStatisticNotFound.latte');
+			$template->render();
 			return;
 		}
 
 		$tripStatisticCount = $this->tripStatisticDataRepository->getCountTripsByTripId($this->tripId);
 
-		$this->getTemplate()->statisticBoxes = $this->buildStatisticBoxes($tripStatistic, $tripStatisticCount);
-		$this->getTemplate()->setFile(str_replace('.php', '.latte', __FILE__));
-		$this->getTemplate()->render();
+		$template->statistics = $this->buildStatisticBoxes($tripStatistic, $tripStatisticCount);
+		$template->tripId = $this->tripId;
+		$template->setFile(str_replace('.php', '.latte', __FILE__));
+		$template->render();
 	}
 
 	protected function createComponentTripDataCountChart(): ChartControl
@@ -112,55 +114,45 @@ class TripStatisticControl extends BaseControl
 	}
 
 	/**
-	 * @return Statistic[]
+	 * @return FrontStatistic[]
 	 */
 	private function buildStatisticBoxes(TripStatisticData $tripStatisticData, int $tripStatisticDataCount): array
 	{
 		$statistics = [];
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_PRIMARY,
+		$statistics[] = new FrontStatistic(
 			'Linka',
 			$tripStatisticData->getRouteId(),
 			'fas fa-bus fa-2x',
-			'border-left-',
-			'col-xl-3 col-md-6 mb-4'
+			FrontStatistic::BLUE
 		);
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_WARNING,
+		$statistics[] = new FrontStatistic(
 			'Trip ID',
 			$tripStatisticData->getTripId(),
 			'fas fa-list-alt fa-2x',
-			'border-left-',
-			'col-xl-3 col-md-6 mb-4'
+			FrontStatistic::INDIGO
 		);
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_DANGER,
+		$statistics[] = new FrontStatistic(
 			'Poslední data dostupná ze dne',
 			$tripStatisticData->getDate()->format(DatetimeFactory::DEFAULT_DATE_FORMAT),
 			'fas fa-history fa-2x',
-			'border-left-',
-			'col-xl-3 col-md-6 mb-4'
+			FrontStatistic::RED
 		);
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_SUCCESS,
+		$statistics[] = new FrontStatistic(
 			'Poslední cílová stanice',
 			$tripStatisticData->getFinalStation(),
-			'fas fa-ruler-vertical fa-2x',
-			'border-left-',
-			'col-xl-3 col-md-6 mb-4'
+			'fas fa-flag fa-2x',
+			FrontStatistic::TEAL
 		);
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_INFO,
+		$statistics[] = new FrontStatistic(
 			'Celkový počet uložených dat',
 			(string) $tripStatisticDataCount,
 			'fas fa-database fa-2x',
-			'border-left-',
-			'col-xl-3 col-md-6 mb-4'
+			FrontStatistic::LIGHT_BLUE
 		);
 
 		$averageDelay = (int) $this->tripStatisticDataRepository->getAvgTripDelay($this->tripId);
@@ -168,13 +160,11 @@ class TripStatisticControl extends BaseControl
 			$averageDelay = 0;
 		}
 
-		$statistics[] = new Statistic(
-			Statistic::CONTEXTUAL_SECONDARY,
+		$statistics[] = new FrontStatistic(
 			'Průměrné zpoždění',
 			(string) $averageDelay . ' sekund',
 			'fas fa-database fa-2x',
-			'border-left-',
-			'col-xl-3 col-md-6 mb-4'
+			FrontStatistic::GRAY
 		);
 
 		return $statistics;

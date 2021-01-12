@@ -19,4 +19,6 @@ class TailwindConstant
 	public const BLACK = 'black';
 
 	public const INDIGO = 'indigo';
+
+	public const GRAY = 'gray';
 }
