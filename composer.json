@@ -129,6 +129,7 @@
 			"@rabbit-declare",
 			"@migration-migrate",
 			"@webpack-admin-prod",
+			"@webpack-front-prod",
 			"@cache-load"
 		]
 	},
