@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Front\Prague\PragueTransportRestriction\Control\Modal;
 
 use App\Transport\Prague\TransportRestriction\TransportRestriction;
-use App\UI\Front\Prague\PragueTransportRestriction\PragueTransportRestrictionPresenter;
+use App\UI\Front\FrontPresenter;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\IHtmlString;
 
@@ -17,7 +17,7 @@ class PragueRestrictionModalTemplate extends Template
 {
 	public PragueRestrictionModalControl $control;
 
-	public PragueTransportRestrictionPresenter $presenter;
+	public FrontPresenter $presenter;
 
 	public TransportRestriction $transportRestriction;
 
