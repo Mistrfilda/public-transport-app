@@ -9,12 +9,15 @@ use App\Transport\TransportRestriction\TransportRestrictionType;
 use App\UI\Front\FrontPresenter;
 use App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList\PragueDepartureTableListControl;
 use App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList\PragueDepartureTableListControlFactory;
+use App\UI\Front\Prague\PragueTransportRestriction\Control\Modal\PragueRestrictionModalControl;
+use App\UI\Front\Prague\PragueTransportRestriction\Control\Modal\PragueRestrictionModalControlFactory;
 use App\UI\Front\Prague\PragueTransportRestriction\Control\PragueTransportRestrictionControl;
 use App\UI\Front\Prague\PragueTransportRestriction\Control\PragueTransportRestrictionControlFactory;
 use App\UI\Front\Statistic\Control\System\SystemStatisticControl;
 use App\UI\Front\Statistic\Control\System\SystemStatisticControlFactory;
 use App\UI\Shared\Map\MapControl;
 use App\UI\Shared\Map\MapControlFactory;
+use Ramsey\Uuid\Uuid;
 
 class HomepagePresenter extends FrontPresenter
 {
@@ -28,12 +31,15 @@ class HomepagePresenter extends FrontPresenter
 
 	private SystemStatisticControlFactory $systemStatisticControlFactory;
 
+	private PragueRestrictionModalControlFactory $pragueRestrictionModalControlFactory;
+
 	public function __construct(
 		MapControlFactory $mapControlFactory,
 		VehicleMapObjectProvider $vehicleMapObjectProvider,
 		PragueDepartureTableListControlFactory $pragueDepartureTableListControlFactory,
 		PragueTransportRestrictionControlFactory $pragueTransportRestrictionControlFactory,
-		SystemStatisticControlFactory $systemStatisticControlFactory
+		SystemStatisticControlFactory $systemStatisticControlFactory,
+		PragueRestrictionModalControlFactory $pragueRestrictionModalControlFactory
 	) {
 		parent::__construct();
 		$this->mapControlFactory = $mapControlFactory;
@@ -41,10 +47,21 @@ class HomepagePresenter extends FrontPresenter
 		$this->pragueDepartureTableListControlFactory = $pragueDepartureTableListControlFactory;
 		$this->pragueTransportRestrictionControlFactory = $pragueTransportRestrictionControlFactory;
 		$this->systemStatisticControlFactory = $systemStatisticControlFactory;
+		$this->pragueRestrictionModalControlFactory = $pragueRestrictionModalControlFactory;
 	}
 
 	public function renderDefault(): void
 	{
+	}
+
+	public function handleShowTransportRestrictionModal(string $transportRestrictionId): void
+	{
+		$this['transportRestrictionModal']->setTransportRestrictionId(
+			Uuid::fromString($transportRestrictionId)
+		);
+		$this->showModal(
+			'transportRestrictionModal'
+		);
 	}
 
 	protected function createComponentMapControl(): MapControl
@@ -68,7 +85,11 @@ class HomepagePresenter extends FrontPresenter
 	{
 		$control = $this->pragueTransportRestrictionControlFactory->create();
 		$control->setRestrictionType(TransportRestrictionType::SHORT_TERM);
-		$control->setCardGridColumn('col-md-12');
 		return $control;
+	}
+
+	protected function createComponentTransportRestrictionModal(): PragueRestrictionModalControl
+	{
+		return $this->pragueRestrictionModalControlFactory->create();
 	}
 }
