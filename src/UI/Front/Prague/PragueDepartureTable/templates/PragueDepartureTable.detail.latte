@@ -1,5 +1,30 @@
+{templateType App\UI\Front\Prague\PragueDepartureTable\PragueDepartureTableTemplate}
+
+
+
+{block header}
+    <header class="py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between">
+            <div>
+                <h1 class="text-3xl font-bold text-white">
+                    {$departureTable->getPragueStop()->getFormattedName()}
+                </h1>
+            </div>
+            <div>
+                <h1 class="text-3xl font-bold text-white">
+                    <span x-data="clock()" x-init="() => { initClock() }"></span>
+                </h1>
+            </div>
+        </div>
+    </header>
+{/block}
+
 {block noContainerContent}
-    <div class="container-fluid px-0 overflow-hidden">
-        {control departureTableControl}
-    </div>
+    <main class="-mt-24">
+        <div class="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+            <div class="bg-gray-50 rounded-lg shadow px-2 py-6">
+                {control departureTableControl}
+            </div>
+        </div>
+    </main>
 {/block}

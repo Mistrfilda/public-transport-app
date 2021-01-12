@@ -229,6 +229,7 @@ services:
 
 	- App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList\PragueDepartureTableListControlFactory
 	- App\UI\Front\Prague\PragueDepartureTable\Control\PragueDepartureTableList\PragueDepartureTableListDataFactory
+	- App\UI\Front\Prague\PragueDepartureTable\Control\FrontPragueDepartureTable\FrontPragueDepartureTableControlFactory
 
 
 	#REQUEST

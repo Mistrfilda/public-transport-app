@@ -5,6 +5,7 @@ declare global {
         googleMapControl: any;
         handleModal: any;
         loadChart: any;
+        clock: any;
     }
 }
 

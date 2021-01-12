@@ -4,33 +4,34 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Prague\PragueDepartureTable;
 
-use App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControl;
-use App\UI\Admin\Prague\PragueDepartureTable\Control\DepartureTableControlFactory;
-use App\UI\Admin\Prague\PragueDepartureTable\Exception\InvalidArgumentException;
+use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\UI\Front\FrontPresenter;
+use App\UI\Front\Prague\PragueDepartureTable\Control\FrontPragueDepartureTable\FrontPragueDepartureTableControl;
+use App\UI\Front\Prague\PragueDepartureTable\Control\FrontPragueDepartureTable\FrontPragueDepartureTableControlFactory;
+use Ramsey\Uuid\Uuid;
 
 class PragueDepartureTablePresenter extends FrontPresenter
 {
-	private DepartureTableControlFactory $departureTableControlFactory;
+	private FrontPragueDepartureTableControlFactory $departureTableControlFactory;
+
+	private DepartureTableRepository $departureTableRepository;
 
 	public function __construct(
-		DepartureTableControlFactory $departureTableControlFactory
+		FrontPragueDepartureTableControlFactory $departureTableControlFactory,
+		DepartureTableRepository $departureTableRepository
 	) {
 		parent::__construct();
 		$this->departureTableControlFactory = $departureTableControlFactory;
+		$this->departureTableRepository = $departureTableRepository;
 	}
 
 	public function renderDetail(string $id): void
 	{
+		$this->getTemplate()->departureTable = $this->departureTableRepository->findById(Uuid::fromString($id));
 	}
 
-	protected function createComponentDepartureTableControl(): DepartureTableControl
+	protected function createComponentDepartureTableControl(): FrontPragueDepartureTableControl
 	{
-		$id = $this->getParameter('id');
-		if ($id === null) {
-			throw new InvalidArgumentException('Missing parameter ID');
-		}
-
-		return $this->departureTableControlFactory->create($id);
+		return $this->departureTableControlFactory->create($this->processParameterStringId());
 	}
 }
