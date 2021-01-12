@@ -45,6 +45,11 @@ class ColumnBadge extends ColumnText
 		return $this->colorCallback;
 	}
 
+	public function isNull(string $value): bool
+	{
+		return $value === FrontDatagrid::NULLABLE_PLACEHOLDER;
+	}
+
 	public function getColorClasses(IEntity $entity): string
 	{
 		$colorTemplate = 'bg-%s-100 text-%s-600';

@@ -18,10 +18,13 @@ use App\UI\Front\Control\Datagrid\Pagination\Pagination;
 use App\UI\Front\Control\Datagrid\Pagination\PaginationService;
 use App\UI\Front\TailwindConstant;
 use Doctrine\Common\Collections\ArrayCollection;
+use Mistrfilda\Datetime\DatetimeFactory;
 use Nette\Application\UI\Control;
 
 class FrontDatagrid extends Control
 {
+	public const NULLABLE_PLACEHOLDER = '----';
+
 	/** @persistent */
 	public int $offset;
 
@@ -103,6 +106,23 @@ class FrontDatagrid extends Control
 			$column,
 			$getterMethod
 		);
+		$this->columns->add($column);
+		return $column;
+	}
+
+	public function addColumnDate(
+		string $column,
+		string $label,
+		?callable $getterMethod = null
+	): ColumnDatetime {
+		$column = new ColumnDatetime(
+			$this,
+			$label,
+			$column,
+			$getterMethod
+		);
+
+		$column->setFormat(DatetimeFactory::DEFAULT_DATE_FORMAT);
 		$this->columns->add($column);
 		return $column;
 	}

@@ -19,7 +19,7 @@ class FrontMenuBuilder
 			new MenuItem('Map', 'default', '', 'Mapa vozidel'),
 			new MenuItem('PragueTransportRestriction', 'default', '', 'Mimořádnosti'),
 			new MenuItem('PragueParkingLot', 'default', '', 'Parkoviště'),
-			new MenuItem('Statistic', 'default', '', 'Statistiky'),
+			new MenuItem('Statistic', 'default', '', 'Statistiky', [], ['StatisticDetail']),
 		];
 	}
 }

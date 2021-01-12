@@ -18,6 +18,8 @@ class FrontStatistic
 
 	public const TEAL = 'bg-teal-500';
 
+	public const GRAY = 'bg-gray-500';
+
 	public const LIGHT_BLUE = 'bg-light-blue-500';
 
 	private string $heading;

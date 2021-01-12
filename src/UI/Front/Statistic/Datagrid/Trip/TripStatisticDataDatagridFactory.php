@@ -6,8 +6,10 @@ namespace App\UI\Front\Statistic\Datagrid\Trip;
 
 use App\Transport\Prague\Statistic\TripStatisticData;
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
-use App\UI\Front\Base\FrontDatagrid;
-use App\UI\Front\Base\FrontDatagridFactory;
+use App\UI\Front\Control\Datagrid\Datasource\DoctrineDataSource;
+use App\UI\Front\Control\Datagrid\FrontDatagrid;
+use App\UI\Front\Control\Datagrid\FrontDatagridFactory;
+use App\UI\Front\TailwindConstant;
 
 class TripStatisticDataDatagridFactory
 {
@@ -25,59 +27,125 @@ class TripStatisticDataDatagridFactory
 
 	public function create(string $tripId): FrontDatagrid
 	{
-		$grid = $this->frontDatagridFactory->create();
-
 		$qb = $this->tripStatisticDataRepository->createQueryBuilder();
 		$qb->andWhere($qb->expr()->eq('tripStatistic.tripId', ':tripId'));
 		$qb->setParameter('tripId', $tripId);
-		$grid->setDataSource($qb);
 
-		$grid->addColumnDate('date', 'Datum')->setSortable()->setFilterDate();
-		$grid->addColumnText('dayName', 'Nazev dne');
-		$czechHoliday = $grid->addColumnText('isCzechHoliday', 'Státní svátek')->setRenderer(
+		$datasource = new DoctrineDataSource($qb);
+		$grid = $this->frontDatagridFactory->create($datasource);
+
+		$grid->addColumnDate('date', 'Datum');
+		$grid->addColumnBadge('dayName', 'Nazev dne', TailwindConstant::BLUE);
+
+		$grid->addColumnBadge(
+			'isCzechHoliday',
+			'Státní svátek',
+			TailwindConstant::RED,
 			function (TripStatisticData $tripStatisticData) {
 				if ($tripStatisticData->isCzechHoliday()) {
 					return 'Ano';
 				}
 
 				return 'Ne';
+			},
+			function (TripStatisticData $tripStatisticData) {
+				if ($tripStatisticData->isCzechHoliday()) {
+					return TailwindConstant::GREEN;
+				}
+
+				return TailwindConstant::RED;
 			}
 		);
 
-		$grid->setFilterSelect($czechHoliday, [
-			0 => 'Ne',
-			1 => 'Ano',
-		]);
+//		$grid->setFilterSelect($czechHoliday, [
+//			0 => 'Ne',
+//			1 => 'Ano',
+//		]);
 
-		$grid->addColumnDateTime('oldestKnownPosition', 'První známá poloha');
-		$grid->addColumnDateTime('newestKnownPosition', 'Poslední známá poloha');
+//		$grid->addColumnDateTime('oldestKnownPosition', 'První známá poloha');
+//		$grid->addColumnDateTime('newestKnownPosition', 'Poslední známá poloha');
 
-		$grid->addColumnText('routeId', 'Route ID')->setFilterText();
+//		$grid->addColumnText('routeId', 'Route ID')->setFilterText();
 		$grid->addColumnText('company', 'Společnost')->setFilterText();
 
-		$grid->addColumnText('vehicleId', 'Vozidlo')
-			->setRenderer(function (TripStatisticData $tripStatisticData): string {
+		$grid->addColumnText(
+			'vehicleId',
+			'Vozidlo',
+			function (TripStatisticData $tripStatisticData): string {
 				if ($tripStatisticData->getVehicleId() !== null) {
 					return $tripStatisticData->getVehicleId();
 				}
 
 				return FrontDatagrid::NULLABLE_PLACEHOLDER;
-			})->setFilterText();
+			}
+		)->setFilterText();
+
 		$grid->addColumnText('finalStation', 'Konečná stanice')->setFilterText();
 
-		$grid->addColumnText('averageDelay', 'Průměrné zpoždění')->setSortable();
-		$grid->addColumnText('highestDelay', 'Nejvyšší zpoždění')->setSortable();
-
-		$grid->addColumnText('lastPositionDelay', 'Zpoždění v cílové zastávce')
-			->setRenderer(function (TripStatisticData $tripStatisticData): string {
-				if ($tripStatisticData->getLastPositionDelay() !== null) {
-					return (string) $tripStatisticData->getLastPositionDelay();
+		$grid->addColumnBadge(
+			'averageDelay',
+			'Průměrné zpoždění',
+			TailwindConstant::GREEN,
+			function (TripStatisticData $tripStatisticData): string {
+				return sprintf('%s sekund', $tripStatisticData->getAverageDelay());
+			},
+			function (TripStatisticData $tripStatisticData): string {
+				if ($tripStatisticData->getAverageDelay() > 120) {
+					return TailwindConstant::RED;
 				}
 
-				return FrontDatagrid::NULLABLE_PLACEHOLDER;
-			})->setSortable();
+				if ($tripStatisticData->getAverageDelay() > -120) {
+					return TailwindConstant::GREEN;
+				}
 
-		$grid->setDefaultSort(['date' => 'desc']);
+				return TailwindConstant::INDIGO;
+			}
+		);
+		$grid->addColumnBadge(
+			'highestDelay',
+			'Nejvyšší zpoždění',
+			TailwindConstant::GREEN,
+			function (TripStatisticData $tripStatisticData): string {
+				return sprintf('%s sekund', $tripStatisticData->getHighestDelay());
+			},
+			function (TripStatisticData $tripStatisticData): string {
+				if ($tripStatisticData->getHighestDelay() > 120) {
+					return TailwindConstant::RED;
+				}
+
+				if ($tripStatisticData->getHighestDelay() > -120) {
+					return TailwindConstant::GREEN;
+				}
+
+				return TailwindConstant::INDIGO;
+			}
+		);
+
+		$grid->addColumnBadge(
+			'lastPositionDelay',
+			'Zpoždění v cílové zastávce',
+			TailwindConstant::GREEN,
+			function (TripStatisticData $tripStatisticData): string {
+				if ($tripStatisticData->getLastPositionDelay() === null) {
+					return FrontDatagrid::NULLABLE_PLACEHOLDER;
+				}
+
+				return sprintf('%s sekund', $tripStatisticData->getLastPositionDelay());
+			},
+			function (TripStatisticData $tripStatisticData): string {
+				if ($tripStatisticData->getLastPositionDelay() > 120) {
+					return TailwindConstant::RED;
+				}
+
+				if ($tripStatisticData->getLastPositionDelay() > -120) {
+					return TailwindConstant::GREEN;
+				}
+
+				return TailwindConstant::YELLOW;
+			}
+		);
+
+		//$grid->setDefaultSort(['date' => 'desc']);
 
 		return $grid;
 	}
