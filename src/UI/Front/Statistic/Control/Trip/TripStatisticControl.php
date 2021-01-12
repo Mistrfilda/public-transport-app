@@ -9,9 +9,9 @@ use App\Transport\Prague\Statistic\ChartDataProvider\TripStatisticDelayChartData
 use App\Transport\Prague\Statistic\ChartDataProvider\TripStatisticVehicleRegistrationChartDataProvider;
 use App\Transport\Prague\Statistic\TripStatisticData;
 use App\Transport\Prague\Statistic\TripStatisticDataRepository;
-use App\UI\Admin\Control\Statistic\Chart\ChartControl;
-use App\UI\Admin\Control\Statistic\Chart\ChartControlFactory;
 use App\UI\Front\Base\BaseControl;
+use App\UI\Front\Control\Chart\FrontChartControl;
+use App\UI\Front\Control\Chart\FrontChartControlFactory;
 use App\UI\Front\Control\Datagrid\FrontDatagrid;
 use App\UI\Front\Statistic\Datagrid\Trip\TripStatisticDataDatagridFactory;
 use App\UI\Front\Statistic\FrontStatistic;
@@ -25,7 +25,7 @@ class TripStatisticControl extends BaseControl
 
 	private TripStatisticDataRepository $tripStatisticDataRepository;
 
-	private ChartControlFactory $chartControlFactory;
+	private FrontChartControlFactory $chartControlFactory;
 
 	private TripStatisticDelayChartDataProvider $tripStatisticChartDataProvider;
 
@@ -38,7 +38,7 @@ class TripStatisticControl extends BaseControl
 	public function __construct(
 		string $tripId,
 		TripStatisticDataRepository $tripStatisticDataRepository,
-		ChartControlFactory $chartControlFactory,
+		FrontChartControlFactory $chartControlFactory,
 		TripStatisticDelayChartDataProvider $tripStatisticChartDataProvider,
 		TripStatisticDataCountChartDataProvider $tripStatisticDataCountChartDataProvider,
 		TripStatisticVehicleRegistrationChartDataProvider $tripStatisticVehicleRegistrationChartDataProvider,
@@ -74,29 +74,26 @@ class TripStatisticControl extends BaseControl
 		$template->render();
 	}
 
-	protected function createComponentTripDataCountChart(): ChartControl
+	protected function createComponentTripDataCountChart(): FrontChartControl
 	{
 		return $this->chartControlFactory->create(
 			ChartType::BAR,
-			'Počet poloh vozidel během 30 dnů',
 			$this->tripStatisticDataCountChartDataProvider
 		);
 	}
 
-	protected function createComponentTripVehicleTypeChart(): ChartControl
+	protected function createComponentTripVehicleTypeChart(): FrontChartControl
 	{
 		return $this->chartControlFactory->create(
 			ChartType::DOUGHNUT,
-			'Vozidla na lince',
 			$this->tripStatisticVehicleRegistrationChartDataProvider
 		);
 	}
 
-	protected function createComponentLineDelayChart(): ChartControl
+	protected function createComponentLineDelayChart(): FrontChartControl
 	{
 		return $this->chartControlFactory->create(
 			ChartType::LINE,
-			'Průměrné zpoždění během 30 dnů',
 			$this->tripStatisticChartDataProvider,
 		);
 	}

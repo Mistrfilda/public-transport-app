@@ -7,7 +7,7 @@
     </p>
 </div>
 
-<ul class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
     {foreach $statistics as $statistic}
         <div class="bg-white overflow-hidden shadow rounded-lg">
             <div class="px-4 py-5 sm:p-6">
@@ -35,7 +35,7 @@
             </div>
         </div>
     {/foreach}
-</ul>
+</div>
 
 <div class="py-5 border-b border-gray-200 mb-3">
     <h3 class="text-2xl leading-6 font-medium text-gray-900">
@@ -46,19 +46,57 @@
 </div>
 
 
-<div class="row">
-    <div class="col-md-6">
-        {control tripDataCountChart}
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
+            <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Počet poloh vozidel
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">
+                    Počet vozidel v jednolivých dnech za posledních 30 dní
+                </p>
+            </div>
+            <div class="px-1 py-1">
+                {control tripDataCountChart}
+            </div>
+        </div>
     </div>
-    <div class="col-md-6">
-        {control tripVehicleTypeChart}
+
+    <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
+            <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Vozidla na lince
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">
+                    Celkový počet
+                </p>
+            </div>
+            <div class="px-1 py-1">
+                {control tripVehicleTypeChart}
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        {control lineDelayChart}
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-1 mt-3">
+    <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200">
+            <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Průměrné zpoždění
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">
+                    Průměrné zpoždění v sekundách za posledních 30 dnů
+                </p>
+            </div>
+            <div class="px-1 py-1">
+                {control lineDelayChart}
+            </div>
+        </div>
     </div>
+
 </div>
 
 
