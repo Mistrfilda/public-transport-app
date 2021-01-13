@@ -20,6 +20,7 @@ tracy:
 
 
 session:
+	autoStart: true
 	expiration: 14 days
 
 decorator:
