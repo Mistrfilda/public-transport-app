@@ -44,7 +44,13 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                         {foreach $stopLines as $stopLine}
                             {continueIf $stopLine->hasVehicleLeft()}
-                            <tr>
+                            <tr
+                                    n:class="
+                                        $stopLine->hasBigDelay() ? 'bg-red-200',
+                                        $stopLine->isNearDeparture() ? 'animate-pulse',
+                                        'bg-gray-200'
+                                    "
+                            >
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">{$stopLine->getLineNumber()}</div>
                                     <div class="text-sm text-gray-500">{$stopLine->getTripId()}</div>
