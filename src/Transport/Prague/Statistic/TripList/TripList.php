@@ -15,6 +15,7 @@ use Mistrfilda\Datetime\Types\DatetimeImmutable;
  * @ORM\Table(name="trip_list",
  *     indexes={
  *        @ORM\Index(name="trip", columns={"trip_id"}),
+ *        @ORM\Index(name="route", columns={"route_id"}),
  *        @ORM\Index(name="routeTripIndex", columns={"trip_id", "route_id"})
  *	   },
  * )

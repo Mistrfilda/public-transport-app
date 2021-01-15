@@ -6,6 +6,7 @@ namespace App\Transport\Prague\Vehicle\Import;
 
 use App\Transport\Prague\Vehicle\VehicleFactory;
 use App\Transport\Prague\Vehicle\VehiclePosition;
+use App\Transport\Prague\Vehicle\VehiclePositionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Mistrfilda\Datetime\DatetimeFactory;
 use Mistrfilda\Pid\Api\GolemioService;
@@ -24,18 +25,22 @@ class VehicleImportFacade
 
 	private DatetimeFactory $datetimeFactory;
 
+	private VehiclePositionRepository $vehiclePositionRepository;
+
 	public function __construct(
 		EntityManagerInterface $entityManager,
 		LoggerInterface $logger,
 		GolemioService $pidService,
 		VehicleFactory $vehicleFactory,
-		DatetimeFactory $datetimeFactory
+		DatetimeFactory $datetimeFactory,
+		VehiclePositionRepository $vehiclePositionRepository
 	) {
 		$this->entityManager = $entityManager;
 		$this->logger = $logger;
 		$this->pidService = $pidService;
 		$this->vehicleFactory = $vehicleFactory;
 		$this->datetimeFactory = $datetimeFactory;
+		$this->vehiclePositionRepository = $vehiclePositionRepository;
 	}
 
 	public function import(): void
@@ -45,6 +50,11 @@ class VehicleImportFacade
 
 		$this->entityManager->beginTransaction();
 		try {
+			$lastVehiclePosition = $this->vehiclePositionRepository->findLast();
+			if ($lastVehiclePosition !== null) {
+				$lastVehiclePosition->notLast();
+			}
+
 			$vehiclePosition = new VehiclePosition($this->datetimeFactory->createNow());
 			$this->entityManager->persist($vehiclePosition);
 			$this->entityManager->flush();

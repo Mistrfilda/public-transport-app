@@ -6,7 +6,6 @@ namespace App\Transport\Prague\Vehicle;
 
 use App\Doctrine\BaseRepository;
 use App\Doctrine\NoEntityFoundException;
-use App\Doctrine\OrderBy;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Ramsey\Uuid\UuidInterface;
@@ -41,8 +40,8 @@ class VehiclePositionRepository extends BaseRepository
 	public function findLast(): ?VehiclePosition
 	{
 		$qb = $this->createQueryBuilder();
-		$qb->orderBy('vehiclePosition.createdAt', OrderBy::DESC);
-		$qb->setMaxResults(1);
+		$qb->where($qb->expr()->eq('vehiclePosition.isLast', ':isLast'));
+		$qb->setParameter('isLast', true);
 
 		try {
 			return $qb->getQuery()->getSingleResult();

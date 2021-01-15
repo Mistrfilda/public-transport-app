@@ -13,7 +13,14 @@ use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="request")
+ * @ORM\Table(name="request",
+ *     indexes={
+ *        @ORM\Index(name="type_finished", columns={"type", "finished_at"}),
+ *        @ORM\Index(name="type_failed", columns={"type", "failed_at"}),
+ *        @ORM\Index(name="finished_at", columns={"finished_at"}),
+ *        @ORM\Index(name="failed_at", columns={"failed_at"})
+ *	   },
+ * )
  */
 class Request implements IEntity
 {

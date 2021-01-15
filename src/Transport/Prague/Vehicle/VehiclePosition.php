@@ -16,7 +16,11 @@ use Mistrfilda\Datetime\Types\DatetimeImmutable;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="prague_vehicle_position")
+ * @ORM\Table(name="prague_vehicle_position",
+ *     indexes={
+ *        @ORM\Index(name="is_last", columns={"is_last"})
+ *	   },
+ * )
  */
 class VehiclePosition implements IEntity, IVehiclePosition
 {
@@ -39,12 +43,23 @@ class VehiclePosition implements IEntity, IVehiclePosition
 	 */
 	private int $vehiclesCount = 0;
 
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	private bool $isLast;
+
 	public function __construct(
 		DateTimeImmutable $now
 	) {
 		$this->createdAt = $now;
 		$this->city = Cities::PRAGUE;
 		$this->vehicles = new ArrayCollection();
+		$this->isLast = true;
+	}
+
+	public function notLast(): void
+	{
+		$this->isLast = false;
 	}
 
 	public function updateVehiclesCount(int $count): void
@@ -68,5 +83,10 @@ class VehiclePosition implements IEntity, IVehiclePosition
 	public function getVehiclesCount(): int
 	{
 		return $this->vehiclesCount;
+	}
+
+	public function isLast(): bool
+	{
+		return $this->isLast;
 	}
 }
