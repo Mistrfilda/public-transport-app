@@ -99,7 +99,7 @@ class TripStatisticDataRepository extends BaseRepository
 	/**
 	 * @return array<array<string, string>>
 	 */
-	public function findTripList(): array
+	public function findTripList(int $offset = 0, int $limit = 5000): array
 	{
 		$qb = $this->createQueryBuilder();
 		$qb->select(
@@ -107,7 +107,20 @@ class TripStatisticDataRepository extends BaseRepository
 		);
 		$qb->groupBy('tripStatistic.tripId, tripStatistic.routeId');
 
+		$qb->setFirstResult($offset);
+		$qb->setMaxResults($limit);
+
 		return $qb->getQuery()->getResult();
+	}
+
+	public function countForTripList(): int
+	{
+		$qb = $this->createQueryBuilder();
+		$qb->select(
+			'count(tripStatistic.id)'
+		);
+
+		return (int) $qb->getQuery()->getSingleScalarResult();
 	}
 
 	/**

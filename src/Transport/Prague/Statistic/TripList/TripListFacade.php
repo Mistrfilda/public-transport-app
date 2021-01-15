@@ -44,54 +44,67 @@ class TripListFacade
 		$this->entityManager->beginTransaction();
 
 		try {
-			$trips = $this->tripStatisticDataRepository->findTripList();
-			$count = count($trips);
+			$count = $this->tripStatisticDataRepository->countForTripList();
 			$this->logger->info('Generating new trip list', ['count' => $count]);
-
 			$progressBar = null;
 			if ($outputInterface !== null) {
 				$progressBar = new ProgressBar($outputInterface, $count);
 			}
 
-			$index = 0;
-			foreach ($trips as $trip) {
-				try {
-					$tripList = $this->tripListRepository->findByStopDateTripId(
-						$trip['tripId'],
-						$trip['routeId']
-					);
+			$step = 5000;
+			$maxStep = 30000;
+			$currentStep = 0;
+			while ($currentStep < $maxStep) {
+				$trips = $this->tripStatisticDataRepository->findTripList(
+					$currentStep * $step, $step
+				);
 
-					$tripList->update(
-						$this->datetimeFactory->createDatetimeFromMysqlFormat($trip['newestKnownPosition']),
-						$trip['finalStation'],
-						$this->datetimeFactory->createNow(),
-						(int) $trip['rowCount']
-					);
-				} catch (NoEntityFoundException $e) {
-					$tripList = new TripList(
-						$trip['tripId'],
-						$trip['routeId'],
-						$this->datetimeFactory->createDatetimeFromMysqlFormat($trip['newestKnownPosition']),
-						$trip['finalStation'],
-						$this->datetimeFactory->createNow(),
-						(int) $trip['rowCount']
-					);
-
-					$this->entityManager->persist($tripList);
+				if (count($trips) === 0) {
+					break;
 				}
 
-				if ($index > 100) {
-					$this->entityManager->flush();
-					$this->entityManager->clear();
+				$index = 0;
+				foreach ($trips as $trip) {
+					try {
+						$tripList = $this->tripListRepository->findByStopDateTripId(
+							$trip['tripId'],
+							$trip['routeId']
+						);
 
-					$index = 0;
+						$tripList->update(
+							$this->datetimeFactory->createDatetimeFromMysqlFormat($trip['newestKnownPosition']),
+							$trip['finalStation'],
+							$this->datetimeFactory->createNow(),
+							(int) $trip['rowCount']
+						);
+					} catch (NoEntityFoundException $e) {
+						$tripList = new TripList(
+							$trip['tripId'],
+							$trip['routeId'],
+							$this->datetimeFactory->createDatetimeFromMysqlFormat($trip['newestKnownPosition']),
+							$trip['finalStation'],
+							$this->datetimeFactory->createNow(),
+							(int) $trip['rowCount']
+						);
 
-					if ($progressBar !== null) {
-						$progressBar->advance(100);
+						$this->entityManager->persist($tripList);
 					}
+
+					if ($index > 100) {
+						$this->entityManager->flush();
+						$this->entityManager->clear();
+
+						$index = 0;
+
+						if ($progressBar !== null) {
+							$progressBar->advance(100);
+						}
+					}
+
+					$index++;
 				}
 
-				$index++;
+				$currentStep++;
 			}
 
 			$this->entityManager->flush();

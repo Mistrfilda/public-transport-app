@@ -14,6 +14,7 @@ use Mistrfilda\Datetime\Types\DatetimeImmutable;
  * @ORM\Table(name="trip_statistic_data",
  *     indexes={
  *        @ORM\Index(name="trip", columns={"trip_id"}),
+ *        @ORM\Index(name="trip_route", columns={"trip_id", "route_id"}),
  *        @ORM\Index(name="routeTripIndex", columns={"trip_id", "route_id", "final_station"})
  *	   },
  *     uniqueConstraints={
