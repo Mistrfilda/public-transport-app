@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74eb9c387d0745ef6fb871b34059d094",
+    "content-hash": "93b38eb90e7fb653a39d9f2244ec8e01",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2332,16 +2332,16 @@
         },
         {
             "name": "mistrfilda/pid-api",
-            "version": "v0.3.4",
+            "version": "v0.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Mistrfilda/pid-api.git",
-                "reference": "8507ceff7793e3d3d31e956aa650627660b2304f"
+                "reference": "0caf7a6c95a3dead8b5e9ecedafa23a3ffbf2a54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Mistrfilda/pid-api/zipball/8507ceff7793e3d3d31e956aa650627660b2304f",
-                "reference": "8507ceff7793e3d3d31e956aa650627660b2304f",
+                "url": "https://api.github.com/repos/Mistrfilda/pid-api/zipball/0caf7a6c95a3dead8b5e9ecedafa23a3ffbf2a54",
+                "reference": "0caf7a6c95a3dead8b5e9ecedafa23a3ffbf2a54",
                 "shasum": ""
             },
             "require": {
@@ -2362,6 +2362,7 @@
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "^0.12.6",
                 "phpstan/phpstan-mockery": "^0.12.3",
                 "phpstan/phpstan-strict-rules": "^0.12",
                 "roave/security-advisories": "dev-master",
@@ -2381,9 +2382,9 @@
             "description": "PID api integration using guzzle/http client",
             "support": {
                 "issues": "https://github.com/Mistrfilda/pid-api/issues",
-                "source": "https://github.com/Mistrfilda/pid-api/tree/v0.3.4"
+                "source": "https://github.com/Mistrfilda/pid-api/tree/v0.3.5"
             },
-            "time": "2020-11-01T12:22:43+00:00"
+            "time": "2021-04-03T23:02:15+00:00"
         },
         {
             "name": "monolog/monolog",
