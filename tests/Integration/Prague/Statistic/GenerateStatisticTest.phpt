@@ -93,7 +93,9 @@ class GenerateStatisticTest extends BaseTest
 				'U54321',
 				'ZASTAVKA',
 				50,
-				true
+				true,
+				0,
+				'2021-04-03T22:46:37.067Z'
 			),
 			new PIDVehiclePosition(
 				50.001,
@@ -110,7 +112,9 @@ class GenerateStatisticTest extends BaseTest
 				'U12345',
 				'U54321',
 				'ZASTAVKA', 50,
-				true
+				true,
+				0,
+				'2021-04-03T22:46:37.067Z'
 			),
 			new PIDVehiclePosition(
 				50.001,
@@ -128,7 +132,9 @@ class GenerateStatisticTest extends BaseTest
 				'U54321',
 				'ZASTAVKA',
 				50,
-				true
+				true,
+				0,
+				'2021-04-03T22:46:37.067Z'
 			),
 			new PIDVehiclePosition(
 				50.001,
@@ -146,7 +152,9 @@ class GenerateStatisticTest extends BaseTest
 				'U54321',
 				'ZASTAVKA',
 				50,
-				true
+				true,
+				0,
+				'2021-04-03T22:46:37.067Z'
 			),
 		]);
 
@@ -171,7 +179,9 @@ class GenerateStatisticTest extends BaseTest
 				'U54321',
 				'ZASTAVKA',
 				50,
-				true
+				true,
+				0,
+				'2021-04-03T22:46:37.067Z'
 			),
 			new PIDVehiclePosition(
 				50.001,
@@ -189,7 +199,9 @@ class GenerateStatisticTest extends BaseTest
 				'U54321',
 				'ZASTAVKA',
 				50,
-				true
+				true,
+				0,
+				'2021-04-03T22:46:37.067Z'
 			),
 			new PIDVehiclePosition(
 				50.001,
@@ -207,7 +219,9 @@ class GenerateStatisticTest extends BaseTest
 				'U54321',
 				'ZASTAVKA',
 				50,
-				true
+				true,
+				0,
+				'2021-04-03T22:46:37.067Z'
 			),
 		]);
 
