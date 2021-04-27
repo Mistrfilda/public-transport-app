@@ -6,8 +6,10 @@ namespace Test\Integration\Prague\Request;
 
 use App\Request\RabbitMQ\MessageFactory;
 use App\Request\Request;
+use App\Request\RequestRepository;
 use App\Request\RequestType;
 use App\Transport\Prague\DepartureTable\DepartureTable;
+use App\Transport\Prague\DepartureTable\DepartureTableRepository;
 use App\Transport\Prague\Request\RabbitMQ\DepartureTable\DepartureTableConsumer;
 use App\Transport\Prague\Stop\Stop;
 use App\Transport\Prague\StopLine\StopLineFactory;
@@ -34,6 +36,10 @@ class DepartureTableConsumerTest extends BaseTest
 
 	private MessageFactory $messageFactory;
 
+	private RequestRepository $requestRepository;
+
+	private DepartureTableRepository $departureTableRepository;
+
 	public function testConsumeMessage(): void
 	{
 		$stop = new Stop(
@@ -59,6 +65,8 @@ class DepartureTableConsumerTest extends BaseTest
 		$this->entityManager->flush();
 		$this->entityManager->refresh($departureTable);
 
+		$departureTableId = $departureTable->getId();
+
 		Assert::notNull($stop->getId());
 
 		$request = new Request(
@@ -70,6 +78,8 @@ class DepartureTableConsumerTest extends BaseTest
 		$this->entityManager->persist($request);
 		$this->entityManager->flush();
 		$this->entityManager->refresh($request);
+
+		$requestId = $request->getId();
 
 		$mockedMessage = new Message(
 			'tag',
@@ -84,6 +94,8 @@ class DepartureTableConsumerTest extends BaseTest
 		Assert::count(0, $this->stopLineFactory->getStopLinesForStop($stop));
 		$rabbitCode = $this->departureTableConsumer->consume($mockedMessage);
 
+		$request = $this->requestRepository->findById($requestId);
+
 		Assert::same(IConsumer::MESSAGE_ACK, $rabbitCode);
 		Assert::count(6, $this->stopLineFactory->getStopLinesForStop($stop));
 
@@ -92,6 +104,8 @@ class DepartureTableConsumerTest extends BaseTest
 		Assert::null($request->getFailedAt());
 		Assert::true($request->hasFinished());
 		Assert::false($request->hasFailed());
+
+		$departureTable = $this->departureTableRepository->findById($departureTableId);
 
 		$request = new Request(
 			RequestType::PRAGUE_DEPARTURE_TABLE,
@@ -102,6 +116,8 @@ class DepartureTableConsumerTest extends BaseTest
 		$this->entityManager->persist($request);
 		$this->entityManager->flush();
 		$this->entityManager->refresh($request);
+
+		$requestId = $request->getId();
 
 		$mockedMessage = new Message(
 			'tag',
@@ -115,6 +131,7 @@ class DepartureTableConsumerTest extends BaseTest
 
 		$rabbitCode = $this->departureTableConsumer->consume($mockedMessage);
 
+		$request = $this->requestRepository->findById($requestId);
 		Assert::same(IConsumer::MESSAGE_ACK, $rabbitCode);
 		$this->entityManager->refresh($request);
 		Assert::null($request->getFinishedAt());
@@ -129,6 +146,8 @@ class DepartureTableConsumerTest extends BaseTest
 		$this->stopLineFactory = $this->container->getByType(StopLineFactory::class);
 		$this->departureTableConsumer = $this->container->getByType(DepartureTableConsumer::class);
 		$this->messageFactory = $this->container->getByType(MessageFactory::class);
+		$this->requestRepository = $this->container->getByType(RequestRepository::class);
+		$this->departureTableRepository = $this->container->getByType(DepartureTableRepository::class);
 	}
 
 	protected function mockTestSpecificClasses(): void
