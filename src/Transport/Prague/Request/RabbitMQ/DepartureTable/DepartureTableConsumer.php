@@ -64,10 +64,12 @@ class DepartureTableConsumer implements IConsumer
 
 			$request->finished($this->datetimeFactory->createNow());
 			$this->entityManager->flush();
+			$this->entityManager->clear();
 		} catch (Throwable $e) {
 			if ($request !== null) {
 				$request->failed($this->datetimeFactory->createNow());
 				$this->entityManager->flush();
+				$this->entityManager->clear();
 			}
 
 			$this->logger->critical(MonologHelper::formatMessageFromException($e));
