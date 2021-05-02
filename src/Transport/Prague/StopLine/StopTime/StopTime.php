@@ -15,7 +15,8 @@ use Mistrfilda\Datetime\Types\DatetimeImmutable;
  * @ORM\Table(name="prague_stop_time",
  *     indexes={
  *        @ORM\Index(name="date_trip_id_index", columns={"date_trip_id"}),
- *        @ORM\Index(name="departure_time_index", columns={"departure_time"})
+ *        @ORM\Index(name="departure_time_index", columns={"departure_time"}),
+ *        @ORM\Index(name="date_stoptime_import", columns={"date_trip_id", "date"})
  *	   },
  *     uniqueConstraints={
  *        @ORM\UniqueConstraint(name="date_trip_id_unique",columns={"date_trip_id"})
