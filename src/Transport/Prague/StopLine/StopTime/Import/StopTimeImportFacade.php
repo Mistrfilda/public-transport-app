@@ -84,6 +84,7 @@ class StopTimeImportFacade
 			);
 
 			try {
+				$index = 0;
 				foreach ($stopTimeResponse->getStopTimes() as $stopTime) {
 					try {
 						$existingStopTime = $this->stopTimeRepository->findByStopDateTripId(
@@ -107,6 +108,11 @@ class StopTimeImportFacade
 					//DELETE STOP TIMES WHICH WERE DELETED FROM TIME SCHEDULE
 					if (array_key_exists($stopTime->getTripId(), $allExistingStopTimes)) {
 						unset($allExistingStopTimes[$stopTime->getTripId()]);
+					}
+
+					$index++;
+					if ($index % 50 === 0) {
+						$this->entityManager->flush();
 					}
 				}
 

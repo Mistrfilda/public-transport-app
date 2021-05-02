@@ -78,6 +78,7 @@ class TripImportFacade
 
 			$this->entityManager->beginTransaction();
 			try {
+				$index = 0;
 				foreach ($trips->getTrips() as $trip) {
 					try {
 						$existingTrip = $this->tripRepository->findByStopDateTripId(
@@ -93,6 +94,11 @@ class TripImportFacade
 					} catch (NoEntityFoundException $e) {
 						$newTrip = $this->tripFactory->createFromPidLibrary($trip, $stop, $date);
 						$this->entityManager->persist($newTrip);
+					}
+
+					$index++;
+					if ($index % 50 === 0) {
+						$this->entityManager->flush();
 					}
 				}
 			} catch (Throwable $e) {
