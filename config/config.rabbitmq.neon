@@ -5,6 +5,7 @@ rabbitmq:
 			password: ""
 			host: ""
 			port: ""
+			hearbeat: 1500.0
 
 	queues:
 		pragueDepartureTableQueue:
